@@ -20,5 +20,5 @@ Référence des jeux :
 – Heartstone : http://eu.battle.net/hearthstone/fr/
 – EVE Online : http://www.eveonline.com/
 
-Tout contenu utilisé de Eve ou Hearthstone appartient à leur société respective,© Blizzard et © CCP. 
+Tout contenu utilisé de Eve ou Hearthstone appartient à leur société respective, © CCP et © Blizzard. 
 Ce jeu ne sera pas commercialisé.
