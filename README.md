@@ -1,7 +1,7 @@
 EveStone
 ========
 
-Dans le cardre de notre cours de langage avancé de programmation à l'Dphec (LLN).
+Dans le cardre de notre cours de langage avancé de programmation à l'Ephec (LLN).
 Nous devons créer Jeuxvideo. Dont voici le principe.
 
 
