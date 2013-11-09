@@ -5,5 +5,9 @@ public class Carte {
 	{
 		System.out.println("Hello Wolrd");
 	}
+	public Carte()
+	{
+		
+	}
 
 }
