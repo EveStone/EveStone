@@ -1,4 +1,4 @@
-package model;
+package eveStone.model;
 
 public class Sort extends Carte{
 	
