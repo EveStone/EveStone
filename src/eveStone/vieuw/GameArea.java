@@ -59,18 +59,11 @@ public class GameArea extends javax.swing.JFrame {
 	private JPanel jPanelBattleArea;
 	private JPanel jPanelHistory;
 	private JPanel jPanelDeck;
-
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				GameArea inst = new GameArea();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-			}
-		});
+	
+	public void run(){
+		GameArea inst = new GameArea();
+		inst.setLocationRelativeTo(null);
+		inst.setVisible(true);
 	}
 	
 	public GameArea() {
