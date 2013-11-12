@@ -4,6 +4,7 @@ public class Carte {
 	
 	private int ressource;
 	
+	
 	public Carte()
 	{
 		
