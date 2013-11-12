@@ -80,7 +80,7 @@ public class GameArea extends javax.swing.JFrame {
 				jPanelMainHautLayout.rowWeights = new double[] {0.1};
 				jPanelMainHautLayout.rowHeights = new int[] {7};
 				jPanelMainHautLayout.columnWeights = new double[] {0.0, 0.0, 0.1};
-				jPanelMainHautLayout.columnWidths = new int[] {106, 575, 7};
+				jPanelMainHautLayout.columnWidths = new int[] {106, 579, 7};
 				getContentPane().add(jPanelMainHaut, BorderLayout.NORTH);
 				jPanelMainHaut.setPreferredSize(new java.awt.Dimension(806, 92));
 				jPanelMainHaut.setBackground(new java.awt.Color(191,191,191));
@@ -115,7 +115,7 @@ public class GameArea extends javax.swing.JFrame {
 				jPanelMainBasLayout.rowWeights = new double[] {0.1};
 				jPanelMainBasLayout.rowHeights = new int[] {7};
 				jPanelMainBasLayout.columnWeights = new double[] {0.0, 0.0, 0.1};
-				jPanelMainBasLayout.columnWidths = new int[] {105, 580, 7};
+				jPanelMainBasLayout.columnWidths = new int[] {105, 583, 7};
 				getContentPane().add(jPanelMainBas, BorderLayout.SOUTH);
 				jPanelMainBas.setPreferredSize(new java.awt.Dimension(806, 74));
 				jPanelMainBas.setBackground(new java.awt.Color(191,191,191));
@@ -299,7 +299,7 @@ public class GameArea extends javax.swing.JFrame {
 						{
 							jLabelArea = new JLabel();
 							jPanelArea.add(jLabelArea);
-							jLabelArea.setText("Zone de crate");
+							jLabelArea.setText("Zone de carte");
 							jLabelArea.setPreferredSize(new java.awt.Dimension(197, 49));
 						}
 					}
