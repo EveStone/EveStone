@@ -24,7 +24,7 @@ import javax.swing.SwingUtilities;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class StartFrame extends javax.swing.JFrame {
+public class StartFrame extends javax.swing.JWindow {
 	private JPanel jPanelMenu;
 	private JPanel jPanelTextArea;
 	private JButton jButtonStart;
@@ -50,15 +50,16 @@ public class StartFrame extends javax.swing.JFrame {
 	
 	private void initGUI() {
 		try {
-			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			pack();
+			setSize(400, 300);
 			{
 				jPanelMenu = new JPanel();
+				getContentPane().add(jPanelMenu, BorderLayout.CENTER);
 				GridBagLayout jPanelMenuLayout = new GridBagLayout();
 				jPanelMenuLayout.columnWidths = new int[] {81, 238, 7};
 				jPanelMenuLayout.rowHeights = new int[] {59, 147, 7};
 				jPanelMenuLayout.columnWeights = new double[] {0.0, 0.0, 0.1};
 				jPanelMenuLayout.rowWeights = new double[] {0.0, 0.0, 0.1};
-				getContentPane().add(jPanelMenu, BorderLayout.CENTER);
 				jPanelMenu.setLayout(jPanelMenuLayout);
 				jPanelMenu.setBackground(new java.awt.Color(77,77,77));
 				{
@@ -93,8 +94,6 @@ public class StartFrame extends javax.swing.JFrame {
 					}
 				}
 			}
-			pack();
-			setSize(400, 300);
 		} catch (Exception e) {
 		    //add your error handling code here
 			e.printStackTrace();
