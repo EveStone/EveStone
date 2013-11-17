@@ -2,17 +2,27 @@ package eveStone.model;
 
 public class Hero {
 	
+	private String image;
 	private int nbStructure;
 	private int nbCoque;
 	private Deck deck;
 	private SortHeroique sortHero;
 
-	public Hero(Deck deck, SortHeroique sortHero)
+	public Hero(String image, Deck deck, SortHeroique sortHero)
 	{
+		this.image = image;
 		this.nbCoque = 20;
 		this.nbStructure = 10;
 		this.deck = deck;
 		this.sortHero = sortHero;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public int getNbStructure() {
