@@ -4,10 +4,20 @@ public class Dommage extends Sort{
 	
 	private int degats;
 	
-	public Dommage()
+	public Dommage(int ressource, String image, String description, int degats)
 	{
-		super();
+		super(ressource, image, description);
+		this.degats = degats;
 	}
+
+	public int getDegats() {
+		return degats;
+	}
+
+	public void setDegats(int degats) {
+		this.degats = degats;
+	}
+	
 	
 
 }
