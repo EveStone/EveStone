@@ -1,5 +1,7 @@
 package be.ephec.eveStone.model;
 
+import be.ephec.eveStone.model.repositories.Deck;
+
 public class Hero {
 	
 	private String image;

@@ -16,9 +16,9 @@ public class Buff extends Sort {
 	 * @param buffPv
 	 * @param buffDegats
 	 */
-	public Buff(int ressource, String image, String description, int buffPv, int buffDegats)
+	public Buff(String nom,int ressource, String image, String description, int buffPv, int buffDegats)
 	{
-		super(ressource, image, description);
+		super(nom,ressource, image, description);
 		this.buffPv = buffPv;
 		this.buffDegats = buffDegats;
 		
@@ -35,9 +35,9 @@ public class Buff extends Sort {
 	 * @param buffDegatsOuPv
 	 * @param check
 	 */
-	public Buff(int ressource, String image, String description, int buffDegatsOuPv, boolean check )
+	public Buff(String nom,int ressource, String image, String description, int buffDegatsOuPv, boolean check )
 	{
-		super(ressource, image, description);
+		super(nom,ressource, image, description);
 		if (check == true) this.buffDegats = buffDegatsOuPv;
 		else this.buffPv = buffDegatsOuPv;
 		

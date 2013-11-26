@@ -4,9 +4,9 @@ public class Sort extends Carte{
 	
 	private String description;
 	
-	public Sort(int ressource, String image, String description)
+	public Sort(String nom,int ressource, String image, String description)
 	{
-		super(ressource, image);
+		super(nom,ressource, image);
 		this.description = description;
 		
 	}

@@ -4,9 +4,9 @@ public class Dommage extends Sort{
 	
 	private int degats;
 	
-	public Dommage(int ressource, String image, String description, int degats)
+	public Dommage(String nom,int ressource, String image, String description, int degats)
 	{
-		super(ressource, image, description);
+		super(nom,ressource, image, description);
 		this.degats = degats;
 	}
 

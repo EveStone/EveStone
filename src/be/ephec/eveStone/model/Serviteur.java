@@ -17,9 +17,9 @@ public class Serviteur extends Carte {
 	 * @param nbVie
 	 * @param nbDommage
 	 */
-	public Serviteur(int ressource, String image, int nbVie, int nbDommage)
+	public Serviteur(String nom, int ressource, String image, int nbVie, int nbDommage)
 	{
-		super(ressource,image);
+		super(nom,ressource,image);
 		this.nbVie = nbVie;
 		this.nbDommage = nbDommage;
 	}
@@ -32,9 +32,9 @@ public class Serviteur extends Carte {
 	 * @param nbDommage
 	 * @param dommageSort
 	 */
-	public Serviteur(int ressource, String image, int nbVie, int nbDommage, int dommageSort)
+	public Serviteur(String nom, int ressource, String image, int nbVie, int nbDommage, int dommageSort)
 	{
-		super(ressource,image);
+		super(nom,ressource,image);
 		this.nbVie = nbVie;
 		this.nbDommage = nbDommage;
 		this.dommageSort = dommageSort;
@@ -50,9 +50,9 @@ public class Serviteur extends Carte {
 	 * @param servBuffPv
 	 * @param servBuffDeg
 	 */
-	public Serviteur(int ressource, String image, int nbVie, int nbDommage, int servBuffPv, int servBuffDeg)
+	public Serviteur(String nom,int ressource, String image, int nbVie, int nbDommage, int servBuffPv, int servBuffDeg)
 	{
-		super(ressource,image);
+		super(nom,ressource,image);
 		this.nbVie = nbVie;
 		this.nbDommage = nbDommage;
 		this.servBuffDeg = servBuffDeg;
@@ -70,9 +70,9 @@ public class Serviteur extends Carte {
 	 * @param servBuffPvOuDeg
 	 * @param check
 	 */
-	public Serviteur(int ressource, String image, int nbVie, int nbDommage, int servBuffPvOuDeg, boolean check)
+	public Serviteur(String nom,int ressource, String image, int nbVie, int nbDommage, int servBuffPvOuDeg, boolean check)
 	{
-		super(ressource,image);
+		super(nom, ressource,image);
 		this.nbVie = nbVie;
 		this.nbDommage = nbDommage;
 		if (check == true) this.servBuffDeg = servBuffPvOuDeg;

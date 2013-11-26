@@ -9,24 +9,24 @@ public class Protection extends Serviteur {
 	
 	private boolean protection;
 	
-	public Protection(int ressource, String image, int nbVie, int nbDommage, boolean protection)
+	public Protection(String nom,int ressource, String image, int nbVie, int nbDommage, boolean protection)
 	{
-		super(ressource, image, nbVie, nbDommage);
+		super(nom,ressource, image, nbVie, nbDommage);
 		this.protection = protection;
 	}
-	public Protection(int ressource, String image, int nbVie, int nbDommage, int dommageSort, boolean protection)
+	public Protection(String nom,int ressource, String image, int nbVie, int nbDommage, int dommageSort, boolean protection)
 	{
-		super(ressource, image, nbVie, nbDommage, dommageSort);
+		super(nom,ressource, image, nbVie, nbDommage, dommageSort);
 		this.protection = protection;
 	}
-	public Protection(int ressource, String image, int nbVie, int nbDommage, int servBuffPv, int servBuffDeg, boolean protection)
+	public Protection(String nom,int ressource, String image, int nbVie, int nbDommage, int servBuffPv, int servBuffDeg, boolean protection)
 	{
-		super(ressource, image, nbVie, nbDommage, servBuffPv,servBuffDeg);
+		super(nom,ressource, image, nbVie, nbDommage, servBuffPv,servBuffDeg);
 		this.protection = protection;
 	}
-	public Protection(int ressource, String image, int nbVie, int nbDommage, int servBuffPvOuDeg, boolean check, boolean protection)
+	public Protection(String nom,int ressource, String image, int nbVie, int nbDommage, int servBuffPvOuDeg, boolean check, boolean protection)
 	{
-		super(ressource, image, nbVie, nbDommage, servBuffPvOuDeg,check);
+		super(nom,ressource, image, nbVie, nbDommage, servBuffPvOuDeg,check);
 		this.protection = protection;
 	}
 
