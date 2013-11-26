@@ -1,4 +1,4 @@
-package eveStone.vieuw;
+package be.ephec.eveStone.vieuw;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

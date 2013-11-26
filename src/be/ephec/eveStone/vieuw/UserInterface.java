@@ -1,4 +1,4 @@
-package eveStone.vieuw;
+package be.ephec.eveStone.vieuw;
 
 public class UserInterface {
 

@@ -1,4 +1,4 @@
-package eveStone;
+package be.ephec.eveStone;
 
 public class EveStone {
 	

@@ -1,4 +1,4 @@
-package eveStone.model;
+package be.ephec.eveStone.model;
 
 /**
  * Même principe que la classe serviteur a part le rajout du boolean invisible pour dire si la carte est invisible ou non.
