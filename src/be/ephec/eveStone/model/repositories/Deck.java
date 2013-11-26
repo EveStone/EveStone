@@ -17,16 +17,14 @@ public class Deck {
 		if (nom.compareTo("interceptor") == 0)
 		{
 			this.nom = nom;
-			LinkedList<Carte> interceptor = makeListInterceptor();
-			this.listCartes = interceptor;
+			this.listCartes = makeListInterceptor();
 		}
 		else
 		{ 
 			if (nom.compareTo("fregate") == 0)
 			{
 				this.nom = nom;
-				LinkedList<Carte> fregate = makeListFregate();
-				this.listCartes = fregate;
+				this.listCartes = makeListFregate();
 				
 			}
 			else
@@ -57,8 +55,8 @@ public class Deck {
 		LinkedList<Carte> tmp = null;
 		tmp.add(new Serviteur("Drones d'attaque", 2, "", 2, 2));
 		tmp.add(new Serviteur("Drones de combat Elite", 5, "", 3, 5));
-		tmp.add(new Dommage("Interception rapide", 5, "", "Attaque directement un serviteur ou un Héro", 4));
-		tmp.add(new Dommage("Interception rapide", 5, "", "Attaque directement un serviteur ou un Héro", 4));
+		tmp.add(new Dommage("Interception rapide", 5, "", "Attaque directement un serviteur ou un Hï¿½ro", 4));
+		tmp.add(new Dommage("Interception rapide", 5, "", "Attaque directement un serviteur ou un Hï¿½ro", 4));
 		tmp.add(new Serviteur("Drone de soutien",2, "", 2, 2, 1, 1));
 		tmp.add(new Serviteur("Drone de soutien",2, "", 2, 2, 1, 1));
 		return tmp;
@@ -70,8 +68,8 @@ public class Deck {
 		tmp.add(new Serviteur("Drones de combat Elite", 5, "", 3, 5));
 		tmp.add(new Serviteur("Drone de soutien",2, "", 2, 2, 1, 1));
 		tmp.add(new Serviteur("Drone de soutien",2, "", 2, 2, 1, 1));
-		tmp.add(new Buff("Bouclier augmenté",2, "", "Augmente de 2 la vie d'un serviteur", 2, false));
-		tmp.add(new Buff("Bouclier augmenté",2, "", "Augmente de 2 la vie d'un serviteur", 2, false));
+		tmp.add(new Buff("Bouclier augmentï¿½",2, "", "Augmente de 2 la vie d'un serviteur", 2, false));
+		tmp.add(new Buff("Bouclier augmentï¿½",2, "", "Augmente de 2 la vie d'un serviteur", 2, false));
 		return tmp;
 	}
 	
