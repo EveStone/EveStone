@@ -102,7 +102,7 @@ public class StartFrame extends javax.swing.JWindow {
 	private void jButtonStartActionPerformed(ActionEvent evt) {
 		//System.out.println("jButtonStart.actionPerformed, event="+evt);
 		this.dispose();
-		GameArea newGame = new GameArea();
+		Area newGame = new Area();
 		newGame.run();
 	}
 	
