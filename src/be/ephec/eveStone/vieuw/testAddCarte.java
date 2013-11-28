@@ -88,7 +88,7 @@ public class testAddCarte extends javax.swing.JFrame {
 					{
 						jLabelNom = new JLabel();
 						jLabel1.add(jLabelNom);
-						jLabelNom.setText("<html><font color=red><b>" + nom + "</b></font></html>");
+						jLabelNom.setText("<html><font color=red><p><b>" + nom + "</b></p></font></html>");
 						jLabelNom.setBounds(61, 139, 94, 16);
 					}
 				}

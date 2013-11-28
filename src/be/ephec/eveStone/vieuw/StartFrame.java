@@ -1,15 +1,12 @@
 package be.ephec.eveStone.vieuw;
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
-
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
-
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -24,10 +21,9 @@ import javax.swing.SwingUtilities;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class StartFrame extends javax.swing.JWindow {
-	private JPanel jPanelMenu;
-	private JPanel jPanelTextArea;
-	private JButton jButtonStart;
-	private JButton jButtonExit;
+	private JButton jButtonQuitter;
+	private JButton jButtonCommencer;
+	private JButton jButtonConfig;
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -50,47 +46,52 @@ public class StartFrame extends javax.swing.JWindow {
 	private void initGUI() {
 		try {
 			pack();
-			setSize(400, 300);
+			setSize(850, 638);
 			{
-				jPanelMenu = new JPanel();
-				getContentPane().add(jPanelMenu, BorderLayout.CENTER);
-				GridBagLayout jPanelMenuLayout = new GridBagLayout();
-				jPanelMenuLayout.columnWidths = new int[] {81, 238, 7};
-				jPanelMenuLayout.rowHeights = new int[] {59, 147, 7};
-				jPanelMenuLayout.columnWeights = new double[] {0.0, 0.0, 0.1};
-				jPanelMenuLayout.rowWeights = new double[] {0.0, 0.0, 0.1};
-				jPanelMenu.setLayout(jPanelMenuLayout);
-				jPanelMenu.setBackground(new java.awt.Color(77,77,77));
+				JLabel background = new JLabel();
+				this.setContentPane(background);
+				background.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/StartFrame.png")));
 				{
-					jPanelTextArea = new JPanel();
-					GridBagLayout jPanelTextAreaLayout = new GridBagLayout();
-					jPanelMenu.add(jPanelTextArea, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-					jPanelTextArea.setBackground(new java.awt.Color(77,77,77));
-					jPanelTextAreaLayout.rowWeights = new double[] {0.1, 0.1};
-					jPanelTextAreaLayout.rowHeights = new int[] {7, 7};
-					jPanelTextAreaLayout.columnWeights = new double[] {0.1};
-					jPanelTextAreaLayout.columnWidths = new int[] {7};
-					jPanelTextArea.setLayout(jPanelTextAreaLayout);
-					{
-						jButtonStart = new JButton();
-						jPanelTextArea.add(jButtonStart, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-						jButtonStart.setText("Commencer");
-						jButtonStart.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) {
-								jButtonStartActionPerformed(evt);
-							}
-						});
-					}
-					{
-						jButtonExit = new JButton();
-						jPanelTextArea.add(jButtonExit, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-						jButtonExit.setText("Quitter");
-						jButtonExit.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) {
-								jButtonExitActionPerformed(evt);
-							}
-						});
-					}
+					jButtonQuitter = new JButton();
+					background.add(jButtonQuitter);
+					jButtonQuitter.setLayout(null);
+					jButtonQuitter.setText("<html><font color=white>Quitter</font></html>");
+					jButtonQuitter.setBounds(700, 589, 78, 22);
+					jButtonQuitter.setBackground(new java.awt.Color(0,0,0));
+					jButtonQuitter.setBorder(BorderFactory.createTitledBorder(""));
+					jButtonQuitter.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jButtonQuitterActionPerformed(evt);
+						}
+					});
+				}
+				{
+					jButtonCommencer = new JButton();
+					background.add(jButtonCommencer);
+					jButtonCommencer.setLayout(null);
+					jButtonCommencer.setText("<html><font color=white>Commencer</font></html>");
+					jButtonCommencer.setBounds(372, 427, 88, 22);
+					jButtonCommencer.setBackground(new java.awt.Color(0,0,0));
+					jButtonCommencer.setBorder(BorderFactory.createTitledBorder(""));
+					jButtonCommencer.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jButtonCommencerActionPerformed(evt);
+						}
+					});
+				}
+				{
+					jButtonConfig = new JButton();
+					background.add(jButtonConfig);
+					jButtonConfig.setLayout(null);
+					jButtonConfig.setBounds(367, 460, 98, 22);
+					jButtonConfig.setText("<html><font color=white>Configuration</font></html>");
+					jButtonConfig.setBackground(new java.awt.Color(0,0,0));
+					jButtonConfig.setBorder(BorderFactory.createTitledBorder(""));
+					jButtonConfig.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jButtonConfigActionPerformed(evt);
+						}
+					});
 				}
 			}
 		} catch (Exception e) {
@@ -99,16 +100,24 @@ public class StartFrame extends javax.swing.JWindow {
 		}
 	}
 	
-	private void jButtonStartActionPerformed(ActionEvent evt) {
-		//System.out.println("jButtonStart.actionPerformed, event="+evt);
+	private void jButtonQuitterActionPerformed(ActionEvent evt) {
+		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
+		//TODO add your code for jButtonQuitter.actionPerformed
 		this.dispose();
-		Area newGame = new Area();
-		newGame.run();
 	}
 	
-	private void jButtonExitActionPerformed(ActionEvent evt) {
-		//System.out.println("jButtonExit.actionPerformed, event="+evt);
+	private void jButtonConfigActionPerformed(ActionEvent evt) {
+		//System.out.println("jButtonConfig.actionPerformed, event="+evt);
+		//TODO add your code for jButtonConfig.actionPerformed
+		ConnectionFrame connect = new ConnectionFrame();
+	}
+	
+	private void jButtonCommencerActionPerformed(ActionEvent evt) {
+		//System.out.println("jButtonCommencer.actionPerformed, event="+evt);
+		//TODO add your code for jButtonCommencer.actionPerformed
+		Area newGame = new Area();
 		this.dispose();
+		newGame.run();
 	}
 
 }

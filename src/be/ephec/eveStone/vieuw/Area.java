@@ -1,30 +1,16 @@
 package be.ephec.eveStone.vieuw;
 
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.io.File;
-import java.io.IOException;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -52,6 +38,7 @@ public class Area extends JFrame {
 	private JMenu jMenu1;
 	private JMenuBar jMenuBar1;
 	private JPanel jPanel1;
+	private JLabel jLabel1;
 
 	public Area(){
 		super();
@@ -60,21 +47,31 @@ public class Area extends JFrame {
 	}
 	
 	private void initGUI(){
-		JLabel background = new JLabel();
-		background.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/background.png")));
-		this.setContentPane(background);
-		
+
 	}
 	
 	public void run(){
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
-		this.initGUI();
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		{
-			jPanel1 = new JPanel();
-			getContentPane().add(jPanel1, BorderLayout.CENTER);
-			jPanel1.setLayout(new GridBagLayout());
+			JLabel background = new JLabel();
+			this.setContentPane(background);
+			background.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/background.png")));
+			{
+				jPanel1 = new JPanel();
+				getContentPane().add(jPanel1, BorderLayout.CENTER);
+				jPanel1.setLayout(new GridBagLayout());
+			}
+			{
+				jLabel1 = new JLabel();
+				background.add(jLabel1);
+				jLabel1.setText(" ");
+				jLabel1.setLayout(null);
+				jLabel1.setBounds(603, 530, 85, 76);
+			}
 		}
+		this.initGUI();
 		{
 			jMenuBar1 = new JMenuBar();
 			setJMenuBar(jMenuBar1);
