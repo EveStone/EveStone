@@ -13,8 +13,8 @@ public class EveStone {
 	
 	public static void main(String[] args)
 	{
-		StartFrame start = new StartFrame();
-		Controller c = new Controller();
+		new StartFrame();
+		new Controller();
 		
 	}
 
