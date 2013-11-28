@@ -56,9 +56,8 @@ public class StartFrame extends javax.swing.JWindow {
 					background.add(jButtonQuitter);
 					jButtonQuitter.setLayout(null);
 					jButtonQuitter.setText("<html><font color=white>Quitter</font></html>");
-					jButtonQuitter.setBounds(700, 589, 78, 22);
+					jButtonQuitter.setBounds(700, 587, 124, 22);
 					jButtonQuitter.setBackground(new java.awt.Color(0,0,0));
-					jButtonQuitter.setBorder(BorderFactory.createTitledBorder(""));
 					jButtonQuitter.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							jButtonQuitterActionPerformed(evt);
@@ -70,9 +69,8 @@ public class StartFrame extends javax.swing.JWindow {
 					background.add(jButtonCommencer);
 					jButtonCommencer.setLayout(null);
 					jButtonCommencer.setText("<html><font color=white>Commencer</font></html>");
-					jButtonCommencer.setBounds(372, 427, 88, 22);
+					jButtonCommencer.setBounds(367, 408, 124, 22);
 					jButtonCommencer.setBackground(new java.awt.Color(0,0,0));
-					jButtonCommencer.setBorder(BorderFactory.createTitledBorder(""));
 					jButtonCommencer.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							jButtonCommencerActionPerformed(evt);
@@ -83,10 +81,9 @@ public class StartFrame extends javax.swing.JWindow {
 					jButtonConfig = new JButton();
 					background.add(jButtonConfig);
 					jButtonConfig.setLayout(null);
-					jButtonConfig.setBounds(367, 460, 98, 22);
+					jButtonConfig.setBounds(367, 442, 124, 22);
 					jButtonConfig.setText("<html><font color=white>Configuration</font></html>");
 					jButtonConfig.setBackground(new java.awt.Color(0,0,0));
-					jButtonConfig.setBorder(BorderFactory.createTitledBorder(""));
 					jButtonConfig.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							jButtonConfigActionPerformed(evt);
