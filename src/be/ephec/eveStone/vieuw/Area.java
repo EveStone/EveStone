@@ -1,5 +1,6 @@
 package be.ephec.eveStone.vieuw;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,6 +23,8 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.File;
+import java.io.IOException;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -57,15 +60,20 @@ public class Area extends JFrame {
 	}
 	
 	private void initGUI(){
+		JLabel background = new JLabel();
+		background.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/background.png")));
+		this.setContentPane(background);
+		
 	}
 	
 	public void run(){
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
+		this.initGUI();
 		{
 			jPanel1 = new JPanel();
 			getContentPane().add(jPanel1, BorderLayout.CENTER);
-			jPanel1.setLayout(jPanel1Layout);
+			jPanel1.setLayout(new GridBagLayout());
 		}
 		{
 			jMenuBar1 = new JMenuBar();
