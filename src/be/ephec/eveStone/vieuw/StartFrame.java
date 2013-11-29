@@ -1,8 +1,8 @@
 package be.ephec.eveStone.vieuw;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -48,6 +48,8 @@ public class StartFrame extends javax.swing.JWindow {
 		try {
 			pack();
 			setSize(850, 638);
+			this.setLocationRelativeTo(null);
+			this.setVisible(true);
 			{
 				JLabel background = new JLabel();
 				this.setContentPane(background);
@@ -135,6 +137,11 @@ public class StartFrame extends javax.swing.JWindow {
 		//System.out.println("jButtonChoixHeros.actionPerformed, event="+evt);
 		//TODO add your code for jButtonChoixHeros.actionPerformed
 		new ChoixHeros();
+	}
+
+	public void run() {
+		StartFrame start = new StartFrame();
+		
 	}
 
 }
