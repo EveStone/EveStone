@@ -24,6 +24,7 @@ public class StartFrame extends javax.swing.JWindow {
 	private JButton jButtonQuitter;
 	private JButton jButtonCommencer;
 	private JButton jButtonConfig;
+	private JButton jButtonChoixHeros;
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -69,7 +70,7 @@ public class StartFrame extends javax.swing.JWindow {
 					background.add(jButtonCommencer);
 					jButtonCommencer.setLayout(null);
 					jButtonCommencer.setText("<html><font color=white>Commencer</font></html>");
-					jButtonCommencer.setBounds(367, 408, 124, 22);
+					jButtonCommencer.setBounds(355, 408, 151, 22);
 					jButtonCommencer.setBackground(new java.awt.Color(0,0,0));
 					jButtonCommencer.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
@@ -81,12 +82,25 @@ public class StartFrame extends javax.swing.JWindow {
 					jButtonConfig = new JButton();
 					background.add(jButtonConfig);
 					jButtonConfig.setLayout(null);
-					jButtonConfig.setBounds(367, 442, 124, 22);
+					jButtonConfig.setBounds(355, 442, 151, 22);
 					jButtonConfig.setText("<html><font color=white>Configuration</font></html>");
 					jButtonConfig.setBackground(new java.awt.Color(0,0,0));
 					jButtonConfig.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							jButtonConfigActionPerformed(evt);
+						}
+					});
+				}
+				{
+					jButtonChoixHeros = new JButton();
+					background.add(jButtonChoixHeros);
+					jButtonChoixHeros.setLayout(null);
+					jButtonChoixHeros.setText("<html><font color=white>Choix du Héros</font></html>");
+					jButtonChoixHeros.setBounds(355, 475, 151, 22);
+					jButtonChoixHeros.setBackground(new java.awt.Color(0,0,0));
+					jButtonChoixHeros.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jButtonChoixHerosActionPerformed(evt);
 						}
 					});
 				}
@@ -106,7 +120,7 @@ public class StartFrame extends javax.swing.JWindow {
 	private void jButtonConfigActionPerformed(ActionEvent evt) {
 		//System.out.println("jButtonConfig.actionPerformed, event="+evt);
 		//TODO add your code for jButtonConfig.actionPerformed
-		ConnectionFrame connect = new ConnectionFrame();
+		new ConnectionFrame();
 	}
 	
 	private void jButtonCommencerActionPerformed(ActionEvent evt) {
@@ -115,6 +129,12 @@ public class StartFrame extends javax.swing.JWindow {
 		Area newGame = new Area();
 		this.dispose();
 		newGame.run();
+	}
+	
+	private void jButtonChoixHerosActionPerformed(ActionEvent evt) {
+		//System.out.println("jButtonChoixHeros.actionPerformed, event="+evt);
+		//TODO add your code for jButtonChoixHeros.actionPerformed
+		new ChoixHeros();
 	}
 
 }

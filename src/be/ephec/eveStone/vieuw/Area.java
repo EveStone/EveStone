@@ -31,6 +31,9 @@ import java.awt.GridBagLayout;
  * Classe représentant la fenêtre de jeu.
  */
 public class Area extends JFrame {
+	
+	private static final String PATH_BG = "img/Background.png";
+	
 	private JMenuItem jMenuItem2;
 	private JMenuItem jMenuItem1;
 	private JMenu jMenu3;
@@ -42,7 +45,7 @@ public class Area extends JFrame {
 
 	public Area(){
 		super();
-		this.setSize(1000, 800);
+		this.setSize(1440, 1152);
 		this.initGUI();
 	}
 	
@@ -57,7 +60,7 @@ public class Area extends JFrame {
 		{
 			JLabel background = new JLabel();
 			this.setContentPane(background);
-			background.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/background.png")));
+			background.setIcon(new ImageIcon(getClass().getClassLoader().getResource(PATH_BG)));
 			{
 				jPanel1 = new JPanel();
 				getContentPane().add(jPanel1, BorderLayout.CENTER);
