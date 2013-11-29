@@ -1,7 +1,6 @@
 package be.ephec.eveStone.vieuw;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-
 import java.awt.GraphicsConfiguration;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,14 +10,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import be.ephec.eveStone.EveStone;
+import be.ephec.eveStone.controller.Controller;
+import be.ephec.eveStone.model.Hero;
+import be.ephec.eveStone.model.SortHeroique;
+import be.ephec.eveStone.model.repositories.Deck;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -41,6 +46,7 @@ public class ChoixHeros extends JFrame implements Runnable {
 	private JLabel jLabel2;
 	private JLabel jLabel1;
 	private JPanel jPanelDescription;
+	private int choixHero = -1; // 0 alors interceptor, 1 alors fregate
 
 	public ChoixHeros(){
 		super("Choix du Héros");
@@ -95,6 +101,11 @@ public class ChoixHeros extends JFrame implements Runnable {
 				jButtonSave.setText("<html><font color=white>Sauver</font></html>");
 				jButtonSave.setBounds(202, 197, 90, 22);
 				jButtonSave.setBackground(new java.awt.Color(0,0,0));
+				jButtonSave.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jButtonSauverActionPerformed(evt);
+					}
+				});
 			}
 			{
 				jButtonQuitter = new JButton();
@@ -136,6 +147,7 @@ public class ChoixHeros extends JFrame implements Runnable {
 								   + "Spécéficité : Petit et rapide, l'interceptor peut infliger des dégats important. Pour cela il utilise principalement"
 								   + " des drones d'attaque et des drone protecteur pour esquiver les dégats.<br/>"
 								   + "Sort Héros : Bombe Kinétique (Inflige des dégats à tous les serviteurs ennemis)</font></html>");
+		choixHero = 0;
 	}
 	
 	private void jLabel2MouseClicked(MouseEvent evt) {
@@ -145,11 +157,29 @@ public class ChoixHeros extends JFrame implements Runnable {
 				   + "Spécéficité : La frégate est un vaisseau robuste principalement conçu pour encaisser des dégats."
 				   + " Elle utilise des drônes puissants et qui nombreux qui noient l'ennemi sous un pluie de coup.<br/>"
 				   + "Sort Héros : Renfort !(Invoques 2 drônes moyens)</font></html>");
+		choixHero = 1;
 	}
 	
 	private void jButtonQuitterActionPerformed(ActionEvent evt) {
 		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
 		//TODO add your code for jButtonQuitter.actionPerformed
+		this.dispose();
+	}
+	private void jButtonSauverActionPerformed(ActionEvent evt) {
+		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
+		//TODO add your code for jButtonQuitter.actionPerformed
+		if (choixHero == 0)
+		{
+			Controller controller = EveStone.getController();
+			controller.setMyHero(new Hero("Interceptor","", new Deck("interceptor"), new SortHeroique(2, 0)));
+			System.out.println(""+ controller.getMyHero().getNom());
+		}
+		else if (choixHero == 1)
+		{
+			Controller controller = EveStone.getController();
+			controller.setMyHero(new Hero("Fregate","", new Deck("fregate"), new SortHeroique(0, 2)));
+			System.out.println(""+ controller.getMyHero().getNom());
+		}
 		this.dispose();
 	}
 

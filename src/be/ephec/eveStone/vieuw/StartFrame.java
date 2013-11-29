@@ -29,6 +29,7 @@ public class StartFrame extends javax.swing.JWindow {
 	/**
 	* Auto-generated main method to display this JFrame
 	*/
+	/*
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -37,7 +38,7 @@ public class StartFrame extends javax.swing.JWindow {
 				inst.setVisible(true);
 			}
 		});
-	}
+	}*/
 	
 	public StartFrame() {
 		super();

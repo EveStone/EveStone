@@ -1,11 +1,14 @@
 package be.ephec.eveStone.controller;
 
 import be.ephec.eveStone.model.*;
+import be.ephec.eveStone.vieuw.StartFrame;
 
 public class Controller {
 	
 	private Hero myHero;
 	private Hero adverseHero;
+	
+	private StartFrame start = new StartFrame();
 	
 	
 	public Controller(){
@@ -39,7 +42,6 @@ public class Controller {
 		}
 
 	}
-	
 
 	/*
 	 * Getters et setters pour avoir le hero adverse ou son hero 

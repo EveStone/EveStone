@@ -4,14 +4,16 @@ import be.ephec.eveStone.model.repositories.Deck;
 
 public class Hero {
 	
+	private String nom;
 	private String image;
 	private int nbStructure;
 	private int nbCoque;
 	private Deck deck;
 	private SortHeroique sortHero;
 
-	public Hero(String image, Deck deck, SortHeroique sortHero)
+	public Hero(String nom,String image, Deck deck, SortHeroique sortHero)
 	{
+		this.nom = nom;
 		this.image = image;
 		this.nbCoque = 20;
 		this.nbStructure = 10;
@@ -58,6 +60,15 @@ public class Hero {
 	public void setSortHero(SortHeroique sortHero) {
 		this.sortHero = sortHero;
 	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
 	
 	
 

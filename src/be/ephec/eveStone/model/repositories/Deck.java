@@ -52,7 +52,7 @@ public class Deck {
 	}
 	private LinkedList<Carte> makeListInterceptor()
 	{
-		LinkedList<Carte> tmp = null;
+		LinkedList<Carte> tmp = new LinkedList<Carte>();
 		tmp.add(new Serviteur("Drones d'attaque", 2, "", 2, 2));
 		tmp.add(new Serviteur("Drones d'attaque", 2, "", 2, 2));
 		tmp.add(new Serviteur("Drones de combat Elite", 5, "", 3, 5));
@@ -87,7 +87,7 @@ public class Deck {
 	}
 	private LinkedList<Carte> makeListFregate()
 	{
-		LinkedList<Carte> tmp = null;
+		LinkedList<Carte> tmp = new LinkedList<Carte>();
 		tmp.add(new Serviteur("Drones d'attaque", 2, "", 2, 2));
 		tmp.add(new Serviteur("Drones d'attaque", 2, "", 2, 2));
 		tmp.add(new Serviteur("Drones de combat Elite", 5, "", 3, 5));

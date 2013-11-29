@@ -6,18 +6,20 @@ import be.ephec.eveStone.model.repositories.Deck;
 import be.ephec.eveStone.vieuw.StartFrame;
 
 public class EveStone {
-	
+
 	private static Controller CONTROLLER;
-	
-	
-	
-	
+
+
+
+
 	public static void main(String[] args)
 	{
-		new StartFrame();
 		CONTROLLER = new Controller();
 		
 	}
-	
-	
+	public static Controller getController(){
+		return CONTROLLER;
+	}
+
+
 }
