@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
+import be.ephec.eveStone.controller.Controller;
+
 /**
 * This code was edited or generated using CloudGarden's Jigloo
 * SWT/Swing GUI Builder, which is free for non-commercial
@@ -25,6 +27,8 @@ public class StartFrame extends javax.swing.JWindow {
 	private JButton jButtonCommencer;
 	private JButton jButtonConfig;
 	private JButton jButtonChoixHeros;
+	
+	private static final String PATH_START = "img/StartFrame.png";
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -40,12 +44,12 @@ public class StartFrame extends javax.swing.JWindow {
 		});
 	}*/
 	
-	public StartFrame() {
+	public StartFrame(final Controller controller) {
 		super();
-		initGUI();
+		initGUI(controller);
 	}
 	
-	private void initGUI() {
+	private void initGUI(final Controller controller) {
 		try {
 			pack();
 			setSize(850, 638);
@@ -54,7 +58,7 @@ public class StartFrame extends javax.swing.JWindow {
 			{
 				JLabel background = new JLabel();
 				this.setContentPane(background);
-				background.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/StartFrame.png")));
+				background.setIcon(new ImageIcon(getClass().getClassLoader().getResource(PATH_START)));
 				{
 					jButtonQuitter = new JButton();
 					background.add(jButtonQuitter);
@@ -70,6 +74,7 @@ public class StartFrame extends javax.swing.JWindow {
 				}
 				{
 					jButtonCommencer = new JButton();
+					jButtonCommencer.setEnabled(false);
 					background.add(jButtonCommencer);
 					jButtonCommencer.setLayout(null);
 					jButtonCommencer.setText("<html><font color=white>Commencer</font></html>");
@@ -77,7 +82,7 @@ public class StartFrame extends javax.swing.JWindow {
 					jButtonCommencer.setBackground(new java.awt.Color(0,0,0));
 					jButtonCommencer.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							jButtonCommencerActionPerformed(evt);
+							jButtonCommencerActionPerformed(evt, controller);
 						}
 					});
 				}
@@ -90,7 +95,7 @@ public class StartFrame extends javax.swing.JWindow {
 					jButtonConfig.setBackground(new java.awt.Color(0,0,0));
 					jButtonConfig.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							jButtonConfigActionPerformed(evt);
+							jButtonConfigActionPerformed(evt, controller);
 						}
 					});
 				}
@@ -103,7 +108,7 @@ public class StartFrame extends javax.swing.JWindow {
 					jButtonChoixHeros.setBackground(new java.awt.Color(0,0,0));
 					jButtonChoixHeros.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							jButtonChoixHerosActionPerformed(evt);
+							jButtonChoixHerosActionPerformed(evt, controller, jButtonCommencer);
 						}
 					});
 				}
@@ -120,29 +125,22 @@ public class StartFrame extends javax.swing.JWindow {
 		this.dispose();
 	}
 	
-	private void jButtonConfigActionPerformed(ActionEvent evt) {
+	private void jButtonConfigActionPerformed(ActionEvent evt, final Controller controller) {
 		//System.out.println("jButtonConfig.actionPerformed, event="+evt);
 		//TODO add your code for jButtonConfig.actionPerformed
-		new ConnectionFrame();
+		new ConnectionFrame(controller);
 	}
 	
-	private void jButtonCommencerActionPerformed(ActionEvent evt) {
+	private void jButtonCommencerActionPerformed(ActionEvent evt, final Controller controller) {
 		//System.out.println("jButtonCommencer.actionPerformed, event="+evt);
 		//TODO add your code for jButtonCommencer.actionPerformed
-		Area newGame = new Area();
+		Area newGame = new Area(controller);
 		this.dispose();
-		newGame.run();
 	}
 	
-	private void jButtonChoixHerosActionPerformed(ActionEvent evt) {
+	private void jButtonChoixHerosActionPerformed(ActionEvent evt, final Controller controller, JButton commencer) {
 		//System.out.println("jButtonChoixHeros.actionPerformed, event="+evt);
 		//TODO add your code for jButtonChoixHeros.actionPerformed
-		new ChoixHeros();
+		new ChoixHeros(controller, commencer);
 	}
-
-	public void run() {
-		StartFrame start = new StartFrame();
-		
-	}
-
 }

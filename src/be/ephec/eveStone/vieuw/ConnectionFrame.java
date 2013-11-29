@@ -1,18 +1,19 @@
 package be.ephec.eveStone.vieuw;
 import java.awt.BorderLayout;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import be.ephec.eveStone.controller.Controller;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -37,7 +38,7 @@ public class ConnectionFrame extends JFrame {
 	private JPanel jPanel1;
 	private JLabel jLabelExemple;
 
-	public ConnectionFrame(){
+	public ConnectionFrame(final Controller controller){
 		super("Connexion");
 		initGUI();
 	}
@@ -117,10 +118,6 @@ public class ConnectionFrame extends JFrame {
 			jPanelMenuLayout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
 			jPanelMenuLayout.columnWidths = new int[] {7, 7, 7, 7, 7};
 		}
-	}
-	
-	public void run(){
-		ConnectionFrame connect = new ConnectionFrame();
 	}
 	
 	private void jButtonAnnulerActionPerformed(ActionEvent evt) {

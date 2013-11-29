@@ -37,7 +37,7 @@ import be.ephec.eveStone.model.repositories.Deck;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class ChoixHeros extends JFrame implements Runnable {
+public class ChoixHeros extends JFrame{
 	private JPanel jPanel1;
 	private JButton jButtonSave;
 	private JLabel jLabelDescription;
@@ -48,12 +48,12 @@ public class ChoixHeros extends JFrame implements Runnable {
 	private JPanel jPanelDescription;
 	private int choixHero = -1; // 0 alors interceptor, 1 alors fregate
 
-	public ChoixHeros(){
+	public ChoixHeros(final Controller controller, final JButton commencer){
 		super("Choix du Héros");
-		initGUI();
+		initGUI(controller, commencer);
 	}
 	
-	private void initGUI(){
+	private void initGUI(final Controller controller, final JButton commencer){
 		this.setSize(500, 500);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
@@ -103,7 +103,7 @@ public class ChoixHeros extends JFrame implements Runnable {
 				jButtonSave.setBackground(new java.awt.Color(0,0,0));
 				jButtonSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						jButtonSauverActionPerformed(evt);
+						jButtonSauverActionPerformed(evt, controller, commencer);
 					}
 				});
 			}
@@ -133,12 +133,6 @@ public class ChoixHeros extends JFrame implements Runnable {
 			}
 		}
 	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		new ChoixHeros();
-	}
 	
 	private void jLabel1MouseClicked(MouseEvent evt) {
 		//System.out.println("jLabel1.mouseClicked, event="+evt);
@@ -165,21 +159,21 @@ public class ChoixHeros extends JFrame implements Runnable {
 		//TODO add your code for jButtonQuitter.actionPerformed
 		this.dispose();
 	}
-	private void jButtonSauverActionPerformed(ActionEvent evt) {
+	private void jButtonSauverActionPerformed(ActionEvent evt, final Controller controller, JButton commencer) {
 		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
 		//TODO add your code for jButtonQuitter.actionPerformed
 		if (choixHero == 0)
 		{
-			Controller controller = EveStone.getController();
 			controller.setMyHero(new Hero("Interceptor","", new Deck("interceptor"), new SortHeroique(2, 0)));
 			System.out.println(""+ controller.getMyHero().getNom());
 		}
 		else if (choixHero == 1)
 		{
-			Controller controller = EveStone.getController();
 			controller.setMyHero(new Hero("Fregate","", new Deck("fregate"), new SortHeroique(0, 2)));
 			System.out.println(""+ controller.getMyHero().getNom());
 		}
+		if (this.choixHero > -1)
+			commencer.setEnabled(true);
 		this.dispose();
 	}
 

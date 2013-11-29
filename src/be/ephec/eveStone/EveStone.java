@@ -15,7 +15,8 @@ public class EveStone {
 	public static void main(String[] args)
 	{
 		CONTROLLER = new Controller();
-		
+		StartFrame gui = new StartFrame(CONTROLLER);
+		//System.out.println(CONTROLLER.getMyHero().getNom());
 	}
 	public static Controller getController(){
 		return CONTROLLER;
