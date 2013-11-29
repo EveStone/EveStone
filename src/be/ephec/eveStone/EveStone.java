@@ -7,6 +7,7 @@ import be.ephec.eveStone.vieuw.StartFrame;
 
 public class EveStone {
 	
+	private static Controller CONTROLLER;
 	
 	
 	
@@ -14,8 +15,9 @@ public class EveStone {
 	public static void main(String[] args)
 	{
 		new StartFrame();
-		new Controller();
+		CONTROLLER = new Controller();
 		
 	}
-
+	
+	
 }
