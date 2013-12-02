@@ -45,7 +45,6 @@ public class ConnectionFrame extends JFrame {
 	
 	private void initGUI(){
 		this.setSize(300, 500);
-		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		{
 			jPanel1 = new JPanel();
@@ -118,6 +117,10 @@ public class ConnectionFrame extends JFrame {
 			jPanelMenuLayout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
 			jPanelMenuLayout.columnWidths = new int[] {7, 7, 7, 7, 7};
 		}
+	}
+	
+	public void display(){
+		this.setVisible(true);
 	}
 	
 	private void jButtonAnnulerActionPerformed(ActionEvent evt) {

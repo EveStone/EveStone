@@ -54,7 +54,6 @@ public class StartFrame extends javax.swing.JWindow {
 			pack();
 			setSize(850, 638);
 			this.setLocationRelativeTo(null);
-			this.setVisible(true);
 			{
 				JLabel background = new JLabel();
 				this.setContentPane(background);
@@ -128,13 +127,15 @@ public class StartFrame extends javax.swing.JWindow {
 	private void jButtonConfigActionPerformed(ActionEvent evt, final Controller controller) {
 		//System.out.println("jButtonConfig.actionPerformed, event="+evt);
 		//TODO add your code for jButtonConfig.actionPerformed
-		new ConnectionFrame(controller);
+		controller.makeConnectionFrame();
+		controller.displayConnectionFrame();
 	}
 	
 	private void jButtonCommencerActionPerformed(ActionEvent evt, final Controller controller) {
 		//System.out.println("jButtonCommencer.actionPerformed, event="+evt);
 		//TODO add your code for jButtonCommencer.actionPerformed
-		Area newGame = new Area(controller);
+		controller.makeArea();
+		controller.displayArea();
 		this.dispose();
 	}
 	
