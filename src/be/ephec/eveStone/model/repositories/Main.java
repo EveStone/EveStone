@@ -19,7 +19,7 @@ public class Main {
 	 */
 	public int add(Carte carte){
 		int index = -1;
-		if (nbCarte <= MAX_CARTE){
+		if (nbCarte < MAX_CARTE){
 			nbCarte++;
 			for(int i = 0; i<nbCarte; i++){
 				if(tabCarte[i]==null){
