@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
+import java.awt.BorderLayout;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -34,6 +35,13 @@ public class Area extends JFrame {
 	private static final long serialVersionUID = 8140867745881460741L;
 	private static final String PATH_BG = "img/Background.png";
 	private JLabel jLabel2;
+	private JPanel jPanelTerrain;
+	private JPanel jPanelTerrainAdversaire;
+	private JPanel jPanelMainAdversaire;
+	private JLabel jLabelRessourceAdversaire;
+	private JLabel jLabelSortHeroiqueAdversaire;
+	private JLabel jLabelHerosAdversaire;
+	private JLabel jLabelSortHeroique;
 	private JLabel jLabelRessource;
 	private JLabel jLabelHeros;
 	public JPanel jPanelMain;
@@ -43,7 +51,7 @@ public class Area extends JFrame {
 
 	public Area(final Controller controller){
 		super("EVE STONE");
-		this.setSize(1200, 800);
+		this.setSize(1200, 819);
 		this.initGUI(controller);
 	}
 	
@@ -65,7 +73,7 @@ public class Area extends JFrame {
 				jButtonFinTour = new JButton();
 				background.add(jButtonFinTour);
 				jButtonFinTour.setText("<html><font color=white>Fin de tour</font></html>");
-				jButtonFinTour.setBounds(952, 366, 117, 28);
+				jButtonFinTour.setBounds(1018, 371, 117, 28);
 				jButtonFinTour.setBackground(new java.awt.Color(0,0,0));
 				jButtonFinTour.setEnabled(false);
 			}
@@ -91,8 +99,51 @@ public class Area extends JFrame {
 				jLabelRessource = new JLabel();
 				background.add(jLabelRessource);
 				jLabelRessource.setText("<html><font color=white>1</font></html>");
-				jLabelRessource.setBounds(470, 579, 60, 33);
+				jLabelRessource.setBounds(470, 573, 60, 31);
 				jLabelRessource.setFont(new java.awt.Font("Purisa",1,20));
+			}
+			{
+				jLabelSortHeroique = new JLabel();
+				background.add(jLabelSortHeroique);
+				jLabelSortHeroique.setText(" ");
+				jLabelSortHeroique.setBounds(684, 541, 81, 78);
+			}
+			{
+				jLabelRessourceAdversaire = new JLabel();
+				background.add(jLabelRessourceAdversaire);
+				jLabelRessourceAdversaire.setText("<html><font color=white>1</font></html>");
+				jLabelRessourceAdversaire.setBounds(465, 168, 35, 41);
+				jLabelRessourceAdversaire.setFont(new java.awt.Font("Purisa",1,20));
+			}
+			{
+				jLabelHerosAdversaire = new JLabel();
+				background.add(jLabelHerosAdversaire);
+				jLabelHerosAdversaire.setText(" ");
+				jLabelHerosAdversaire.setBounds(543, 119, 117, 120);
+			}
+			{
+				jLabelSortHeroiqueAdversaire = new JLabel();
+				background.add(jLabelSortHeroiqueAdversaire);
+				jLabelSortHeroiqueAdversaire.setText(" ");
+				jLabelSortHeroiqueAdversaire.setBounds(684, 138, 81, 83);
+			}
+			{
+				jPanelMainAdversaire = new JPanel();
+				background.add(jPanelMainAdversaire);
+				jPanelMainAdversaire.setBounds(273, 12, 665, 95);
+				jPanelMainAdversaire.setOpaque(false);
+			}
+			{
+				jPanelTerrainAdversaire = new JPanel();
+				background.add(jPanelTerrainAdversaire);
+				jPanelTerrainAdversaire.setBounds(207, 255, 799, 116);
+				jPanelTerrainAdversaire.setOpaque(false);
+			}
+			{
+				jPanelTerrain = new JPanel();
+				background.add(jPanelTerrain);
+				jPanelTerrain.setBounds(208, 404, 799, 118);
+				jPanelTerrain.setOpaque(false);
 			}
 		}
 	}
@@ -109,15 +160,43 @@ public class Area extends JFrame {
 		return this.jPanelMain;
 	}
 	
+	public JPanel getjPanelTerrain() {
+		return jPanelTerrain;
+	}
+
+	public JPanel getjPanelTerrainAdversaire() {
+		return jPanelTerrainAdversaire;
+	}
+
+	public JPanel getjPanelMainAdversaire() {
+		return jPanelMainAdversaire;
+	}
+
+	public JLabel getjLabelHerosAdversaire() {
+		return jLabelHerosAdversaire;
+	}
+
 	public JLabel getLabelHeros(){
 		return this.jLabelHeros;
 	}
+	public JLabel getjLabelSortHeroique() {
+		return this.jLabelSortHeroique;
+	}
 	
+	
+	public JLabel getjLabelRessourceAdversaire() {
+		return jLabelRessourceAdversaire;
+	}
+
+	public JLabel getjLabelSortHeroiqueAdversaire() {
+		return jLabelSortHeroiqueAdversaire;
+	}
+
 	public JLabel getLabelRessource(){
 		return this.jLabelRessource;
 	}
 	
 	public JButton getFinTourButton(){
 		return jButtonFinTour;
-	}
+	}	
 }
