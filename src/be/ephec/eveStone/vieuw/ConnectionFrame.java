@@ -121,4 +121,9 @@ public class ConnectionFrame extends JFrame {
 	public JButton getjButtonCommencer() {
 		return jButtonCommencer;
 	}
+
+	public JTextField getjTextFieldIP() {
+		return jTextFieldIP;
+	}
+	
 }

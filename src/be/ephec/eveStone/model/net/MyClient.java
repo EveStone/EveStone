@@ -67,6 +67,21 @@ public class MyClient extends Socket implements Runnable {
 	{
 		
 	}
+	
+
+	public ObjectOutputStream getOos() {
+		return oos;
+	}
+
+	public ObjectInputStream getOis() {
+		return ois;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num){
+		this.num= num;
+	}
 
 	@Override
 	public void run() {

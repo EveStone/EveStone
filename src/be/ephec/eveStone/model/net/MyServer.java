@@ -20,15 +20,14 @@ public class MyServer extends ServerSocket {
 			try {
 				MyServer ms = new MyServer();
 				System.out.println("Le serveur tourne sur le port: " + numPort);
-				//while (true);//c'est tr�s andy c'est a dire moche !!!!!!!!!!!!!!!!!!!
 				do{
 					Socket s = ms.accept();
 					ms.listeClient.add(new MySocketSideServer(s,ms.listeClient.size() +1));
-					ms.listeClient.get(ms.listeClient.size()-1).getOos().writeObject("Bienvenue sur le serveur");
+					ms.listeClient.get(ms.listeClient.size()-1).getOos().writeObject("Connection établie..........");
 					ms.listeClient.get(ms.listeClient.size()-1).getOos().writeObject(ms.listeClient.size());
 					for (MySocketSideServer mscs : ms.listeClient) 
 					{
-						mscs.getOos().writeObject("Nouveau client (nom = " + ms.listeClient.size()+") sur le serveur");
+						mscs.getOos().writeObject("Bienvenue sur EveStone (nom = " + ms.listeClient.size()+") sur le serveur");
 					}
 				}while(!ms.isClosed());
 

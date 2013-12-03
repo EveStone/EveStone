@@ -2,11 +2,14 @@ package be.ephec.eveStone.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import be.ephec.eveStone.model.*;
+import be.ephec.eveStone.model.net.MyClient;
 import be.ephec.eveStone.model.repositories.Main;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.ConnectionFrame;
@@ -27,9 +30,12 @@ public class Controller {
 
 	// Path pour la construction des cartes
 	private final String PATH_DRONE_ATTAQUE = "img/CarteFaceV2_petit.png";
-	
+
 	//Port serveur
 	private final int NUM_PORT = 2013;
+
+	//client NET
+	private MyClient client;
 
 	private int nbTour;
 
@@ -167,8 +173,8 @@ public class Controller {
 	public Hero getAdverseHero() {
 		return adverseHero;
 	}
-	
-	
+
+
 	public int getNUM_PORT() {
 		return NUM_PORT;
 	}
@@ -232,7 +238,7 @@ public class Controller {
 		else
 			JOptionPane.showMessageDialog(null, "Erreur : Ressources Inssufisantes !");
 	}
-	
+
 	protected void jButtonFinTourClicked(MouseEvent evt) {
 		nbTour++;
 		if (nbTour < 10)
@@ -253,6 +259,27 @@ public class Controller {
 	}
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
+		try {
+			client = new MyClient(this.connexion.getjTextFieldIP().getText(), NUM_PORT);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String s = "";
+		try {
+			s = (String)client.getOis().readObject();
+			client.setNum((int)client.getOis().readObject());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.connexion.dispose();
+		JOptionPane.showMessageDialog(null, " Bienvenue sur EveStone!!!! vous êtes le  " + client.getNum() + " client \n" + s);
 	}
 }
