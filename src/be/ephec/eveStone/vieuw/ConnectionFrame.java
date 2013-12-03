@@ -72,11 +72,6 @@ public class ConnectionFrame extends JFrame {
 				jButtonCommencer.setLayout(null);
 				jButtonCommencer.setText("<html><font color=white>Commencer</font></html>");
 				jButtonCommencer.setBackground(new java.awt.Color(0,0,0));
-				jButtonCommencer.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						jButtonCommencerActionPerformed(evt);
-					}
-				});
 			}
 			{
 				jButtonAnnuler = new JButton();
@@ -84,11 +79,6 @@ public class ConnectionFrame extends JFrame {
 				jButtonAnnuler.setLayout(null);
 				jButtonAnnuler.setText("<html><font color=white>Annuler</font></html>");
 				jButtonAnnuler.setBackground(new java.awt.Color(0,0,0));
-				jButtonAnnuler.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						jButtonAnnulerActionPerformed(evt);
-					}
-				});
 			}
 			{
 				jLabel2 = new JLabel();
@@ -123,15 +113,12 @@ public class ConnectionFrame extends JFrame {
 		this.setVisible(true);
 	}
 	
-	private void jButtonAnnulerActionPerformed(ActionEvent evt) {
-		//System.out.println("jButtonAnnuler.actionPerformed, event="+evt);
-		//TODO add your code for jButtonAnnuler.actionPerformed
-		this.dispose();
-	}
 	
-	private void jButtonCommencerActionPerformed(ActionEvent evt) {
-		//System.out.println("jButtonCommencer.actionPerformed, event="+evt);
-		//TODO add your code for jButtonCommencer.actionPerformed
-		this.dispose();
+	public JButton getjButtonAnnuler() {
+		return jButtonAnnuler;
+	}
+
+	public JButton getjButtonCommencer() {
+		return jButtonCommencer;
 	}
 }

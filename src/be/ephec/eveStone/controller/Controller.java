@@ -58,6 +58,16 @@ public class Controller {
 	 */
 	public void makeConnectionFrame(){
 		this.connexion = new ConnectionFrame(this);
+		this.connexion.getjButtonAnnuler().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				jButtonAnnulerClicked(evt);
+			}
+		});
+		this.connexion.getjButtonCommencer().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				jButtonCommencerClicked(evt);
+			}
+		});
 	}
 	/**
 	 * Affiche la fenêtre de connection
@@ -236,5 +246,13 @@ public class Controller {
 		this.area.getLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		this.area.revalidate();
 		this.area.repaint();
+	}
+	protected void jButtonAnnulerClicked(MouseEvent evt)
+	{
+		this.connexion.dispose();
+	}
+	protected void jButtonCommencerClicked(MouseEvent evt)
+	{
+		this.connexion.dispose();
 	}
 }
