@@ -4,7 +4,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import be.ephec.eveStone.model.*;
 import be.ephec.eveStone.model.repositories.Main;
 import be.ephec.eveStone.vieuw.Area;
@@ -27,6 +28,7 @@ public class Controller {
 	// Path pour la construction des cartes
 	private final String PATH_DRONE_ATTAQUE = "img/CarteFaceV2_petit.png";
 
+	private int nbTour;
 
 	public Controller(){
 
@@ -71,7 +73,14 @@ public class Controller {
 			}
 		});
 		this.main = new Main();
+		this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent evt){
+				jButtonFinTourClicked(evt);
+			}
+		});
+		nbTour=1;
 	}
+
 	/**
 	 * Affiche la Zone de jeu
 	 */
@@ -165,8 +174,7 @@ public class Controller {
 			card.setIndex(indexOfCard);
 			card.setCard(main.getCard(indexOfCard));
 			card.setName(card.getCard().getNom());
-			System.out.println("Carte ajoutée : "+card.getCard().getNom()+" en : "+indexOfCard);
-			main.affiche();
+			card.makeCard();
 			area.getPanelMain().add(card);
 			card.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent ev){
@@ -194,9 +202,27 @@ public class Controller {
 	}
 
 	protected void jButtonJouerClicked(MouseEvent evt, CardPanel label) {
-		this.main.remove(label.getIndex());
-		area.getPanelMain().remove(label);
-		area.getPanelMain().revalidate();
-		area.getPanelMain().repaint();
+		if(myHero.getRessource() >= label.getCard().getRessource()){
+			this.main.remove(label.getIndex());
+			myHero.setRessource(myHero.getRessource()-label.getCard().getRessource());
+			this.area.getLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
+			area.getPanelMain().remove(label);
+			area.revalidate();
+			area.repaint();
+		}
+		else
+			JOptionPane.showMessageDialog(null, "Erreur : Ressources Inssufisantes !");
+	}
+	
+	protected void jButtonFinTourClicked(MouseEvent evt) {
+		this.nbTour++;
+		if (myHero.getRessource() < nbTour){
+			myHero.setRessource(nbTour);
+		}
+		else
+			myHero.setRessource(10);
+		this.area.getLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
+		this.area.revalidate();
+		this.area.repaint();
 	}
 }

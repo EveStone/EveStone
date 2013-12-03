@@ -10,6 +10,7 @@ public class Hero {
 	private int nbCoque;
 	private Deck deck;
 	private SortHeroique sortHero;
+	private int ressource;
 
 	public Hero(String nom,String image, Deck deck, SortHeroique sortHero)
 	{
@@ -19,6 +20,7 @@ public class Hero {
 		this.nbStructure = 10;
 		this.deck = deck;
 		this.sortHero = sortHero;
+		ressource = 1;
 	}
 
 	public String getImage() {
@@ -69,10 +71,11 @@ public class Hero {
 		this.nom = nom;
 	}
 	
+	public int getRessource(){
+		return ressource;
+	}
 	
-	
-
-
-	
-
+	public void setRessource(int ressource){
+		this.ressource = ressource;
+	}
 }

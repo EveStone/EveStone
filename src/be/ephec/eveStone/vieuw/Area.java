@@ -4,19 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
 
 import be.ephec.eveStone.controller.Controller;
-
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -38,9 +28,14 @@ import java.awt.event.MouseEvent;
  */
 public class Area extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8140867745881460741L;
 	private static final String PATH_BG = "img/Background.png";
 	private JLabel jLabel2;
-	private JLabel jLabel_IL;
+	private JLabel jLabelRessource;
+	private JLabel jLabelHeros;
 	public JPanel jPanelMain;
 	private JButton jButtonFinTour;
 
@@ -83,8 +78,21 @@ public class Area extends JFrame {
 			{
 				jLabel2 = new JLabel();
 				background.add(jLabel2);
-				jLabel2.setText(" ");
+				jLabel2.setText("");
 				jLabel2.setBounds(975, 522, 77, 116);
+			}
+			{
+				jLabelHeros = new JLabel();
+				background.add(jLabelHeros);
+				jLabelHeros.setText(" ");
+				jLabelHeros.setBounds(536, 546, 124, 124);
+			}
+			{
+				jLabelRessource = new JLabel();
+				background.add(jLabelRessource);
+				jLabelRessource.setText("<html><font color=white>1</font></html>");
+				jLabelRessource.setBounds(470, 579, 60, 33);
+				jLabelRessource.setFont(new java.awt.Font("Purisa",1,20));
 			}
 		}
 	}
@@ -99,5 +107,17 @@ public class Area extends JFrame {
 	
 	public JPanel getPanelMain(){
 		return this.jPanelMain;
+	}
+	
+	public JLabel getLabelHeros(){
+		return this.jLabelHeros;
+	}
+	
+	public JLabel getLabelRessource(){
+		return this.jLabelRessource;
+	}
+	
+	public JButton getFinTourButton(){
+		return jButtonFinTour;
 	}
 }

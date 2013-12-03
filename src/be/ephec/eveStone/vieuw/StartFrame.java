@@ -23,6 +23,10 @@ import be.ephec.eveStone.controller.Controller;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class StartFrame extends javax.swing.JWindow {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4679000391438807432L;
 	private JButton jButtonQuitter;
 	private JButton jButtonCommencer;
 	private JButton jButtonConfig;

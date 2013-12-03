@@ -15,13 +15,21 @@ public class CardPanel extends JLabel {
 	private int index;
 	private Carte card;
 	JButton jouer;
+	JLabel ressource;
 
 	public CardPanel(Icon image) {
 		super(image);
+	}
+	
+	public void makeCard(){
 		jouer = new JButton("Jouer");
 		jouer.setBounds(5, 100, 75, 20);
 		this.add(jouer);
 		jouer.setVisible(false);
+		ressource = new JLabel();
+		ressource.setText("<html><font color=\"#FBF2B7\">"+card.getRessource()+"</font></html>");
+		ressource.setBounds(5, 0, 20, 20);
+		this.add(ressource);
 	}
 	
 	public void setIndex(int index){
