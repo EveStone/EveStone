@@ -16,13 +16,14 @@ public class MyClient extends Socket implements Runnable {
 	private ObjectInputStream ois;
 	private int num;
 	
-
+	/*
+	 * Suspendu car pas besoin
 	public MyClient() throws UnknownHostException, IOException {
 		super("127.0.0.1",2013);
 		oos = new ObjectOutputStream(this.getOutputStream());
 		ois = new ObjectInputStream(this.getInputStream());
 	}
-
+	*/
 
 	public MyClient(String host, int port) throws UnknownHostException,
 			IOException {
@@ -31,11 +32,12 @@ public class MyClient extends Socket implements Runnable {
 		ois = new ObjectInputStream(this.getInputStream());
 	}
 
-
+	/* 
+	 * Garde en exemple de client
 	public static void main(String[] args) {
 		MyClient mc = null;
 		try {
-			mc = new MyClient();
+			mc = new MyClient("127.0.0.1",2013);
 			String s = (String)mc.ois.readObject();
 			System.out.println("Le client a re�u: " + s);
 			
@@ -69,16 +71,24 @@ public class MyClient extends Socket implements Runnable {
 		}
 
 	}
-
+	*/
+	
+	public void ecrire(ObjectSend objS)
+	{
+		
+	}
 
 	@Override
 	public void run() {
 		while (!this.isClosed())
 		{
-			String s = null;
+			ObjectSend obj = null;
 			try {
-				s = (String) this.ois.readObject();
-				System.out.println("J'ai recu: " + s);
+				obj = (ObjectSend) this.ois.readObject();
+				int action = obj.getAction();
+				Object o = obj.getObj();
+				System.out.println("Numéro de l'action" + action);
+				
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
