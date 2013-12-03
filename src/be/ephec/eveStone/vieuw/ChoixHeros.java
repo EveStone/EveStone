@@ -47,6 +47,9 @@ public class ChoixHeros extends JFrame{
 	private JLabel jLabel1;
 	private JPanel jPanelDescription;
 	private int choixHero = -1; // 0 alors interceptor, 1 alors fregate
+	
+	private final String IMG_FREGATE = "img/Fregate.png";
+	private final String IMG_INTERCEPTOR = "img/Interceptor.png";
 
 	public ChoixHeros(final Controller controller, final JButton commencer){
 		super("Choix du Héros");
@@ -164,12 +167,12 @@ public class ChoixHeros extends JFrame{
 		//TODO add your code for jButtonQuitter.actionPerformed
 		if (choixHero == 0)
 		{
-			controller.setMyHero(new Hero("Interceptor","", new Deck("interceptor"), new SortHeroique(2, 0)));
+			controller.setMyHero(new Hero("Interceptor",IMG_INTERCEPTOR, new Deck("interceptor"), new SortHeroique(2, 0)));
 			System.out.println(""+ controller.getMyHero().getNom());
 		}
 		else if (choixHero == 1)
 		{
-			controller.setMyHero(new Hero("Fregate","", new Deck("fregate"), new SortHeroique(0, 2)));
+			controller.setMyHero(new Hero("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique(0, 2)));
 			System.out.println(""+ controller.getMyHero().getNom());
 		}
 		if (this.choixHero > -1)

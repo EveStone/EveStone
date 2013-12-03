@@ -44,7 +44,7 @@ public class Area extends JFrame {
 	private JLabel jLabelSortHeroique;
 	private JLabel jLabelRessource;
 	private JLabel jLabelHeros;
-	public JPanel jPanelMain;
+	private JPanel jPanelMain;
 	private JButton jButtonFinTour;
 
 	private JLabel jLabel1;
@@ -93,7 +93,8 @@ public class Area extends JFrame {
 				jLabelHeros = new JLabel();
 				background.add(jLabelHeros);
 				jLabelHeros.setText(" ");
-				jLabelHeros.setBounds(536, 546, 124, 124);
+				jLabelHeros.setBounds(539, 522, 133, 142);
+				jLabelHeros.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/Interceptor.png")));
 			}
 			{
 				jLabelRessource = new JLabel();
@@ -176,7 +177,7 @@ public class Area extends JFrame {
 		return jLabelHerosAdversaire;
 	}
 
-	public JLabel getLabelHeros(){
+	public JLabel getjLabelHeros(){
 		return this.jLabelHeros;
 	}
 	public JLabel getjLabelSortHeroique() {
@@ -192,7 +193,7 @@ public class Area extends JFrame {
 		return jLabelSortHeroiqueAdversaire;
 	}
 
-	public JLabel getLabelRessource(){
+	public JLabel getjLabelRessource(){
 		return this.jLabelRessource;
 	}
 	

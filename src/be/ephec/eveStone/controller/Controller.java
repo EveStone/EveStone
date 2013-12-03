@@ -86,6 +86,8 @@ public class Controller {
 	 */
 	public void makeArea(){
 		this.area = new Area(this);
+		this.area.getjLabelHeros().setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getImage())));
+		
 		this.area.getDeckPanel().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
 				jLabel2MouseClicked(evt);
@@ -230,7 +232,7 @@ public class Controller {
 		if(myHero.getRessource() >= label.getCard().getRessource()){
 			this.main.remove(label.getIndex());
 			myHero.setRessource(myHero.getRessource()-label.getCard().getRessource());
-			this.area.getLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
+			this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 			area.getPanelMain().remove(label);
 			area.revalidate();
 			area.repaint();
@@ -249,7 +251,7 @@ public class Controller {
 		{
 			myHero.setRessource(10);
 		}
-		this.area.getLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
+		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		this.area.revalidate();
 		this.area.repaint();
 	}
