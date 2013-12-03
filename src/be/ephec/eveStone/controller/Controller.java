@@ -216,11 +216,14 @@ public class Controller {
 	
 	protected void jButtonFinTourClicked(MouseEvent evt) {
 		nbTour++;
-		if (nbTour < 10){
+		if (nbTour < 10)
+		{
 			myHero.setRessource(nbTour);
 		}
 		else
+		{
 			myHero.setRessource(10);
+		}
 		this.area.getLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		this.area.revalidate();
 		this.area.repaint();
