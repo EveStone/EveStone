@@ -25,7 +25,7 @@ public class Serviteur extends Carte {
 	}
 	
 	/**
-	 * Constructeur d'un serviteur qui fait des dommages dès qu'il est posé.
+	 * Constructeur d'un serviteur qui fait des dommages dï¿½s qu'il est posï¿½.
 	 * @param ressource
 	 * @param image
 	 * @param nbVie
@@ -42,7 +42,7 @@ public class Serviteur extends Carte {
 	}
 	
 	/**
-	 * Constructeur d'un serviteur qui buff un autre serviteur d'un nombre de pv et de dégats.
+	 * Constructeur d'un serviteur qui buff un autre serviteur d'un nombre de pv et de dï¿½gats.
 	 * @param ressource
 	 * @param image
 	 * @param nbVie
@@ -59,27 +59,6 @@ public class Serviteur extends Carte {
 		this.servBuffPv = servBuffPv;	
 	}
 	
-	/**
-	 * Ce constructeur permet de créé un serviteur qui soit buffera les pv ou les degats d'un autre en fonction du boolean check
-	 * vrai ==> degats
-	 * faux ==> pv
-	 * @param ressource
-	 * @param image
-	 * @param nbVie
-	 * @param nbDommage
-	 * @param servBuffPvOuDeg
-	 * @param check
-	 */
-	public Serviteur(String nom,int ressource, String image, int nbVie, int nbDommage, int servBuffPvOuDeg, boolean check)
-	{
-		super(nom, ressource,image);
-		this.nbVie = nbVie;
-		this.nbDommage = nbDommage;
-		if (check == true) this.servBuffDeg = servBuffPvOuDeg;
-		else this.servBuffPv = servBuffPvOuDeg;
-	}
-	
-
 	public int getNbVie() {
 		return nbVie;
 	}

@@ -1,7 +1,7 @@
 package be.ephec.eveStone.model;
 
 /**
- * Même principe que la classe serviteur a part le rajout du boolean invisible pour dire si la carte est invisible ou non.
+ * Mï¿½me principe que la classe serviteur a part le rajout du boolean invisible pour dire si la carte est invisible ou non.
  * @author nicolas
  *
  */
@@ -22,11 +22,6 @@ public class Invisible extends Serviteur {
 	public Invisible(String nom,int ressource, String image, int nbVie, int nbDommage, int servBuffPv, int servBuffDeg, boolean invisible)
 	{
 		super(nom,ressource, image, nbVie, nbDommage, servBuffPv,servBuffDeg);
-		this.invisible = invisible;
-	}
-	public Invisible(String nom,int ressource, String image, int nbVie, int nbDommage, int servBuffPvOuDeg, boolean check, boolean invisible)
-	{
-		super(nom,ressource, image, nbVie, nbDommage, servBuffPvOuDeg,check);
 		this.invisible = invisible;
 	}
 

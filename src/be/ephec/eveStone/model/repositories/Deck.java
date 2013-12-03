@@ -71,8 +71,8 @@ public class Deck {
 		tmp.add(new Protection("Drone tank et de soutien",6, "", 5, 6, 1, 1, true));
 		tmp.add(new Invisible("Drone invisible",4, "", 4, 4, 2, true));
 		tmp.add(new Invisible("Drone invisible",4, "", 4, 4, 2, true));
-		tmp.add(new Buff("Bouclier augment�",2, "", "Augmente de 2 la vie d'un serviteur", 2, false));
-		tmp.add(new Buff("Bouclier augment�",2, "", "Augmente de 2 la vie d'un serviteur", 2, false));
+		tmp.add(new Buff("Bouclier augment�",2, "", "Augmente de 2 la vie d'un serviteur", 2, 0));
+		tmp.add(new Buff("Bouclier augment�",2, "", "Augmente de 2 la vie d'un serviteur", 2, 0));
 		tmp.add(new Serviteur("Drone lieutenant �lite de combat",8, "", 6, 8, 2, 2));
 		tmp.add(new Serviteur("Drone lieutenant �lite de combat",8, "", 6, 8, 2, 2));
 		tmp.add(new Serviteur("Drone de combat", 3,"", 3,3));
@@ -81,10 +81,10 @@ public class Deck {
 		tmp.add(new Buff("Egide des anciens",4, "", "Augmente de 4 les Pv et de 4 les d�gats d'un serviteur", 4, 4));
 		tmp.add(new Protection("Drone tank",2, "", 2, 2, true));
 		tmp.add(new Protection("Drone tank",2, "", 2, 2, true));
-		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, false));
-		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, false));
-		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, false));
-		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, false));
+		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, 0));
+		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, 0));
+		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, 0));
+		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, 0));
 		return tmp;
 	}
 	private LinkedList<Carte> makeListFregate()
@@ -100,8 +100,8 @@ public class Deck {
 		tmp.add(new Serviteur("Drones de combat Elite", 5, "", 3, 5));
 		tmp.add(new Serviteur("Drone de soutien",2, "", 2, 2, 1, 1));
 		tmp.add(new Serviteur("Drone de soutien",2, "", 2, 2, 1, 1));
-		tmp.add(new Buff("Bouclier augment�",2, "", "Augmente de 2 la vie d'un serviteur", 2, false));
-		tmp.add(new Buff("Bouclier augment�",2, "", "Augmente de 2 la vie d'un serviteur", 2, false));
+		tmp.add(new Buff("Bouclier augment�",2, "", "Augmente de 2 la vie d'un serviteur", 2, 0));
+		tmp.add(new Buff("Bouclier augment�",2, "", "Augmente de 2 la vie d'un serviteur", 2, 0));
 		tmp.add(new Protection("Drone tank et de soutien",6, "", 5, 6, 1, 1, true));
 		tmp.add(new Protection("Drone tank et de soutien",6, "", 5, 6, 1, 1, true));
 		tmp.add(new Invisible("Drone invisible",4, "", 4, 4, 2, true));
@@ -116,10 +116,10 @@ public class Deck {
 		tmp.add(new Buff("Egide des anciens",4, "", "Augmente de 4 les Pv et de 4 les d�gats d'un serviteur", 4, 4));
 		tmp.add(new Protection("Drone tank",2, "", 2, 2, true));
 		tmp.add(new Protection("Drone tank",2, "", 2, 2, true));
-		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, false));
-		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, false));
-		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, false));
-		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, false));
+		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, 0));
+		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, 0));
+		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, 0));
+		tmp.add(new Serviteur("Drone docteur",1, "", 1, 1, 1, 0));
 		return tmp;
 	}
 	

@@ -9,7 +9,7 @@ public class Buff extends Sort {
 	
 	/**
 	 * 
-	 *Constructeur avec les buff de vie et de dégats
+	 *Constructeur avec les buff de vie et de dï¿½gats
 	 * @param ressource
 	 * @param image
 	 * @param description
@@ -21,25 +21,6 @@ public class Buff extends Sort {
 		super(nom,ressource, image, description);
 		this.buffPv = buffPv;
 		this.buffDegats = buffDegats;
-		
-	}
-	
-	
-	/**
-	 * Constructeur avec un parametre soit pour buffer les pv ou les dégats selon le check (boolean)
-	 * vrai ==> degats
-	 * faux ==> pv
-	 * @param ressource
-	 * @param image
-	 * @param description
-	 * @param buffDegatsOuPv
-	 * @param check
-	 */
-	public Buff(String nom,int ressource, String image, String description, int buffDegatsOuPv, boolean check )
-	{
-		super(nom,ressource, image, description);
-		if (check == true) this.buffDegats = buffDegatsOuPv;
-		else this.buffPv = buffDegatsOuPv;
 		
 	}
 	
