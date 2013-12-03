@@ -89,7 +89,7 @@ public class Controller {
 	}
 	/**
 	 * Cette m�thode permet de retourner l'attaque d'un serviteur et d'un sort
-	 * @param une carte (NE PEUT PAS ETRE NULL
+	 * @param une carte (NE PEUT PAS ETRE NULL)
 	 * @return 0 si ce n'est pas un serviteur ou un sort de dommage, retourne l'attaque du serviteur ou le nombre de dommage du sort
 	 */
 	public int makeDommage(Carte c)
