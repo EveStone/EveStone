@@ -215,8 +215,8 @@ public class Controller {
 	}
 	
 	protected void jButtonFinTourClicked(MouseEvent evt) {
-		this.nbTour++;
-		if (myHero.getRessource() < nbTour){
+		nbTour++;
+		if (nbTour < 10){
 			myHero.setRessource(nbTour);
 		}
 		else
