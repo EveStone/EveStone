@@ -27,6 +27,9 @@ public class Controller {
 
 	// Path pour la construction des cartes
 	private final String PATH_DRONE_ATTAQUE = "img/CarteFaceV2_petit.png";
+	
+	//Port serveur
+	private final int NUM_PORT = 2013;
 
 	private int nbTour;
 
@@ -154,6 +157,12 @@ public class Controller {
 	public Hero getAdverseHero() {
 		return adverseHero;
 	}
+	
+	
+	public int getNUM_PORT() {
+		return NUM_PORT;
+	}
+
 	public void setAdverseHero(Hero adverseHero) {
 		this.adverseHero = adverseHero;
 	}
