@@ -132,6 +132,7 @@ public class ConnectionFrame extends JFrame {
 	private void jButtonCommencerActionPerformed(ActionEvent evt) {
 		//System.out.println("jButtonCommencer.actionPerformed, event="+evt);
 		//TODO add your code for jButtonCommencer.actionPerformed
+		//MyClient mc = new Myclient("", )
 		this.dispose();
 	}
 }

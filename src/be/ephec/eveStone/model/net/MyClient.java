@@ -12,41 +12,31 @@ import java.net.UnknownHostException;
 
 public class MyClient extends Socket implements Runnable {
 	
-	private ObjectOutputStream oos; //on inverse sinon il ecoute tout les deux en meme temps;
+	private ObjectOutputStream oos; 
 	private ObjectInputStream ois;
 	private int num;
 	
-	/*
-	 * Suspendu car pas besoin
-	public MyClient() throws UnknownHostException, IOException {
-		super("127.0.0.1",2013);
-		oos = new ObjectOutputStream(this.getOutputStream());
-		ois = new ObjectInputStream(this.getInputStream());
-	}
-	*/
-
 	public MyClient(String host, int port) throws UnknownHostException,
 			IOException {
 		super(host, port);
 		oos = new ObjectOutputStream(this.getOutputStream());
 		ois = new ObjectInputStream(this.getInputStream());
 	}
-
-	/* 
-	 * Garde en exemple de client
+	
 	public static void main(String[] args) {
 		MyClient mc = null;
 		try {
 			mc = new MyClient("127.0.0.1",2013);
 			String s = (String)mc.ois.readObject();
-			System.out.println("Le client a re�u: " + s);
+			System.out.println("Le client a reçu: " + s);
 			
 			mc.num = (int)mc.ois.readObject();
-			System.out.println("Ceci est la console du num�ro " + mc.num);
+			System.out.println("Ceci est la console du numéro " + mc.num);
 			
 			Thread t = new Thread(mc);
 			t.start();
 			Thread.sleep(100);
+			
 			
 			
 		} catch (UnknownHostException e) {
@@ -57,7 +47,7 @@ public class MyClient extends Socket implements Runnable {
 			e.printStackTrace();
 			try {
 				mc.close();
-				System.out.println("Le socket est ferm�");
+				System.out.println("Le socket est fermé");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -65,13 +55,13 @@ public class MyClient extends Socket implements Runnable {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-	*/
+
 	
 	public void ecrire(ObjectSend objS)
 	{
