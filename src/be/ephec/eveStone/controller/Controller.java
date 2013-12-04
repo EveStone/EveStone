@@ -28,9 +28,6 @@ public class Controller {
 	private StartFrame start;
 	private ConnectionFrame connexion;
 
-	// Path pour la construction des cartes
-	private final String PATH_DRONE_ATTAQUE = "img/CarteFaceV2_petit.png";
-
 	//Port serveur
 	private final int NUM_PORT = 2013;
 
@@ -196,10 +193,11 @@ public class Controller {
 		if (indexOfCard != -1){
 			area.getDeckPanel().revalidate();
 			area.getDeckPanel().repaint();
-			final CardPanel card = new CardPanel(new ImageIcon(getClass().getClassLoader().getResource(PATH_DRONE_ATTAQUE)));
+			final CardPanel card = new CardPanel();
 			card.setLayout(null);
 			card.setIndex(indexOfCard);
 			card.setCard(main.getCard(indexOfCard));
+			card.setIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())));
 			card.setName(card.getCard().getNom());
 			card.makeCard();
 			area.getPanelMain().add(card);

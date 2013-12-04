@@ -17,6 +17,10 @@ public class CardPanel extends JLabel {
 	JButton jouer;
 	JLabel ressource;
 
+	public CardPanel(){
+		
+	}
+	
 	public CardPanel(Icon image) {
 		super(image);
 	}
@@ -26,6 +30,7 @@ public class CardPanel extends JLabel {
 		jouer.setBounds(5, 100, 75, 20);
 		this.add(jouer);
 		jouer.setVisible(false);
+		
 		ressource = new JLabel();
 		ressource.setText("<html><font color=\"#FBF2B7\">"+card.getRessource()+"</font></html>");
 		ressource.setBounds(5, 0, 20, 20);
