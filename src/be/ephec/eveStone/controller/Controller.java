@@ -1,9 +1,12 @@
 package be.ephec.eveStone.controller;
 
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -32,6 +35,7 @@ public class Controller {
 	private final int NB_MAX_RESSOURCE = 10;
 	private final int NB_MAX_CARTE_TERRAIN = 7;
 	private final int NB_MAX_CARTE_MAIN = 7;
+	private final int NB_CARTE_DEPART = 4;
 
 	//Port serveur
 	private final int NUM_PORT = 2013;
@@ -108,18 +112,13 @@ public class Controller {
 	public void makeArea(){
 		this.area = new Area(this);
 		this.area.getjLabelHeros().setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getImage())));
-
-		this.area.getDeckPanel().addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				jLabel2MouseClicked(evt);
-			}
-		});
 		this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent evt){
 				jButtonFinTourClicked(evt);
 			}
 		});
 		nbTour=1;
+		piocheDepart();
 	}
 
 	/**
@@ -198,14 +197,13 @@ public class Controller {
 	 * Panel du deck, quand on clique sur le deck, on ajoute une carte a la main. (a supprimer car automatique)
 	 * @param evt
 	 */
-	private void jLabel2MouseClicked(MouseEvent evt) {
-		if (area.getPanelMain().getComponentCount()<NB_MAX_CARTE_MAIN){
+	private void piocheDepart() {
+		for(int i = 0; i<NB_CARTE_DEPART; i++){
 			area.getDeckPanel().revalidate();
 			area.getDeckPanel().repaint();
 			final CardPanel card = new CardPanel();
 			card.setLayout(null);
 			card.setCard(myHero.getDeck().getTabCartes().poll());
-			card.setIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())));
 			card.setName(card.getCard().getNom());
 			card.makeCard();
 			area.getPanelMain().add(card);
@@ -219,10 +217,94 @@ public class Controller {
 					cardClicked(ev, card);
 				}
 			});
+			card.addMouseListener(new MouseAdapter(){
+				public void mouseEntered(MouseEvent evt){
+					cardMouseOn(card);
+				}
+			});
+			card.addMouseListener(new MouseAdapter(){
+				public void mouseExited(MouseEvent evt){
+					cardMouseOff(evt,card);
+				}
+			});
 		}
-		else
-			javax.swing.JOptionPane.showMessageDialog(null, "Main Pleine !");
 	}
+
+	private void pioche(){
+		if(area.getPanelMain().getComponentCount()<NB_MAX_CARTE_MAIN){
+			area.getDeckPanel().revalidate();
+			area.getDeckPanel().repaint();
+			final CardPanel card = new CardPanel();
+			card.setLayout(null);
+			card.setCard(myHero.getDeck().getTabCartes().poll());
+			card.setName(card.getCard().getNom());
+			card.makeCard();
+			area.getPanelMain().add(card);
+			card.getButton().addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent evt){
+					jButtonJouerClicked(evt, card);
+				}
+			});
+			card.addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent ev){
+					cardClicked(ev, card);
+				}
+			});
+			card.addMouseListener(new MouseAdapter(){
+				public void mouseEntered(MouseEvent evt){
+					cardMouseOn(card);
+				}
+			});
+			card.addMouseListener(new MouseAdapter(){
+				public void mouseExited(MouseEvent evt){
+					cardMouseOff(evt, card);
+				}
+			});
+		}
+		else{
+			myHero.getDeck().getTabCartes().poll();
+			myHero.setNbCoque(myHero.getNbCoque()-1);
+		}
+	}
+
+	protected void cardMouseOff(MouseEvent evt, final CardPanel card) {
+		Timer animation = new Timer();
+		animation.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				int width = 109;
+				double height = 170;
+				for(int i=0; i<25; i++) {
+					card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_DEFAULT)));
+					width--;
+					height=(height-1.96);
+					card.revalidate();
+					card.repaint();
+				}
+			}
+		},30);
+		animation.purge();
+	}
+
+	protected void cardMouseOn(final CardPanel card) {
+		Timer animation = new Timer();
+		animation.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				int width = 84;
+				double height = 121;
+				for(int i=0; i<25; i++) {
+					card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_DEFAULT)));
+					width++;
+					height=(height+1.96);
+					card.revalidate();
+					card.repaint();
+				}
+			}
+		},2);
+		animation.purge();
+	}
+
 	/**
 	 * Losque que l'on clique sur une carte, un bouton jouer apparait.
 	 * @param ev
@@ -271,7 +353,8 @@ public class Controller {
 
 	protected void jButtonFinTourClicked(MouseEvent evt) {
 		nbTour++;
-		current.getButton().setVisible(false);
+		if(current != null)
+			current.getButton().setVisible(false);
 		if (nbTour < NB_MAX_RESSOURCE)
 		{
 			myHero.setRessource(nbTour);
@@ -283,11 +366,14 @@ public class Controller {
 		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		this.area.revalidate();
 		this.area.repaint();
+		pioche();
 	}
+
 	protected void jButtonAnnulerClicked(MouseEvent evt)
 	{
 		this.connexion.dispose();
 	}
+
 	protected void jButtonCloseClicked(MouseEvent evt)
 	{
 		this.rules.dispose();

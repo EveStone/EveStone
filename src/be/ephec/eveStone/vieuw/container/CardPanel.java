@@ -1,8 +1,11 @@
 package be.ephec.eveStone.vieuw.container;
 
+import java.awt.Image;
+
 import be.ephec.eveStone.model.*;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -27,8 +30,10 @@ public class CardPanel extends JLabel {
 	}
 
 	public void makeCard(){
+		this.setIcon(new ImageIcon((new ImageIcon(getClass().getClassLoader().getResource(card.getImage()))).getImage().getScaledInstance(85, 122, Image.SCALE_DEFAULT)));
+		
 		jouer = new JButton("Jouer");
-		jouer.setBounds(5, 100, 75, 20);
+		jouer.setBounds(20, 100, 75, 20);
 		this.add(jouer);
 		jouer.setVisible(false);
 
