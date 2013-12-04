@@ -30,6 +30,7 @@ public class StartFrame extends javax.swing.JWindow {
 	private JButton jButtonQuitter;
 	private JButton jButtonCommencer;
 	private JButton jButtonConfig;
+	private JButton jButtonRegles;
 	private JButton jButtonChoixHeros;
 	
 	private static final String PATH_START = "img/StartFrame.png";
@@ -115,6 +116,19 @@ public class StartFrame extends javax.swing.JWindow {
 						}
 					});
 				}
+				{
+					jButtonRegles = new JButton();
+					background.add(jButtonRegles);
+					jButtonRegles.setLayout(null);
+					jButtonRegles.setText("<html><font color=white>Règles</font></html>");
+					jButtonRegles.setBackground(new java.awt.Color(0,0,0));
+					jButtonRegles.setBounds(355, 508, 151, 23);
+					jButtonRegles.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jButtonReglesActionPerformed(evt, controller);
+						}
+					});
+				}
 			}
 		} catch (Exception e) {
 		    //add your error handling code here
@@ -147,5 +161,11 @@ public class StartFrame extends javax.swing.JWindow {
 		//System.out.println("jButtonChoixHeros.actionPerformed, event="+evt);
 		//TODO add your code for jButtonChoixHeros.actionPerformed
 		new ChoixHeros(controller, commencer);
+	}
+	
+	private void jButtonReglesActionPerformed(ActionEvent evt,final Controller controller) {
+		controller.makeRulesFrame();
+		controller.displayRulesFrame();
+		//TODO add your code for jButtonRegles.actionPerformed
 	}
 }

@@ -13,6 +13,7 @@ import be.ephec.eveStone.model.net.MyClient;
 import be.ephec.eveStone.model.repositories.Main;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.ConnectionFrame;
+import be.ephec.eveStone.vieuw.RulesFrame;
 import be.ephec.eveStone.vieuw.StartFrame;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
@@ -27,6 +28,7 @@ public class Controller {
 	private Area area;
 	private StartFrame start;
 	private ConnectionFrame connexion;
+	private RulesFrame rules;
 
 	//Port serveur
 	private final int NUM_PORT = 2013;
@@ -77,6 +79,25 @@ public class Controller {
 	 */
 	public void displayConnectionFrame(){
 		connexion.display();
+	}
+	/**
+	 * Construit la fenêtre de regles
+	 */
+	public void makeRulesFrame()
+	{
+		this.rules = new RulesFrame(this);
+		this.rules.getjButtonClose().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				jButtonCloseClicked(evt);
+			}
+		});
+	}
+	/**
+	 * Affiche la fenêtre de regles
+	 */
+	public void displayRulesFrame()
+	{
+		rules.display();
 	}
 	/**
 	 * Contsruit la zone de jeu qui permet de jouer contre un adversaire.
@@ -256,6 +277,10 @@ public class Controller {
 	protected void jButtonAnnulerClicked(MouseEvent evt)
 	{
 		this.connexion.dispose();
+	}
+	protected void jButtonCloseClicked(MouseEvent evt)
+	{
+		this.rules.dispose();
 	}
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
