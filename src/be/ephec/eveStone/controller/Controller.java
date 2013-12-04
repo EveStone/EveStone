@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 
 import be.ephec.eveStone.model.*;
 import be.ephec.eveStone.model.net.MyClient;
-import be.ephec.eveStone.model.repositories.Main;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.ConnectionFrame;
 import be.ephec.eveStone.vieuw.RulesFrame;
@@ -22,7 +21,6 @@ public class Controller {
 	// Modèles
 	private Hero myHero;
 	private Hero adverseHero;
-	private Main main;
 	private CardPanel current;
 
 	// Views
@@ -30,8 +28,10 @@ public class Controller {
 	private StartFrame start;
 	private ConnectionFrame connexion;
 	private RulesFrame rules;
-	
+
 	private final int NB_MAX_RESSOURCE = 10;
+	private final int NB_MAX_CARTE_TERRAIN = 7;
+	private final int NB_MAX_CARTE_MAIN = 7;
 
 	//Port serveur
 	private final int NUM_PORT = 2013;
@@ -108,13 +108,12 @@ public class Controller {
 	public void makeArea(){
 		this.area = new Area(this);
 		this.area.getjLabelHeros().setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getImage())));
-		
+
 		this.area.getDeckPanel().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
 				jLabel2MouseClicked(evt);
 			}
 		});
-		this.main = new Main();
 		this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent evt){
 				jButtonFinTourClicked(evt);
@@ -186,7 +185,6 @@ public class Controller {
 		return adverseHero;
 	}
 
-
 	public int getNUM_PORT() {
 		return NUM_PORT;
 	}
@@ -195,24 +193,18 @@ public class Controller {
 		this.adverseHero = adverseHero;
 	}
 
-	public void updateMain(Main main){
-		this.main = main;
-	}
-
 	// Actions
 	/**
 	 * Panel du deck, quand on clique sur le deck, on ajoute une carte a la main. (a supprimer car automatique)
 	 * @param evt
 	 */
 	private void jLabel2MouseClicked(MouseEvent evt) {
-		int indexOfCard = this.main.add(this.myHero.getDeck().getTabCartes().poll());
-		if (indexOfCard != -1){
+		if (area.getPanelMain().getComponentCount()<NB_MAX_CARTE_MAIN){
 			area.getDeckPanel().revalidate();
 			area.getDeckPanel().repaint();
 			final CardPanel card = new CardPanel();
 			card.setLayout(null);
-			card.setIndex(indexOfCard);
-			card.setCard(main.getCard(indexOfCard));
+			card.setCard(myHero.getDeck().getTabCartes().poll());
 			card.setIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())));
 			card.setName(card.getCard().getNom());
 			card.makeCard();
@@ -229,7 +221,7 @@ public class Controller {
 			});
 		}
 		else
-			javax.swing.JOptionPane.showMessageDialog(null, "Erreur : main pleine !");
+			javax.swing.JOptionPane.showMessageDialog(null, "Main Pleine !");
 	}
 	/**
 	 * Losque que l'on clique sur une carte, un bouton jouer apparait.
@@ -259,23 +251,27 @@ public class Controller {
 	 */
 	protected void jButtonJouerClicked(MouseEvent evt, CardPanel label) {
 		if(myHero.getRessource() >= label.getCard().getRessource()){
-			this.main.remove(label.getIndex());
-			myHero.setRessource(myHero.getRessource()-label.getCard().getRessource());
-			this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
-			//label.getButton().setVisible(false);
-			label.remove(label.getButton());
-			if ((label.getCard() instanceof Serviteur))
-				area.getjPanelTerrain().add(label);
-			area.getPanelMain().remove(label);
-			area.revalidate();
-			area.repaint();
+			if((label.getCard() instanceof Serviteur) && area.getjPanelTerrain().getComponentCount()>=NB_MAX_CARTE_TERRAIN){
+				JOptionPane.showMessageDialog(null, "Terrain Plein !");
+			}
+			else{
+				if(label.getCard() instanceof Serviteur)
+					area.getjPanelTerrain().add(label);
+				myHero.setRessource(myHero.getRessource()-label.getCard().getRessource());
+				this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
+				label.remove(label.getButton());
+				area.getPanelMain().remove(label);
+				area.revalidate();
+				area.repaint();
+			}
 		}
 		else
-			JOptionPane.showMessageDialog(null, "Erreur : Ressources Inssufisantes !");
+			JOptionPane.showMessageDialog(null, "Ressources Inssufisantes !");
 	}
 
 	protected void jButtonFinTourClicked(MouseEvent evt) {
 		nbTour++;
+		current.getButton().setVisible(false);
 		if (nbTour < NB_MAX_RESSOURCE)
 		{
 			myHero.setRessource(nbTour);

@@ -12,7 +12,6 @@ public class CardPanel extends JLabel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1931817779287136633L;
-	private int index;
 	private Carte card;
 	JButton jouer;
 	JLabel ressource;
@@ -64,14 +63,6 @@ public class CardPanel extends JLabel {
 
 		this.add(ressource);
 		
-	}
-
-	public void setIndex(int index){
-		this.index = index;
-	}
-
-	public int getIndex(){
-		return this.index;
 	}
 
 	public void setCard(Carte card){
