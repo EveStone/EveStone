@@ -64,44 +64,45 @@ public class RulesFrame extends javax.swing.JFrame {
 			}
 			{
 				jPanelRegles = new JPanel();
+				getContentPane().add(jPanelRegles, BorderLayout.SOUTH);
 				GridBagLayout jPanelReglesLayout = new GridBagLayout();
 				jPanelReglesLayout.rowWeights = new double[] {0.0, 0.1};
-				jPanelReglesLayout.rowHeights = new int[] {194, 7};
+				jPanelReglesLayout.rowHeights = new int[] {386, 7};
 				jPanelReglesLayout.columnWeights = new double[] {0.1};
 				jPanelReglesLayout.columnWidths = new int[] {7};
 				jPanelRegles.setLayout(jPanelReglesLayout);
-				getContentPane().add(jPanelRegles, BorderLayout.SOUTH);
 				jPanelRegles.setPreferredSize(new java.awt.Dimension(603, 481));
 				jPanelRegles.setBackground(new java.awt.Color(0,0,0));
 				{
 					jLabelRegles = new JLabel();
-					jPanelRegles.add(jLabelRegles, new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+					jPanelRegles.add(jLabelRegles, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 					jLabelRegles.setText("<html><font color=white>" 
 							+ "EveStone \n "
 							+ "======== \n"
-							 + "Dans le cardre de notre cours de langage avancé de programmation à l'Ephec (LLN). \n"
-							+ "Nous devons créer Jeuxvideo. Dont voici le principe. \n \n"
-
-
+									+ "Dans le cardre de notre cours de langage avancé de programmation à l'Ephec (LLN). \n"
+									+ "Nous devons créer Jeuxvideo. Dont voici le principe. \n \n"
+									
+									
 							+"Notre projet portera sur un jeu de carte typé TCG (Trading Card Game). Il sera basé \n"
 							+"principalement sur les règles du jeu Heartstone accomodé à un univers de EVE Online. \n"
 							+"Le principe repose en l'affrontement de 2 joueurs qui combatent grâce à des cartes qu'ils \n"
 							+"auront choisies pour former des decks. Les joueurs devront alors gérer différentes ressources et des \n"
 							+"barres de vie."
 							+"Le jeu se déroule au tour par tour et à chaque tour, les joueurs tirent des cartes. Ils peuvent \n" 
-							+"par la suite les poser sur l'aire de jeu ou les garder en main. Pour poser une carte, il est nécéssaire de \n" 
-							+"posséder les ressources nécéssaire à son déployement. La partie se termine lorsque l'un des deux \n \n"
-							+"joueurs voit ses points de vie atteindre 0. \n"
-
+									+"par la suite les poser sur l'aire de jeu ou les garder en main. Pour poser une carte, il est nécéssaire de \n" 
+											+"posséder les ressources nécéssaire à son déployement. La partie se termine lorsque l'un des deux \n \n"
+											+"joueurs voit ses points de vie atteindre 0. \n"
+											
 							+"Référence des jeux : \n \n" 
-
+							
 							+"– Heartstone : http://eu.battle.net/hearthstone/fr/ \n"
 							+"– EVE Online : http://www.eveonline.com/ \n"
-
+							
 							+"Tout contenu utilisé de Eve ou Hearthstone appartient à leur société respective, © CCP et © Blizzard. \n"
-							+"Ce jeu ne sera pas commercialisé. \n" +
-					
+									+"Ce jeu ne sera pas commercialisé. \n" +
+									
 							"</font></html>");
+					jLabelRegles.setPreferredSize(new java.awt.Dimension(5829, 33));
 				}
 				{
 					jButtonClose = new JButton();
