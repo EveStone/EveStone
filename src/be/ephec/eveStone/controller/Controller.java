@@ -23,12 +23,15 @@ public class Controller {
 	private Hero myHero;
 	private Hero adverseHero;
 	private Main main;
+	private CardPanel current;
 
 	// Views
 	private Area area;
 	private StartFrame start;
 	private ConnectionFrame connexion;
 	private RulesFrame rules;
+	
+	private final int NB_MAX_RESSOURCE = 10;
 
 	//Port serveur
 	private final int NUM_PORT = 2013;
@@ -197,7 +200,10 @@ public class Controller {
 	}
 
 	// Actions
-
+	/**
+	 * Panel du deck, quand on clique sur le deck, on ajoute une carte a la main. (a supprimer car automatique)
+	 * @param evt
+	 */
 	private void jLabel2MouseClicked(MouseEvent evt) {
 		int indexOfCard = this.main.add(this.myHero.getDeck().getTabCartes().poll());
 		if (indexOfCard != -1){
@@ -211,6 +217,11 @@ public class Controller {
 			card.setName(card.getCard().getNom());
 			card.makeCard();
 			area.getPanelMain().add(card);
+			card.getButton().addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent evt){
+					jButtonJouerClicked(evt, card);
+				}
+			});
 			card.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent ev){
 					cardClicked(ev, card);
@@ -220,13 +231,18 @@ public class Controller {
 		else
 			javax.swing.JOptionPane.showMessageDialog(null, "Erreur : main pleine !");
 	}
-
+	/**
+	 * Losque que l'on clique sur une carte, un bouton jouer apparait.
+	 * @param ev
+	 * @param label le CarPanel qui contient la carte.
+	 */
 	protected void cardClicked(MouseEvent ev, final CardPanel label) {
-		label.getButton().addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent evt){
-				jButtonJouerClicked(evt, label);
-			}
-		});
+		if (current == null)
+			current=label;
+		else{
+			current.getButton().setVisible(false);
+			current=label;
+		}
 		if(label.getButton().isVisible())
 			label.getButton().setVisible(false);
 		else
@@ -235,12 +251,21 @@ public class Controller {
 		area.getPanelMain().repaint();
 		System.out.println(label.getName());
 	}
-
+	/**
+	 * Permet d'engager une carte
+	 * 		- Les serviteurs s'ajoutent sur le terrain
+	 * @param evt
+	 * @param label
+	 */
 	protected void jButtonJouerClicked(MouseEvent evt, CardPanel label) {
 		if(myHero.getRessource() >= label.getCard().getRessource()){
 			this.main.remove(label.getIndex());
 			myHero.setRessource(myHero.getRessource()-label.getCard().getRessource());
 			this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
+			//label.getButton().setVisible(false);
+			label.remove(label.getButton());
+			if ((label.getCard() instanceof Serviteur))
+				area.getjPanelTerrain().add(label);
 			area.getPanelMain().remove(label);
 			area.revalidate();
 			area.repaint();
@@ -251,13 +276,13 @@ public class Controller {
 
 	protected void jButtonFinTourClicked(MouseEvent evt) {
 		nbTour++;
-		if (nbTour < 10)
+		if (nbTour < NB_MAX_RESSOURCE)
 		{
 			myHero.setRessource(nbTour);
 		}
 		else
 		{
-			myHero.setRessource(10);
+			myHero.setRessource(NB_MAX_RESSOURCE);
 		}
 		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		this.area.revalidate();

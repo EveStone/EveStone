@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
-import java.awt.BorderLayout;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -143,7 +142,7 @@ public class Area extends JFrame {
 			{
 				jPanelTerrain = new JPanel();
 				background.add(jPanelTerrain);
-				jPanelTerrain.setBounds(208, 404, 799, 118);
+				jPanelTerrain.setBounds(202, 383, 799, 136);
 				jPanelTerrain.setOpaque(false);
 			}
 		}
