@@ -37,13 +37,12 @@ public class CardPanel extends JLabel {
 		ressource.setText("<html><font color=\"#00FF00\">"+card.getRessource()+"</font></html>");
 		ressource.setBounds(5, 0, 20, 20);
 
-		
 		//85 x 132
-		if (card.getClass().isInstance(Serviteur.class) || card.getClass().isInstance(Invisible.class) || card.getClass().isInstance(Protection.class))
+		if ((card instanceof Serviteur) || (card instanceof Invisible) || (card instanceof Protection))
 		{
 			attaque = new JLabel();
 			attaque.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbDommage()+"</font></html>");
-			attaque.setBounds(5, 125, 20, 20);
+			attaque.setBounds(5, 110, 20, 20);
 			System.out.println("coucou");
 			this.add(attaque);
 		}
@@ -51,7 +50,7 @@ public class CardPanel extends JLabel {
 		{
 			attaque = new JLabel();
 			attaque.setText("<html><font color=\"#FBF2B7\">"+((Dommage) card).getDegats()+"</font></html>");
-			attaque.setBounds(5, 125, 20, 20);
+			attaque.setBounds(5, 100, 20, 20);
 			this.add(attaque);
 		}
 
