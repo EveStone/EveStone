@@ -148,7 +148,33 @@ public class Controller {
 			return attaque;
 		}
 	}
-	public int[] makeBuff(Carte c)
+	/**
+	 * Cette méthode permet de buff une carte ciblé elle est ainsi augmenter de X pts de vie et de X pts de degats
+	 * @param buff[0] ==> pv
+	 *        buff[1] ==> degats 
+	 */
+	private void makeBuff(int[] buff)
+	{
+		if ((buff[1] != 0) && (buff[0] !=0))
+		{
+			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[0] + " le nombre de point de vie et de " + buff[1] + " le nombre de dégats du serviteur ciblé");
+		}
+		else if ((buff[1] == 0) && (buff[0] !=0))
+		{
+			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[0] + " de point de vie du serviteur ciblé");
+		}
+		else if ((buff[1] != 0) && (buff[0] ==0))
+		{
+			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[1] + " de point de dégats du serviteur ciblé");
+		}
+	}
+	/**
+	 * Retourne un tableau de int pour le buff de la carte
+	 * @param une carte ne peut pas être null
+	 * @return buff[0] ==> pv
+	 *         buff[1] ==> degats
+	 */
+	private int[] getBuff(Carte c)
 	{
 		int buff[] = {0 , 0};
 		if ((c instanceof Serviteur) || (c instanceof Invisible) || (c instanceof Protection))
@@ -157,7 +183,7 @@ public class Controller {
 			buff[1] = ((Serviteur) c).getServBuffDeg();
 			return buff;
 		}
-		else if (c instanceof Dommage)
+		else if (c instanceof Buff)
 		{
 			buff[0] = ((Buff) c).getBuffPv();
 			buff[1] = ((Buff) c).getBuffDegats();
@@ -338,7 +364,14 @@ public class Controller {
 			}
 			else{
 				if(label.getCard() instanceof Serviteur)
+				{
 					area.getjPanelTerrain().add(label);
+					makeBuff(getBuff(label.getCard()));
+				}
+				else if (label.getCard() instanceof Buff)
+				{
+					makeBuff(getBuff(label.getCard()));
+				}
 				myHero.setRessource(myHero.getRessource()-label.getCard().getRessource());
 				this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 				label.remove(label.getButton());
@@ -346,6 +379,7 @@ public class Controller {
 				area.revalidate();
 				area.repaint();
 			}
+
 		}
 		else
 			JOptionPane.showMessageDialog(null, "Ressources Inssufisantes !");
