@@ -77,7 +77,7 @@ public class RulesFrame extends javax.swing.JFrame {
 					jLabelRegles = new JLabel();
 					jPanelRegles.add(jLabelRegles, new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 					jLabelRegles.setText("<html><font color=white>" 
-							+ "EveStone \n"
+							+ "EveStone \n "
 							+ "======== \n"
 							 + "Dans le cardre de notre cours de langage avancé de programmation à l'Ephec (LLN). \n"
 							+ "Nous devons créer Jeuxvideo. Dont voici le principe. \n \n"

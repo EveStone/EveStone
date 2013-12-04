@@ -127,7 +127,7 @@ public class StartFrame extends javax.swing.JWindow {
 						public void actionPerformed(ActionEvent evt) {
 							jButtonReglesActionPerformed(evt, controller);
 						}
-					});
+					}); 
 				}
 			}
 		} catch (Exception e) {

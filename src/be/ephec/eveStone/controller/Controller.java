@@ -43,7 +43,7 @@ public class Controller {
 	}
 	/*
 	 * Partie Construction des Frame et affichage pour lier les frames au Controller
-	 */
+	 */ 
 
 	/**
 	 * Construit la nouvelles Fenetre Start qui permet de séléctionner son héros, de se connecter
