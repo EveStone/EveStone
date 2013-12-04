@@ -1,5 +1,6 @@
 package be.ephec.eveStone.model.repositories;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 import be.ephec.eveStone.model.*;
@@ -105,6 +106,7 @@ public class Deck {
 		tmp.add(new Serviteur("Light Maintenance",1, PATH_LIGHT_MAINTENANCE, 1, 1, 1, 0));
 		tmp.add(new Serviteur("Light Maintenance",1, PATH_LIGHT_MAINTENANCE, 1, 1, 1, 0));
 		tmp.add(new Serviteur("Light Maintenance",1, PATH_LIGHT_MAINTENANCE, 1, 1, 1, 0));
+		Collections.shuffle(tmp);
 		return tmp;
 	}
 	private LinkedList<Carte> makeListFregate()
@@ -141,6 +143,7 @@ public class Deck {
 		tmp.add(new Serviteur("Light Maintenance",1, PATH_LIGHT_MAINTENANCE, 1, 1, 1, 0));
 		tmp.add(new Serviteur("Light Maintenance",1, PATH_LIGHT_MAINTENANCE, 1, 1, 1, 0));
 		tmp.add(new Serviteur("Light Maintenance",1, PATH_LIGHT_MAINTENANCE, 1, 1, 1, 0));
+		Collections.shuffle(tmp);
 		return tmp;
 	}
 	
