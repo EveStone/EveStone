@@ -127,15 +127,6 @@ public class Controller {
 		area.display();
 	}
 	/**
-	 * Cette m�thode retourne le String de la classe d'une carte
-	 * @param carte ne peut pas etre null
-	 * @return la Classe sous la forme de String
-	 */
-	public String getClassCarte(Carte c)
-	{
-		return (c.getClass()).toString();
-	}
-	/**
 	 * Cette m�thode permet de retourner l'attaque d'un serviteur et d'un sort
 	 * @param une carte (NE PEUT PAS ETRE NULL)
 	 * @return 0 si ce n'est pas un serviteur ou un sort de dommage, retourne l'attaque du serviteur ou le nombre de dommage du sort
@@ -143,12 +134,11 @@ public class Controller {
 	public int makeDommage(Carte c)
 	{
 		int attaque = 0;
-		String check = getClassCarte(c);
-		if ((check.compareTo("Serviteur") == 0) || (check.compareTo("Invisible") == 0) || (check.compareTo("Protection") == 0))
+		if ((c instanceof Serviteur) || (c instanceof Invisible) || (c instanceof Protection))
 		{
 			return ((Serviteur) c).getNbDommage();
 		}
-		else if (check.compareTo("Dommage") == 0)
+		else if (c instanceof Dommage)
 		{
 			return ((Dommage) c).getDegats();
 		}
@@ -160,14 +150,13 @@ public class Controller {
 	public int[] makeBuff(Carte c)
 	{
 		int buff[] = {0 , 0};
-		String check = getClassCarte(c);
-		if ((check.compareTo("Serviteur") == 0) || (check.compareTo("Invisible") == 0) || (check.compareTo("Protection") == 0))
+		if ((c instanceof Serviteur) || (c instanceof Invisible) || (c instanceof Protection))
 		{
 			buff[0] = ((Serviteur) c).getServBuffPv();
 			buff[1] = ((Serviteur) c).getServBuffDeg();
 			return buff;
 		}
-		else if (check.compareTo("Buff") == 0)
+		else if (c instanceof Dommage)
 		{
 			buff[0] = ((Buff) c).getBuffPv();
 			buff[1] = ((Buff) c).getBuffDegats();
