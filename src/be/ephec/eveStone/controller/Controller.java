@@ -298,17 +298,17 @@ public class Controller {
 		animation.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				int width = 109;
-				double height = 170;
-				for(int i=0; i<25; i++) {
+				int width = 200;
+				double height = 300;
+				for(int i=0; i<115; i++) {
 					card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_DEFAULT)));
 					width--;
-					height=(height-1.96);
+					height=(height-1.5);
 					card.revalidate();
 					card.repaint();
 				}
 			}
-		},30);
+		},2);
 		animation.purge();
 	}
 
@@ -317,12 +317,12 @@ public class Controller {
 		animation.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				int width = 84;
-				double height = 121;
-				for(int i=0; i<25; i++) {
+				int width = 85;
+				double height = 122;
+				for(int i=0; i<115; i++) {
 					card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_DEFAULT)));
 					width++;
-					height=(height+1.96);
+					height=(height+1.5);
 					card.revalidate();
 					card.repaint();
 				}
