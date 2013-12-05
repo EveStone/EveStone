@@ -306,8 +306,6 @@ public class Controller {
 	 */
 	private void piocheDepart() {
 		for(int i = 0; i<NB_CARTE_DEPART; i++){
-			area.getDeckPanel().revalidate();
-			area.getDeckPanel().repaint();
 			final CardPanel card = new CardPanel();
 			card.setLayout(null);
 			card.setCard(myHero.getDeck().getTabCartes().poll());
@@ -339,8 +337,6 @@ public class Controller {
 
 	private void pioche(){
 		if(area.getPanelMain().getComponentCount()<NB_MAX_CARTE_MAIN){
-			area.getDeckPanel().revalidate();
-			area.getDeckPanel().repaint();
 			final CardPanel card = new CardPanel();
 			card.setLayout(null);
 			card.setCard(myHero.getDeck().getTabCartes().poll());

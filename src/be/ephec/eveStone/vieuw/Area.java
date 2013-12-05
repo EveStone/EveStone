@@ -1,5 +1,7 @@
 package be.ephec.eveStone.vieuw;
 
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,7 +35,6 @@ public class Area extends JFrame {
 	 */
 	private static final long serialVersionUID = 8140867745881460741L;
 	private static final String PATH_BG = "img/Background.png";
-	private JLabel jLabel2;
 	private JPanel jPanelTerrain;
 	private JPanel jPanelTerrainAdversaire;
 	private JPanel jPanelMainAdversaire;
@@ -46,11 +47,11 @@ public class Area extends JFrame {
 	private JPanel jPanelMain;
 	private JButton jButtonFinTour;
 
-	private JLabel jLabel1;
-
 	public Area(final Controller controller){
 		super("EVE STONE");
-		this.setSize(1200, 819);
+		this.setSize(1220, 1100);
+		this.setBackground(Color.BLACK);
+		this.setResizable(false);
 		this.initGUI(controller);
 	}
 	
@@ -61,99 +62,83 @@ public class Area extends JFrame {
 			JLabel background = new JLabel();
 			this.setContentPane(background);
 			background.setIcon(new ImageIcon(getClass().getClassLoader().getResource(PATH_BG)));
-			{
-				jLabel1 = new JLabel();
-				background.add(jLabel1);
-				jLabel1.setText("");
-				jLabel1.setLayout(null);
-				jLabel1.setBounds(603, 530, 85, 76);
-			}
+			background.setPreferredSize(new java.awt.Dimension(1204, 944));
 			{
 				jButtonFinTour = new JButton();
 				background.add(jButtonFinTour);
 				jButtonFinTour.setText("<html><font color=white>Fin de tour</font></html>");
-				jButtonFinTour.setBounds(1018, 371, 117, 28);
+				jButtonFinTour.setBounds(1023, 513, 117, 28);
 				jButtonFinTour.setBackground(new java.awt.Color(0,0,0));
 				jButtonFinTour.setEnabled(false);
 			}
 			{
+				jPanelTerrain = new JPanel();
+				background.add(jPanelTerrain);
+				jPanelTerrain.setBounds(199, 544, 799, 317);
+				jPanelTerrain.setOpaque(false);
+			}
+			{
 				jPanelMain = new JPanel();
 				background.add(jPanelMain);
-				jPanelMain.setBounds(246, 638, 706, 159);
+				jPanelMain.setBounds(20, 737, 1172, 324);
 				jPanelMain.setOpaque(false);
-			}
-			{
-				jLabel2 = new JLabel();
-				background.add(jLabel2);
-				jLabel2.setText("");
-				jLabel2.setBounds(975, 522, 77, 116);
-			}
-			{
-				jLabelHeros = new JLabel();
-				background.add(jLabelHeros);
-				jLabelHeros.setText(" ");
-				jLabelHeros.setBounds(539, 522, 133, 142);
-				jLabelHeros.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/Interceptor.png")));
 			}
 			{
 				jLabelRessource = new JLabel();
 				background.add(jLabelRessource);
 				jLabelRessource.setText("<html><font color=white>1</font></html>");
-				jLabelRessource.setBounds(470, 573, 60, 31);
+				jLabelRessource.setBounds(474, 712, 59, 29);
 				jLabelRessource.setFont(new java.awt.Font("Purisa",1,20));
 			}
 			{
 				jLabelSortHeroique = new JLabel();
 				background.add(jLabelSortHeroique);
 				jLabelSortHeroique.setText(" ");
-				jLabelSortHeroique.setBounds(684, 541, 81, 78);
+				jLabelSortHeroique.setBounds(686, 688, 81, 78);
 			}
 			{
 				jLabelRessourceAdversaire = new JLabel();
 				background.add(jLabelRessourceAdversaire);
 				jLabelRessourceAdversaire.setText("<html><font color=white>1</font></html>");
-				jLabelRessourceAdversaire.setBounds(465, 168, 35, 41);
+				jLabelRessourceAdversaire.setBounds(463, 306, 35, 41);
 				jLabelRessourceAdversaire.setFont(new java.awt.Font("Purisa",1,20));
 			}
 			{
 				jLabelHerosAdversaire = new JLabel();
 				background.add(jLabelHerosAdversaire);
 				jLabelHerosAdversaire.setText(" ");
-				jLabelHerosAdversaire.setBounds(543, 119, 117, 120);
+				jLabelHerosAdversaire.setBounds(546, 269, 117, 120);
 			}
 			{
 				jLabelSortHeroiqueAdversaire = new JLabel();
 				background.add(jLabelSortHeroiqueAdversaire);
 				jLabelSortHeroiqueAdversaire.setText(" ");
-				jLabelSortHeroiqueAdversaire.setBounds(684, 138, 81, 83);
+				jLabelSortHeroiqueAdversaire.setBounds(686, 283, 81, 83);
 			}
 			{
 				jPanelMainAdversaire = new JPanel();
 				background.add(jPanelMainAdversaire);
-				jPanelMainAdversaire.setBounds(273, 12, 665, 95);
+				jPanelMainAdversaire.setBounds(20, 7, 1182, 250);
 				jPanelMainAdversaire.setOpaque(false);
 			}
 			{
 				jPanelTerrainAdversaire = new JPanel();
 				background.add(jPanelTerrainAdversaire);
-				jPanelTerrainAdversaire.setBounds(207, 255, 799, 116);
+				jPanelTerrainAdversaire.setBounds(217, 288, 799, 223);
 				jPanelTerrainAdversaire.setOpaque(false);
 			}
 			{
-				jPanelTerrain = new JPanel();
-				background.add(jPanelTerrain);
-				jPanelTerrain.setBounds(202, 383, 799, 136);
-				jPanelTerrain.setOpaque(false);
+				jLabelHeros = new JLabel();
+				background.add(jLabelHeros);
+				jLabelHeros.setText(" ");
+				jLabelHeros.setBounds(541, 663, 133, 142);
+				jLabelHeros.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/Interceptor.png")));
 			}
 		}
 	}
 	
 	public void display(){
 		this.setVisible(true);
-	}
-	
-	public JLabel getDeckPanel(){
-		return this.jLabel2;
 	}
 	
 	public JPanel getPanelMain(){
