@@ -22,7 +22,7 @@ public class MyClient extends Socket implements Runnable {
 		oos = new ObjectOutputStream(this.getOutputStream());
 		ois = new ObjectInputStream(this.getInputStream());
 	}
-	
+	/*
 	public static void main(String[] args) {
 		MyClient mc = null;
 		try {
@@ -62,7 +62,7 @@ public class MyClient extends Socket implements Runnable {
 		}
 	}
 
-	
+	*/
 	public void ecrire(ObjectSend objS)
 	{
 		
@@ -76,6 +76,15 @@ public class MyClient extends Socket implements Runnable {
 	public ObjectInputStream getOis() {
 		return ois;
 	}
+	
+	public void setOos(ObjectOutputStream oos) {
+		this.oos = oos;
+	}
+
+	public void setOis(ObjectInputStream ois) {
+		this.ois = ois;
+	}
+
 	public int getNum() {
 		return num;
 	}

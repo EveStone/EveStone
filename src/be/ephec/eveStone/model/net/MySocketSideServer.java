@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class MySocketSideServer {
+public class MySocketSideServer implements Runnable {
 
 	private Socket s;
 	private ObjectInputStream ois;
@@ -38,6 +38,34 @@ public class MySocketSideServer {
 
 	public void setOos(ObjectOutputStream oos) {
 		this.oos = oos;
+	}
+
+	@Override
+	public void run() {
+		while (!s.isClosed())
+		{
+			ObjectSend obj = null;
+			try {
+				obj = (ObjectSend) this.ois.readObject();
+				int action = obj.getAction();
+				Object o = obj.getObj();
+				System.out.println("Numéro de l'action" + action);
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				try {
+					s.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}//lecture bloquante
+			
+		}
 	}
 	
 }
