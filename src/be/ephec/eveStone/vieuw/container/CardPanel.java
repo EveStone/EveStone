@@ -1,5 +1,7 @@
 package be.ephec.eveStone.vieuw.container;
 
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.Image;
 
 import be.ephec.eveStone.model.*;
@@ -30,44 +32,58 @@ public class CardPanel extends JLabel {
 	}
 
 	public void makeCard(){
-		this.setIcon(new ImageIcon((new ImageIcon(getClass().getClassLoader().getResource(card.getImage()))).getImage().getScaledInstance(85, 122, Image.SCALE_DEFAULT)));
-		
+		if (this.getIcon() == null)
+			this.setIcon(new ImageIcon((new ImageIcon(getClass().getClassLoader().getResource(card.getImage()))).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
+
 		jouer = new JButton("Jouer");
-		jouer.setBounds(20, 100, 75, 20);
+		jouer.setBounds(50, 60, 75, 20);
 		this.add(jouer);
 		jouer.setVisible(false);
 
 		ressource = new JLabel();
-		ressource.setText("<html><font color=\"#00FF00\">"+card.getRessource()+"</font></html>");
-		ressource.setBounds(5, 0, 20, 20);
+		ressource.setText("<html><font color=\"#00FFFF\">"+card.getRessource()+"</font></html>");
+		ressource.setBounds(5, 5, 30, 30);
 
 		//85 x 132
 		if (card instanceof Serviteur)
 		{
 			attaque = new JLabel();
 			attaque.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbDommage()+"</font></html>");
-			attaque.setBounds(5, 110, 20, 20);
+			attaque.setBounds(15, 260, 30, 30);
 			this.add(attaque);
+			attaque.setFont(new Font("Arial", 6, 30));
 		}
 		else if (card instanceof Dommage)
 		{
 			attaque = new JLabel();
 			attaque.setText("<html><font color=\"#FBF2B7\">"+((Dommage) card).getDegats()+"</font></html>");
-			attaque.setBounds(5, 110, 20, 20);
+			attaque.setBounds(15, 110, 30, 30);
 			this.add(attaque);
+			attaque.setFont(new Font("Arial", 6, 30));
 		}
 
 		if (card instanceof Serviteur)
 		{
 			vie = new JLabel();
 			vie.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbDommage()+"</font></html>");
-			vie.setBounds(73, 110, 20, 20);
+			vie.setBounds(165, 260, 30, 30);
 			this.add(vie);
+			vie.setFont(new Font("Arial", 6, 30));
 		}
-
-
 		this.add(ressource);
-		
+		ressource.setFont(new Font("Arial", 6, 30));
+
+	}
+
+	public void showInfo(boolean show){
+
+		this.ressource.setVisible(show);
+		if(this.card instanceof Serviteur || card instanceof Dommage)
+			this.attaque.setVisible(show);
+		if(card instanceof Serviteur)
+				this.vie.setVisible(show);
+		this.revalidate();
+		this.repaint();
 	}
 
 	public void setCard(Carte card){
@@ -87,7 +103,21 @@ public class CardPanel extends JLabel {
 		vie.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbVie()+"</font></html>");
 		this.revalidate();
 		this.repaint();
-		
+
 	}
 
+	@Override
+	public Component.BaselineResizeBehavior getBaselineResizeBehavior() {
+	    return Component.BaselineResizeBehavior.CONSTANT_DESCENT;
+	}
+
+	@Override
+	public int getBaseline(int width, int height) {
+	    return 0;
+	}
+	
+	public Component add(Component comp){
+		super.add(comp);
+		return comp;
+	}
 }

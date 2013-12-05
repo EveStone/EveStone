@@ -9,19 +9,19 @@ public class Protection extends Serviteur {
 	
 	private boolean protection;
 	
-	public Protection(String nom,int ressource, String image, int nbVie, int nbDommage, boolean protection)
+	public Protection(String nom,int ressource, String image, String description, int nbVie, int nbDommage, boolean protection)
 	{
-		super(nom,ressource, image, nbVie, nbDommage);
+		super(nom,ressource, image, description, nbVie, nbDommage);
 		this.protection = protection;
 	}
-	public Protection(String nom,int ressource, String image, int nbVie, int nbDommage, int dommageSort, boolean protection)
+	public Protection(String nom,int ressource, String image, String description, int nbVie, int nbDommage, int dommageSort, boolean protection)
 	{
-		super(nom,ressource, image, nbVie, nbDommage, dommageSort);
+		super(nom,ressource, image, description, nbVie, nbDommage, dommageSort);
 		this.protection = protection;
 	}
-	public Protection(String nom,int ressource, String image, int nbVie, int nbDommage, int servBuffPv, int servBuffDeg, boolean protection)
+	public Protection(String nom,int ressource, String image, String description, int nbVie, int nbDommage, int servBuffPv, int servBuffDeg, boolean protection)
 	{
-		super(nom,ressource, image, nbVie, nbDommage, servBuffPv,servBuffDeg);
+		super(nom,ressource, image, description, nbVie, nbDommage, servBuffPv,servBuffDeg);
 		this.protection = protection;
 	}
 

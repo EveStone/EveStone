@@ -1,5 +1,6 @@
 package be.ephec.eveStone.controller;
 
+import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -26,7 +28,6 @@ public class Controller {
 	// Modèles
 	private Hero myHero;
 	private Hero adverseHero;
-	private CardPanel current;
 
 	// Views
 	private Area area;
@@ -187,9 +188,9 @@ public class Controller {
 		}
 		return check;
 	}
-			
-	
-			
+
+
+
 	protected void dommageClicked(MouseEvent e, final int dommage)
 	{
 		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() - dommage);
@@ -301,40 +302,17 @@ public class Controller {
 
 	// Actions
 	/**
-	 * Panel du deck, quand on clique sur le deck, on ajoute une carte a la main. (a supprimer car automatique)
+	 * Pioche NB_CARTE_DEPART au début du jeu
 	 * @param evt
 	 */
 	private void piocheDepart() {
 		for(int i = 0; i<NB_CARTE_DEPART; i++){
-			final CardPanel card = new CardPanel();
-			card.setLayout(null);
-			card.setCard(myHero.getDeck().getTabCartes().poll());
-			card.setName(card.getCard().getNom());
-			card.makeCard();
-			area.getPanelMain().add(card);
-			card.getButton().addMouseListener(new MouseAdapter(){
-				public void mouseClicked(MouseEvent evt){
-					jButtonJouerClicked(evt, card);
-				}
-			});
-			card.addMouseListener(new MouseAdapter(){
-				public void mouseClicked(MouseEvent ev){
-					cardClicked(ev, card);
-				}
-			});
-			card.addMouseListener(new MouseAdapter(){
-				public void mouseEntered(MouseEvent evt){
-					cardMouseOn(card);
-				}
-			});
-			card.addMouseListener(new MouseAdapter(){
-				public void mouseExited(MouseEvent evt){
-					cardMouseOff(evt,card);
-				}
-			});
+			pioche();
 		}
 	}
-
+	/**
+	 * ajoute une carte a la main, si NB_MAX_CARTE_MAIN non atteint, sinon retire 1 pv au héros
+	 */
 	private void pioche(){
 		if(area.getPanelMain().getComponentCount()<NB_MAX_CARTE_MAIN){
 			final CardPanel card = new CardPanel();
@@ -343,6 +321,7 @@ public class Controller {
 			card.setName(card.getCard().getNom());
 			card.makeCard();
 			area.getPanelMain().add(card);
+			card.showInfo(false);
 			card.getButton().addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent evt){
 					jButtonJouerClicked(evt, card);
@@ -352,13 +331,9 @@ public class Controller {
 				public void mouseClicked(MouseEvent ev){
 					cardClicked(ev, card);
 				}
-			});
-			card.addMouseListener(new MouseAdapter(){
 				public void mouseEntered(MouseEvent evt){
 					cardMouseOn(card);
 				}
-			});
-			card.addMouseListener(new MouseAdapter(){
 				public void mouseExited(MouseEvent evt){
 					cardMouseOff(evt, card);
 				}
@@ -371,41 +346,54 @@ public class Controller {
 	}
 
 	protected void cardMouseOff(MouseEvent evt, final CardPanel card) {
-		Timer animation = new Timer();
-		animation.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				int width = 200;
-				double height = 300;
-				for(int i=0; i<115; i++) {
-					card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_DEFAULT)));
-					width--;
-					height=(height-1.5);
-					card.revalidate();
-					card.repaint();
+		if (! (card.contains(evt.getPoint()))){
+			area.getLabelInfo().setText("<html><font color=white>Carte : <br/><br/>"
+					+"Type : <br/><br/>"
+					+"Desciption : </font></html>");
+			final Timer animation = new Timer();
+			card.getButton().setVisible(false);
+			card.showInfo(false);
+			card.getButton().setVisible(false);
+			animation.schedule(new TimerTask() {
+				int width = 108;
+				double height = 157;
+				@Override
+				public void run() {
+					for(int i=0; i<23; i++) {
+						card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_SMOOTH)));
+						width=width-1;
+						height=(height-(1*1.5));
+						card.revalidate();
+						card.repaint();
+					}
+					animation.cancel();
 				}
-			}
-		},2);
-		animation.purge();
+			},5);
+		}
 	}
 
 	protected void cardMouseOn(final CardPanel card) {
-		Timer animation = new Timer();
+		final Timer animation = new Timer();
+		area.getLabelInfo().setText("<html><font color=white>Carte : "+card.getCard().getNom()+"<br/><br/>"
+									+"Type : "+card.getCard().toString()+"<br/><br/>"
+									+"Desciption : "+card.getCard().getDescription()+"</font></html>");
+		area.getPanelMain().setSize(area.getPanelMain().getWidth(), 300);
 		animation.schedule(new TimerTask() {
+			int width = 85;
+			double height = 132;
 			@Override
 			public void run() {
-				int width = 85;
-				double height = 122;
-				for(int i=0; i<115; i++) {
+				for(int i=0; i<23; i++) {
 					card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_DEFAULT)));
-					width++;
-					height=(height+1.5);
+					width=width+1;
+					height=(height+(1*1.5));
 					card.revalidate();
 					card.repaint();
 				}
+				animation.cancel();
 			}
-		},2);
-		animation.purge();
+		},5);
+		card.showInfo(true);
 	}
 	/**
 	 * Cette méthode permet de supprimer le dernier mouseListener d'un Jpanel 
@@ -426,12 +414,6 @@ public class Controller {
 	 * @param label le CarPanel qui contient la carte.
 	 */
 	protected void cardClicked(MouseEvent ev, final CardPanel label) {
-		if (current == null)
-			current=label;
-		else{
-			current.getButton().setVisible(false);
-			current=label;
-		}
 		if(label.getButton().isVisible())
 			label.getButton().setVisible(false);
 		else
@@ -454,6 +436,7 @@ public class Controller {
 			else{
 				if(label.getCard() instanceof Serviteur)
 				{
+					label.remove(label.getButton());
 					area.getjPanelTerrain().add(label);
 					makeBuff(getBuff(label.getCard()));
 				}
@@ -463,8 +446,9 @@ public class Controller {
 				}
 				myHero.setRessource(myHero.getRessource()-label.getCard().getRessource());
 				this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
-				label.remove(label.getButton());
 				area.getPanelMain().remove(label);
+				label.showInfo(false);
+				label.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(label.getCard().getImage())).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
 				area.revalidate();
 				area.repaint();
 			}
@@ -476,8 +460,6 @@ public class Controller {
 
 	protected void jButtonFinTourClicked(MouseEvent evt) {
 		nbTour++;
-		if(current != null)
-			current.getButton().setVisible(false);
 		if (nbTour < NB_MAX_RESSOURCE)
 		{
 			myHero.setRessource(nbTour);

@@ -9,19 +9,19 @@ public class Invisible extends Serviteur {
 	
 	private boolean invisible;
 	
-	public Invisible(String nom,int ressource, String image, int nbVie, int nbDommage, boolean invisible)
+	public Invisible(String nom,int ressource, String image, String description, int nbVie, int nbDommage, boolean invisible)
 	{
-		super(nom,ressource, image, nbVie, nbDommage);
+		super(nom,ressource, image, description, nbVie, nbDommage);
 		this.invisible = invisible;
 	}
-	public Invisible(String nom,int ressource, String image, int nbVie, int nbDommage, int dommageSort, boolean invisible)
+	public Invisible(String nom,int ressource, String image, String description, int nbVie, int nbDommage, int dommageSort, boolean invisible)
 	{
-		super(nom,ressource, image, nbVie, nbDommage, dommageSort);
+		super(nom,ressource, image, description, nbVie, nbDommage, dommageSort);
 		this.invisible = invisible;
 	}
-	public Invisible(String nom,int ressource, String image, int nbVie, int nbDommage, int servBuffPv, int servBuffDeg, boolean invisible)
+	public Invisible(String nom,int ressource, String image, String description, int nbVie, int nbDommage, int servBuffPv, int servBuffDeg, boolean invisible)
 	{
-		super(nom,ressource, image, nbVie, nbDommage, servBuffPv,servBuffDeg);
+		super(nom,ressource, image, description, nbVie, nbDommage, servBuffPv,servBuffDeg);
 		this.invisible = invisible;
 	}
 
