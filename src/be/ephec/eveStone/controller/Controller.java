@@ -134,7 +134,7 @@ public class Controller {
 	 * @param une carte (NE PEUT PAS ETRE NULL)
 	 * @return 0 si ce n'est pas un serviteur ou un sort de dommage, retourne l'attaque du serviteur ou le nombre de dommage du sort
 	 */
-	public int makeDommage(Carte c)
+	public int getDommage(Carte c)
 	{
 		int attaque = 0;
 		if (c instanceof Serviteur)
@@ -149,6 +149,52 @@ public class Controller {
 		{
 			return attaque;
 		}
+	}
+	private void makeDommage(final int dommage)
+	{
+		System.out.println(area.getjPanelTerrainAdversaire().getComponentCount());
+		for (int i = 0; i< area.getjPanelTerrainAdversaire().getComponentCount(); i++)
+		{
+			area.getjPanelTerrainAdversaire().getComponent(i).addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e)
+				{
+					if (((Invisible)((CardPanel) e.getComponent()).getCard()).isInvisible() == true)
+					{
+						JOptionPane.showMessageDialog(null, "Vous ne pouvez pas attaquer ce serviteur car il est invisible");
+					}
+					else if (checkListProtection(area.getjPanelTerrainAdversaire()) == false || ((Protection)((CardPanel) e.getComponent()).getCard()).isProtection()== true)
+					{
+						dommageClicked(e, dommage);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "L'adversaire a un serviteur sous protection, vous devez l'attaquer!");
+					}
+					delLastMotionListener(area.getjPanelTerrain());
+				}
+			});
+		}
+	}
+	protected boolean checkListProtection(JPanel panel)
+	{
+		boolean check = false;
+		for (int i = 0; i< panel.getComponentCount(); i++)
+		{
+			if (((Protection)((CardPanel) panel.getComponent(i)).getCard()).isProtection()== true)
+			{
+				return true;
+			}
+		}
+		return check;
+	}
+			
+	
+			
+	protected void dommageClicked(MouseEvent e, final int dommage)
+	{
+		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() - dommage);
+		JOptionPane.showMessageDialog(null, "Vous infligez " + dommage + " de dégats sur le serviteur" + ((Serviteur)((CardPanel) e.getComponent()).getCard()).getNom());
+		((CardPanel) e.getComponent()).update();
 	}
 	/**
 	 * Cette méthode permet de buff une carte ciblé elle est ainsi augmenter de X pts de vie et de X pts de degats
@@ -201,24 +247,6 @@ public class Controller {
 					}
 				});
 			}
-		}
-	}
-	protected void buffClicked(MouseEvent e, final int buff[])
-	{
-		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() + buff[0]);
-		System.out.println("pv: " + ((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie());
-		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbDommage(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbDommage() + buff[1]);
-		System.out.println("degats: " + ((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbDommage());
-		((CardPanel) e.getComponent()).update();
-		
-		
-	}
-	protected void delLastMotionListener(JPanel p)
-	{
-		for (int i = 0; i< p.getComponentCount(); i++)
-		{
-			MouseListener ml[] = p.getComponent(i).getMouseListeners();
-			p.getComponent(i).removeMouseListener(ml[ml.length-1]);
 		}
 	}
 	/**
@@ -383,7 +411,19 @@ public class Controller {
 		},2);
 		animation.purge();
 	}
-
+	/**
+	 * Cette méthode permet de supprimer le dernier mouseListener d'un Jpanel 
+	 * Utile pour supprimer un mouseListener d'un carte présent dans la main ou sur un terrain.
+	 * @param p: JPanel non null
+	 */
+	protected void delLastMotionListener(JPanel p)
+	{
+		for (int i = 0; i< p.getComponentCount(); i++)
+		{
+			MouseListener ml[] = p.getComponent(i).getMouseListeners();
+			p.getComponent(i).removeMouseListener(ml[ml.length-1]);
+		}
+	}
 	/**
 	 * Losque que l'on clique sur une carte, un bouton jouer apparait.
 	 * @param ev
@@ -454,6 +494,20 @@ public class Controller {
 		this.area.revalidate();
 		this.area.repaint();
 		pioche();
+	}
+	/**
+	 * Cette methode recoit un event et buff la carte en fonction du tableau buff
+	 * @param e: event non null
+	 * @param buff[0] ==> pv
+	 *        buff[1] ==> degats 
+	 */
+	protected void buffClicked(MouseEvent e, final int buff[])
+	{
+		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() + buff[0]);
+		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbDommage(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbDommage() + buff[1]);
+		((CardPanel) e.getComponent()).update();
+
+
 	}
 
 	protected void jButtonAnnulerClicked(MouseEvent evt)
