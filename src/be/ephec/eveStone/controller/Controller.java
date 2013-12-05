@@ -3,6 +3,7 @@ package be.ephec.eveStone.controller;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Timer;
@@ -10,6 +11,7 @@ import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import be.ephec.eveStone.model.*;
 import be.ephec.eveStone.model.net.MyClient;
@@ -135,7 +137,7 @@ public class Controller {
 	public int makeDommage(Carte c)
 	{
 		int attaque = 0;
-		if ((c instanceof Serviteur) || (c instanceof Invisible) || (c instanceof Protection))
+		if (c instanceof Serviteur)
 		{
 			return ((Serviteur) c).getNbDommage();
 		}
@@ -153,19 +155,70 @@ public class Controller {
 	 * @param buff[0] ==> pv
 	 *        buff[1] ==> degats 
 	 */
-	private void makeBuff(int[] buff)
+	private void makeBuff(final int[] buff)
 	{
 		if ((buff[1] != 0) && (buff[0] !=0))
 		{
-			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[0] + " le nombre de point de vie et de " + buff[1] + " le nombre de dégats du serviteur ciblé");
+			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[0] + " le nombre de points de vie et de " + buff[1] + " le nombre de dégats du serviteur ciblé");
+			System.out.println(area.getjPanelTerrain().getComponentCount());
+			for (int i = 0; i< area.getjPanelTerrain().getComponentCount(); i++)
+			{
+				area.getjPanelTerrain().getComponent(i).addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e)
+					{
+						buffClicked(e, buff);
+						delLastMotionListener(area.getjPanelTerrain());
+					}
+				});
+			}
 		}
 		else if ((buff[1] == 0) && (buff[0] !=0))
 		{
-			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[0] + " de point de vie du serviteur ciblé");
+			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[0] + " de points de vie du serviteur ciblé");
+			System.out.println(area.getjPanelTerrain().getComponentCount());
+			for (int i = 0; i< area.getjPanelTerrain().getComponentCount(); i++)
+			{
+				area.getjPanelTerrain().getComponent(i).addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e)
+					{
+						buffClicked(e, buff);
+						delLastMotionListener(area.getjPanelTerrain());
+					}
+				});
+			}
 		}
 		else if ((buff[1] != 0) && (buff[0] ==0))
 		{
-			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[1] + " de point de dégats du serviteur ciblé");
+			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[1] + " de points de dégats du serviteur ciblé");
+			System.out.println(area.getjPanelTerrain().getComponentCount());
+			for (int i = 0; i< area.getjPanelTerrain().getComponentCount(); i++)
+			{
+				area.getjPanelTerrain().getComponent(i).addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e)
+					{
+						buffClicked(e, buff);
+						delLastMotionListener(area.getjPanelTerrain());
+					}
+				});
+			}
+		}
+	}
+	protected void buffClicked(MouseEvent e, final int buff[])
+	{
+		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() + buff[0]);
+		System.out.println("pv: " + ((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie());
+		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbDommage(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbDommage() + buff[1]);
+		System.out.println("degats: " + ((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbDommage());
+		((CardPanel) e.getComponent()).update();
+		
+		
+	}
+	protected void delLastMotionListener(JPanel p)
+	{
+		for (int i = 0; i< p.getComponentCount(); i++)
+		{
+			MouseListener ml[] = p.getComponent(i).getMouseListeners();
+			p.getComponent(i).removeMouseListener(ml[ml.length-1]);
 		}
 	}
 	/**
@@ -177,7 +230,7 @@ public class Controller {
 	private int[] getBuff(Carte c)
 	{
 		int buff[] = {0 , 0};
-		if ((c instanceof Serviteur) || (c instanceof Invisible) || (c instanceof Protection))
+		if (c instanceof Serviteur)
 		{
 			buff[0] = ((Serviteur) c).getServBuffPv();
 			buff[1] = ((Serviteur) c).getServBuffDeg();
