@@ -1,6 +1,7 @@
 package be.ephec.eveStone.vieuw;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,7 +50,7 @@ public class Area extends JFrame {
 
 	public Area(final Controller controller){
 		super("EVE STONE");
-		this.setSize(1220, 1100);
+		this.setSize(1220, 800);
 		this.setBackground(Color.BLACK);
 		this.setResizable(false);
 		this.initGUI(controller);
@@ -74,11 +75,16 @@ public class Area extends JFrame {
 			{
 				jPanelTerrain = new JPanel();
 				background.add(jPanelTerrain);
+				jPanelTerrain.setAlignmentY(BOTTOM_ALIGNMENT);
 				jPanelTerrain.setBounds(199, 544, 799, 317);
 				jPanelTerrain.setOpaque(false);
 			}
 			{
 				jPanelMain = new JPanel();
+				jPanelMain.setAlignmentY(BOTTOM_ALIGNMENT);
+				FlowLayout jPanelMainLayout = new FlowLayout();
+				jPanelMainLayout.setAlignOnBaseline(true);
+				jPanelMain.setLayout(jPanelMainLayout);
 				background.add(jPanelMain);
 				jPanelMain.setBounds(20, 737, 1172, 324);
 				jPanelMain.setOpaque(false);
