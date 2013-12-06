@@ -1,25 +1,20 @@
 package be.ephec.eveStone.vieuw;
+
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GraphicsConfiguration;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
-import be.ephec.eveStone.EveStone;
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Hero;
 import be.ephec.eveStone.model.SortHeroique;

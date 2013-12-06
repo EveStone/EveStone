@@ -25,7 +25,7 @@ public class Deck {
 	private static final String PATH_LIGHT_MAINTENANCE = "img/CommonCard/lightMaintenance.png";
 	private static final String PATH_HORNET = "img/FregateCard/hornet.png";
 	private static final String PATH_WASP = "img/FregateCard/wasp.png";
-	private static final String PATH_HORNET_EC_300 = "img/FregateCard/hornetEC300";
+	private static final String PATH_HORNET_EC_300 = "img/FregateCard/hornetEC300.png";
 	private static final String PATH_MANTIS = "img/FregateCard/mantis.png";
 	private static final String PATH_DRAGONFLY = "img/FregateCard/dragonfly.png";
 	private static final String PATH_VESPA = "img/FregateCard/vespa.png";

@@ -7,6 +7,7 @@ public class Serviteur extends Carte {
 	private int dommageSort;
 	private int servBuffPv;
 	private int servBuffDeg;
+	private boolean canBuff;
 	
 	
 	/**
@@ -22,6 +23,7 @@ public class Serviteur extends Carte {
 		super(nom,ressource,image, description);
 		this.nbVie = nbVie;
 		this.nbDommage = nbDommage;
+		this.canBuff=false;
 	}
 	
 	/**
@@ -38,7 +40,7 @@ public class Serviteur extends Carte {
 		this.nbVie = nbVie;
 		this.nbDommage = nbDommage;
 		this.dommageSort = dommageSort;
-		
+		this.canBuff=false;
 	}
 	
 	/**
@@ -57,6 +59,7 @@ public class Serviteur extends Carte {
 		this.nbDommage = nbDommage;
 		this.servBuffDeg = servBuffDeg;
 		this.servBuffPv = servBuffPv;	
+		this.canBuff=true;
 	}
 	
 	public int getNbVie() {
@@ -102,5 +105,7 @@ public class Serviteur extends Carte {
 		this.servBuffDeg = servBuffDeg;
 	}
 	
-
+	public boolean isBuffing(){
+		return canBuff;
+	}
 }

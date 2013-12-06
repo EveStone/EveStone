@@ -85,6 +85,7 @@ public class Area extends JFrame {
 				background.add(jPanelMain);
 				jPanelMain.setBounds(251, 635, 712, 133);
 				jPanelMain.setOpaque(false);
+				jPanelMain.setSize(712, 300);
 			}
 			{
 				jLabelRessource = new JLabel();
