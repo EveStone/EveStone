@@ -55,7 +55,7 @@ public class Area extends JFrame {
 
 	public Area(final Controller controller){
 		super("EVE STONE");
-		this.setSize(1220, 800);
+		this.setSize(1240, 859);
 		this.setBackground(Color.BLACK);
 		this.setResizable(false);
 		this.initGUI(controller);
@@ -73,7 +73,7 @@ public class Area extends JFrame {
 				jButtonFinTour = new JButton();
 				background.add(jButtonFinTour);
 				jButtonFinTour.setText("<html><font color=white>Fin de tour</font></html>");
-				jButtonFinTour.setBounds(1009, 384, 117, 28);
+				jButtonFinTour.setBounds(1017, 396, 117, 28);
 				jButtonFinTour.setBackground(new java.awt.Color(0,0,0));
 				jButtonFinTour.setEnabled(false);
 			}
@@ -83,41 +83,40 @@ public class Area extends JFrame {
 				jPanelMainLayout.setAlignOnBaseline(true);
 				jPanelMain.setLayout(jPanelMainLayout);
 				background.add(jPanelMain);
-				jPanelMain.setBounds(251, 635, 712, 133);
+				jPanelMain.setBounds(263, 652, 708, 195);
 				jPanelMain.setOpaque(false);
-				jPanelMain.setSize(712, 300);
 			}
 			{
 				jLabelRessource = new JLabel();
 				background.add(jLabelRessource);
 				jLabelRessource.setText("<html><font color=white>1</font></html>");
-				jLabelRessource.setBounds(470, 570, 59, 29);
+				jLabelRessource.setBounds(470, 602, 58, 28);
 				jLabelRessource.setFont(new java.awt.Font("Purisa",1,20));
 			}
 			{
 				jLabelSortHeroique = new JLabel();
 				background.add(jLabelSortHeroique);
 				jLabelSortHeroique.setText(" ");
-				jLabelSortHeroique.setBounds(686, 546, 81, 78);
+				jLabelSortHeroique.setBounds(686, 575, 80, 78);
 			}
 			{
 				jLabelRessourceAdversaire = new JLabel();
 				background.add(jLabelRessourceAdversaire);
 				jLabelRessourceAdversaire.setText("<html><font color=white>1</font></html>");
-				jLabelRessourceAdversaire.setBounds(462, 164, 35, 41);
+				jLabelRessourceAdversaire.setBounds(463, 192, 35, 43);
 				jLabelRessourceAdversaire.setFont(new java.awt.Font("Purisa",1,20));
 			}
 			{
 				jLabelHerosAdversaire = new JLabel();
 				background.add(jLabelHerosAdversaire);
 				jLabelHerosAdversaire.setText(" ");
-				jLabelHerosAdversaire.setBounds(541, 131, 117, 120);
+				jLabelHerosAdversaire.setBounds(542, 151, 117, 120);
 			}
 			{
 				jLabelSortHeroiqueAdversaire = new JLabel();
 				background.add(jLabelSortHeroiqueAdversaire);
 				jLabelSortHeroiqueAdversaire.setText(" ");
-				jLabelSortHeroiqueAdversaire.setBounds(686, 283, 81, 83);
+				jLabelSortHeroiqueAdversaire.setBounds(686, 175, 79, 83);
 			}
 			{
 				jPanelMainAdversaire = new JPanel();
@@ -128,27 +127,27 @@ public class Area extends JFrame {
 			{
 				jPanelTerrainAdversaire = new JPanel();
 				background.add(jPanelTerrainAdversaire);
-				jPanelTerrainAdversaire.setBounds(176, 180, 799, 186);
+				jPanelTerrainAdversaire.setBounds(206, 268, 799, 179);
 				jPanelTerrainAdversaire.setOpaque(false);
 			}
 			{
 				jPanelTerrain = new JPanel();
 				background.add(jPanelTerrain);
-				jPanelTerrain.setBounds(150, 378, 901, 201);
+				jPanelTerrain.setBounds(156, 340, 901, 201);
 				jPanelTerrain.setOpaque(false);
 			}
 			{
 				jLabelHeros = new JLabel();
 				background.add(jLabelHeros);
 				jLabelHeros.setText(" ");
-				jLabelHeros.setBounds(541, 517, 133, 142);
+				jLabelHeros.setBounds(540, 546, 134, 143);
 				jLabelHeros.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/Interceptor.png")));
 			}
 			{
 				jLabelInfosCarte = new JLabel();
 				background.add(jLabelInfosCarte);
 				jLabelInfosCarte.setText(" ");
-				jLabelInfosCarte.setBounds(14, 507, 244, 256);
+				jLabelInfosCarte.setBounds(7, 562, 244, 256);
 				jLabelInfosCarte.setBorder(BorderFactory.createTitledBorder(""));
 			}
 		}
