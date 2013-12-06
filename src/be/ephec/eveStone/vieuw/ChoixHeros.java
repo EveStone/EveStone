@@ -154,7 +154,7 @@ public class ChoixHeros extends JFrame{
 		jLabelDescription.setText("<html><font color=white>Nom : Interceptor<br/><br/>"
 								   + "Spécéficité : Petit et rapide, l'interceptor peut infliger des dégats important. Pour cela il utilise principalement"
 								   + " des drones d'attaque et des drone protecteur pour esquiver les dégats.<br/><br/>"
-								   + "Sort Héros : Bombe Kinétique (Inflige des dégats à tous les serviteurs ennemis)</font></html>");
+								   + "Sort Héros : Bombe Kinétique (Inflige deux de dégats à un serviteur ou hero)</font></html>");
 		choixHero = 0;
 		jLabelcheckInterceptor.setVisible(true);
 		jLabelCheckFregate.setVisible(false);
@@ -166,7 +166,7 @@ public class ChoixHeros extends JFrame{
 		jLabelDescription.setText("<html><font color=white>Nom : Frégate<br/><br/>"
 				   + "Spécéficité : La frégate est un vaisseau robuste principalement conçu pour encaisser des dégats."
 				   + " Elle utilise des drônes puissants et qui nombreux qui noient l'ennemi sous un pluie de coup.<br/><br/>"
-				   + "Sort Héros : Renfort !(Invoques 2 drônes moyens)</font></html>");
+				   + "Sort Héros : Defense !(Donne + 2 à la coque)</font></html>");
 		choixHero = 1;
 		jLabelCheckFregate.setVisible(true);
 		jLabelcheckInterceptor.setVisible(false);
