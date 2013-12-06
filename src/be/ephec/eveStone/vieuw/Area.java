@@ -49,6 +49,10 @@ public class Area extends JFrame {
 	private JLabel jLabelRessource;
 	private JLabel jLabelHeros;
 	private JPanel jPanelMain;
+	private JLabel jLabelStructureAdverse;
+	private JLabel jLabelCoqueAdverse;
+	private JLabel jLabelStructure;
+	private JLabel jLabelCoque;
 	private JLabel jLabelInfosCarte;
 	private JPanel jPanelTerrain;
 	private JButton jButtonFinTour;
@@ -150,6 +154,42 @@ public class Area extends JFrame {
 				jLabelInfosCarte.setBounds(7, 562, 244, 256);
 				jLabelInfosCarte.setBorder(BorderFactory.createTitledBorder(""));
 			}
+			{
+				jLabelCoque = new JLabel();
+				background.add(jLabelCoque);
+				jLabelCoque.setText("<html><font color=white>20</font></html>");
+				jLabelCoque.setBounds(519, 546, 25, 30);
+				jLabelCoque.setBackground(Color.RED);
+				jLabelCoque.setFont(new java.awt.Font("Purisa",1,20));
+				jLabelCoque.setOpaque(true);
+			}
+			{
+				jLabelStructure = new JLabel();
+				background.add(jLabelStructure);
+				jLabelStructure.setText("<html><font color=white>10</font></html>");
+				jLabelStructure.setBounds(654, 545, 26, 32);
+				jLabelStructure.setBackground(Color.BLACK);
+				jLabelStructure.setFont(new java.awt.Font("Purisa",1,20));
+				jLabelStructure.setOpaque(true);
+			}
+			{
+				jLabelCoqueAdverse = new JLabel();
+				background.add(jLabelCoqueAdverse);
+				jLabelCoqueAdverse.setText("<html><font color=white>20</font></html>");
+				jLabelCoqueAdverse.setBounds(519, 247, 21, 28);
+				jLabelCoqueAdverse.setBackground(Color.RED);
+				jLabelCoqueAdverse.setFont(new java.awt.Font("Purisa",1,20));
+				jLabelCoqueAdverse.setOpaque(true);
+			}
+			{
+				jLabelStructureAdverse = new JLabel();
+				background.add(jLabelStructureAdverse);
+				jLabelStructureAdverse.setText("<html><font color=white>10</font></html>");
+				jLabelStructureAdverse.setBounds(652, 248, 28, 25);
+				jLabelStructureAdverse.setBackground(Color.BLACK);
+				jLabelStructureAdverse.setFont(new java.awt.Font("Purisa",1,20));
+				jLabelStructureAdverse.setOpaque(true);
+			}
 		}
 	}
 	
@@ -204,4 +244,37 @@ public class Area extends JFrame {
 	public JLabel getLabelInfo(){
 		return this.jLabelInfosCarte;
 	}
+
+	public JLabel getjLabelStructureAdverse() {
+		return jLabelStructureAdverse;
+	}
+
+	public void setjLabelStructureAdverse(JLabel jLabelStructureAdverse) {
+		this.jLabelStructureAdverse = jLabelStructureAdverse;
+	}
+
+	public JLabel getjLabelCoqueAdverse() {
+		return jLabelCoqueAdverse;
+	}
+
+	public void setjLabelCoqueAdverse(JLabel jLabelCoqueAdverse) {
+		this.jLabelCoqueAdverse = jLabelCoqueAdverse;
+	}
+
+	public JLabel getjLabelStructure() {
+		return jLabelStructure;
+	}
+
+	public void setjLabelStructure(JLabel jLabelStructure) {
+		this.jLabelStructure = jLabelStructure;
+	}
+
+	public JLabel getjLabelCoque() {
+		return jLabelCoque;
+	}
+
+	public void setjLabelCoque(JLabel jLabelCoque) {
+		this.jLabelCoque = jLabelCoque;
+	}
+	
 }
