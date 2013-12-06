@@ -1,6 +1,5 @@
 package be.ephec.eveStone.controller;
 
-import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,7 +8,6 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -25,6 +23,7 @@ import be.ephec.eveStone.vieuw.container.CardPanel;
 
 public class Controller {
 
+	
 	// Modèles
 	private Hero myHero;
 	private Hero adverseHero;
@@ -47,6 +46,7 @@ public class Controller {
 	private MyClient client;
 
 	private int nbTour;
+	private MouseAdapter cardListener;
 
 	public Controller(){
 
@@ -122,6 +122,22 @@ public class Controller {
 		});
 		nbTour=1;
 		piocheDepart();
+
+		// Test
+		final CardPanel carteEnnemi = new CardPanel();
+		carteEnnemi.setCard(new Serviteur("Hornet", 2, "img/FregateCard/hornet.png", "Drone d'attaque léger", 2, 2));
+		carteEnnemi.makeCard();
+		carteEnnemi.showInfo(false);
+		carteEnnemi.addMouseListener(new MouseAdapter(){
+			public void mouseEntered(MouseEvent e){
+				cardMouseOn(carteEnnemi);
+			}
+			
+			public void mouseExited(MouseEvent e){
+				cardMouseOff(e, carteEnnemi);
+			}
+		});
+		area.getjPanelTerrainAdversaire().add(carteEnnemi);
 	}
 
 	/**
@@ -159,11 +175,13 @@ public class Controller {
 			area.getjPanelTerrainAdversaire().getComponent(i).addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e)
 				{
-					if (((Invisible)((CardPanel) e.getComponent()).getCard()).isInvisible() == true)
-					{
-						JOptionPane.showMessageDialog(null, "Vous ne pouvez pas attaquer ce serviteur car il est invisible");
+					if ((((CardPanel) e.getComponent()).getCard()) instanceof Invisible){
+						if (((Invisible)((CardPanel) e.getComponent()).getCard()).isInvisible() == true)
+						{
+							JOptionPane.showMessageDialog(null, "Vous ne pouvez pas attaquer ce serviteur car il est invisible");
+						}
 					}
-					else if (checkListProtection(area.getjPanelTerrainAdversaire()) == false || ((Protection)((CardPanel) e.getComponent()).getCard()).isProtection()== true)
+					else if (checkListProtection(area.getjPanelTerrainAdversaire()) == false || (((CardPanel)e.getComponent()).getCard()) instanceof Protection== true)
 					{
 						dommageClicked(e, dommage);
 					}
@@ -171,7 +189,7 @@ public class Controller {
 					{
 						JOptionPane.showMessageDialog(null, "L'adversaire a un serviteur sous protection, vous devez l'attaquer!");
 					}
-					delLastMotionListener(area.getjPanelTerrain());
+					delLastMotionListener(area.getjPanelTerrainAdversaire());
 				}
 			});
 		}
@@ -181,7 +199,7 @@ public class Controller {
 		boolean check = false;
 		for (int i = 0; i< panel.getComponentCount(); i++)
 		{
-			if (((Protection)((CardPanel) panel.getComponent(i)).getCard()).isProtection()== true)
+			if (((CardPanel)panel.getComponent(i)).getCard() instanceof Protection)
 			{
 				return true;
 			}
@@ -193,7 +211,10 @@ public class Controller {
 
 	protected void dommageClicked(MouseEvent e, final int dommage)
 	{
-		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() - dommage);
+		if (((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie()-dommage >=0)
+			((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() - dommage);
+		else
+			((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(0);
 		JOptionPane.showMessageDialog(null, "Vous infligez " + dommage + " de dégats sur le serviteur" + ((Serviteur)((CardPanel) e.getComponent()).getCard()).getNom());
 		((CardPanel) e.getComponent()).update();
 	}
@@ -341,7 +362,10 @@ public class Controller {
 		}
 		else{
 			myHero.getDeck().getTabCartes().poll();
-			myHero.setNbCoque(myHero.getNbCoque()-1);
+			if (myHero.getNbCoque()>0)
+				myHero.setNbCoque(myHero.getNbCoque()-1);
+			else
+				myHero.setNbStructure(myHero.getNbStructure()-1);
 		}
 	}
 
@@ -375,8 +399,8 @@ public class Controller {
 	protected void cardMouseOn(final CardPanel card) {
 		final Timer animation = new Timer();
 		area.getLabelInfo().setText("<html><font color=white>Carte : "+card.getCard().getNom()+"<br/><br/>"
-									+"Type : "+card.getCard().toString()+"<br/><br/>"
-									+"Desciption : "+card.getCard().getDescription()+"</font></html>");
+				+"Type : "+card.getCard().toString()+"<br/><br/>"
+				+"Desciption : "+card.getCard().getDescription()+"</font></html>");
 		area.getPanelMain().setSize(area.getPanelMain().getWidth(), 300);
 		animation.schedule(new TimerTask() {
 			int width = 85;
@@ -428,7 +452,7 @@ public class Controller {
 	 * @param evt
 	 * @param label
 	 */
-	protected void jButtonJouerClicked(MouseEvent evt, CardPanel label) {
+	protected void jButtonJouerClicked(MouseEvent evt, final CardPanel label) {
 		if(myHero.getRessource() >= label.getCard().getRessource()){
 			if((label.getCard() instanceof Serviteur) && area.getjPanelTerrain().getComponentCount()>=NB_MAX_CARTE_TERRAIN){
 				JOptionPane.showMessageDialog(null, "Terrain Plein !");
@@ -439,6 +463,11 @@ public class Controller {
 					label.remove(label.getButton());
 					area.getjPanelTerrain().add(label);
 					makeBuff(getBuff(label.getCard()));
+					label.addMouseListener(new MouseAdapter(){
+						public void mouseClicked(MouseEvent e){
+							makeDommage(((Serviteur)(label.getCard())).getNbDommage());
+						}
+					});
 				}
 				else if (label.getCard() instanceof Buff)
 				{

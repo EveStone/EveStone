@@ -127,13 +127,13 @@ public class Area extends JFrame {
 			{
 				jPanelTerrainAdversaire = new JPanel();
 				background.add(jPanelTerrainAdversaire);
-				jPanelTerrainAdversaire.setBounds(210, 333, 799, 223);
+				jPanelTerrainAdversaire.setBounds(176, 180, 799, 186);
 				jPanelTerrainAdversaire.setOpaque(false);
 			}
 			{
 				jPanelTerrain = new JPanel();
 				background.add(jPanelTerrain);
-				jPanelTerrain.setBounds(153, 301, 901, 220);
+				jPanelTerrain.setBounds(150, 378, 901, 201);
 				jPanelTerrain.setOpaque(false);
 			}
 			{

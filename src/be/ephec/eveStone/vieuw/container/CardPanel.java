@@ -22,6 +22,8 @@ public class CardPanel extends JLabel {
 	JLabel ressource;
 	JLabel attaque;
 	JLabel vie;
+	
+	private static final int FONT_SIZE = 25;
 
 	public CardPanel(){
 
@@ -36,7 +38,7 @@ public class CardPanel extends JLabel {
 			this.setIcon(new ImageIcon((new ImageIcon(getClass().getClassLoader().getResource(card.getImage()))).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
 
 		jouer = new JButton("Jouer");
-		jouer.setBounds(50, 60, 75, 20);
+		jouer.setBounds(15, 60, 75, 20);
 		this.add(jouer);
 		jouer.setVisible(false);
 
@@ -49,29 +51,29 @@ public class CardPanel extends JLabel {
 		{
 			attaque = new JLabel();
 			attaque.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbDommage()+"</font></html>");
-			attaque.setBounds(15, 260, 30, 30);
+			attaque.setBounds(5, 135, 30, 30);
 			this.add(attaque);
-			attaque.setFont(new Font("Arial", 6, 30));
+			attaque.setFont(new Font("Arial", 6, FONT_SIZE));
 		}
 		else if (card instanceof Dommage)
 		{
 			attaque = new JLabel();
 			attaque.setText("<html><font color=\"#FBF2B7\">"+((Dommage) card).getDegats()+"</font></html>");
-			attaque.setBounds(15, 110, 30, 30);
+			attaque.setBounds(5, 135, 30, 30);
 			this.add(attaque);
-			attaque.setFont(new Font("Arial", 6, 30));
+			attaque.setFont(new Font("Arial", 6, FONT_SIZE));
 		}
 
 		if (card instanceof Serviteur)
 		{
 			vie = new JLabel();
 			vie.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbDommage()+"</font></html>");
-			vie.setBounds(165, 260, 30, 30);
+			vie.setBounds(85, 135, 30, 30);
 			this.add(vie);
-			vie.setFont(new Font("Arial", 6, 30));
+			vie.setFont(new Font("Arial", 6, FONT_SIZE));
 		}
 		this.add(ressource);
-		ressource.setFont(new Font("Arial", 6, 30));
+		ressource.setFont(new Font("Arial", 6, FONT_SIZE));
 
 	}
 
