@@ -6,14 +6,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import be.ephec.eveStone.model.*;
+import be.ephec.eveStone.model.listener.BuffingListener;
+import be.ephec.eveStone.model.listener.CardListenerMain;
+import be.ephec.eveStone.model.listener.CardListenerTerrain;
+import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
 import be.ephec.eveStone.model.net.MyClient;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.ConnectionFrame;
@@ -23,7 +24,7 @@ import be.ephec.eveStone.vieuw.container.CardPanel;
 
 public class Controller {
 
-	
+
 	// Modèles
 	private Hero myHero;
 	private Hero adverseHero;
@@ -46,7 +47,6 @@ public class Controller {
 	private MyClient client;
 
 	private int nbTour;
-	private MouseAdapter cardListener;
 
 	public Controller(){
 
@@ -128,16 +128,17 @@ public class Controller {
 		carteEnnemi.setCard(new Serviteur("Hornet", 2, "img/FregateCard/hornet.png", "Drone d'attaque léger", 2, 2));
 		carteEnnemi.makeCard();
 		carteEnnemi.showInfo(false);
-		carteEnnemi.addMouseListener(new MouseAdapter(){
-			public void mouseEntered(MouseEvent e){
-				cardMouseOn(carteEnnemi);
-			}
-			
-			public void mouseExited(MouseEvent e){
-				cardMouseOff(e, carteEnnemi);
-			}
-		});
+		carteEnnemi.setName(carteEnnemi.getName());
+		carteEnnemi.addMouseListener(new CardListenerTerrainAdv(carteEnnemi, area.getLabelInfo(), area.getjPanelTerrain(), area.getjPanelTerrainAdversaire()));
 		area.getjPanelTerrainAdversaire().add(carteEnnemi);
+
+		final CardPanel carteEnnemi2 =  new CardPanel();
+		carteEnnemi2.setCard(new Protection("Wasp EC-900",2, "img/FregateCard/waspEC900.png", "Protection : L'ennemi ne peut attaquer aucun autre serviteur ou votre héros tant que cette carte est en jeu", 2, 2, true));
+		carteEnnemi2.makeCard();
+		carteEnnemi2.showInfo(false);
+		carteEnnemi2.setName("Wasp EC-900");
+		carteEnnemi2.addMouseListener(new CardListenerTerrainAdv(carteEnnemi2, area.getLabelInfo(), area.getjPanelTerrain(), area.getjPanelTerrainAdversaire()));
+		area.getjPanelTerrainAdversaire().add(carteEnnemi2);
 	}
 
 	/**
@@ -145,6 +146,10 @@ public class Controller {
 	 */
 	public void displayArea(){
 		area.display();
+	}
+
+	public Area getArea(){
+		return this.area;
 	}
 	/**
 	 * Cette m�thode permet de retourner l'attaque d'un serviteur et d'un sort
@@ -167,137 +172,6 @@ public class Controller {
 			return attaque;
 		}
 	}
-	private void makeDommage(final int dommage)
-	{
-		System.out.println(area.getjPanelTerrainAdversaire().getComponentCount());
-		for (int i = 0; i< area.getjPanelTerrainAdversaire().getComponentCount(); i++)
-		{
-			area.getjPanelTerrainAdversaire().getComponent(i).addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e)
-				{
-					if ((((CardPanel) e.getComponent()).getCard()) instanceof Invisible){
-						if (((Invisible)((CardPanel) e.getComponent()).getCard()).isInvisible() == true)
-						{
-							JOptionPane.showMessageDialog(null, "Vous ne pouvez pas attaquer ce serviteur car il est invisible");
-						}
-					}
-					else if (checkListProtection(area.getjPanelTerrainAdversaire()) == false || (((CardPanel)e.getComponent()).getCard()) instanceof Protection== true)
-					{
-						dommageClicked(e, dommage);
-					}
-					else
-					{
-						JOptionPane.showMessageDialog(null, "L'adversaire a un serviteur sous protection, vous devez l'attaquer!");
-					}
-					delLastMotionListener(area.getjPanelTerrainAdversaire());
-				}
-			});
-		}
-	}
-	protected boolean checkListProtection(JPanel panel)
-	{
-		boolean check = false;
-		for (int i = 0; i< panel.getComponentCount(); i++)
-		{
-			if (((CardPanel)panel.getComponent(i)).getCard() instanceof Protection)
-			{
-				return true;
-			}
-		}
-		return check;
-	}
-
-
-
-	protected void dommageClicked(MouseEvent e, final int dommage)
-	{
-		if (((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie()-dommage >=0)
-			((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() - dommage);
-		else
-			((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(0);
-		JOptionPane.showMessageDialog(null, "Vous infligez " + dommage + " de dégats sur le serviteur" + ((Serviteur)((CardPanel) e.getComponent()).getCard()).getNom());
-		((CardPanel) e.getComponent()).update();
-	}
-	/**
-	 * Cette méthode permet de buff une carte ciblé elle est ainsi augmenter de X pts de vie et de X pts de degats
-	 * @param buff[0] ==> pv
-	 *        buff[1] ==> degats 
-	 */
-	private void makeBuff(final int[] buff)
-	{
-		if ((buff[1] != 0) && (buff[0] !=0))
-		{
-			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[0] + " le nombre de points de vie et de " + buff[1] + " le nombre de dégats du serviteur ciblé");
-			System.out.println(area.getjPanelTerrain().getComponentCount());
-			for (int i = 0; i< area.getjPanelTerrain().getComponentCount(); i++)
-			{
-				area.getjPanelTerrain().getComponent(i).addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent e)
-					{
-						buffClicked(e, buff);
-						delLastMotionListener(area.getjPanelTerrain());
-					}
-				});
-			}
-		}
-		else if ((buff[1] == 0) && (buff[0] !=0))
-		{
-			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[0] + " de points de vie du serviteur ciblé");
-			System.out.println(area.getjPanelTerrain().getComponentCount());
-			for (int i = 0; i< area.getjPanelTerrain().getComponentCount(); i++)
-			{
-				area.getjPanelTerrain().getComponent(i).addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent e)
-					{
-						buffClicked(e, buff);
-						delLastMotionListener(area.getjPanelTerrain());
-					}
-				});
-			}
-		}
-		else if ((buff[1] != 0) && (buff[0] ==0))
-		{
-			JOptionPane.showMessageDialog(null, "Cliquez sur une carte pour augmenter de " + buff[1] + " de points de dégats du serviteur ciblé");
-			System.out.println(area.getjPanelTerrain().getComponentCount());
-			for (int i = 0; i< area.getjPanelTerrain().getComponentCount(); i++)
-			{
-				area.getjPanelTerrain().getComponent(i).addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent e)
-					{
-						buffClicked(e, buff);
-						delLastMotionListener(area.getjPanelTerrain());
-					}
-				});
-			}
-		}
-	}
-	/**
-	 * Retourne un tableau de int pour le buff de la carte
-	 * @param une carte ne peut pas être null
-	 * @return buff[0] ==> pv
-	 *         buff[1] ==> degats
-	 */
-	private int[] getBuff(Carte c)
-	{
-		int buff[] = {0 , 0};
-		if (c instanceof Serviteur)
-		{
-			buff[0] = ((Serviteur) c).getServBuffPv();
-			buff[1] = ((Serviteur) c).getServBuffDeg();
-			return buff;
-		}
-		else if (c instanceof Buff)
-		{
-			buff[0] = ((Buff) c).getBuffPv();
-			buff[1] = ((Buff) c).getBuffDegats();
-			return buff;
-		}
-		else
-		{
-			return buff;
-		}
-	}
-
 	/*
 	 * Getters et setters pour avoir le hero adverse ou son hero 
 	 * 
@@ -309,6 +183,7 @@ public class Controller {
 	public void setMyHero(Hero myHero) {
 		this.myHero = myHero;
 	}
+
 	public Hero getAdverseHero() {
 		return adverseHero;
 	}
@@ -348,17 +223,7 @@ public class Controller {
 					jButtonJouerClicked(evt, card);
 				}
 			});
-			card.addMouseListener(new MouseAdapter(){
-				public void mouseClicked(MouseEvent ev){
-					cardClicked(ev, card);
-				}
-				public void mouseEntered(MouseEvent evt){
-					cardMouseOn(card);
-				}
-				public void mouseExited(MouseEvent evt){
-					cardMouseOff(evt, card);
-				}
-			});
+			card.addMouseListener(new CardListenerMain(card, area.getLabelInfo()));
 		}
 		else{
 			myHero.getDeck().getTabCartes().poll();
@@ -369,83 +234,6 @@ public class Controller {
 		}
 	}
 
-	protected void cardMouseOff(MouseEvent evt, final CardPanel card) {
-		if (! (card.contains(evt.getPoint()))){
-			area.getLabelInfo().setText("<html><font color=white>Carte : <br/><br/>"
-					+"Type : <br/><br/>"
-					+"Desciption : </font></html>");
-			final Timer animation = new Timer();
-			card.getButton().setVisible(false);
-			card.showInfo(false);
-			card.getButton().setVisible(false);
-			animation.schedule(new TimerTask() {
-				int width = 108;
-				double height = 157;
-				@Override
-				public void run() {
-					for(int i=0; i<23; i++) {
-						card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_SMOOTH)));
-						width=width-1;
-						height=(height-(1*1.5));
-						card.revalidate();
-						card.repaint();
-					}
-					animation.cancel();
-				}
-			},5);
-		}
-	}
-
-	protected void cardMouseOn(final CardPanel card) {
-		final Timer animation = new Timer();
-		area.getLabelInfo().setText("<html><font color=white>Carte : "+card.getCard().getNom()+"<br/><br/>"
-				+"Type : "+card.getCard().toString()+"<br/><br/>"
-				+"Desciption : "+card.getCard().getDescription()+"</font></html>");
-		area.getPanelMain().setSize(area.getPanelMain().getWidth(), 300);
-		animation.schedule(new TimerTask() {
-			int width = 85;
-			double height = 132;
-			@Override
-			public void run() {
-				for(int i=0; i<23; i++) {
-					card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_DEFAULT)));
-					width=width+1;
-					height=(height+(1*1.5));
-					card.revalidate();
-					card.repaint();
-				}
-				animation.cancel();
-			}
-		},5);
-		card.showInfo(true);
-	}
-	/**
-	 * Cette méthode permet de supprimer le dernier mouseListener d'un Jpanel 
-	 * Utile pour supprimer un mouseListener d'un carte présent dans la main ou sur un terrain.
-	 * @param p: JPanel non null
-	 */
-	protected void delLastMotionListener(JPanel p)
-	{
-		for (int i = 0; i< p.getComponentCount(); i++)
-		{
-			MouseListener ml[] = p.getComponent(i).getMouseListeners();
-			p.getComponent(i).removeMouseListener(ml[ml.length-1]);
-		}
-	}
-	/**
-	 * Losque que l'on clique sur une carte, un bouton jouer apparait.
-	 * @param ev
-	 * @param label le CarPanel qui contient la carte.
-	 */
-	protected void cardClicked(MouseEvent ev, final CardPanel label) {
-		if(label.getButton().isVisible())
-			label.getButton().setVisible(false);
-		else
-			label.getButton().setVisible(true);
-		area.getPanelMain().revalidate();
-		area.getPanelMain().repaint();
-		System.out.println(label.getName());
-	}
 	/**
 	 * Permet d'engager une carte
 	 * 		- Les serviteurs s'ajoutent sur le terrain
@@ -461,17 +249,23 @@ public class Controller {
 				if(label.getCard() instanceof Serviteur)
 				{
 					label.remove(label.getButton());
-					area.getjPanelTerrain().add(label);
-					makeBuff(getBuff(label.getCard()));
-					label.addMouseListener(new MouseAdapter(){
-						public void mouseClicked(MouseEvent e){
-							makeDommage(((Serviteur)(label.getCard())).getNbDommage());
+					if (((Serviteur)label.getCard()).isBuffing()){
+						JOptionPane.showMessageDialog(null, "Choisissez la carte à buffer");
+						for(int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
+							area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, area.getjPanelTerrain()));
 						}
-					});
+					}
+					area.getjPanelTerrain().add(label);
+					MouseListener ml[] = label.getMouseListeners();
+					label.removeMouseListener(ml[ml.length-1]);
+					label.addMouseListener(new CardListenerTerrain(label, area.getLabelInfo(), area.getjPanelTerrain(), area.getjPanelTerrainAdversaire()));
 				}
 				else if (label.getCard() instanceof Buff)
 				{
-					makeBuff(getBuff(label.getCard()));
+					JOptionPane.showMessageDialog(null, "Choisissez la carte à buffer");
+					for(int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
+						area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, area.getjPanelTerrain()));
+					}
 				}
 				myHero.setRessource(myHero.getRessource()-label.getCard().getRessource());
 				this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
@@ -481,7 +275,6 @@ public class Controller {
 				area.revalidate();
 				area.repaint();
 			}
-
 		}
 		else
 			JOptionPane.showMessageDialog(null, "Ressources Inssufisantes !");
@@ -497,24 +290,14 @@ public class Controller {
 		{
 			myHero.setRessource(NB_MAX_RESSOURCE);
 		}
+		/*for(int i=0; i< area.getjPanelTerrain().getComponentCount(); i++){
+			area.getjPanelTerrain().getComponent(i).addMouseListener(new CardListenerTerrain((CardPanel)area.getjPanelTerrain().getComponent(i), area.getLabelInfo(), area.getjPanelTerrain(), area.getjPanelTerrainAdversaire()));
+		}
+		*/
 		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		this.area.revalidate();
 		this.area.repaint();
 		pioche();
-	}
-	/**
-	 * Cette methode recoit un event et buff la carte en fonction du tableau buff
-	 * @param e: event non null
-	 * @param buff[0] ==> pv
-	 *        buff[1] ==> degats 
-	 */
-	protected void buffClicked(MouseEvent e, final int buff[])
-	{
-		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() + buff[0]);
-		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbDommage(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbDommage() + buff[1]);
-		((CardPanel) e.getComponent()).update();
-
-
 	}
 
 	protected void jButtonAnnulerClicked(MouseEvent evt)

@@ -67,7 +67,7 @@ public class CardPanel extends JLabel {
 		if (card instanceof Serviteur)
 		{
 			vie = new JLabel();
-			vie.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbDommage()+"</font></html>");
+			vie.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbVie()+"</font></html>");
 			vie.setBounds(85, 135, 30, 30);
 			this.add(vie);
 			vie.setFont(new Font("Arial", 6, FONT_SIZE));
