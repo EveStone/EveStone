@@ -10,28 +10,81 @@ import javax.swing.JPanel;
 import be.ephec.eveStone.model.Invisible;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
+import be.ephec.eveStone.model.SortHeroique;
 import be.ephec.eveStone.vieuw.container.CardPanel;
-
+/**
+ * Listener sur les cartes du terrain adverse.
+ * 
+ * Comme il existe des regles particulières en terme d'attaque, ces dernières
+ * seront détaillées dans les méthodes adéquates.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
+ *
+ */
 public class CardListenerTerrainAdv extends CardListenerTerrain{
 
 	private boolean isTargetable;
 	private CardPanel cardAttacking;
-
+	private SortHeroique sort;
+	private JLabel labelSort;
+	
+	/**
+	 * Constructeur
+	 * @param card le panel de la carte ciblée
+	 * @param infoLabel le label d'information complémentaire
+	 * @param terrain le terrain du joueur
+	 * @param terrainAdv le terrain de son adversaire
+	 */
 	public CardListenerTerrainAdv(CardPanel card, JLabel infoLabel, JPanel terrain, JPanel terrainAdv) {
 		super(card, infoLabel, terrain, terrainAdv);
 		isTargetable=false;
 	}
-
+	/**
+	 * On verifie si la cible est targetable. On definit ensuite la nature des degats :
+	 * 	-Si la source de dégat est un serviteur adverse, le sort enregistré est forcement null (voir CardListenerTerrain)
+	 * 	 On vérifie donc si on peut l'attaquer (makeDegat).
+	 * 		Si toute les conditions sont favorables, les serviteurs vont s'infliger des dégats mutuels
+	 * 		On supprime donc les flags de target et on réinitialise la carte attaquante à null
+	 * 		Si la cible qui attaquait était invisible, elle ne l'est plus et peut maintenant subir des dégats
+	 * 	
+	 * 	-Si la source de dégats est un sort,
+	 * 	 On vérifie que les condition sont favorable (même règle que pour les carte en jeu)
+	 * 	 On retire le montant de points de vie du sort a la cible.
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (isTargetable){
-			if(makeDommage(arg0, ((Serviteur)cardAttacking.getCard()).getNbDommage())){
-				MouseListener ml[]=cardAttacking.getMouseListeners();
-				((CardListenerTerrain)ml[0]).setCanAttack(false);
-				for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
-					ml = getTerrainAdv().getComponent(i).getMouseListeners();
-					((CardListenerTerrainAdv)ml[0]).setTargetable(false);
-					((CardListenerTerrainAdv)ml[0]).setCardAttacking(null);
+			int degats;
+			if (sort==null){
+				degats=((Serviteur)cardAttacking.getCard()).getNbDommage();
+				if (makeDommage(arg0)){
+					dommageClicked((CardPanel)arg0.getComponent(), degats);
+					degats=((Serviteur)((CardPanel)arg0.getComponent()).getCard()).getNbDommage();
+					dommageClicked(cardAttacking, degats);
+					MouseListener ml[]=cardAttacking.getMouseListeners();
+					((CardListenerTerrain)ml[0]).setCanAttack(false);
+					if (cardAttacking.getCard() instanceof Invisible){
+						if (((Invisible)cardAttacking.getCard()).isInvisible());
+						((Invisible)cardAttacking.getCard()).setInvisible(false);
+					}
+					for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
+						ml = getTerrainAdv().getComponent(i).getMouseListeners();
+						((CardListenerTerrainAdv)ml[0]).setTargetable(false);
+						((CardListenerTerrainAdv)ml[0]).setCardAttacking(null);
+					}
+				}
+			}
+			else{
+				degats=sort.getDegats();
+				if(makeDommage(arg0)){
+					dommageClicked(((CardPanel)arg0.getComponent()), degats);
+					MouseListener ml[] = labelSort.getMouseListeners();
+					((SortHerosListener)ml[0]).setEnable(false);
+					for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
+						ml = getTerrainAdv().getComponent(i).getMouseListeners();
+						((CardListenerTerrainAdv)ml[0]).setTargetable(false);
+						((CardListenerTerrainAdv)ml[0]).setSortHero(null, null);
+					}
 				}
 			}
 		}
@@ -58,7 +111,11 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * Méthode qui permet de définir si une carte de protection se trouve sur le terrain panel
+	 * @param panel le terrain à vérifier
+	 * @return false si aucune carte Protection n'est en jeu sur le terrain panel, true sinon
+	 */
 	protected boolean checkListProtection(JPanel panel)
 	{
 		boolean check = false;
@@ -79,8 +136,12 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	public void setCardAttacking(CardPanel cardAttacking) {
 		this.cardAttacking = cardAttacking;
 	}
-
-	private boolean makeDommage(MouseEvent e, final int dommage)
+	/**
+	 * Méthode qui permet de définir si la cible est une cible attaquable
+	 * @param e la source du clic
+	 * @return true si la cible est attaquable, false sinon
+	 */
+	private boolean makeDommage(MouseEvent e)
 	{
 		if ((((CardPanel) e.getComponent()).getCard()) instanceof Invisible){
 			if (((Invisible)((CardPanel) e.getComponent()).getCard()).isInvisible() == true)
@@ -89,15 +150,11 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 				return false;
 			}
 			else{
-				dommageClicked((CardPanel)e.getComponent(), dommage);
-				dommageClicked(cardAttacking, ((Serviteur)((CardPanel)e.getComponent()).getCard()).getNbDommage());
 				return true;
 			}
 		}
 		else{
 			if (checkListProtection(getTerrainAdv()) == false || (((CardPanel)e.getComponent()).getCard()) instanceof Protection== true){
-				dommageClicked((CardPanel)e.getComponent(), dommage);
-				dommageClicked(cardAttacking, ((Serviteur)((CardPanel)e.getComponent()).getCard()).getNbDommage());
 				return true;
 			}
 			else
@@ -107,7 +164,11 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			}
 		}
 	}
-
+	/**
+	 * Méthode qui permet de retire une nombre de point de dégat dommage à une carte
+	 * @param card Le Label contenant la carte
+	 * @param dommage Le nombre de point de dégats a retirr à la carte
+	 */
 	protected void dommageClicked(CardPanel card, final int dommage)
 	{
 		if (((Serviteur) (card.getCard())).getNbVie()-dommage >0){
@@ -126,5 +187,10 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 
 	public void setTargetable(boolean check){
 		this.isTargetable=check;
+	}
+	
+	public void setSortHero(SortHeroique sort, JLabel labelSort){
+		this.sort=sort;
+		this.labelSort=labelSort;
 	}
 }

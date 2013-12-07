@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import be.ephec.eveStone.model.*;
@@ -15,6 +16,7 @@ import be.ephec.eveStone.model.listener.BuffingListener;
 import be.ephec.eveStone.model.listener.CardListenerMain;
 import be.ephec.eveStone.model.listener.CardListenerTerrain;
 import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
+import be.ephec.eveStone.model.listener.SortHerosListener;
 import be.ephec.eveStone.model.net.client.MyClient;
 import be.ephec.eveStone.model.net.server.MyServer;
 import be.ephec.eveStone.vieuw.Area;
@@ -129,9 +131,10 @@ public class Controller {
 		});
 		nbTour=1;
 		piocheDepart();
+		initSortHero(area.getjLabelSortHeroique());
 
 		// Test
-		final CardPanel carteEnnemi = new CardPanel();
+		CardPanel carteEnnemi = new CardPanel();
 		carteEnnemi.setCard(new Serviteur("Hornet", 2, "img/FregateCard/hornet.png", "Drone d'attaque léger", 2, 2));
 		carteEnnemi.makeCard();
 		carteEnnemi.showInfo(false);
@@ -139,7 +142,7 @@ public class Controller {
 		carteEnnemi.addMouseListener(new CardListenerTerrainAdv(carteEnnemi, area.getLabelInfo(), area.getjPanelTerrain(), area.getjPanelTerrainAdversaire()));
 		area.getjPanelTerrainAdversaire().add(carteEnnemi);
 
-		final CardPanel carteEnnemi2 =  new CardPanel();
+		CardPanel carteEnnemi2 =  new CardPanel();
 		carteEnnemi2.setCard(new Protection("Wasp EC-900",2, "img/FregateCard/waspEC900.png", "Protection : L'ennemi ne peut attaquer aucun autre serviteur ou votre héros tant que cette carte est en jeu", 2, 2, true));
 		carteEnnemi2.makeCard();
 		carteEnnemi2.showInfo(false);
@@ -153,6 +156,15 @@ public class Controller {
 	 */
 	public void displayArea(){
 		area.display();
+	}
+	
+	/**
+	 * Initialise l'affichage du sort héroique
+	 */
+	private void initSortHero(JLabel sortHero){
+		sortHero.setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getSortHero().getImage())));
+		sortHero.setText(""+myHero.getSortHero().getRessource());
+		sortHero.addMouseListener(new SortHerosListener(area.getjPanelTerrain(), area.getjPanelTerrainAdversaire(), area.getLabelInfo(), myHero, area.getjLabelRessource()));
 	}
 
 	public Area getArea(){
@@ -247,7 +259,7 @@ public class Controller {
 	 * @param evt
 	 * @param label
 	 */
-	protected void jButtonJouerClicked(MouseEvent evt, final CardPanel label) {
+	protected void jButtonJouerClicked(MouseEvent evt, CardPanel label) {
 		if(myHero.getRessource() >= label.getCard().getRessource()){
 			if((label.getCard() instanceof Serviteur) && area.getjPanelTerrain().getComponentCount()>=NB_MAX_CARTE_TERRAIN){
 				JOptionPane.showMessageDialog(null, "Terrain Plein !");
@@ -297,14 +309,18 @@ public class Controller {
 		{
 			myHero.setRessource(NB_MAX_RESSOURCE);
 		}
-		/*for(int i=0; i< area.getjPanelTerrain().getComponentCount(); i++){
-			area.getjPanelTerrain().getComponent(i).addMouseListener(new CardListenerTerrain((CardPanel)area.getjPanelTerrain().getComponent(i), area.getLabelInfo(), area.getjPanelTerrain(), area.getjPanelTerrainAdversaire()));
-		}
-		*/
+		setTargetableFalse();
 		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		this.area.revalidate();
 		this.area.repaint();
 		pioche();
+	}
+	
+	private void setTargetableFalse(){
+		for(int i=0; i<area.getjPanelTerrainAdversaire().getComponentCount(); i++){
+			MouseListener ml[] = area.getjPanelTerrainAdversaire().getComponent(i).getMouseListeners();
+			((CardListenerTerrainAdv)ml[0]).setTargetable(false);
+		}
 	}
 
 	protected void jButtonAnnulerClicked(MouseEvent evt)
@@ -321,7 +337,7 @@ public class Controller {
 		myClient = new MyClient(this.connexion.getjTextFieldIP().getText());
 		this.connexion.dispose();
 	}
-	protected void 	jButtonMakeServerClicked(MouseEvent evt)
+	protected void jButtonMakeServerClicked(MouseEvent evt)
 	{
 		try {
 			server = new MyServer();

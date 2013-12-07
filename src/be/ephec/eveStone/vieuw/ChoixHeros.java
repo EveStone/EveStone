@@ -33,6 +33,10 @@ import be.ephec.eveStone.model.repositories.Deck;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class ChoixHeros extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3248722263899412425L;
 	private JPanel jPanel1;
 	private JButton jButtonSave;
 	private JLabel jLabelDescription;
@@ -47,6 +51,12 @@ public class ChoixHeros extends JFrame{
 
 	private final String IMG_FREGATE = "img/Fregate.png";
 	private final String IMG_INTERCEPTOR = "img/Interceptor.png";
+	
+	private final String IMG_SORT_FREGATE = "img/sortFregate.png";
+	private final String IMG_SORT_INTERCEPTOR = "img/sortInterceptor.png";
+	
+	private final String DESCR_SORT_FREGATE = "Invoque 1 serviteur sur le terrain. Ce serviteur possède 2 d'attaque et 2 points de vie.";
+	private final String DESCR_SORT_INTEREPTOR = "Tir un missile qui inflige 2 points de degats à un serviteur ou héros ennemi";
 
 	public ChoixHeros(final Controller controller, final JButton commencer){
 		super("Choix du Héros");
@@ -182,12 +192,12 @@ public class ChoixHeros extends JFrame{
 		//TODO add your code for jButtonQuitter.actionPerformed
 		if (choixHero == 0)
 		{
-			controller.setMyHero(new Hero("Interceptor",IMG_INTERCEPTOR, new Deck("interceptor"), new SortHeroique(2, 0)));
+			controller.setMyHero(new Hero("Interceptor",IMG_INTERCEPTOR, new Deck("interceptor"), new SortHeroique("Tir de Missile", 2, 2, 0, IMG_SORT_INTERCEPTOR, DESCR_SORT_INTEREPTOR)));
 			System.out.println(""+ controller.getMyHero().getNom());
 		}
 		else if (choixHero == 1)
 		{
-			controller.setMyHero(new Hero("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique(0, 2)));
+			controller.setMyHero(new Hero("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique("Renfort !", 2, 0, 2, IMG_SORT_FREGATE, DESCR_SORT_FREGATE)));
 			System.out.println(""+ controller.getMyHero().getNom());
 		}
 		if (this.choixHero > -1)

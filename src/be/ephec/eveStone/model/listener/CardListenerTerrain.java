@@ -6,9 +6,18 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.vieuw.container.CardPanel;
-
+/**
+ * Listener sur le terrain de jeu
+ * 
+ * De part sa définition, les listener sur les cartes du terrain sont forcement des serviteurs ou une instances
+ * de ceux-ci. Il ne leur est donc possible que d'attaquer l'adversaire.
+ * 
+ * (ATTENTION : Fonctionne en symbiose avec le CardListenerTerrainAdv)
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
+ *
+ */
 public class CardListenerTerrain extends CardListenerMain{
 
 	private CardPanel card;
@@ -19,20 +28,24 @@ public class CardListenerTerrain extends CardListenerMain{
 
 	public CardListenerTerrain(CardPanel card, JLabel infoLabel, JPanel terrain, JPanel terrainAdv){
 		super(card, infoLabel);
-		this.card = card;
-		this.terrain = terrain;
+		this.card=card;
+		this.terrain=terrain;
 		this.terrainAdv=terrainAdv;
-		this.infoLabel=infoLabel;
 		canAttack=true;
 	}
-
+	/**
+	 * Lorsque l'on clique sur un serviteur du terrain, on active la fonction targetable
+	 * sur les carte du terrain adverse. On enregistre par ailleurs la carte attaquante et on
+	 * supprime le sort qui pourrait etre enregistré sur les carte (dans le cas ou on aurait cliqué sur
+	 * le sort avant de cliquer ensuite sur un serviteur)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("Nom : "+this.card.getName()+" vie : "+((Serviteur)card.getCard()).getNbVie());
 		if (canAttack){
 			for(int i=0; i<terrainAdv.getComponentCount(); i++){
 				MouseListener ml[] = terrainAdv.getComponent(i).getMouseListeners();
 				((CardListenerTerrainAdv)ml[0]).setTargetable(true);
+				((CardListenerTerrainAdv)ml[0]).setSortHero(null, null);
 				((CardListenerTerrainAdv)ml[0]).setCardAttacking(card);
 			}
 		}

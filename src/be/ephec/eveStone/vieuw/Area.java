@@ -87,27 +87,27 @@ public class Area extends JFrame {
 				jPanelMainLayout.setAlignOnBaseline(true);
 				jPanelMain.setLayout(jPanelMainLayout);
 				background.add(jPanelMain);
-				jPanelMain.setBounds(263, 652, 708, 195);
+				jPanelMain.setBounds(263, 717, 708, 189);
 				jPanelMain.setOpaque(false);
 			}
 			{
 				jLabelRessource = new JLabel();
 				background.add(jLabelRessource);
 				jLabelRessource.setText("<html><font color=white>1</font></html>");
-				jLabelRessource.setBounds(470, 602, 58, 28);
+				jLabelRessource.setBounds(470, 616, 58, 28);
 				jLabelRessource.setFont(new java.awt.Font("Purisa",1,20));
 			}
 			{
 				jLabelSortHeroique = new JLabel();
 				background.add(jLabelSortHeroique);
 				jLabelSortHeroique.setText(" ");
-				jLabelSortHeroique.setBounds(686, 575, 80, 78);
+				jLabelSortHeroique.setBounds(686, 592, 80, 78);
 			}
 			{
 				jLabelRessourceAdversaire = new JLabel();
 				background.add(jLabelRessourceAdversaire);
 				jLabelRessourceAdversaire.setText("<html><font color=white>1</font></html>");
-				jLabelRessourceAdversaire.setBounds(463, 192, 35, 43);
+				jLabelRessourceAdversaire.setBounds(465, 203, 35, 43);
 				jLabelRessourceAdversaire.setFont(new java.awt.Font("Purisa",1,20));
 			}
 			{
@@ -131,34 +131,34 @@ public class Area extends JFrame {
 			{
 				jPanelTerrainAdversaire = new JPanel();
 				background.add(jPanelTerrainAdversaire);
-				jPanelTerrainAdversaire.setBounds(206, 268, 799, 179);
+				jPanelTerrainAdversaire.setBounds(206, 244, 799, 182);
 				jPanelTerrainAdversaire.setOpaque(false);
 			}
 			{
 				jPanelTerrain = new JPanel();
 				background.add(jPanelTerrain);
-				jPanelTerrain.setBounds(156, 340, 901, 201);
+				jPanelTerrain.setBounds(156, 435, 901, 164);
 				jPanelTerrain.setOpaque(false);
 			}
 			{
 				jLabelHeros = new JLabel();
 				background.add(jLabelHeros);
 				jLabelHeros.setText(" ");
-				jLabelHeros.setBounds(540, 546, 134, 143);
+				jLabelHeros.setBounds(540, 562, 134, 143);
 				jLabelHeros.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/Interceptor.png")));
 			}
 			{
 				jLabelInfosCarte = new JLabel();
 				background.add(jLabelInfosCarte);
 				jLabelInfosCarte.setText(" ");
-				jLabelInfosCarte.setBounds(7, 562, 244, 256);
+				jLabelInfosCarte.setBounds(2, 285, 244, 256);
 				jLabelInfosCarte.setBorder(BorderFactory.createTitledBorder(""));
 			}
 			{
 				jLabelCoque = new JLabel();
 				background.add(jLabelCoque);
 				jLabelCoque.setText("<html><font color=white>20</font></html>");
-				jLabelCoque.setBounds(519, 546, 25, 30);
+				jLabelCoque.setBounds(519, 546, 29, 30);
 				jLabelCoque.setBackground(Color.RED);
 				jLabelCoque.setFont(new java.awt.Font("Purisa",1,20));
 				jLabelCoque.setOpaque(true);
@@ -167,7 +167,7 @@ public class Area extends JFrame {
 				jLabelStructure = new JLabel();
 				background.add(jLabelStructure);
 				jLabelStructure.setText("<html><font color=white>10</font></html>");
-				jLabelStructure.setBounds(654, 545, 26, 32);
+				jLabelStructure.setBounds(651, 545, 29, 32);
 				jLabelStructure.setBackground(Color.BLACK);
 				jLabelStructure.setFont(new java.awt.Font("Purisa",1,20));
 				jLabelStructure.setOpaque(true);
@@ -176,7 +176,7 @@ public class Area extends JFrame {
 				jLabelCoqueAdverse = new JLabel();
 				background.add(jLabelCoqueAdverse);
 				jLabelCoqueAdverse.setText("<html><font color=white>20</font></html>");
-				jLabelCoqueAdverse.setBounds(519, 247, 21, 28);
+				jLabelCoqueAdverse.setBounds(519, 247, 28, 28);
 				jLabelCoqueAdverse.setBackground(Color.RED);
 				jLabelCoqueAdverse.setFont(new java.awt.Font("Purisa",1,20));
 				jLabelCoqueAdverse.setOpaque(true);
@@ -185,7 +185,7 @@ public class Area extends JFrame {
 				jLabelStructureAdverse = new JLabel();
 				background.add(jLabelStructureAdverse);
 				jLabelStructureAdverse.setText("<html><font color=white>10</font></html>");
-				jLabelStructureAdverse.setBounds(652, 248, 28, 25);
+				jLabelStructureAdverse.setBounds(650, 248, 30, 25);
 				jLabelStructureAdverse.setBackground(Color.BLACK);
 				jLabelStructureAdverse.setFont(new java.awt.Font("Purisa",1,20));
 				jLabelStructureAdverse.setOpaque(true);

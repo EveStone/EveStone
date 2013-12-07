@@ -10,7 +10,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import be.ephec.eveStone.vieuw.container.CardPanel;
-
+/**
+ * Listener pour les carte de la main.
+ * 
+ * Elle permet de mettre en jeu différentes carte. La méthde associé au bonton "Jouer"
+ * de la carte se trouve dans le controller (peut etre modifié par la suite)
+ * 
+ * @author Dasseler Nicolas @ Vanbutsele Andy
+ *
+ */
 public class CardListenerMain implements MouseListener{
 
 	private CardPanel card;
@@ -25,7 +33,6 @@ public class CardListenerMain implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		cardClicked(arg0, card);
-		System.out.println("pouet");
 	}
 
 	@Override
@@ -49,15 +56,27 @@ public class CardListenerMain implements MouseListener{
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * Permet d'afficher ou non le bouton jouer de la carte lorsque l'on clique dessus
+	 * @param ev
+	 * @param label le Label contenant la carte
+	 */
 	protected void cardClicked(MouseEvent ev, final CardPanel label) {
 		if(label.getButton().isVisible())
 			label.getButton().setVisible(false);
 		else
 			label.getButton().setVisible(true);
-		System.out.println(label.getName());
 	}
-
+	/**
+	 * Méthode d'animation et d'affichage d'information
+	 * 
+	 * Lors du survole d'une carte, la carte va zoomer et afficher ses informations
+	 * distinctes (ressource necessaire a la mise en jeu, points d'attaque, pv)
+	 * Elle va aussi mettre à jour un cadran sur le coté qui permet d'avoir une aide
+	 * approffondie sur la carte (nom, type, description)
+	 * 
+	 * @param card le Panel de la carte active
+	 */
 	protected void cardMouseOn(final CardPanel card) {
 		final Timer animation = new Timer();
 		infoLabel.setText("<html><font color=white>Carte : "+card.getCard().getNom()+"<br/><br/>"
@@ -80,7 +99,13 @@ public class CardListenerMain implements MouseListener{
 		},5);
 		card.showInfo(true);
 	}
-
+	/**
+	 * Permet de dézoomer une carte et de supprimer l'affichage de toute les informations
+	 * lui étant liées.
+	 * 
+	 * @param evt
+	 * @param card
+	 */
 	protected void cardMouseOff(MouseEvent evt, final CardPanel card) {
 		if (! (card.contains(evt.getPoint()))){
 			infoLabel.setText("<html><font color=white>Carte : <br/><br/>"
@@ -104,18 +129,7 @@ public class CardListenerMain implements MouseListener{
 					}
 					animation.cancel();
 				}
-			},5);
+			},5);		
 		}
 	}
-	/**
-	 * Cette méthode permet de supprimer le dernier mouseListener d'un Jpanel 
-	 * Utile pour supprimer un mouseListener d'un carte présent dans la main ou sur un terrain.
-	 * @param p: JPanel non null
-	 */
-	protected void delLastMotionListener(CardPanel card)
-	{
-		MouseListener ml[] = card.getMouseListeners();
-		card.removeMouseListener(ml[ml.length-1]);
-	}
-
 }

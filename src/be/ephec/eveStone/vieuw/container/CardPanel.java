@@ -34,31 +34,28 @@ public class CardPanel extends JLabel {
 	}
 
 	public void makeCard(){
-		if (this.getIcon() == null)
-			this.setIcon(new ImageIcon((new ImageIcon(getClass().getClassLoader().getResource(card.getImage()))).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
+
+		this.setIcon(new ImageIcon((new ImageIcon(getClass().getClassLoader().getResource(card.getImage()))).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
 
 		jouer = new JButton("Jouer");
 		jouer.setBounds(15, 60, 75, 20);
 		this.add(jouer);
 		jouer.setVisible(false);
 
-		ressource = new JLabel();
-		ressource.setText("<html><font color=\"#00FFFF\">"+card.getRessource()+"</font></html>");
+		ressource = new JLabel("<html><font color=\"#00FFFF\">"+card.getRessource()+"</font></html>");
 		ressource.setBounds(5, 5, 30, 30);
 
 		//85 x 132
 		if (card instanceof Serviteur)
 		{
-			attaque = new JLabel();
-			attaque.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbDommage()+"</font></html>");
+			attaque = new JLabel("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbDommage()+"</font></html>");
 			attaque.setBounds(5, 135, 30, 30);
 			this.add(attaque);
 			attaque.setFont(new Font("Arial", 6, FONT_SIZE));
 		}
 		else if (card instanceof Dommage)
 		{
-			attaque = new JLabel();
-			attaque.setText("<html><font color=\"#FBF2B7\">"+((Dommage) card).getDegats()+"</font></html>");
+			attaque = new JLabel("<html><font color=\"#FBF2B7\">"+((Dommage) card).getDegats()+"</font></html>");
 			attaque.setBounds(5, 135, 30, 30);
 			this.add(attaque);
 			attaque.setFont(new Font("Arial", 6, FONT_SIZE));
@@ -66,8 +63,7 @@ public class CardPanel extends JLabel {
 
 		if (card instanceof Serviteur)
 		{
-			vie = new JLabel();
-			vie.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbVie()+"</font></html>");
+			vie = new JLabel("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbVie()+"</font></html>");
 			vie.setBounds(85, 135, 30, 30);
 			this.add(vie);
 			vie.setFont(new Font("Arial", 6, FONT_SIZE));
@@ -110,7 +106,7 @@ public class CardPanel extends JLabel {
 
 	@Override
 	public Component.BaselineResizeBehavior getBaselineResizeBehavior() {
-	    return Component.BaselineResizeBehavior.CONSTANT_DESCENT;
+	    return Component.BaselineResizeBehavior.CONSTANT_ASCENT;
 	}
 
 	@Override
@@ -122,4 +118,5 @@ public class CardPanel extends JLabel {
 		super.add(comp);
 		return comp;
 	}
+	
 }

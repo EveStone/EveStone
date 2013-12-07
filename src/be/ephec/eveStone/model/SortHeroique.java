@@ -2,13 +2,25 @@ package be.ephec.eveStone.model;
 
 public class SortHeroique {
 	
+	private String nom;
 	private int degats;
 	private int bouclier;
+	private String image;
+	private int ressource;
+	private String description;
 	
-	public SortHeroique(int degats, int bouclier)
+	public SortHeroique(String nom, int ressource, int degats, int bouclier, String image, String description)
 	{
+		this.nom=nom;
+		this.ressource=ressource;
 		this.bouclier = bouclier;
 		this.degats = degats;
+		this.image = image;
+		this.description=description;
+	}
+	
+	public String getNom(){
+		return nom;
 	}
 
 	public int getDegats() {
@@ -27,5 +39,15 @@ public class SortHeroique {
 		this.bouclier = bouclier;
 	}
 	
-
+	public String getImage(){
+		return image;
+	}
+	
+	public int getRessource(){
+		return ressource;
+	}
+	
+	public String getDescription(){
+		return description;
+	}
 }
