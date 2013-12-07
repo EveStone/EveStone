@@ -15,7 +15,7 @@ import be.ephec.eveStone.model.listener.BuffingListener;
 import be.ephec.eveStone.model.listener.CardListenerMain;
 import be.ephec.eveStone.model.listener.CardListenerTerrain;
 import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
-import be.ephec.eveStone.model.net.client.Client;
+import be.ephec.eveStone.model.net.client.MyClient;
 import be.ephec.eveStone.model.net.server.MyServer;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.ConnectionFrame;
@@ -45,7 +45,7 @@ public class Controller {
 	private final int NUM_PORT = 2013;
 
 	//client NET
-	private Client client;
+	private MyClient myClient;
 	private MyServer server;
 
 	private int nbTour;
@@ -318,7 +318,7 @@ public class Controller {
 	}
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
-		client = new Client(this.connexion.getjTextFieldIP().getText());
+		myClient = new MyClient(this.connexion.getjTextFieldIP().getText());
 		this.connexion.dispose();
 	}
 	protected void 	jButtonMakeServerClicked(MouseEvent evt)

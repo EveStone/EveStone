@@ -5,12 +5,12 @@ import java.net.*;
 
 import javax.swing.JOptionPane;
 
-public class Client {
+public class MyClient {
 
 	public static Socket socket = null;
 	public static Thread t1;
 	
-	public Client(String ip) {
+	public MyClient(String ip) {
 	
 		
 	try {
