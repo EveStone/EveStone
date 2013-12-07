@@ -29,6 +29,7 @@ import be.ephec.eveStone.controller.Controller;
 */
 public class ConnectionFrame extends JFrame {
 	private JTextField jTextFieldIP;
+	private JButton jButtonMakeServer;
 	private JLabel jLabelIPEx;
 	private JLabel jLabel2;
 	private JButton jButtonAnnuler;
@@ -102,6 +103,12 @@ public class ConnectionFrame extends JFrame {
 				jLabelIPEx.setText("<html><font color=white>192.168.x.x</html></font>");
 				jLabelIPEx.setLayout(null);
 			}
+			{
+				jButtonMakeServer = new JButton();
+				jPanelMenu.add(jButtonMakeServer, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				jButtonMakeServer.setText("<html><font color=white>Démarrer le serveur</font></html>");
+				jButtonMakeServer.setBackground(new java.awt.Color(0,0,0));
+			}
 			jPanelMenuLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
 			jPanelMenuLayout.rowHeights = new int[] {7, 7, 7, 7, 7};
 			jPanelMenuLayout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
@@ -124,6 +131,9 @@ public class ConnectionFrame extends JFrame {
 
 	public JTextField getjTextFieldIP() {
 		return jTextFieldIP;
+	}
+	public JButton getjButtonMakeServer() {
+		return jButtonMakeServer;
 	}
 	
 }

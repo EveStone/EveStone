@@ -15,7 +15,8 @@ import be.ephec.eveStone.model.listener.BuffingListener;
 import be.ephec.eveStone.model.listener.CardListenerMain;
 import be.ephec.eveStone.model.listener.CardListenerTerrain;
 import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
-import be.ephec.eveStone.model.net.MyClient;
+import be.ephec.eveStone.model.net.client.Client;
+import be.ephec.eveStone.model.net.server.MyServer;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.ConnectionFrame;
 import be.ephec.eveStone.vieuw.RulesFrame;
@@ -44,7 +45,8 @@ public class Controller {
 	private final int NUM_PORT = 2013;
 
 	//client NET
-	private MyClient client;
+	private Client client;
+	private MyServer server;
 
 	private int nbTour;
 
@@ -81,6 +83,11 @@ public class Controller {
 		this.connexion.getjButtonCommencer().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
 				jButtonCommencerClicked(evt);
+			}
+		});
+		this.connexion.getjButtonMakeServer().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				jButtonMakeServerClicked(evt);
 			}
 		});
 	}
@@ -311,27 +318,18 @@ public class Controller {
 	}
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
-		try {
-			client = new MyClient(this.connexion.getjTextFieldIP().getText(), NUM_PORT);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String s = "";
-		try {
-			s = (String)client.getOis().readObject();
-			client.setNum((int)client.getOis().readObject());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		client = new Client(this.connexion.getjTextFieldIP().getText());
 		this.connexion.dispose();
-		JOptionPane.showMessageDialog(null, " Bienvenue sur EveStone!!!! vous êtes le  " + client.getNum() + " client \n" + s);
+	}
+	protected void 	jButtonMakeServerClicked(MouseEvent evt)
+	{
+		try {
+			server = new MyServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JOptionPane.showMessageDialog(null, "Serveur lancé");
+		this.connexion.dispose();
 	}
 }
