@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 /**
  * Listener sur le terrain de jeu
@@ -24,13 +25,15 @@ public class CardListenerTerrain extends CardListenerMain{
 	private JPanel terrain;
 	private JPanel terrainAdv;
 	private JLabel infoLabel;
+	private JLabel herosAdvLabel;
 	private boolean canAttack;
 
-	public CardListenerTerrain(CardPanel card, JLabel infoLabel, JPanel terrain, JPanel terrainAdv){
-		super(card, infoLabel);
+	public CardListenerTerrain(CardPanel card, Area area){
+		super(card, area.getLabelInfo());
 		this.card=card;
-		this.terrain=terrain;
-		this.terrainAdv=terrainAdv;
+		this.terrain=area.getjPanelTerrain();
+		this.terrainAdv=area.getjPanelTerrainAdversaire();
+		this.herosAdvLabel=area.getjLabelHerosAdversaire();
 		canAttack=true;
 	}
 	/**
@@ -42,12 +45,17 @@ public class CardListenerTerrain extends CardListenerMain{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (canAttack){
+			MouseListener ml[];
 			for(int i=0; i<terrainAdv.getComponentCount(); i++){
-				MouseListener ml[] = terrainAdv.getComponent(i).getMouseListeners();
+				ml = terrainAdv.getComponent(i).getMouseListeners();
 				((CardListenerTerrainAdv)ml[0]).setTargetable(true);
 				((CardListenerTerrainAdv)ml[0]).setSortHero(null, null);
 				((CardListenerTerrainAdv)ml[0]).setCardAttacking(card);
 			}
+			ml = herosAdvLabel.getMouseListeners();
+			((HerosListener)ml[0]).setCardAttacking(getCard());
+			((HerosListener)ml[0]).setSortAttacking(null);
+			((HerosListener)ml[0]).setTargetable(true);
 		}
 	}
 

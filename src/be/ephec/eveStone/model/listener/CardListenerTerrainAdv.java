@@ -7,10 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import be.ephec.eveStone.model.Dommage;
 import be.ephec.eveStone.model.Invisible;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
+import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 /**
  * Listener sur les cartes du terrain adverse.
@@ -27,7 +29,8 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	private CardPanel cardAttacking;
 	private SortHeroique sort;
 	private JLabel labelSort;
-	
+	private JLabel heros;
+
 	/**
 	 * Constructeur
 	 * @param card le panel de la carte ciblée
@@ -35,8 +38,9 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	 * @param terrain le terrain du joueur
 	 * @param terrainAdv le terrain de son adversaire
 	 */
-	public CardListenerTerrainAdv(CardPanel card, JLabel infoLabel, JPanel terrain, JPanel terrainAdv) {
-		super(card, infoLabel, terrain, terrainAdv);
+	public CardListenerTerrainAdv(CardPanel card, Area area) {
+		super(card, area);
+		this.heros=area.getjLabelHerosAdversaire();
 		isTargetable=false;
 	}
 	/**
@@ -56,22 +60,27 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		if (isTargetable){
 			int degats;
 			if (sort==null){
-				degats=((Serviteur)cardAttacking.getCard()).getNbDommage();
+				if (cardAttacking.getCard() instanceof Serviteur)
+					degats=((Serviteur)cardAttacking.getCard()).getNbDommage();
+				else
+					degats=((Dommage)cardAttacking.getCard()).getDegats();
 				if (makeDommage(arg0)){
 					dommageClicked((CardPanel)arg0.getComponent(), degats);
 					degats=((Serviteur)((CardPanel)arg0.getComponent()).getCard()).getNbDommage();
-					dommageClicked(cardAttacking, degats);
-					MouseListener ml[]=cardAttacking.getMouseListeners();
-					((CardListenerTerrain)ml[0]).setCanAttack(false);
-					if (cardAttacking.getCard() instanceof Invisible){
-						if (((Invisible)cardAttacking.getCard()).isInvisible());
-						((Invisible)cardAttacking.getCard()).setInvisible(false);
-					}
-					for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
-						ml = getTerrainAdv().getComponent(i).getMouseListeners();
-						((CardListenerTerrainAdv)ml[0]).setTargetable(false);
-						((CardListenerTerrainAdv)ml[0]).setCardAttacking(null);
-					}
+					if(cardAttacking.getCard() instanceof Serviteur){
+						if (cardAttacking.getCard() instanceof Invisible){
+							if (((Invisible)cardAttacking.getCard()).isInvisible());
+							((Invisible)cardAttacking.getCard()).setInvisible(false);
+						}
+						dommageClicked(cardAttacking, degats);
+						MouseListener ml[]=cardAttacking.getMouseListeners();
+						((CardListenerTerrain)ml[0]).setCanAttack(false);
+						for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
+							ml = getTerrainAdv().getComponent(i).getMouseListeners();
+							((CardListenerTerrainAdv)ml[0]).setTargetable(false);
+							((CardListenerTerrainAdv)ml[0]).setCardAttacking(null);
+						}
+					}	
 				}
 			}
 			else{
@@ -87,6 +96,10 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 					}
 				}
 			}
+			MouseListener ml[] = heros.getMouseListeners();
+			((HerosListener)ml[0]).setTargetable(false);
+			((HerosListener)ml[0]).setCardAttacking(null);
+			((HerosListener)ml[0]).setSortAttacking(null);
 		}
 	}
 
@@ -188,7 +201,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	public void setTargetable(boolean check){
 		this.isTargetable=check;
 	}
-	
+
 	public void setSortHero(SortHeroique sort, JLabel labelSort){
 		this.sort=sort;
 		this.labelSort=labelSort;

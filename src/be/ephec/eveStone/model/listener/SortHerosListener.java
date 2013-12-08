@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import be.ephec.eveStone.model.Hero;
 import be.ephec.eveStone.model.Serviteur;
+import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 /**
  * Classe qui s'occupe de gérer les sort héroiques du  héros
@@ -33,15 +34,17 @@ public class SortHerosListener implements MouseListener{
 	private Hero heros;
 	private boolean offensive;
 	private JLabel ressource;
+	private JLabel labelHeros;
 
-	public SortHerosListener(JPanel terrain, JPanel terrainAdv, JLabel infoLabel, Hero heros, JLabel ressource){
+	public SortHerosListener(Hero heros, Area area){
 		super();
 		this.enable=true;
-		this.terrain=terrain;
-		this.terrainAdv=terrainAdv;
-		this.infoLabel=infoLabel;
+		this.terrain=area.getjPanelTerrain();
+		this.terrainAdv=area.getjPanelTerrainAdversaire();
+		this.infoLabel=area.getLabelInfo();
 		this.heros=heros;
-		this.ressource=ressource;
+		this.ressource=area.getjLabelRessource();
+		this.labelHeros=area.getjLabelHerosAdversaire();
 		offensive=isOffensive();
 	}
 	/**
@@ -61,26 +64,29 @@ public class SortHerosListener implements MouseListener{
 		if (enable){
 			if (heros.getRessource() >= heros.getSortHero().getRessource()){
 				if (offensive){
+					MouseListener ml[];
 					for(int i=0; i<terrainAdv.getComponentCount(); i++){
-						MouseListener ml[] = terrainAdv.getComponent(i).getMouseListeners();
+						ml = terrainAdv.getComponent(i).getMouseListeners();
 						((CardListenerTerrainAdv)ml[0]).setTargetable(true);
 						((CardListenerTerrainAdv)ml[0]).setSortHero(heros.getSortHero(), (JLabel)arg0.getComponent());
 						((CardListenerTerrainAdv)ml[0]).setCardAttacking(null);
 					}
+					ml = labelHeros.getMouseListeners();
+					((HerosListener)ml[0]).setSortAttacking(heros.getSortHero());
+					((HerosListener)ml[0]).setTargetable(true);
 				}
 				else{
 					CardPanel minion = new CardPanel();
 					minion.setCard(new Serviteur("Hornet", 2, "img/FregateCard/hornet.png", "Drone d'attaque léger", 2, 2));
 					minion.makeCard();
 					minion.showInfo(false);
-					minion.addMouseListener(new CardListenerTerrain(minion, infoLabel, terrain, terrainAdv));
+					minion.addMouseListener(new CardListenerTerrain(minion, (Area)infoLabel.getParent()));
 					System.out.println(minion.getCard().getNom());
-					MouseListener ml[] = arg0.getComponent().getMouseListeners();
-					((SortHerosListener)ml[0]).setEnable(false);
 					terrain.add(minion);
 					terrain.revalidate();
 					terrain.repaint();
 				}
+				this.setEnable(false);
 				heros.setRessource(heros.getRessource()-heros.getSortHero().getRessource());
 				ressource.setText("<html><font color=white>"+heros.getRessource()+"</font></html>");
 				ressource.revalidate();

@@ -135,7 +135,8 @@ public class Controller {
 		piocheDepart();
 		initSortHero(area.getjLabelSortHeroique());
 		adverseHero = new Hero("Fregate", "img/Fregate.png", null, null);
-		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero));
+		area.getjLabelHerosAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getImage())));
+		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero, area));
 
 		// Test
 		CardPanel carteEnnemi = new CardPanel();
@@ -143,16 +144,17 @@ public class Controller {
 		carteEnnemi.makeCard();
 		carteEnnemi.showInfo(false);
 		carteEnnemi.setName(carteEnnemi.getName());
-		carteEnnemi.addMouseListener(new CardListenerTerrainAdv(carteEnnemi, area.getLabelInfo(), area.getjPanelTerrain(), area.getjPanelTerrainAdversaire()));
+		carteEnnemi.addMouseListener(new CardListenerTerrainAdv(carteEnnemi, area));
 		area.getjPanelTerrainAdversaire().add(carteEnnemi);
-
+		/*
 		CardPanel carteEnnemi2 =  new CardPanel();
 		carteEnnemi2.setCard(new Protection("Wasp EC-900",2, "img/FregateCard/waspEC900.png", "Protection : L'ennemi ne peut attaquer aucun autre serviteur ou votre héros tant que cette carte est en jeu", 2, 2, true));
 		carteEnnemi2.makeCard();
 		carteEnnemi2.showInfo(false);
 		carteEnnemi2.setName("Wasp EC-900");
-		carteEnnemi2.addMouseListener(new CardListenerTerrainAdv(carteEnnemi2, area.getLabelInfo(), area.getjPanelTerrain(), area.getjPanelTerrainAdversaire()));
+		carteEnnemi2.addMouseListener(new CardListenerTerrainAdv(carteEnnemi2, area));
 		area.getjPanelTerrainAdversaire().add(carteEnnemi2);
+		 */
 	}
 
 	/**
@@ -161,13 +163,13 @@ public class Controller {
 	public void displayArea(){
 		area.display();
 	}
-	
+
 	/**
 	 * Initialise l'affichage du sort héroique
 	 */
 	private void initSortHero(JLabel sortHero){
 		sortHero.setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getSortHero().getImage())));
-		sortHero.addMouseListener(new SortHerosListener(area.getjPanelTerrain(), area.getjPanelTerrainAdversaire(), area.getLabelInfo(), myHero, area.getjLabelRessource()));
+		sortHero.addMouseListener(new SortHerosListener(myHero, area));
 	}
 
 	public Area getArea(){
@@ -281,14 +283,29 @@ public class Controller {
 					area.getjPanelTerrain().add(label);
 					MouseListener ml[] = label.getMouseListeners();
 					label.removeMouseListener(ml[ml.length-1]);
-					label.addMouseListener(new CardListenerTerrain(label, area.getLabelInfo(), area.getjPanelTerrain(), area.getjPanelTerrainAdversaire()));
+					label.addMouseListener(new CardListenerTerrain(label, area));
 				}
 				else if (label.getCard() instanceof Buff)
 				{
-					JOptionPane.showMessageDialog(null, "Choisissez la carte à buffer");
-					for(int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
-						area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, area.getjPanelTerrain()));
+					if (area.getComponentCount() >= 0){
+						JOptionPane.showMessageDialog(null, "Choisissez la carte à buffer");
+						for(int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
+							area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, area.getjPanelTerrain()));
+						}
 					}
+				}
+				else if (label.getCard() instanceof Dommage){
+					MouseListener ml[];
+					for(int i=0; i< area.getjPanelTerrainAdversaire().getComponentCount(); i++){
+						ml = area.getjPanelTerrainAdversaire().getComponent(i).getMouseListeners();
+						((CardListenerTerrainAdv)ml[0]).setCardAttacking(label);
+						((CardListenerTerrainAdv)ml[0]).setSortHero(null, null);
+						((CardListenerTerrainAdv)ml[0]).setTargetable(true);
+					}
+					ml = area.getjLabelHerosAdversaire().getMouseListeners();
+					((HerosListener)ml[0]).setCardAttacking(label);
+					((HerosListener)ml[0]).setSortAttacking(null);
+					((HerosListener)ml[0]).setTargetable(true);
 				}
 				myHero.setRessource(myHero.getRessource()-label.getCard().getRessource());
 				this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
@@ -315,16 +332,31 @@ public class Controller {
 		}
 		setTargetableFalse();
 		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
+		setCanAttack();
+		MouseListener ml[] = area.getjLabelSortHeroique().getMouseListeners();
+		((SortHerosListener)ml[0]).setEnable(true);
 		this.area.revalidate();
 		this.area.repaint();
 		pioche();
 	}
-	
+
+	private void setCanAttack(){
+		MouseListener ml[];
+		for (int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
+			System.out.println("terrain : "+i);
+			ml = area.getjPanelTerrain().getComponent(i).getMouseListeners();
+			((CardListenerTerrain)ml[0]).setCanAttack(true);
+		}
+	}
+
 	private void setTargetableFalse(){
+		MouseListener ml[];
 		for(int i=0; i<area.getjPanelTerrainAdversaire().getComponentCount(); i++){
-			MouseListener ml[] = area.getjPanelTerrainAdversaire().getComponent(i).getMouseListeners();
+			ml = area.getjPanelTerrainAdversaire().getComponent(i).getMouseListeners();
 			((CardListenerTerrainAdv)ml[0]).setTargetable(false);
 		}
+		ml = area.getjLabelHerosAdversaire().getMouseListeners();
+		((HerosListener)ml[0]).setTargetable(false);
 	}
 
 	protected void jButtonAnnulerClicked(MouseEvent evt)
