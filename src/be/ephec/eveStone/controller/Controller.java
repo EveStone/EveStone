@@ -275,9 +275,11 @@ public class Controller {
 				{
 					label.remove(label.getButton());
 					if (((Serviteur)label.getCard()).isBuffing()){
-						JOptionPane.showMessageDialog(null, "Choisissez la carte à buffer");
-						for(int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
-							area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, area.getjPanelTerrain()));
+						if (area.getjPanelTerrain().getComponentCount() > 0){
+							JOptionPane.showMessageDialog(null, "Choisissez la carte à buffer");
+							for(int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
+								area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, area.getjPanelTerrain()));
+							}
 						}
 					}
 					area.getjPanelTerrain().add(label);
@@ -287,7 +289,7 @@ public class Controller {
 				}
 				else if (label.getCard() instanceof Buff)
 				{
-					if (area.getComponentCount() >= 0){
+					if (area.getjPanelTerrain().getComponentCount() > 0){
 						JOptionPane.showMessageDialog(null, "Choisissez la carte à buffer");
 						for(int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
 							area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, area.getjPanelTerrain()));
