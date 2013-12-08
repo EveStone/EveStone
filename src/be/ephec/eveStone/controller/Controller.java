@@ -16,6 +16,7 @@ import be.ephec.eveStone.model.listener.BuffingListener;
 import be.ephec.eveStone.model.listener.CardListenerMain;
 import be.ephec.eveStone.model.listener.CardListenerTerrain;
 import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
+import be.ephec.eveStone.model.listener.HerosListener;
 import be.ephec.eveStone.model.listener.SortHerosListener;
 import be.ephec.eveStone.model.net.client.MyClient;
 import be.ephec.eveStone.model.net.server.MyServer;
@@ -65,6 +66,7 @@ public class Controller {
 	 */
 	public void makeStartFrame(){
 		this.start = new StartFrame(this);
+		this.start.getjButtonChoixHeros().setEnabled(false);
 	}
 	/**
 	 * Affiche la startFrame
@@ -132,6 +134,8 @@ public class Controller {
 		nbTour=1;
 		piocheDepart();
 		initSortHero(area.getjLabelSortHeroique());
+		adverseHero = new Hero("Fregate", "img/Fregate.png", null, null);
+		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero));
 
 		// Test
 		CardPanel carteEnnemi = new CardPanel();
@@ -336,6 +340,8 @@ public class Controller {
 	{
 		myClient = new MyClient(this.connexion.getjTextFieldIP().getText());
 		this.connexion.dispose();
+		this.start.getjButtonChoixHeros().setEnabled(true);
+		this.start.getjButtonConfig().setEnabled(false);
 	}
 	protected void jButtonMakeServerClicked(MouseEvent evt)
 	{
@@ -347,5 +353,7 @@ public class Controller {
 		}
 		JOptionPane.showMessageDialog(null, "Serveur lancé");
 		this.connexion.dispose();
+		this.start.getjButtonChoixHeros().setEnabled(true);
+		this.start.getjButtonConfig().setEnabled(false);
 	}
 }
