@@ -65,6 +65,7 @@ public class Controller {
 	 */
 	public void makeStartFrame(){
 		this.start = new StartFrame(this);
+		this.start.getjButtonChoixHeros().setEnabled(false);
 	}
 	/**
 	 * Affiche la startFrame
@@ -336,6 +337,8 @@ public class Controller {
 	{
 		myClient = new MyClient(this.connexion.getjTextFieldIP().getText());
 		this.connexion.dispose();
+		this.start.getjButtonChoixHeros().setEnabled(true);
+		this.start.getjButtonConfig().setEnabled(false);
 	}
 	protected void jButtonMakeServerClicked(MouseEvent evt)
 	{
@@ -347,5 +350,7 @@ public class Controller {
 		}
 		JOptionPane.showMessageDialog(null, "Serveur lancé");
 		this.connexion.dispose();
+		this.start.getjButtonChoixHeros().setEnabled(true);
+		this.start.getjButtonConfig().setEnabled(false);
 	}
 }
