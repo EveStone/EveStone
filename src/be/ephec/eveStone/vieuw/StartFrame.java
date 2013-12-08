@@ -34,20 +34,6 @@ public class StartFrame extends javax.swing.JWindow {
 	private JButton jButtonChoixHeros;
 	
 	private static final String PATH_START = "img/StartFrame.png";
-
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
-	/*
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				StartFrame inst = new StartFrame();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-			}
-		});
-	}*/
 	
 	public StartFrame(final Controller controller) {
 		super();
@@ -168,4 +154,21 @@ public class StartFrame extends javax.swing.JWindow {
 		controller.displayRulesFrame();
 		//TODO add your code for jButtonRegles.actionPerformed
 	}
+
+	public JButton getjButtonConfig() {
+		return jButtonConfig;
+	}
+
+	public void setjButtonConfig(JButton jButtonConfig) {
+		this.jButtonConfig = jButtonConfig;
+	}
+
+	public JButton getjButtonChoixHeros() {
+		return jButtonChoixHeros;
+	}
+
+	public void setjButtonChoixHeros(JButton jButtonChoixHeros) {
+		this.jButtonChoixHeros = jButtonChoixHeros;
+	}
+	
 }

@@ -95,14 +95,14 @@ public class SortHerosListener implements MouseListener{
 	public void mouseEntered(MouseEvent arg0) {
 		infoLabel.setText("<html><font color=white>Carte : "+heros.getSortHero().getNom()+"<br/><br/>"
 				+"Type : Sort Héros<br/><br/>"
-				+"Desciption : "+heros.getSortHero().getDescription()+"</font></html>");
+				+"Description : "+heros.getSortHero().getDescription()+"</font></html>");
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		infoLabel.setText("<html><font color=white>Carte : <br/><br/>"
 				+"Type :<br/><br/>"
-				+"Desciption : </font></html>");
+				+"Description : </font></html>");
 	}
 
 	@Override

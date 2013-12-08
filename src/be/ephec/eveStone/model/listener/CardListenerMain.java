@@ -81,7 +81,7 @@ public class CardListenerMain implements MouseListener{
 		final Timer animation = new Timer();
 		infoLabel.setText("<html><font color=white>Carte : "+card.getCard().getNom()+"<br/><br/>"
 				+"Type : "+card.getCard().toString()+"<br/><br/>"
-				+"Desciption : "+card.getCard().getDescription()+"</font></html>");
+				+"Description : "+card.getCard().getDescription()+"</font></html>");
 		animation.schedule(new TimerTask() {
 			int width = 85;
 			double height = 132;
@@ -110,7 +110,7 @@ public class CardListenerMain implements MouseListener{
 		if (! (card.contains(evt.getPoint()))){
 			infoLabel.setText("<html><font color=white>Carte : <br/><br/>"
 					+"Type : <br/><br/>"
-					+"Desciption : </font></html>");
+					+"Description : </font></html>");
 			final Timer animation = new Timer();
 			card.getButton().setVisible(false);
 			card.showInfo(false);
