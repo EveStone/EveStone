@@ -163,7 +163,6 @@ public class Controller {
 	 */
 	private void initSortHero(JLabel sortHero){
 		sortHero.setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getSortHero().getImage())));
-		sortHero.setText(""+myHero.getSortHero().getRessource());
 		sortHero.addMouseListener(new SortHerosListener(area.getjPanelTerrain(), area.getjPanelTerrainAdversaire(), area.getLabelInfo(), myHero, area.getjLabelRessource()));
 	}
 
@@ -234,6 +233,7 @@ public class Controller {
 			card.setLayout(null);
 			card.setCard(myHero.getDeck().getTabCartes().poll());
 			card.setName(card.getCard().getNom());
+			System.out.println(card.getName());
 			card.makeCard();
 			area.getPanelMain().add(card);
 			card.showInfo(false);

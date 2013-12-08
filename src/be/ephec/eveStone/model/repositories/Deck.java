@@ -12,7 +12,7 @@ public class Deck {
 	
 	private static final String PATH_ACOLYTE = "img/InterceptorCard/acolyte.png";
 	private static final String PATH_PRAETOR = "img/InterceptorCard/praetor.png";
-	private static final String PATH_MISSILE = "img/InterceptorCard/missile.png";
+	private static final String PATH_MISSILE = "img/FregateCard/missile.png";
 	private static final String PATH_LASER = "img/InterceptorCard/laser.png";
 	private static final String PATH_ACOLYTE_EV_300 = "img/InterceptorCard/acolyteEV300.png";
 	private static final String PATH_HEAVY_MAINTENANCE = "img/CommonCard/heavyMaintenance.png";

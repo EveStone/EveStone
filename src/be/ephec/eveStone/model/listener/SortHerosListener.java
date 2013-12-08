@@ -75,9 +75,14 @@ public class SortHerosListener implements MouseListener{
 					minion.showInfo(false);
 					minion.addMouseListener(new CardListenerTerrain(minion, infoLabel, terrain, terrainAdv));
 					System.out.println(minion.getCard().getNom());
+					MouseListener ml[] = arg0.getComponent().getMouseListeners();
+					((SortHerosListener)ml[0]).setEnable(false);
 					terrain.add(minion);
+					terrain.revalidate();
+					terrain.repaint();
 				}
 				heros.setRessource(heros.getRessource()-heros.getSortHero().getRessource());
+				ressource.setText("<html><font color=white>"+heros.getRessource()+"</font></html>");
 				ressource.revalidate();
 				ressource.repaint();
 			}
