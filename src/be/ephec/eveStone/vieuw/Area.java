@@ -50,10 +50,12 @@ public class Area extends JFrame {
 	private JLabel jLabelHeros;
 	private JPanel jPanelMain;
 	private JLabel jLabelIconeCoque;
+	private JLabel jLabelIconeCoqueAdverse;
 	private JLabel jLabel1;
 	private JLabel jLabelRessSort;
 	private JLabel jLabelIconeStruct;
 	private JLabel jLabelStructureAdverse;
+	private JLabel jLabelIconeStructAdverse;
 	private JLabel jLabelCoqueAdverse;
 	private JLabel jLabelStructure;
 	private JLabel jLabelCoque;
@@ -81,7 +83,7 @@ public class Area extends JFrame {
 				jButtonFinTour = new JButton();
 				background.add(jButtonFinTour);
 				jButtonFinTour.setText("<html><font color=white>Fin de tour</font></html>");
-				jButtonFinTour.setBounds(1017, 396, 117, 28);
+				jButtonFinTour.setBounds(1076, 398, 117, 28);
 				jButtonFinTour.setBackground(new java.awt.Color(0,0,0));
 				jButtonFinTour.setEnabled(false);
 			}
@@ -91,14 +93,14 @@ public class Area extends JFrame {
 				jPanelMainLayout.setAlignOnBaseline(true);
 				jPanelMain.setLayout(jPanelMainLayout);
 				background.add(jPanelMain);
-				jPanelMain.setBounds(231, 693, 708, 166);
+				jPanelMain.setBounds(243, 657, 708, 166);
 				jPanelMain.setOpaque(false);
 			}
 			{
 				jLabelRessource = new JLabel();
 				background.add(jLabelRessource);
 				jLabelRessource.setText("<html><font color=white>1</font></html>");
-				jLabelRessource.setBounds(470, 598, 23, 28);
+				jLabelRessource.setBounds(470, 596, 35, 32);
 				jLabelRessource.setFont(new java.awt.Font("Bitstream Charter",1,26));
 			}
 			{
@@ -111,7 +113,7 @@ public class Area extends JFrame {
 				jLabelRessourceAdversaire = new JLabel();
 				background.add(jLabelRessourceAdversaire);
 				jLabelRessourceAdversaire.setText("<html><font color=white>1</font></html>");
-				jLabelRessourceAdversaire.setBounds(465, 203, 35, 43);
+				jLabelRessourceAdversaire.setBounds(465, 190, 41, 49);
 				jLabelRessourceAdversaire.setFont(new java.awt.Font("Purisa",1,20));
 			}
 			{
@@ -138,13 +140,13 @@ public class Area extends JFrame {
 				jPanelTerrainAdversaireLayout.setAlignOnBaseline(true);
 				jPanelTerrainAdversaire.setLayout(jPanelTerrainAdversaireLayout);
 				background.add(jPanelTerrainAdversaire);
-				jPanelTerrainAdversaire.setBounds(206, 244, 799, 182);
+				jPanelTerrainAdversaire.setBounds(206, 253, 799, 177);
 				jPanelTerrainAdversaire.setOpaque(false);
 			}
 			{
 				jPanelTerrain = new JPanel();
 				background.add(jPanelTerrain);
-				jPanelTerrain.setBounds(156, 435, 901, 164);
+				jPanelTerrain.setBounds(141, 395, 901, 184);
 				jPanelTerrain.setOpaque(false);
 			}
 			{
@@ -158,7 +160,7 @@ public class Area extends JFrame {
 				jLabelCoque = new JLabel();
 				background.add(jLabelCoque);
 				jLabelCoque.setText("<html><font color=cyan>20</font></html>");
-				jLabelCoque.setBounds(529, 670, 35, 27);
+				jLabelCoque.setBounds(519, 544, 35, 27);
 				jLabelCoque.setBackground(Color.RED);
 				jLabelCoque.setFont(new java.awt.Font("Bitstream Charter",1,24));
 			}
@@ -166,7 +168,7 @@ public class Area extends JFrame {
 				jLabelStructure = new JLabel();
 				background.add(jLabelStructure);
 				jLabelStructure.setText("<html><font color=white>10</font></html>");
-				jLabelStructure.setBounds(639, 665, 29, 32);
+				jLabelStructure.setBounds(648, 541, 29, 32);
 				jLabelStructure.setBackground(Color.BLACK);
 				jLabelStructure.setFont(new java.awt.Font("Bitstream Charter",1,24));
 			}
@@ -174,10 +176,8 @@ public class Area extends JFrame {
 				jLabelCoqueAdverse = new JLabel();
 				background.add(jLabelCoqueAdverse);
 				jLabelCoqueAdverse.setText("<html><font color=black>20</font></html>");
-				jLabelCoqueAdverse.setBounds(519, 247, 28, 28);
-				jLabelCoqueAdverse.setBackground(Color.RED);
+				jLabelCoqueAdverse.setBounds(519, 143, 28, 28);
 				jLabelCoqueAdverse.setFont(new java.awt.Font("Purisa",1,20));
-				jLabelCoqueAdverse.setOpaque(true);
 			}
 			{
 				jLabelStructureAdverse = new JLabel();
@@ -186,7 +186,13 @@ public class Area extends JFrame {
 					jLabelIconeStruct = new JLabel();
 					background.add(jLabelIconeStruct);
 					jLabelIconeStruct.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/vieHeros_p.png")));
-					jLabelIconeStruct.setBounds(628, 655, 53, 55);
+					jLabelIconeStruct.setBounds(637, 531, 52, 55);
+				}
+				{
+					jLabelIconeStructAdverse = new JLabel();
+					background.add(jLabelIconeStructAdverse);
+					jLabelIconeStructAdverse.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/vieHeros_p.png")));
+					jLabelIconeStructAdverse.setBounds(640, 126, 54, 52);
 				}
 				{
 					this.jLabelCoque = jLabelCoque;
@@ -198,13 +204,21 @@ public class Area extends JFrame {
 					BorderLayout jLabelIconeCoqueLayout = new BorderLayout();
 					jLabelIconeCoque.setLayout(jLabelIconeCoqueLayout);
 					jLabelIconeCoque.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/coqueHeros_p.png")));
-					jLabelIconeCoque.setBounds(519, 650, 54, 64);
+					jLabelIconeCoque.setBounds(506, 126, 57, 64);
+				}
+				{
+					jLabelIconeCoqueAdverse = new JLabel();
+					background.add(jLabelIconeCoqueAdverse);
+					BorderLayout jLabelIconeCoqueLayout = new BorderLayout();
+					jLabelIconeCoqueAdverse.setLayout(jLabelIconeCoqueLayout);
+					jLabelIconeCoqueAdverse.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/coqueHeros_p.png")));
+					jLabelIconeCoqueAdverse.setBounds(509, 526, 54, 64);
 				}
 				{
 					jLabelHeros = new JLabel();
 					background.add(jLabelHeros);
 					jLabelHeros.setText(" ");
-					jLabelHeros.setBounds(537, 544, 134, 143);
+					jLabelHeros.setBounds(538, 546, 134, 143);
 					jLabelHeros.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/Interceptor.png")));
 				}
 				{
@@ -221,10 +235,8 @@ public class Area extends JFrame {
 					jLabelRessSort.setBounds(739, 558, 47, 58);
 				}
 				jLabelStructureAdverse.setText("<html><font color=white>10</font></html>");
-				jLabelStructureAdverse.setBounds(650, 248, 30, 25);
-				jLabelStructureAdverse.setBackground(Color.BLACK);
+				jLabelStructureAdverse.setBounds(652, 137, 32, 26);
 				jLabelStructureAdverse.setFont(new java.awt.Font("Purisa",1,20));
-				jLabelStructureAdverse.setOpaque(true);
 			}
 		}
 	}
