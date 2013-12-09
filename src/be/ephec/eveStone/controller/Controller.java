@@ -133,8 +133,9 @@ public class Controller {
 		if (myClient == null)
 		{
 			try {
-				String message = (String)myClientServer.getOis().readObject();
-				System.out.println("Le héro de l'adversaire est " + message);
+				ObjectSend message = (ObjectSend)myClientServer.getOis().readObject();
+				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
+				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNbCoque());
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -143,8 +144,9 @@ public class Controller {
 		else 
 		{
 			try {
-				String message = (String)myClient.getOis().readObject();
-				System.out.println("Le héro de l'adversaire est " + message);
+				ObjectSend message = (ObjectSend)myClient.getOis().readObject();
+				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
+				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNbCoque());
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

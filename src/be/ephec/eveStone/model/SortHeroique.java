@@ -1,7 +1,13 @@
 package be.ephec.eveStone.model;
 
-public class SortHeroique {
+import java.io.Serializable;
+
+public class SortHeroique implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6199168053210644430L;
 	private String nom;
 	private int degats;
 	private int bouclier;

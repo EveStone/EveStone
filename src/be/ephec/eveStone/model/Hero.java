@@ -1,9 +1,15 @@
 package be.ephec.eveStone.model;
 
+import java.io.Serializable;
+
 import be.ephec.eveStone.model.repositories.Deck;
 
-public class Hero {
+public class Hero implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7413118141276505328L;
 	private String nom;
 	private String image;
 	private int nbStructure;

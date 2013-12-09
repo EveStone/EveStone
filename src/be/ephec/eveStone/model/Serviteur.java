@@ -1,7 +1,13 @@
 package be.ephec.eveStone.model;
 
-public class Serviteur extends Carte {
+import java.io.Serializable;
+
+public class Serviteur extends Carte implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8584328020461044873L;
 	private int nbVie;
 	private int nbDommage;
 	private int dommageSort;

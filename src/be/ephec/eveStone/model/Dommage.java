@@ -1,7 +1,13 @@
 package be.ephec.eveStone.model;
 
-public class Dommage extends Sort{
+import java.io.Serializable;
+
+public class Dommage extends Sort implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3634239282069928393L;
 	private int degats;
 	
 	public Dommage(String nom,int ressource, String image, String description, int degats)

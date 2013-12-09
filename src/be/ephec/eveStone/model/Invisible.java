@@ -1,12 +1,18 @@
 package be.ephec.eveStone.model;
 
+import java.io.Serializable;
+
 /**
  * M�me principe que la classe serviteur a part le rajout du boolean invisible pour dire si la carte est invisible ou non.
  * @author nicolas
  *
  */
-public class Invisible extends Serviteur {
+public class Invisible extends Serviteur implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6826062827631564174L;
 	private boolean invisible;
 	
 	public Invisible(String nom,int ressource, String image, String description, int nbVie, int nbDommage, boolean invisible)

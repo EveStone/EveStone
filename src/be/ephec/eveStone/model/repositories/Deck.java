@@ -1,5 +1,6 @@
 package be.ephec.eveStone.model.repositories;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -8,8 +9,12 @@ import be.ephec.eveStone.model.*;
 
 
 
-public class Deck {
+public class Deck implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7989942328651803961L;
 	private static final String PATH_ACOLYTE = "img/InterceptorCard/acolyte.png";
 	private static final String PATH_PRAETOR = "img/InterceptorCard/praetor.png";
 	private static final String PATH_MISSILE = "img/FregateCard/missile.png";

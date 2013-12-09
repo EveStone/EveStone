@@ -200,9 +200,8 @@ public class ChoixHeros extends JFrame{
 			System.out.println(""+ controller.getMyHero().getNom());
 			if (controller.getMyClient() == null)
 			{
-				System.out.println("Je suis dans le choix hero");
 				try {
-					controller.getMyClientServer().getOos().writeObject((String) controller.getMyHero().getNom());
+					controller.getMyClientServer().getOos().writeObject(new ObjectSend(0,controller.getMyHero()));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -210,9 +209,8 @@ public class ChoixHeros extends JFrame{
 			}
 			else 
 			{
-				System.out.println("Je suis dans le choix hero");
 				try {
-					controller.getMyClient().getOos().writeObject((String) controller.getMyHero().getNom());
+					controller.getMyClient().getOos().writeObject(new ObjectSend(0,controller.getMyHero()));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -227,9 +225,8 @@ public class ChoixHeros extends JFrame{
 			
 			if (controller.getMyClient() == null)
 			{
-				System.out.println("Je suis dans le choix hero");
 				try {
-					controller.getMyClientServer().getOos().writeObject((String) controller.getMyHero().getNom());
+					controller.getMyClientServer().getOos().writeObject(new ObjectSend(0,controller.getMyHero()));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -237,9 +234,8 @@ public class ChoixHeros extends JFrame{
 			}
 			else 
 			{
-				System.out.println("Je suis dans le choix hero");
 				try {
-					controller.getMyClient().getOos().writeObject((String) controller.getMyHero().getNom());
+					controller.getMyClient().getOos().writeObject(new ObjectSend(0,controller.getMyHero()));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

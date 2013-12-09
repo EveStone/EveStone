@@ -1,7 +1,13 @@
 package be.ephec.eveStone.model;
 
-public class Carte {
+import java.io.Serializable;
+
+public class Carte implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2278480827902288826L;
 	private int ressource;
 	private String image; //chemin d'acc�s de l'image de la carte
 	private String nom;

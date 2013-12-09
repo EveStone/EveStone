@@ -1,7 +1,13 @@
 package be.ephec.eveStone.model;
 
-public class Buff extends Sort {
+import java.io.Serializable;
+
+public class Buff extends Sort implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1766582470131004337L;
 	private int buffPv;
 	private int buffDegats;
 	
