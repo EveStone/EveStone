@@ -197,13 +197,13 @@ public class ChoixHeros extends JFrame{
 		{
 			controller.setMyHero(new Hero("Interceptor",IMG_INTERCEPTOR, new Deck("interceptor"), new SortHeroique("Tir de Missile", 2, 2, 0, IMG_SORT_INTERCEPTOR, DESCR_SORT_INTEREPTOR)));
 			System.out.println(""+ controller.getMyHero().getNom());
-			/*
+			
 			if (controller.getMyClient() == null)
 			{
 				try {
 					ObjectOutputStream oos = new ObjectOutputStream(controller.getMyClientServer().getSocket().getOutputStream());
-					//ObjectSend message = new ObjectSend(0, controller.getMyHero());
-					oos.writeObject((Object) controller.getMyHero().getNom() );
+					ObjectSend message = new ObjectSend(0, controller.getMyHero());
+					oos.writeObject((Object) message );
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -213,26 +213,25 @@ public class ChoixHeros extends JFrame{
 			{
 				try {
 					ObjectOutputStream oos = new ObjectOutputStream(controller.getMyClient().getSocket().getOutputStream());
-					//ObjectSend message = new ObjectSend(0, controller.getMyHero());
-					oos.writeObject((Object) controller.getMyHero().getNom() );
+					ObjectSend message = new ObjectSend(0, controller.getMyHero());
+					oos.writeObject((Object) message );
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-			}*/
+			}
 		}
 		else if (choixHero == 1)
 		{
 			controller.setMyHero(new Hero("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique("Renfort !", 2, 0, 2, IMG_SORT_FREGATE, DESCR_SORT_FREGATE)));
 			System.out.println(""+ controller.getMyHero().getNom());
-			/*
 			if (controller.getMyClient() == null)
 			{
 				try {
 					ObjectOutputStream oos = new ObjectOutputStream(controller.getMyClientServer().getSocket().getOutputStream());
-					//ObjectSend message = new ObjectSend(0, controller.getMyHero());
-					oos.writeObject((Object) controller.getMyHero().getNom() );
+					ObjectSend message = new ObjectSend(0, controller.getMyHero());
+					oos.writeObject((Object) message );
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -242,14 +241,14 @@ public class ChoixHeros extends JFrame{
 			{
 				try {
 					ObjectOutputStream oos = new ObjectOutputStream(controller.getMyClient().getSocket().getOutputStream());
-					//ObjectSend message = new ObjectSend(0, controller.getMyHero());
-					oos.writeObject((Object) controller.getMyHero().getNom() );
+					ObjectSend message = new ObjectSend(0, controller.getMyHero());
+					oos.writeObject((Object) message );
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-			}*/
+			}
 		}
 		if (this.choixHero > -1)
 			commencer.setEnabled(true);

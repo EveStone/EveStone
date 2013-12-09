@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ import be.ephec.eveStone.model.listener.HerosListener;
 import be.ephec.eveStone.model.listener.SortHerosListener;
 import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.model.net.client.MyClient;
+import be.ephec.eveStone.model.net.server.ClientServer;
 import be.ephec.eveStone.model.net.server.MyServer;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.ConnectionFrame;
@@ -52,7 +54,7 @@ public class Controller {
 
 	//client NET
 	private MyClient myClient = null;
-	private MyClient myClientServer = null;
+	private ClientServer myClientServer = null;
 	private MyServer server;
 
 	private int nbTour;
@@ -419,6 +421,9 @@ public class Controller {
 		JOptionPane.showMessageDialog(null, "Serveur lancé");
 		
 		
+		//myClientServer = new ClientServer();
+		
+		
 		this.connexion.dispose();
 		this.start.getjButtonChoixHeros().setEnabled(true);
 		this.start.getjButtonConfig().setEnabled(false);
@@ -428,8 +433,12 @@ public class Controller {
 		return myClient;
 	}
 
-	public MyClient getMyClientServer() {
+	public ClientServer getMyClientServer() {
 		return myClientServer;
+	}
+	public MyServer getServer()
+	{
+		return server;
 	}
 	
 	

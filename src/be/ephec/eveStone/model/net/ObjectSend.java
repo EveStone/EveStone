@@ -1,12 +1,18 @@
 package be.ephec.eveStone.model.net;
 
+import java.io.Serializable;
+
 /**
  * Cette classe permet de cr�er les objet qui seront envoyé.
  * @author nicolas, andy
  *
  */
-public class ObjectSend {
+public class ObjectSend implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int action;//Permet de dire quelle action l'adversaire � effectuer et ainsi facilit� les casting
 	private Object obj;
 	

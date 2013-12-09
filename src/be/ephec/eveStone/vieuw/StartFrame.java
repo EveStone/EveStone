@@ -1,6 +1,7 @@
 package be.ephec.eveStone.vieuw;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -59,7 +60,7 @@ public class StartFrame extends JFrame{
 					jButtonQuitter.setBackground(new java.awt.Color(0,0,0));
 					jButtonQuitter.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							jButtonQuitterActionPerformed(evt);
+							jButtonQuitterActionPerformed(evt, controller);
 						}
 					});
 				}
@@ -123,9 +124,16 @@ public class StartFrame extends JFrame{
 		}
 	}
 	
-	private void jButtonQuitterActionPerformed(ActionEvent evt) {
+	private void jButtonQuitterActionPerformed(ActionEvent evt, final Controller controller) {
 		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
 		//TODO add your code for jButtonQuitter.actionPerformed
+		try {
+			if (controller.getMyClient() != null) controller.getMyClient().getSocket().close();
+			if (controller.getServer() != null)controller.getServer().getS().close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.dispose();
 	}
 	
