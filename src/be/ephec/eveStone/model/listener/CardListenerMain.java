@@ -1,5 +1,6 @@
 package be.ephec.eveStone.model.listener;
 
+import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -78,6 +79,7 @@ public class CardListenerMain implements MouseListener{
 	 * @param card le Panel de la carte active
 	 */
 	protected void cardMouseOn(final CardPanel card) {
+		card.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		final Timer animation = new Timer();
 		infoLabel.setText("<html><font color=white>Carte : "+card.getCard().getNom()+"<br/><br/>"
 				+"Type : "+card.getCard().toString()+"<br/><br/>"
