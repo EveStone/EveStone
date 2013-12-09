@@ -104,6 +104,15 @@ public class Area extends JFrame {
 				jLabelRessource.setFont(new java.awt.Font("Bitstream Charter",1,26));
 			}
 			{
+				jPanelTerrainAdversaire = new JPanel();
+				background.add(jPanelTerrainAdversaire);
+				FlowLayout jPanelTerrainAdversaireLayout = new FlowLayout();
+				jPanelTerrainAdversaireLayout.setAlignOnBaseline(true);
+				jPanelTerrainAdversaire.setLayout(jPanelTerrainAdversaireLayout);
+				jPanelTerrainAdversaire.setBounds(206, 253, 799, 177);
+				jPanelTerrainAdversaire.setOpaque(false);
+			}
+			{
 				jLabelSortHeroique = new JLabel();
 				background.add(jLabelSortHeroique);
 				jLabelSortHeroique.setText(" ");
@@ -133,15 +142,6 @@ public class Area extends JFrame {
 				background.add(jPanelMainAdversaire);
 				jPanelMainAdversaire.setBounds(20, 7, 1182, 133);
 				jPanelMainAdversaire.setOpaque(false);
-			}
-			{
-				jPanelTerrainAdversaire = new JPanel();
-				FlowLayout jPanelTerrainAdversaireLayout = new FlowLayout();
-				jPanelTerrainAdversaireLayout.setAlignOnBaseline(true);
-				jPanelTerrainAdversaire.setLayout(jPanelTerrainAdversaireLayout);
-				background.add(jPanelTerrainAdversaire);
-				jPanelTerrainAdversaire.setBounds(206, 253, 799, 177);
-				jPanelTerrainAdversaire.setOpaque(false);
 			}
 			{
 				jPanelTerrain = new JPanel();
