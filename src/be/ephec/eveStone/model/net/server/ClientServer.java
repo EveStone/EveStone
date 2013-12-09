@@ -9,37 +9,40 @@ import be.ephec.eveStone.model.net.Emission;
 import be.ephec.eveStone.model.net.Reception;
 
 
-public class ClientServer implements Runnable {
+public class ClientServer {
 
 	private Socket socket;
-	private Thread t3, t4;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
 	
 	public ClientServer(Socket s) {
-		this.socket = s;
-	}
-	@Override
-	public void run() {
-		
 		try {
-			ois = new ObjectInputStream(socket.getInputStream());
-			oos = new ObjectOutputStream(socket.getOutputStream());
-			
-			System.out.println("Client serveur connecté");
-			
-			//Thread t3 = new Thread(new Reception(ois));
-			//t3.start();
-			//Thread t4 = new Thread(new Emission(oos));
-			//t4.start();
-			
-			} catch (IOException e) {
-				System.err.println(" Le client s'est déconnecté ");
-			}
-		
+			this.socket = s;
+			ois = new ObjectInputStream(s.getInputStream());
+			oos = new ObjectOutputStream(s.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
 	public Socket getSocket() {
 		return socket;
+	}
+	public ObjectInputStream getOis() {
+		return ois;
+	}
+
+	public void setOis(ObjectInputStream ois) {
+		this.ois = ois;
+	}
+
+	public ObjectOutputStream getOos() {
+		return oos;
+	}
+
+	public void setOos(ObjectOutputStream oos) {
+		this.oos = oos;
 	}
 	
 

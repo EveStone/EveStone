@@ -17,6 +17,7 @@ public class MyServer {
 		System.out.println("Le serveur est à l'écoute du port "+s.getLocalPort());
 		
 		t = new Thread(new Accept_connexion(s));
+		t.setDaemon(true);
 		t.start();
 		
 

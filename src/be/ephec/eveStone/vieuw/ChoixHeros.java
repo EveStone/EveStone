@@ -193,11 +193,12 @@ public class ChoixHeros extends JFrame{
 	private void jButtonSauverActionPerformed(ActionEvent evt, final Controller controller, JButton commencer) {
 		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
 		//TODO add your code for jButtonQuitter.actionPerformed
+		
 		if (choixHero == 0)
 		{
 			controller.setMyHero(new Hero("Interceptor",IMG_INTERCEPTOR, new Deck("interceptor"), new SortHeroique("Tir de Missile", 2, 2, 0, IMG_SORT_INTERCEPTOR, DESCR_SORT_INTEREPTOR)));
 			System.out.println(""+ controller.getMyHero().getNom());
-			
+			/*
 			if (controller.getMyClient() == null)
 			{
 				try {
@@ -220,12 +221,13 @@ public class ChoixHeros extends JFrame{
 					e.printStackTrace();
 				}
 				
-			}
+			}*/
 		}
 		else if (choixHero == 1)
 		{
 			controller.setMyHero(new Hero("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique("Renfort !", 2, 0, 2, IMG_SORT_FREGATE, DESCR_SORT_FREGATE)));
 			System.out.println(""+ controller.getMyHero().getNom());
+			/*
 			if (controller.getMyClient() == null)
 			{
 				try {
@@ -248,7 +250,7 @@ public class ChoixHeros extends JFrame{
 					e.printStackTrace();
 				}
 				
-			}
+			}*/
 		}
 		if (this.choixHero > -1)
 			commencer.setEnabled(true);

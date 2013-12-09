@@ -421,7 +421,13 @@ public class Controller {
 		JOptionPane.showMessageDialog(null, "Serveur lancé");
 		
 		
-		//myClientServer = new ClientServer();
+		
+		try {
+			myClientServer = new ClientServer(server.getS().accept());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		this.connexion.dispose();
