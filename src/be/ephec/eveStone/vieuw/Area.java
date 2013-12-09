@@ -323,5 +323,17 @@ public class Area extends JFrame {
 
 	public void setjLabelCoque(JLabel jLabelCoque) {
 	}
+
+	public void setjPanelTerrainAdversaire(JPanel jPanelTerrainAdversaire) {
+		this.jPanelTerrainAdversaire = jPanelTerrainAdversaire;
+		this.jPanelTerrainAdversaire.revalidate();
+		this.jPanelTerrainAdversaire.repaint();
+	}
+
+	public void setjLabelRessourceAdversaire(JLabel jLabelRessourceAdversaire) {
+		this.jLabelRessourceAdversaire = jLabelRessourceAdversaire;
+		this.revalidate();
+		this.repaint();
+	}
 	
 }

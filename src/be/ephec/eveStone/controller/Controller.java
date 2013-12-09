@@ -22,6 +22,7 @@ import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
 import be.ephec.eveStone.model.listener.HerosListener;
 import be.ephec.eveStone.model.listener.SortHerosListener;
 import be.ephec.eveStone.model.net.ObjectSend;
+import be.ephec.eveStone.model.net.Reception;
 import be.ephec.eveStone.model.net.client.MyClient;
 import be.ephec.eveStone.model.net.server.ClientServer;
 import be.ephec.eveStone.model.net.server.MyServer;
@@ -130,12 +131,24 @@ public class Controller {
 	 * Contsruit la zone de jeu qui permet de jouer contre un adversaire.
 	 */
 	public void makeArea(){
+		
+		this.area = new Area(this);
+		this.area.getjLabelHeros().setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getImage())));
+		nbTour=1;
+		piocheDepart();
+		initSortHero(area.getjLabelSortHeroique());
+		
 		ObjectSend message = null;
 		if (myClient == null)
 		{
 			try {
 				message = (ObjectSend)myClientServer.getOis().readObject();
 				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
+				this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent evt){
+						jButtonFinTourClicked(evt);
+					}
+				});
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -146,6 +159,9 @@ public class Controller {
 			try {
 				message = (ObjectSend)myClient.getOis().readObject();
 				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
+				this.area.getFinTourButton().setEnabled(false);//mise en false car c'est le serveur qui commence a jouer
+				Thread t = new Thread(new Reception(area , myClient.getOis()));
+				t.start();
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -153,16 +169,6 @@ public class Controller {
 
 		}
 		this.adverseHero = (Hero)message.getObj();
-		this.area = new Area(this);
-		this.area.getjLabelHeros().setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getImage())));
-		this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent evt){
-				jButtonFinTourClicked(evt);
-			}
-		});
-		nbTour=1;
-		piocheDepart();
-		initSortHero(area.getjLabelSortHeroique());
 		
 		this.area.getjLabelHerosAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getImage())));
 		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero, area));
@@ -259,8 +265,6 @@ public class Controller {
 	private void piocheDepart() {
 		for(int i = 0; i<NB_CARTE_DEPART; i++){
 			pioche();
-			JLabel label = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/CarteDosV3.png")));
-			area.getjPanelMainAdversaire().add(label);
 		}
 	}
 	/**
@@ -269,6 +273,8 @@ public class Controller {
 	private void pioche(){
 		if(area.getPanelMain().getComponentCount()<NB_MAX_CARTE_MAIN){
 			final CardPanel card = new CardPanel();
+			JLabel label = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/CarteDosV3.png")));
+			area.getjPanelMainAdversaire().add(label);
 			card.setLayout(null);
 			card.setCard(myHero.getDeck().getTabCartes().poll());
 			card.setName(card.getCard().getNom());
@@ -316,6 +322,25 @@ public class Controller {
 						}
 					}
 					area.getjPanelTerrain().add(label);
+					if (myClient == null)
+					{
+						try {
+							myClientServer.getOos().writeObject(new ObjectSend(1, label));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					else 
+					{
+						try {
+							myClient.getOos().writeObject(new ObjectSend(1, label));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
 					MouseListener ml[] = label.getMouseListeners();
 					label.removeMouseListener(ml[ml.length-1]);
 					label.addMouseListener(new CardListenerTerrain(label, area));
@@ -347,6 +372,7 @@ public class Controller {
 				area.getPanelMain().remove(label);
 				label.showInfo(false);
 				label.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(label.getCard().getImage())).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
+				
 				area.revalidate();
 				area.repaint();
 			}
@@ -368,11 +394,14 @@ public class Controller {
 		setTargetableFalse();
 		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		setCanAttack();
-		/*
+		
 		if (myClient == null)
 		{
 			try {
-				myClientServer.getOos().writeObject(new ObjectSend(0,controller.getMyHero()));
+				myClientServer.getOos().writeObject(new ObjectSend(5,"Stop"));
+				Thread t = new Thread(new Reception(area , myClientServer.getOis()));
+				t.start();
+				this.area.getFinTourButton().setEnabled(false);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -381,13 +410,16 @@ public class Controller {
 		else 
 		{
 			try {
-				myClient().getOos().writeObject(new ObjectSend(0,controller.getMyHero()));
+				myClient.getOos().writeObject(new ObjectSend(5,"Stop"));
+				Thread t = new Thread(new Reception(area , myClient.getOis()));
+				t.start();
+				this.area.getFinTourButton().setEnabled(false);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-		}*/
+		}
 		
 		MouseListener ml[] = area.getjLabelSortHeroique().getMouseListeners();
 		((SortHerosListener)ml[0]).setEnable(true);
