@@ -128,7 +128,7 @@ public class Controller {
 	 * Contsruit la zone de jeu qui permet de jouer contre un adversaire.
 	 */
 	public void makeArea(){
-		
+		/*
 		if (myClient == null)
 		{
 			try {
@@ -152,7 +152,7 @@ public class Controller {
 			}
 			
 		}
-		
+		*/
 		
 		
 		this.area = new Area(this);
@@ -418,8 +418,6 @@ public class Controller {
 		}
 		JOptionPane.showMessageDialog(null, "Serveur lancé");
 		
-		//Création du deuxieme client coté serveur
-		myClientServer = new MyClient("127.0.0.1");
 		
 		this.connexion.dispose();
 		this.start.getjButtonChoixHeros().setEnabled(true);
