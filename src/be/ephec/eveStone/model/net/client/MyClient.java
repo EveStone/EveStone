@@ -5,7 +5,6 @@ import java.net.*;
 
 import javax.swing.JOptionPane;
 
-import be.ephec.eveStone.model.net.Reception;
 
 public class MyClient extends Socket{
 

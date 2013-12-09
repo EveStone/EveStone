@@ -5,10 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import be.ephec.eveStone.model.net.Emission;
-import be.ephec.eveStone.model.net.Reception;
-
-
 public class ClientServer {
 
 	private Socket socket;

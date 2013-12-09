@@ -130,12 +130,12 @@ public class Controller {
 	 * Contsruit la zone de jeu qui permet de jouer contre un adversaire.
 	 */
 	public void makeArea(){
+		ObjectSend message = null;
 		if (myClient == null)
 		{
 			try {
-				ObjectSend message = (ObjectSend)myClientServer.getOis().readObject();
+				message = (ObjectSend)myClientServer.getOis().readObject();
 				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
-				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNbCoque());
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -144,16 +144,15 @@ public class Controller {
 		else 
 		{
 			try {
-				ObjectSend message = (ObjectSend)myClient.getOis().readObject();
+				message = (ObjectSend)myClient.getOis().readObject();
 				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
-				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNbCoque());
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		}
-
+		this.adverseHero = (Hero)message.getObj();
 		this.area = new Area(this);
 		this.area.getjLabelHeros().setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getImage())));
 		this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
@@ -164,10 +163,12 @@ public class Controller {
 		nbTour=1;
 		piocheDepart();
 		initSortHero(area.getjLabelSortHeroique());
-		adverseHero = new Hero("Fregate", "img/Fregate.png", null, null);
-		area.getjLabelHerosAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getImage())));
+		
+		this.area.getjLabelHerosAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getImage())));
 		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero, area));
-
+		this.area.getjLabelSortHeroiqueAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getSortHero().getImage())));
+		
+		/*
 		// Test
 		CardPanel carteEnnemi = new CardPanel();
 		carteEnnemi.setCard(new Serviteur("Hornet", 2, "img/FregateCard/hornet.png", "Drone d'attaque léger", 2, 2));
@@ -258,6 +259,8 @@ public class Controller {
 	private void piocheDepart() {
 		for(int i = 0; i<NB_CARTE_DEPART; i++){
 			pioche();
+			JLabel label = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/CarteDosV3.png")));
+			area.getjPanelMainAdversaire().add(label);
 		}
 	}
 	/**
@@ -365,6 +368,27 @@ public class Controller {
 		setTargetableFalse();
 		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		setCanAttack();
+		/*
+		if (myClient == null)
+		{
+			try {
+				myClientServer.getOos().writeObject(new ObjectSend(0,controller.getMyHero()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else 
+		{
+			try {
+				myClient().getOos().writeObject(new ObjectSend(0,controller.getMyHero()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}*/
+		
 		MouseListener ml[] = area.getjLabelSortHeroique().getMouseListeners();
 		((SortHerosListener)ml[0]).setEnable(true);
 		this.area.revalidate();
