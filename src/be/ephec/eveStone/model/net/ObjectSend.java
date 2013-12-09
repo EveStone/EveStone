@@ -12,7 +12,10 @@ public class ObjectSend implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7529348765750425977L;
+	/**
+	 * 
+	 */
 	private int action;//Permet de dire quelle action l'adversaire � effectuer et ainsi facilit� les casting
 	private Object obj;
 	

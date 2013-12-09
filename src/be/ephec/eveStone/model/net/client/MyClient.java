@@ -5,31 +5,20 @@ import java.net.*;
 
 import javax.swing.JOptionPane;
 
-public class MyClient {
+import be.ephec.eveStone.model.net.Reception;
+
+public class MyClient extends Socket{
 
 	public static Socket socket = null;
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
-	
 
-	public MyClient(String ip) {
+	public MyClient(String ip) throws UnknownHostException, IOException {
+		super(ip,2013);
+		oos = new ObjectOutputStream(this.getOutputStream());
+		ois = new ObjectInputStream(this.getInputStream());
+		JOptionPane.showMessageDialog(null, "Connexion établie avec le serveur"); // Si le message s'affiche c'est que je suis connect�
 
-
-		try {
-
-			System.out.println("Tentative de connexion");
-			socket = new Socket(ip,2013);
-			oos = new ObjectOutputStream(socket.getOutputStream());
-			ois = new ObjectInputStream(socket.getInputStream());
-			JOptionPane.showMessageDialog(null, "Connexion établie avec le serveur"); // Si le message s'affiche c'est que je suis connect�
-
-
-
-		} catch (UnknownHostException e) {
-			System.err.println("Impossible de se connecter à l'adresse "+socket.getLocalAddress());
-		} catch (IOException e) {
-			System.err.println("Aucun serveur sur le port"+socket.getLocalPort());
-		}
 	}
 
 	public Socket getSocket() {
@@ -50,6 +39,4 @@ public class MyClient {
 	public void setOos(ObjectOutputStream oos) {
 		this.oos = oos;
 	}
-
-
 }

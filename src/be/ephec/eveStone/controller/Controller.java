@@ -130,12 +130,10 @@ public class Controller {
 	 * Contsruit la zone de jeu qui permet de jouer contre un adversaire.
 	 */
 	public void makeArea(){
-		/*
 		if (myClient == null)
 		{
 			try {
-				ObjectInputStream ois = new ObjectInputStream(myClientServer.getSocket().getInputStream());
-				String message = (String)ois.readObject();
+				String message = (String)myClientServer.getOis().readObject();
 				System.out.println("Le héro de l'adversaire est " + message);
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -145,18 +143,15 @@ public class Controller {
 		else 
 		{
 			try {
-				ObjectInputStream ois = new ObjectInputStream(myClient.getSocket().getInputStream());
-				String message = (String)ois.readObject();
+				String message = (String)myClient.getOis().readObject();
 				System.out.println("Le héro de l'adversaire est " + message);
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		*/
-		
-		
+
 		this.area = new Area(this);
 		this.area.getjLabelHeros().setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getImage())));
 		this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
@@ -405,7 +400,15 @@ public class Controller {
 	}
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
-		myClient = new MyClient(this.connexion.getjTextFieldIP().getText());
+		try {
+			myClient = new MyClient(this.connexion.getjTextFieldIP().getText());
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.connexion.dispose();
 		this.start.getjButtonChoixHeros().setEnabled(true);
 		this.start.getjButtonConfig().setEnabled(false);
@@ -413,23 +416,15 @@ public class Controller {
 	protected void jButtonMakeServerClicked(MouseEvent evt)
 	{
 		try {
-			server = new MyServer();
+			server = new MyServer(this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		JOptionPane.showMessageDialog(null, "Serveur lancé");
-		
-		
-		
-		try {
-			myClientServer = new ClientServer(server.getS().accept());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+
+
+
 		this.connexion.dispose();
 		this.start.getjButtonChoixHeros().setEnabled(true);
 		this.start.getjButtonConfig().setEnabled(false);
@@ -442,10 +437,19 @@ public class Controller {
 	public ClientServer getMyClientServer() {
 		return myClientServer;
 	}
+	
+	public void setMyClient(MyClient myClient) {
+		this.myClient = myClient;
+	}
+
+	public void setMyClientServer(ClientServer myClientServer) {
+		this.myClientServer = myClientServer;
+	}
+
 	public MyServer getServer()
 	{
 		return server;
 	}
-	
-	
+
+
 }

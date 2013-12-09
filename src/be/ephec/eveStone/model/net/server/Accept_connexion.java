@@ -3,16 +3,18 @@ package be.ephec.eveStone.model.net.server;
 import java.io.*;
 import java.net.*;
 
+import be.ephec.eveStone.controller.Controller;
+
 
 public class Accept_connexion implements Runnable{
 
 	private ServerSocket socketserver = null;
-	private PrintWriter out = null;
-	private Socket socket = null;
+	private Controller controller;
 
-	public Thread t1;
-	public Accept_connexion(ServerSocket ss){
+	public Accept_connexion(ServerSocket ss, Controller controller){
 	 socketserver = ss;
+	 this.controller = controller;
+	 
 	}
 	
 	public void run() {
@@ -20,15 +22,11 @@ public class Accept_connexion implements Runnable{
 		try {
 			while(true){
 				
-			socket = socketserver.accept();
+			Socket s = socketserver.accept();
+			controller.setMyClientServer(new ClientServer(s));
 			System.out.println("Un client s'ait connecté ");
 			
-			out = new PrintWriter(socket.getOutputStream());
-			out.println("connecte");
-			out.flush();
-			
-			//t1 = new Thread(new ClientServer(socket));
-			//t1.start();
+	
 			
 			}
 		} catch (IOException e) {

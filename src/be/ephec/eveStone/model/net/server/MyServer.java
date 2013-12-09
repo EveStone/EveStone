@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import be.ephec.eveStone.controller.Controller;
+
 
 public class MyServer {
 
@@ -12,11 +14,11 @@ public class MyServer {
 	private Thread t;
 	private ServerSocket s;
 
-	public MyServer() throws IOException {
+	public MyServer(Controller controller) throws IOException {
 		this.s = new ServerSocket(numPort);
 		System.out.println("Le serveur est à l'écoute du port "+s.getLocalPort());
 		
-		t = new Thread(new Accept_connexion(s));
+		t = new Thread(new Accept_connexion(s, controller));
 		t.setDaemon(true);
 		t.start();
 		
@@ -25,6 +27,10 @@ public class MyServer {
 
 	public ServerSocket getS() {
 		return s;
+	}
+	public int getNumPort()
+	{
+		return numPort;
 	}
 	
 	
