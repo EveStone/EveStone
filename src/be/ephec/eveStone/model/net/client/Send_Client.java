@@ -26,10 +26,10 @@ public class Send_Client implements Runnable {
 			ois = new ObjectInputStream(socket.getInputStream());
 			
 			
-			Thread t4 = new Thread(new Emission(oos, null));
-			t4.start();
-			Thread t3 = new Thread(new Reception(ois));
-			t3.start();
+			//Thread t4 = new Thread(new Emission(oos));
+			//t4.start();
+			//Thread t3 = new Thread(new Reception(ois));
+			//t3.start();
 		
 		   
 		    

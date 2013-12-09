@@ -4,6 +4,8 @@ package be.ephec.eveStone.model.net;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import be.ephec.eveStone.model.Hero;
+
 
 public class Reception implements Runnable {
 
@@ -21,7 +23,7 @@ public class Reception implements Runnable {
 
 				try {
 					message = (ObjectSend) ois.readObject();
-					System.out.println("Le serveur vous dit :" +message);
+					System.out.println("" + ((Hero) message.getObj()).getNom());
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

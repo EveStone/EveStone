@@ -5,6 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
@@ -18,6 +20,7 @@ import be.ephec.eveStone.model.listener.CardListenerTerrain;
 import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
 import be.ephec.eveStone.model.listener.HerosListener;
 import be.ephec.eveStone.model.listener.SortHerosListener;
+import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.model.net.client.MyClient;
 import be.ephec.eveStone.model.net.server.MyServer;
 import be.ephec.eveStone.vieuw.Area;
@@ -48,7 +51,8 @@ public class Controller {
 	private final int NUM_PORT = 2013;
 
 	//client NET
-	private MyClient myClient;
+	private MyClient myClient = null;
+	private MyClient myClientServer = null;
 	private MyServer server;
 
 	private int nbTour;
@@ -124,6 +128,33 @@ public class Controller {
 	 * Contsruit la zone de jeu qui permet de jouer contre un adversaire.
 	 */
 	public void makeArea(){
+		
+		if (myClient == null)
+		{
+			try {
+				ObjectInputStream ois = new ObjectInputStream(myClientServer.getSocket().getInputStream());
+				String message = (String)ois.readObject();
+				System.out.println("Le héro de l'adversaire est " + message);
+			} catch (IOException | ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else 
+		{
+			try {
+				ObjectInputStream ois = new ObjectInputStream(myClient.getSocket().getInputStream());
+				String message = (String)ois.readObject();
+				System.out.println("Le héro de l'adversaire est " + message);
+			} catch (IOException | ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		
 		this.area = new Area(this);
 		this.area.getjLabelHeros().setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getImage())));
 		this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
@@ -386,8 +417,22 @@ public class Controller {
 			e.printStackTrace();
 		}
 		JOptionPane.showMessageDialog(null, "Serveur lancé");
+		
+		//Création du deuxieme client coté serveur
+		myClientServer = new MyClient("127.0.0.1");
+		
 		this.connexion.dispose();
 		this.start.getjButtonChoixHeros().setEnabled(true);
 		this.start.getjButtonConfig().setEnabled(false);
 	}
+
+	public MyClient getMyClient() {
+		return myClient;
+	}
+
+	public MyClient getMyClientServer() {
+		return myClientServer;
+	}
+	
+	
 }

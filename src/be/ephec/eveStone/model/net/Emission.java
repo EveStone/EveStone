@@ -11,9 +11,9 @@ public class Emission implements Runnable {
 	private ObjectOutputStream oos;
 	private ObjectSend message = null;
 
-	public Emission(ObjectOutputStream oos, ObjectSend message) {
-		this.oos = oos;
+	public Emission(ObjectSend message,ObjectOutputStream oos) {
 		this.message = message;
+		this.oos = oos;
 	}
 
 

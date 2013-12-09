@@ -22,6 +22,10 @@ public class MyServer {
 
 	}
 
+	public ServerSocket getS() {
+		return s;
+	}
+	
 	
 	
 

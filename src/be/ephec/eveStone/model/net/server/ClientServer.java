@@ -26,15 +26,21 @@ public class ClientServer implements Runnable {
 			ois = new ObjectInputStream(socket.getInputStream());
 			oos = new ObjectOutputStream(socket.getOutputStream());
 			
-			Thread t3 = new Thread(new Reception(ois));
-			t3.start();
-			Thread t4 = new Thread(new Emission(oos, null));
-			t4.start();
+			System.out.println("Client serveur connecté");
+			
+			//Thread t3 = new Thread(new Reception(ois));
+			//t3.start();
+			//Thread t4 = new Thread(new Emission(oos));
+			//t4.start();
 			
 			} catch (IOException e) {
 				System.err.println(" Le client s'est déconnecté ");
 			}
 		
 	}
+	public Socket getSocket() {
+		return socket;
+	}
+	
 
 }

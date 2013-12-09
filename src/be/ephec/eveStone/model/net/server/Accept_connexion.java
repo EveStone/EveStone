@@ -27,8 +27,8 @@ public class Accept_connexion implements Runnable{
 			out.println("connecte");
 			out.flush();
 			
-			t1 = new Thread(new ClientServer(socket));
-			t1.start();
+			//t1 = new Thread(new ClientServer(socket));
+			//t1.start();
 			
 			}
 		} catch (IOException e) {

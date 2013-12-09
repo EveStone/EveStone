@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import javax.swing.JPanel;
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Hero;
 import be.ephec.eveStone.model.SortHeroique;
+import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.model.repositories.Deck;
 
 /**
@@ -194,11 +197,59 @@ public class ChoixHeros extends JFrame{
 		{
 			controller.setMyHero(new Hero("Interceptor",IMG_INTERCEPTOR, new Deck("interceptor"), new SortHeroique("Tir de Missile", 2, 2, 0, IMG_SORT_INTERCEPTOR, DESCR_SORT_INTEREPTOR)));
 			System.out.println(""+ controller.getMyHero().getNom());
+			
+			if (controller.getMyClient() == null)
+			{
+				try {
+					ObjectOutputStream oos = new ObjectOutputStream(controller.getMyClientServer().getSocket().getOutputStream());
+					//ObjectSend message = new ObjectSend(0, controller.getMyHero());
+					oos.writeObject((Object) controller.getMyHero().getNom() );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else 
+			{
+				try {
+					ObjectOutputStream oos = new ObjectOutputStream(controller.getMyClient().getSocket().getOutputStream());
+					//ObjectSend message = new ObjectSend(0, controller.getMyHero());
+					oos.writeObject((Object) controller.getMyHero().getNom() );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 		}
 		else if (choixHero == 1)
 		{
 			controller.setMyHero(new Hero("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique("Renfort !", 2, 0, 2, IMG_SORT_FREGATE, DESCR_SORT_FREGATE)));
 			System.out.println(""+ controller.getMyHero().getNom());
+			
+			if (controller.getMyClient() == null)
+			{
+				try {
+					ObjectOutputStream oos = new ObjectOutputStream(controller.getMyClientServer().getSocket().getOutputStream());
+					//ObjectSend message = new ObjectSend(0, controller.getMyHero());
+					oos.writeObject((Object) controller.getMyHero().getNom() );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else 
+			{
+				try {
+					ObjectOutputStream oos = new ObjectOutputStream(controller.getMyClient().getSocket().getOutputStream());
+					//ObjectSend message = new ObjectSend(0, controller.getMyHero());
+					oos.writeObject((Object) controller.getMyHero().getNom() );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 		}
 		if (this.choixHero > -1)
 			commencer.setEnabled(true);

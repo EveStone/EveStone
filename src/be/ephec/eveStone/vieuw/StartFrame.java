@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
@@ -22,7 +23,7 @@ import be.ephec.eveStone.controller.Controller;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class StartFrame extends javax.swing.JWindow {
+public class StartFrame extends JFrame{
 	/**
 	 * 
 	 */

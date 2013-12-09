@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class MyClient {
 
-	public static Socket socket = null;
+	public Socket socket = null;
 	public static Thread t1;
 	
 	public MyClient(String ip) {
@@ -19,8 +19,8 @@ public class MyClient {
 		socket = new Socket(ip,2013);
 		JOptionPane.showMessageDialog(null, "Connexion établie avec le serveur"); // Si le message s'affiche c'est que je suis connect�
 		
-		t1 = new Thread(new Connexion(socket));
-		t1.start();
+		//t1 = new Thread(new Connexion(socket));
+		//t1.start();
 		
 		
 		
@@ -33,5 +33,10 @@ public class MyClient {
 	
 
 	}
+
+	public Socket getSocket() {
+		return socket;
+	}
+	
 
 }
