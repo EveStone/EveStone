@@ -60,10 +60,9 @@ public class Reception implements Runnable {
 					{
 						System.out.println("Je change mon terrain");
 						CardPanel carte = (CardPanel) message.getObj();
-						controller.getArea().getjPanelTerrain().getComponent(message.getIndex()).setVisible(false);
-						carte.addMouseListener(new CardListenerTerrain(carte, controller.getArea()));
+						if (message.getIndex()>=0)
+							controller.getArea().getjPanelTerrain().remove(message.getIndex());
 						if (((Serviteur)(carte.getCard())).getNbVie()>0){
-							carte.addMouseListener(new CardListenerTerrain(carte, controller.getArea()));
 							controller.getArea().getjPanelTerrain().add(carte);
 						}
 						controller.getArea().revalidate();
@@ -73,13 +72,11 @@ public class Reception implements Runnable {
 					{
 						System.out.println("Je change le terrain adverse");
 						CardPanel carte = (CardPanel) message.getObj();
+						if(message.getIndex()>=0)
+							controller.getArea().getjPanelTerrainAdversaire().remove(message.getIndex());
 						if (((Serviteur)(carte.getCard())).getNbVie()>0){
-							carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
 							controller.getArea().getjPanelTerrainAdversaire().add(carte);
 						}
-						carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
-						controller.getArea().getjPanelTerrainAdversaire().remove(message.getIndex());
-						controller.getArea().getjPanelTerrainAdversaire().add(carte);
 						controller.getArea().revalidate();
 						controller.getArea().repaint();
 					}

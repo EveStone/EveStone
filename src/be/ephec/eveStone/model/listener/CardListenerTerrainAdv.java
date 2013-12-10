@@ -78,7 +78,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 					degats=((Dommage)cardAttacking.getCard()).getDegats();
 				if (makeDommage(arg0)){
 					dommageClicked((CardPanel)arg0.getComponent(), degats);
-					sendModifCarte(cardAttacking, (CardPanel)arg0.getComponent(), arg0);
+					sendModifCarte(cardAttacking, (CardPanel)arg0.getComponent());
 					degats=((Serviteur)((CardPanel)arg0.getComponent()).getCard()).getNbDommage();
 					if(cardAttacking.getCard() instanceof Serviteur){
 						if (cardAttacking.getCard() instanceof Invisible){
@@ -86,7 +86,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 							((Invisible)cardAttacking.getCard()).setInvisible(false);
 						}
 						dommageClicked(cardAttacking, degats);
-						sendModifCarte((CardPanel)arg0.getComponent(), cardAttacking, arg0);
+						sendModifCarteBack((CardPanel)arg0.getComponent(), cardAttacking);
 						MouseListener ml[]=cardAttacking.getMouseListeners();
 						((CardListenerTerrain)ml[0]).setCanAttack(false);
 						for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
@@ -117,34 +117,57 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			arg0.getComponent().setCursor(notTargetable);
 		}
 	}
-	public void sendModifCarte(CardPanel cAttacking, CardPanel cAttacked, MouseEvent e)
+	public void sendModifCarte(CardPanel cAttacking, CardPanel cAttacked)
 	{
 
 
 		try {
 			if (controller.getMyClient() == null)
 			{
-
-				System.out.println("coucou");
-				Component[] list = ((JPanel)e.getComponent().getParent()).getComponents();
-				int i=0;
-				for(i=0; i<controller.getArea().getjPanelTerrainAdversaire().getComponentCount(); i++){
-					if(list[i]==((CardPanel)e.getComponent()))
-						break;
-				}
+				// Coté Serveur
+				int i = retrieveIndex(getTerrainAdv(), cAttacked);
 				System.out.println("INDICE CARTE : "+i);
+				//Envoi carte attaquante
 				controller.getMyClientServer().getOos().writeObject(new ObjectSend(2, cAttacked, i));
-				System.out.println("coucou");
-				controller.getMyClientServer().getOos().writeObject(new ObjectSend(3, cAttacking));
-				System.out.println("coucou");
-				controller.getMyClient().getOos().writeObject(new ObjectSend(2, cAttacking));
-				System.out.println("coucou");
-				controller.getMyClient().getOos().writeObject(new ObjectSend(3, cAttacked));
-
+				i=retrieveIndex(getTerrain(), cAttacking);
+				controller.getMyClientServer().getOos().writeObject(new ObjectSend(3, cAttacking, i));
+			}
+			else
+			{
+				// Coté client
+				int i = retrieveIndex(getTerrainAdv(), cAttacked);
+				controller.getMyClient().getOos().writeObject(new ObjectSend(2, cAttacked, i));
+				i = retrieveIndex(getTerrain(), cAttacking);
+				controller.getMyClient().getOos().writeObject(new ObjectSend(3, cAttacking, i));
 			}
 		} catch (IOException ey) {
 			// TODO Auto-generated catch block
 			ey.printStackTrace();
+		}
+	}
+	
+	public void sendModifCarteBack(CardPanel cAttacking, CardPanel cAttacked){
+		try{
+			if (controller.getMyClient() == null)
+			{
+				// Coté Serveur
+				int i = retrieveIndex(getTerrainAdv(), cAttacking);
+				System.out.println("INDICE CARTE : "+i);
+				//Envoi carte attaquante
+				controller.getMyClientServer().getOos().writeObject(new ObjectSend(2, cAttacking, i));
+				i=retrieveIndex(getTerrain(), cAttacked);
+				controller.getMyClientServer().getOos().writeObject(new ObjectSend(3, cAttacked, i));
+			}
+			else
+			{
+				// Coté client
+				int i = retrieveIndex(getTerrainAdv(), cAttacking);
+				controller.getMyClient().getOos().writeObject(new ObjectSend(2, cAttacking, i));
+				i = retrieveIndex(getTerrain(), cAttacked);
+				controller.getMyClient().getOos().writeObject(new ObjectSend(3, cAttacked, i));
+			}
+		}catch(IOException e){
+			e.printStackTrace();
 		}
 	}
 	@Override
@@ -197,6 +220,17 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	public void setCardAttacking(CardPanel cardAttacking) {
 		this.cardAttacking = cardAttacking;
 	}
+	
+	public int retrieveIndex(JPanel toFind, CardPanel card){
+		Component[] list = toFind.getComponents();
+		int i=0;
+		for(i=0; i<controller.getArea().getjPanelTerrainAdversaire().getComponentCount(); i++){
+			if(list[i]==card)
+				return i;
+		}
+		return -1;
+	}
+	
 	/**
 	 * Méthode qui permet de définir si la cible est une cible attaquable
 	 * @param e la source du clic
@@ -241,6 +275,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		}
 		if (((Serviteur)card.getCard()).getNbVie() == 0){
 			card.setVisible(false);
+			card.getParent().remove(card);
 			System.out.println(""+getTerrainAdv().getComponentCount());
 		}
 	}
