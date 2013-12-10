@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,6 +22,8 @@ public class Reception implements Runnable {
 	private ObjectSend message = null;
 	private Area area = null;
 	private boolean check = false;
+	
+	private JLabel label = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/CarteDosV3.png")));
 
 	public Reception(Area area,ObjectInputStream ois){
 		this.ois = ois;
@@ -39,6 +42,7 @@ public class Reception implements Runnable {
 					{
 						System.out.println("Coucou ca passe");
 						area.getjPanelTerrainAdversaire().add((JLabel) message.getObj());
+						area.getjPanelMainAdversaire().remove(label);
 						area.revalidate();
 						area.repaint();
 					}

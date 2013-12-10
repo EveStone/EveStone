@@ -138,41 +138,16 @@ public class Controller {
 		piocheDepart();
 		initSortHero(area.getjLabelSortHeroique());
 		
-		ObjectSend message = null;
-		if (myClient == null)
-		{
-			try {
-				message = (ObjectSend)myClientServer.getOis().readObject();
-				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
-				this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
-					public void mouseClicked(MouseEvent evt){
-						jButtonFinTourClicked(evt);
-					}
-				});
-			} catch (IOException | ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else 
-		{
-			try {
-				message = (ObjectSend)myClient.getOis().readObject();
-				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
-				this.area.getFinTourButton().setEnabled(false);//mise en false car c'est le serveur qui commence a jouer
-				Thread t = new Thread(new Reception(area , myClient.getOis()));
-				t.start();
-			} catch (IOException | ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		this.adverseHero = (Hero)message.getObj();
+		connexionStarted();
 		
 		this.area.getjLabelHerosAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getImage())));
 		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero, area));
 		this.area.getjLabelSortHeroiqueAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getSortHero().getImage())));
+		this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent evt){
+				jButtonFinTourClicked(evt);
+			}
+		});
 		
 		/*
 		// Test
@@ -395,32 +370,6 @@ public class Controller {
 		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
 		setCanAttack();
 		
-		if (myClient == null)
-		{
-			try {
-				myClientServer.getOos().writeObject(new ObjectSend(5,"Stop"));
-				Thread t = new Thread(new Reception(area , myClientServer.getOis()));
-				t.start();
-				this.area.getFinTourButton().setEnabled(false);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else 
-		{
-			try {
-				myClient.getOos().writeObject(new ObjectSend(5,"Stop"));
-				Thread t = new Thread(new Reception(area , myClient.getOis()));
-				t.start();
-				this.area.getFinTourButton().setEnabled(false);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		
 		MouseListener ml[] = area.getjLabelSortHeroique().getMouseListeners();
 		((SortHerosListener)ml[0]).setEnable(true);
 		this.area.revalidate();
@@ -456,6 +405,9 @@ public class Controller {
 	{
 		this.rules.dispose();
 	}
+	
+	
+	//Partie NET
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
 		try {
@@ -486,6 +438,36 @@ public class Controller {
 		this.connexion.dispose();
 		this.start.getjButtonChoixHeros().setEnabled(true);
 		this.start.getjButtonConfig().setEnabled(false);
+	}
+	public void connexionStarted()
+	{
+		ObjectSend message = null;
+		if (myClient == null)
+		{
+			try {
+				message = (ObjectSend)myClientServer.getOis().readObject();
+				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
+				Thread tClientServer = new Thread(new Reception(area , myClientServer.getOis()));
+				tClientServer.start();
+			} catch (IOException | ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else 
+		{
+			try {
+				message = (ObjectSend)myClient.getOis().readObject();
+				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
+				Thread tClient = new Thread(new Reception(area , myClient.getOis()));
+				tClient.start();
+			} catch (IOException | ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		this.adverseHero = (Hero)message.getObj();
 	}
 
 	public MyClient getMyClient() {
