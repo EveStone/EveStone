@@ -129,13 +129,13 @@ public class Area extends JFrame {
 				jLabelHerosAdversaire = new JLabel();
 				background.add(jLabelHerosAdversaire);
 				jLabelHerosAdversaire.setText(" ");
-				jLabelHerosAdversaire.setBounds(542, 151, 117, 120);
+				jLabelHerosAdversaire.setBounds(542, 151, 126, 127);
 			}
 			{
 				jLabelSortHeroiqueAdversaire = new JLabel();
 				background.add(jLabelSortHeroiqueAdversaire);
 				jLabelSortHeroiqueAdversaire.setText(" ");
-				jLabelSortHeroiqueAdversaire.setBounds(686, 175, 79, 83);
+				jLabelSortHeroiqueAdversaire.setBounds(686, 172, 79, 86);
 			}
 			{
 				jPanelMainAdversaire = new JPanel();
