@@ -1,8 +1,10 @@
 package be.ephec.eveStone.model.listener;
 
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,6 +16,8 @@ import be.ephec.eveStone.model.Invisible;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
+import be.ephec.eveStone.model.net.ObjectSend;
+import be.ephec.eveStone.model.net.client.MyClient;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 /**
@@ -33,7 +37,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	private JLabel labelSort;
 	private JLabel heros;
 	private Controller controller;
-	
+
 	private static final Cursor targetable = new Cursor(Cursor.CROSSHAIR_CURSOR);
 	private static final Cursor notTargetable = new Cursor(Cursor.DEFAULT_CURSOR);
 
@@ -108,9 +112,62 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			((HerosListener)ml[0]).setCardAttacking(null);
 			((HerosListener)ml[0]).setSortAttacking(null);
 			arg0.getComponent().setCursor(notTargetable);
+
+			sendModifCarte();
 		}
 	}
+	public void sendModifCarte()
+	{
 
+
+		try {
+			if (controller.getMyClient() == null)
+			{
+				for(int i=0; i<getTerrainAdv().getComponentCount(); i++)
+				{
+					System.out.println("coucou");
+					controller.getMyClientServer().getOos().writeObject(new ObjectSend(2, getTerrainAdv().getComponent(i)));
+				}
+			}
+			else
+			{
+				for(int i=0; i<getTerrainAdv().getComponentCount(); i++)
+				{
+					System.out.println("coucou");
+					controller.getMyClient().getOos().writeObject(new ObjectSend(2, getTerrainAdv().getComponent(i)));
+				}
+
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			if (controller.getMyClient() == null)
+			{
+				for(int i=0; i<getTerrain().getComponentCount(); i++)
+				{
+					System.out.println("coucou");
+					controller.getMyClientServer().getOos().writeObject(new ObjectSend(3, getTerrain().getComponent(i)));
+					
+				}
+			}
+			else
+			{
+				for(int i=0; i<getTerrain().getComponentCount(); i++)
+				{
+					System.out.println("coucou");
+					controller.getMyClient().getOos().writeObject(new ObjectSend(3, getTerrain().getComponent(i)));
+				}
+
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		super.mouseEntered(arg0);

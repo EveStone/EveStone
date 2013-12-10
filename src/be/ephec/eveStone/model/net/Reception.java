@@ -1,6 +1,7 @@
 package be.ephec.eveStone.model.net;
 
 
+import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -53,36 +54,34 @@ public class Reception implements Runnable {
 					}
 					else if (choix == 2) //pour les changements de degats de carte attaqué
 					{
+						System.out.println("Je change mon terrain");
 						CardPanel carte = (CardPanel) message.getObj();
-						controller.getArea().getjPanelTerrain().remove(carte);
+						Container c = carte.getParent();
+						c.remove(carte);
 						carte.addMouseListener(new CardListenerTerrain(carte, controller.getArea()));
 						controller.getArea().getjPanelTerrain().add(carte);
 						controller.getArea().revalidate();
 						controller.getArea().repaint();
 						
 					}
-					else if (choix == 3) //Pour les changements de suppression de carte attaqué
+					else if (choix == 3) 
 					{
+						System.out.println("Je change le terrain adverse");
 						CardPanel carte = (CardPanel) message.getObj();
-						controller.getArea().getjPanelTerrain().remove(carte);
-						controller.getArea().revalidate();
-						controller.getArea().repaint();
-					}
-					else if (choix == 4) // //pour les changements de degats de carte qui attaque
-					{
-						CardPanel carte = (CardPanel) message.getObj();
-						controller.getArea().getjPanelTerrainAdversaire().remove(carte);
+						Container c = carte.getParent();
+						c.remove(carte);
 						carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
 						controller.getArea().getjPanelTerrainAdversaire().add(carte);
 						controller.getArea().revalidate();
 						controller.getArea().repaint();
 					}
-					else if (choix == 5)//Pour les changements de suppression de carte qui attaque
+					else if (choix == 4) 
 					{
-						CardPanel carte = (CardPanel) message.getObj();
-						controller.getArea().getjPanelTerrainAdversaire().remove(carte);
-						controller.getArea().revalidate();
-						controller.getArea().repaint();
+					
+					}
+					else if (choix == 5)
+					{
+						
 					}
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block

@@ -335,5 +335,11 @@ public class Area extends JFrame {
 		this.revalidate();
 		this.repaint();
 	}
+
+	public void setjPanelTerrain(JPanel jPanelTerrain) {
+		this.jPanelTerrain = jPanelTerrain;
+		this.revalidate();
+		this.repaint();
+	}
 	
 }
