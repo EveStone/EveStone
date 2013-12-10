@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Hero;
-import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.listener.CardListenerMain;
 import be.ephec.eveStone.model.listener.CardListenerTerrain;
 import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
@@ -60,7 +59,10 @@ public class Reception implements Runnable {
 					{
 						System.out.println("Je change mon terrain");
 						CardPanel carte = (CardPanel) message.getObj();
+<<<<<<< HEAD
 						controller.getArea().getjPanelTerrain().remove(message.getIndex());
+=======
+>>>>>>> branch 'master' of https://github.com/EveStone/EveStone.git
 						carte.addMouseListener(new CardListenerTerrain(carte, controller.getArea()));
 						if (((Serviteur)(carte.getCard())).getNbVie()>0){
 							carte.addMouseListener(new CardListenerTerrain(carte, controller.getArea()));
@@ -73,11 +75,16 @@ public class Reception implements Runnable {
 					{
 						System.out.println("Je change le terrain adverse");
 						CardPanel carte = (CardPanel) message.getObj();
+<<<<<<< HEAD
 						controller.getArea().getjPanelTerrainAdversaire().remove(message.getIndex());
 						if (((Serviteur)(carte.getCard())).getNbVie()<0){
 							carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
 							controller.getArea().getjPanelTerrainAdversaire().add(carte);
 						}
+=======
+						carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
+						controller.getArea().getjPanelTerrainAdversaire().add(carte);
+>>>>>>> branch 'master' of https://github.com/EveStone/EveStone.git
 						controller.getArea().revalidate();
 						controller.getArea().repaint();
 					}

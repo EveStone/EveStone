@@ -19,6 +19,7 @@ import be.ephec.eveStone.model.listener.BuffingListener;
 import be.ephec.eveStone.model.listener.CardListenerMain;
 import be.ephec.eveStone.model.listener.CardListenerTerrain;
 import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
+import be.ephec.eveStone.model.listener.FinTourListener;
 import be.ephec.eveStone.model.listener.HerosListener;
 import be.ephec.eveStone.model.listener.SortHerosListener;
 import be.ephec.eveStone.model.net.ObjectSend;
@@ -131,24 +132,30 @@ public class Controller {
 	 * Contsruit la zone de jeu qui permet de jouer contre un adversaire.
 	 */
 	public void makeArea(){
-		
+
 		this.area = new Area(this);
 		this.area.getjLabelHeros().setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getImage())));
 		nbTour=1;
 		piocheDepart();
 		initSortHero(area.getjLabelSortHeroique());
-		
+
 		connexionStarted();
-		
+
 		this.area.getjLabelHerosAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getImage())));
 		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero, area));
 		this.area.getjLabelSortHeroiqueAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getSortHero().getImage())));
-		this.area.getFinTourButton().addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent evt){
-				jButtonFinTourClicked(evt);
-			}
-		});
+		this.area.getFinTourButton().addMouseListener(new FinTourListener(this));
 		
+		if (myClient == null)
+		{
+			area.getFinTourButton().setEnabled(true);
+		}
+		else
+		{
+			area.getFinTourButton().setEnabled(false);
+			stateOfEnd();
+		}
+
 		/*
 		// Test
 		CardPanel carteEnnemi = new CardPanel();
@@ -169,6 +176,21 @@ public class Controller {
 		 */
 	}
 
+	public void stateOfEnd()
+	{
+		MouseListener mlSh[] = area.getjLabelSortHeroique().getMouseListeners();
+		((SortHerosListener)mlSh[0]).setEnable(false);
+		for (int i = 0; i<area.getjPanelTerrain().getComponentCount(); i++)
+		{
+			MouseListener ml[] = area.getjPanelTerrain().getComponent(i).getMouseListeners();
+			area.getjPanelTerrain().getComponent(i).removeMouseListener(ml[0]);
+		}
+		for (int i = 0; i<area.getjPanelMain().getComponentCount(); i++)
+		{
+			MouseListener ml[] = area.getjPanelMain().getComponent(i).getMouseListeners();
+			area.getjPanelMain().getComponent(i).removeMouseListener(ml[0]);
+		}
+	}
 	/**
 	 * Affiche la Zone de jeu
 	 */
@@ -347,34 +369,13 @@ public class Controller {
 				area.getPanelMain().remove(label);
 				label.showInfo(false);
 				label.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(label.getCard().getImage())).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
-				
+
 				area.revalidate();
 				area.repaint();
 			}
 		}
 		else
 			JOptionPane.showMessageDialog(null, "Ressources Inssufisantes !");
-	}
-
-	protected void jButtonFinTourClicked(MouseEvent evt) {
-		nbTour++;
-		if (nbTour < NB_MAX_RESSOURCE)
-		{
-			myHero.setRessource(nbTour);
-		}
-		else
-		{
-			myHero.setRessource(NB_MAX_RESSOURCE);
-		}
-		setTargetableFalse();
-		this.area.getjLabelRessource().setText("<html><font color=white>"+myHero.getRessource()+"</font></html>");
-		setCanAttack();
-		
-		MouseListener ml[] = area.getjLabelSortHeroique().getMouseListeners();
-		((SortHerosListener)ml[0]).setEnable(true);
-		this.area.revalidate();
-		this.area.repaint();
-		pioche();
 	}
 
 	private void setCanAttack(){
@@ -405,8 +406,8 @@ public class Controller {
 	{
 		this.rules.dispose();
 	}
-	
-	
+
+
 	//Partie NET
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
@@ -470,6 +471,7 @@ public class Controller {
 		this.adverseHero = (Hero)message.getObj();
 	}
 
+
 	public MyClient getMyClient() {
 		return myClient;
 	}
@@ -477,7 +479,7 @@ public class Controller {
 	public ClientServer getMyClientServer() {
 		return myClientServer;
 	}
-	
+
 	public void setMyClient(MyClient myClient) {
 		this.myClient = myClient;
 	}
@@ -490,7 +492,7 @@ public class Controller {
 	{
 		return server;
 	}
-	
+
 
 
 }

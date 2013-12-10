@@ -18,6 +18,11 @@ public class ObjectSend implements Serializable {
 	 */
 	private int action;//Permet de dire quelle action l'adversaire � effectuer et ainsi facilit� les casting
 	private Object obj;
+	private Object cAttack;
+	private Object cAttacked;
+	private int indexCAttack;
+	private int indexCAttacked;
+	private int indice;
 	
 	/**
 	 * Constructeur de la classe ObjectSend
@@ -27,6 +32,20 @@ public class ObjectSend implements Serializable {
 	public ObjectSend(int action, Object obj) {
 		this.action = action;
 		this.obj = obj;
+	}
+	
+	public ObjectSend(int action, Object obj, int index){
+		this.action=action;
+		this.obj=obj;
+		this.indice=index;
+	}
+	
+	public ObjectSend(int action, Object cAttack, Object cAttacked, int indexCAttack, int indexCAttacked){
+		this.action=action;
+		this.cAttack=cAttack;
+		this.cAttacked=cAttacked;
+		this.indexCAttack=indexCAttack;
+		this.indexCAttacked=indexCAttacked;
 	}
 
 	public int getAction() {
@@ -45,6 +64,8 @@ public class ObjectSend implements Serializable {
 		this.obj = obj;
 	}
 	
-	
+	public int getIndex(){
+		return indice;
+	}
 
 }

@@ -118,5 +118,10 @@ public class CardPanel extends JLabel {
 		super.add(comp);
 		return comp;
 	}
+
+	public JButton getJouer() {
+		return jouer;
+	}
+	
 	
 }

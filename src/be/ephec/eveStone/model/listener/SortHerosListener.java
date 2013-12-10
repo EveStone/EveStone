@@ -36,6 +36,7 @@ public class SortHerosListener implements MouseListener{
 	private boolean offensive;
 	private JLabel ressource;
 	private JLabel labelHeros;
+	private Area area;
 	
 	private static final Cursor dispo = new Cursor(Cursor.HAND_CURSOR);
 	private static final Cursor nonDispo = new Cursor(Cursor.DEFAULT_CURSOR);
@@ -49,6 +50,7 @@ public class SortHerosListener implements MouseListener{
 		this.heros=heros;
 		this.ressource=area.getjLabelRessource();
 		this.labelHeros=area.getjLabelHerosAdversaire();
+		this.area = area;
 		offensive=isOffensive();
 	}
 	/**
@@ -84,7 +86,7 @@ public class SortHerosListener implements MouseListener{
 					minion.setCard(new Serviteur("Hornet", 2, "img/FregateCard/hornet.png", "Drone d'attaque léger", 2, 2));
 					minion.makeCard();
 					minion.showInfo(false);
-					minion.addMouseListener(new CardListenerTerrain(minion, (Area)infoLabel.getParent().getParent().getParent().getParent()));
+					minion.addMouseListener(new CardListenerTerrain(minion, area));
 					System.out.println(minion.getCard().getNom());
 					terrain.add(minion);
 					terrain.revalidate();
