@@ -341,5 +341,10 @@ public class Area extends JFrame {
 		this.revalidate();
 		this.repaint();
 	}
+
+	public JPanel getjPanelMain() {
+		return jPanelMain;
+	}
+	
 	
 }
