@@ -447,7 +447,7 @@ public class Controller {
 			try {
 				message = (ObjectSend)myClientServer.getOis().readObject();
 				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
-				Thread tClientServer = new Thread(new Reception(area , myClientServer.getOis()));
+				Thread tClientServer = new Thread(new Reception(this , myClientServer.getOis()));
 				tClientServer.start();
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -459,7 +459,7 @@ public class Controller {
 			try {
 				message = (ObjectSend)myClient.getOis().readObject();
 				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
-				Thread tClient = new Thread(new Reception(area , myClient.getOis()));
+				Thread tClient = new Thread(new Reception(this , myClient.getOis()));
 				tClient.start();
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -490,6 +490,7 @@ public class Controller {
 	{
 		return server;
 	}
+	
 
 
 }

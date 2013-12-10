@@ -2,16 +2,19 @@ package be.ephec.eveStone.model.listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Dommage;
 import be.ephec.eveStone.model.Invisible;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
+import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 /**
@@ -30,6 +33,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	private SortHeroique sort;
 	private JLabel labelSort;
 	private JLabel heros;
+	private Controller controller;
 
 	/**
 	 * Constructeur
@@ -38,9 +42,10 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	 * @param terrain le terrain du joueur
 	 * @param terrainAdv le terrain de son adversaire
 	 */
-	public CardListenerTerrainAdv(CardPanel card, Area area) {
-		super(card, area);
-		this.heros=area.getjLabelHerosAdversaire();
+	public CardListenerTerrainAdv(CardPanel card,Controller controller) {
+		super(card, controller.getArea());
+		this.controller = controller;
+		this.heros=controller.getArea().getjLabelHerosAdversaire();
 		isTargetable=false;
 	}
 	/**
@@ -65,14 +70,14 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 				else
 					degats=((Dommage)cardAttacking.getCard()).getDegats();
 				if (makeDommage(arg0)){
-					dommageClicked((CardPanel)arg0.getComponent(), degats);
+					dommageClicked((CardPanel)arg0.getComponent(), degats, false);
 					degats=((Serviteur)((CardPanel)arg0.getComponent()).getCard()).getNbDommage();
 					if(cardAttacking.getCard() instanceof Serviteur){
 						if (cardAttacking.getCard() instanceof Invisible){
 							if (((Invisible)cardAttacking.getCard()).isInvisible());
 							((Invisible)cardAttacking.getCard()).setInvisible(false);
 						}
-						dommageClicked(cardAttacking, degats);
+						dommageClicked(cardAttacking, degats, true);
 						MouseListener ml[]=cardAttacking.getMouseListeners();
 						((CardListenerTerrain)ml[0]).setCanAttack(false);
 						for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
@@ -86,7 +91,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			else{
 				degats=sort.getDegats();
 				if(makeDommage(arg0)){
-					dommageClicked(((CardPanel)arg0.getComponent()), degats);
+					dommageClicked(((CardPanel)arg0.getComponent()), degats, false);
 					MouseListener ml[] = labelSort.getMouseListeners();
 					((SortHerosListener)ml[0]).setEnable(false);
 					for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
@@ -182,19 +187,54 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	 * @param card Le Label contenant la carte
 	 * @param dommage Le nombre de point de dégats a retirr à la carte
 	 */
-	protected void dommageClicked(CardPanel card, final int dommage)
+	protected void dommageClicked(CardPanel card, final int dommage, boolean carteAttaque)
 	{
 		if (((Serviteur) (card.getCard())).getNbVie()-dommage >0){
 			((Serviteur)(card.getCard())).setNbVie(((Serviteur)(card.getCard())).getNbVie() - dommage);
 			card.update();
+			if (carteAttaque = false)
+			{
+				sendDommageCard(card, 2);
+			}
+			else
+			{
+				sendDommageCard(card, 4);
+			}
 		}
 		else{
 			((Serviteur)card.getCard()).setNbVie(0);
-		}
-		if (((Serviteur)card.getCard()).getNbVie() == 0){
 			card.setVisible(false);
 			card.getParent().remove(card);
-			System.out.println(""+getTerrainAdv().getComponentCount());
+			if (carteAttaque = false)
+			{
+				sendDommageCard(card, 3);
+			}
+			else
+			{
+				sendDommageCard(card, 5);
+			}
+		}
+	}
+	private void sendDommageCard(CardPanel card, int choix)
+	{
+		if (controller.getMyClient() == null)
+		{
+			try {
+				controller.getMyClientServer().getOos().writeObject(new ObjectSend(choix, card));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else 
+		{
+			try {
+				controller.getMyClient().getOos().writeObject(new ObjectSend(choix, card));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 

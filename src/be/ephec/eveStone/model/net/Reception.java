@@ -13,21 +13,24 @@ import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Hero;
+import be.ephec.eveStone.model.listener.CardListenerTerrain;
+import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
 import be.ephec.eveStone.vieuw.Area;
+import be.ephec.eveStone.vieuw.container.CardPanel;
 
 
 public class Reception implements Runnable {
 
 	private ObjectInputStream ois;
 	private ObjectSend message = null;
-	private Area area = null;
+	private Controller controller;
 	private boolean check = false;
 	
 	private JLabel label = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/CarteDosV3.png")));
 
-	public Reception(Area area,ObjectInputStream ois){
+	public Reception(Controller controller,ObjectInputStream ois){
 		this.ois = ois;
-		this.area = area;
+		this.controller = controller;
 	}
 
 	public void run() {
@@ -40,27 +43,46 @@ public class Reception implements Runnable {
 					int choix = message.getAction();
 					if (choix == 1) //pour les changements de jPanelTerrainAdversaire
 					{
-						System.out.println("Coucou ca passe");
-						area.getjPanelTerrainAdversaire().add((JLabel) message.getObj());
-						area.getjPanelMainAdversaire().remove(label);
-						area.revalidate();
-						area.repaint();
+						CardPanel carte = (CardPanel) message.getObj();
+						carte.showInfo(false);
+						carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
+						controller.getArea().getjPanelTerrainAdversaire().add(carte);
+						controller.getArea().getjPanelMainAdversaire().remove(label);
+						controller.getArea().revalidate();
+						controller.getArea().repaint();
 					}
-					else if (choix == 2) //pour les changements de JpanelTerrain
+					else if (choix == 2) //pour les changements de degats de carte attaqué
 					{
+						CardPanel carte = (CardPanel) message.getObj();
+						controller.getArea().getjPanelTerrain().remove(carte);
+						carte.addMouseListener(new CardListenerTerrain(carte, controller.getArea()));
+						controller.getArea().getjPanelTerrain().add(carte);
+						controller.getArea().revalidate();
+						controller.getArea().repaint();
 						
 					}
-					else if (choix == 3) //Pour les changements de point de vie du hero adverse
+					else if (choix == 3) //Pour les changements de suppression de carte attaqué
 					{
-					
+						CardPanel carte = (CardPanel) message.getObj();
+						controller.getArea().getjPanelTerrain().remove(carte);
+						controller.getArea().revalidate();
+						controller.getArea().repaint();
 					}
-					else if (choix == 4) //
+					else if (choix == 4) // //pour les changements de degats de carte qui attaque
 					{
-						
+						CardPanel carte = (CardPanel) message.getObj();
+						controller.getArea().getjPanelTerrainAdversaire().remove(carte);
+						carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
+						controller.getArea().getjPanelTerrainAdversaire().add(carte);
+						controller.getArea().revalidate();
+						controller.getArea().repaint();
 					}
-					else if (choix == 5)//Pour les fin de tour
+					else if (choix == 5)//Pour les changements de suppression de carte qui attaque
 					{
-						check = true;
+						CardPanel carte = (CardPanel) message.getObj();
+						controller.getArea().getjPanelTerrainAdversaire().remove(carte);
+						controller.getArea().revalidate();
+						controller.getArea().repaint();
 					}
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
@@ -68,7 +90,6 @@ public class Reception implements Runnable {
 				}
 			}
 		}
-		this.area.getFinTourButton().setEnabled(true);
 	}
 }
 
