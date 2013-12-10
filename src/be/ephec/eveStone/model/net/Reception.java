@@ -4,6 +4,7 @@ package be.ephec.eveStone.model.net;
 import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -14,8 +15,11 @@ import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Hero;
+import be.ephec.eveStone.model.Serviteur;
+import be.ephec.eveStone.model.listener.CardListenerMain;
 import be.ephec.eveStone.model.listener.CardListenerTerrain;
 import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
+import be.ephec.eveStone.model.listener.SortHerosListener;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
@@ -56,22 +60,24 @@ public class Reception implements Runnable {
 					{
 						System.out.println("Je change mon terrain");
 						CardPanel carte = (CardPanel) message.getObj();
-						Container c = carte.getParent();
-						c.remove(carte);
+						controller.getArea().getjPanelTerrain().remove(message.getIndex());
 						carte.addMouseListener(new CardListenerTerrain(carte, controller.getArea()));
-						controller.getArea().getjPanelTerrain().add(carte);
+						if (((Serviteur)(carte.getCard())).getNbVie()>0){
+							carte.addMouseListener(new CardListenerTerrain(carte, controller.getArea()));
+							controller.getArea().getjPanelTerrain().add(carte);
+						}
 						controller.getArea().revalidate();
 						controller.getArea().repaint();
-						
 					}
 					else if (choix == 3) 
 					{
 						System.out.println("Je change le terrain adverse");
 						CardPanel carte = (CardPanel) message.getObj();
-						Container c = carte.getParent();
-						c.remove(carte);
-						carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
-						controller.getArea().getjPanelTerrainAdversaire().add(carte);
+						controller.getArea().getjPanelTerrainAdversaire().remove(message.getIndex());
+						if (((Serviteur)(carte.getCard())).getNbVie()<0){
+							carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
+							controller.getArea().getjPanelTerrainAdversaire().add(carte);
+						}
 						controller.getArea().revalidate();
 						controller.getArea().repaint();
 					}
@@ -79,8 +85,20 @@ public class Reception implements Runnable {
 					{
 					
 					}
-					else if (choix == 5)
+					else if (choix == 5) //bouton fin de tour
 					{
+						controller.getArea().getFinTourButton().setEnabled(true);
+						MouseListener ml[] = controller.getArea().getjLabelSortHeroique().getMouseListeners();
+						((SortHerosListener)ml[0]).setEnable(true);
+						for (int i = 0; i<controller.getArea().getjPanelTerrain().getComponentCount(); i++)
+						{
+							controller.getArea().getjPanelTerrain().getComponent(i).addMouseListener(new CardListenerTerrain((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i),controller.getArea()));
+						}
+						for (int i = 0; i<controller.getArea().getjPanelMain().getComponentCount(); i++)
+						{
+							controller.getArea().getjPanelMain().getComponent(i).addMouseListener(new CardListenerMain((CardPanel)controller.getArea().getjPanelMain().getComponent(i), controller.getArea().getLabelInfo()));
+						}
+						controller.pioche();
 						
 					}
 				} catch (ClassNotFoundException | IOException e) {
