@@ -1,5 +1,6 @@
 package be.ephec.eveStone.model.listener;
 
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -23,6 +24,7 @@ public class BuffingListener implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		buffClicked(arg0, getBuff(cardBuffing.getCard()));
+		arg0.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		for(int i=0; i<terrain.getComponentCount(); i++){
 			if (!terrain.getComponent(i).equals(cardBuffing)){
 				MouseListener ml[] = terrain.getComponent(i).getMouseListeners();
@@ -34,7 +36,7 @@ public class BuffingListener implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
+		arg0.getComponent().setCursor(new Cursor(Cursor.MOVE_CURSOR));
 	}
 
 	@Override

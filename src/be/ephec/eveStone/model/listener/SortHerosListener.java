@@ -1,5 +1,6 @@
 package be.ephec.eveStone.model.listener;
 
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -35,6 +36,9 @@ public class SortHerosListener implements MouseListener{
 	private boolean offensive;
 	private JLabel ressource;
 	private JLabel labelHeros;
+	
+	private static final Cursor dispo = new Cursor(Cursor.HAND_CURSOR);
+	private static final Cursor nonDispo = new Cursor(Cursor.DEFAULT_CURSOR);
 
 	public SortHerosListener(Hero heros, Area area){
 		super();
@@ -102,6 +106,10 @@ public class SortHerosListener implements MouseListener{
 		infoLabel.setText("<html><font color=white>Carte : "+heros.getSortHero().getNom()+"<br/><br/>"
 				+"Type : Sort Héros<br/><br/>"
 				+"Description : "+heros.getSortHero().getDescription()+"</font></html>");
+		if(enable)
+			arg0.getComponent().setCursor(dispo);
+		else
+			arg0.getComponent().setCursor(nonDispo);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package be.ephec.eveStone.model.listener;
 
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -44,6 +45,7 @@ public class CardListenerTerrain extends CardListenerMain{
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
+		System.out.println("Can Attack ? : "+canAttack);
 		if (canAttack){
 			MouseListener ml[];
 			for(int i=0; i<terrainAdv.getComponentCount(); i++){
@@ -62,6 +64,10 @@ public class CardListenerTerrain extends CardListenerMain{
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		super.mouseEntered(arg0);
+		if(canAttack)
+			arg0.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
+		else
+			arg0.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 	@Override

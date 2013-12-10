@@ -45,10 +45,10 @@ public class Controller {
 	private ConnectionFrame connexion;
 	private RulesFrame rules;
 
-	private final int NB_MAX_RESSOURCE = 10;
-	private final int NB_MAX_CARTE_TERRAIN = 7;
-	private final int NB_MAX_CARTE_MAIN = 7;
-	private final int NB_CARTE_DEPART = 4;
+	public final static int NB_MAX_RESSOURCE = 10;
+	public final static int NB_MAX_CARTE_TERRAIN = 7;
+	public final static int NB_MAX_CARTE_MAIN = 7;
+	public final static int NB_CARTE_DEPART = 4;
 
 	//Port serveur
 	private final int NUM_PORT = 2013;
@@ -58,7 +58,7 @@ public class Controller {
 	private ClientServer myClientServer = null;
 	private MyServer server;
 
-	private int nbTour;
+	public static int nbTour;
 
 	public Controller(){
 
@@ -245,7 +245,7 @@ public class Controller {
 	/**
 	 * ajoute une carte a la main, si NB_MAX_CARTE_MAIN non atteint, sinon retire 1 pv au héros
 	 */
-	private void pioche(){
+	public void pioche(){
 		if(area.getPanelMain().getComponentCount()<NB_MAX_CARTE_MAIN){
 			final CardPanel card = new CardPanel();
 			JLabel label = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/CarteDosV3.png")));

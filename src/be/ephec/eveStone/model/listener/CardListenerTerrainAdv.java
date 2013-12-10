@@ -1,8 +1,8 @@
 package be.ephec.eveStone.model.listener;
 
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,7 +14,6 @@ import be.ephec.eveStone.model.Invisible;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
-import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 /**
@@ -34,6 +33,9 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	private JLabel labelSort;
 	private JLabel heros;
 	private Controller controller;
+	
+	private static final Cursor targetable = new Cursor(Cursor.CROSSHAIR_CURSOR);
+	private static final Cursor notTargetable = new Cursor(Cursor.DEFAULT_CURSOR);
 
 	/**
 	 * Constructeur
@@ -42,7 +44,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	 * @param terrain le terrain du joueur
 	 * @param terrainAdv le terrain de son adversaire
 	 */
-	public CardListenerTerrainAdv(CardPanel card,Controller controller) {
+	public CardListenerTerrainAdv(CardPanel card, Controller controller) {
 		super(card, controller.getArea());
 		this.controller = controller;
 		this.heros=controller.getArea().getjLabelHerosAdversaire();
@@ -70,14 +72,14 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 				else
 					degats=((Dommage)cardAttacking.getCard()).getDegats();
 				if (makeDommage(arg0)){
-					dommageClicked((CardPanel)arg0.getComponent(), degats, false);
+					dommageClicked((CardPanel)arg0.getComponent(), degats);
 					degats=((Serviteur)((CardPanel)arg0.getComponent()).getCard()).getNbDommage();
 					if(cardAttacking.getCard() instanceof Serviteur){
 						if (cardAttacking.getCard() instanceof Invisible){
 							if (((Invisible)cardAttacking.getCard()).isInvisible());
 							((Invisible)cardAttacking.getCard()).setInvisible(false);
 						}
-						dommageClicked(cardAttacking, degats, true);
+						dommageClicked(cardAttacking, degats);
 						MouseListener ml[]=cardAttacking.getMouseListeners();
 						((CardListenerTerrain)ml[0]).setCanAttack(false);
 						for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
@@ -91,7 +93,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			else{
 				degats=sort.getDegats();
 				if(makeDommage(arg0)){
-					dommageClicked(((CardPanel)arg0.getComponent()), degats, false);
+					dommageClicked(((CardPanel)arg0.getComponent()), degats);
 					MouseListener ml[] = labelSort.getMouseListeners();
 					((SortHerosListener)ml[0]).setEnable(false);
 					for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
@@ -105,12 +107,17 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			((HerosListener)ml[0]).setTargetable(false);
 			((HerosListener)ml[0]).setCardAttacking(null);
 			((HerosListener)ml[0]).setSortAttacking(null);
+			arg0.getComponent().setCursor(notTargetable);
 		}
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		super.mouseEntered(arg0);
+		if(isTargetable)
+			getCard().setCursor(targetable);
+		else
+			getCard().setCursor(notTargetable);
 	}
 
 	@Override
@@ -187,54 +194,19 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	 * @param card Le Label contenant la carte
 	 * @param dommage Le nombre de point de dégats a retirr à la carte
 	 */
-	protected void dommageClicked(CardPanel card, final int dommage, boolean carteAttaque)
+	protected void dommageClicked(CardPanel card, final int dommage)
 	{
 		if (((Serviteur) (card.getCard())).getNbVie()-dommage >0){
 			((Serviteur)(card.getCard())).setNbVie(((Serviteur)(card.getCard())).getNbVie() - dommage);
 			card.update();
-			if (carteAttaque = false)
-			{
-				sendDommageCard(card, 2);
-			}
-			else
-			{
-				sendDommageCard(card, 4);
-			}
 		}
 		else{
 			((Serviteur)card.getCard()).setNbVie(0);
+		}
+		if (((Serviteur)card.getCard()).getNbVie() == 0){
 			card.setVisible(false);
 			card.getParent().remove(card);
-			if (carteAttaque = false)
-			{
-				sendDommageCard(card, 3);
-			}
-			else
-			{
-				sendDommageCard(card, 5);
-			}
-		}
-	}
-	private void sendDommageCard(CardPanel card, int choix)
-	{
-		if (controller.getMyClient() == null)
-		{
-			try {
-				controller.getMyClientServer().getOos().writeObject(new ObjectSend(choix, card));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else 
-		{
-			try {
-				controller.getMyClient().getOos().writeObject(new ObjectSend(choix, card));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			System.out.println(""+getTerrainAdv().getComponentCount());
 		}
 	}
 

@@ -1,8 +1,13 @@
 package be.ephec.eveStone.model.listener;
 
+import java.awt.BorderLayout;
+import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,6 +29,11 @@ public class HerosListener implements MouseListener{
 	private SortHeroique sortHeroique;
 	private JLabel labelCoque;
 	private JLabel labelStructure;
+	private JLabel anim; 
+	private JLabel herosLabel;
+
+	private static final Cursor targetable = new Cursor(Cursor.CROSSHAIR_CURSOR);
+	private static final Cursor notTargetable = new Cursor(Cursor.DEFAULT_CURSOR);
 
 	public HerosListener(Hero heros, Area area){
 		this.heros=heros;
@@ -37,23 +47,27 @@ public class HerosListener implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
+		System.out.println("Target = "+isTargetable);
 		if (isTargetable){
 			if(!checkProtection()){
 				int degats=0;
 				if(sortHeroique==null){
 					if (cardAttacking.getCard() instanceof Serviteur){
 						degats=((Serviteur)cardAttacking.getCard()).getNbDommage();
-						resetTarget();
 					}
 					else
 						degats=((Dommage)cardAttacking.getCard()).getDegats();
+					resetTarget();
 				}
 				else
 					degats=sortHeroique.getDegats();
+				resetTarget();
 				makeDommage(degats);
+				boum(arg0);
 				updateUI();
 				System.out.println("Coque : "+heros.getNbCoque()+" Struct : "+heros.getNbStructure());
-				}
+				arg0.getComponent().setCursor(notTargetable);
+			}
 			else{
 				JOptionPane.showMessageDialog(null, "L'adversaire a un serviteur sous protection ! Vous devez d'abord l'attaquer !");
 			}
@@ -63,12 +77,14 @@ public class HerosListener implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-
+		if(isTargetable)
+			arg0.getComponent().setCursor(targetable);
+		else
+			arg0.getComponent().setCursor(notTargetable);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -94,11 +110,13 @@ public class HerosListener implements MouseListener{
 	public void setSortAttacking(SortHeroique sort){
 		this.sortHeroique=sort;
 	}
-	
+
 	private void resetTarget(){
 		MouseListener ml[];
-		ml = cardAttacking.getMouseListeners();
-		((CardListenerTerrain)ml[0]).setCanAttack(false);
+		if((cardAttacking!=null) && (!(cardAttacking.getCard() instanceof Dommage))){
+			ml = cardAttacking.getMouseListeners();
+			((CardListenerTerrain)ml[0]).setCanAttack(false);
+		}
 		for(int i=0; i<terrainAdv.getComponentCount(); i++){
 			ml = terrainAdv.getComponent(i).getMouseListeners();
 			((CardListenerTerrainAdv)ml[0]).setCardAttacking(null);
@@ -140,5 +158,30 @@ public class HerosListener implements MouseListener{
 				System.exit(0);
 			}
 		}	
+	}
+
+	private void boum(MouseEvent e){
+		herosLabel = ((JLabel)e.getComponent());
+		herosLabel.setLayout(new BorderLayout());
+		System.out.println("boum");
+		anim = new JLabel();
+		anim.setIcon(new ImageIcon(getClass().getClassLoader().getResource("animation/explosion.gif")));
+		((JLabel)e.getComponent()).add(anim, BorderLayout.CENTER);
+		
+		ActionListener stop = new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				anim.setIcon(null);
+				herosLabel.revalidate();
+				herosLabel.repaint();
+				herosLabel.remove(anim);
+			}
+			
+		};
+		javax.swing.Timer thread = new javax.swing.Timer(300, stop);
+		thread.setRepeats(false);
+		thread.start();
 	}
 }
