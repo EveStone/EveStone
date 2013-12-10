@@ -1,5 +1,6 @@
 package be.ephec.eveStone.model.listener;
 
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
@@ -77,6 +78,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 					degats=((Dommage)cardAttacking.getCard()).getDegats();
 				if (makeDommage(arg0)){
 					dommageClicked((CardPanel)arg0.getComponent(), degats);
+					sendModifCarte(cardAttacking, (CardPanel)arg0.getComponent(), arg0);
 					degats=((Serviteur)((CardPanel)arg0.getComponent()).getCard()).getNbDommage();
 					if(cardAttacking.getCard() instanceof Serviteur){
 						if (cardAttacking.getCard() instanceof Invisible){
@@ -84,6 +86,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 							((Invisible)cardAttacking.getCard()).setInvisible(false);
 						}
 						dommageClicked(cardAttacking, degats);
+						sendModifCarte((CardPanel)arg0.getComponent(), cardAttacking, arg0);
 						MouseListener ml[]=cardAttacking.getMouseListeners();
 						((CardListenerTerrain)ml[0]).setCanAttack(false);
 						for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
@@ -112,46 +115,36 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			((HerosListener)ml[0]).setCardAttacking(null);
 			((HerosListener)ml[0]).setSortAttacking(null);
 			arg0.getComponent().setCursor(notTargetable);
-
-			sendModifCarte();
 		}
 	}
-	public void sendModifCarte()
+	public void sendModifCarte(CardPanel cAttacking, CardPanel cAttacked, MouseEvent e)
 	{
 
 
 		try {
 			if (controller.getMyClient() == null)
 			{
-				for(int i=0; i<getTerrainAdv().getComponentCount(); i++)
-				{
-					System.out.println("coucou");
-					controller.getMyClientServer().getOos().writeObject(new ObjectSend(2, getTerrainAdv().getComponent(i)));
+
+				System.out.println("coucou");
+				Component[] list = ((JPanel)e.getComponent().getParent()).getComponents();
+				int i=0;
+				for(i=0; i<controller.getArea().getjPanelTerrainAdversaire().getComponentCount(); i++){
+					if(list[i]==((CardPanel)e.getComponent()))
+						break;
 				}
-				for(int i=0; i<getTerrain().getComponentCount(); i++)
-				{
-					System.out.println("coucou");
-					controller.getMyClientServer().getOos().writeObject(new ObjectSend(3, getTerrain().getComponent(i)));
-					
-				}
-			}
-			else
-			{
-				for(int i=0; i<getTerrainAdv().getComponentCount(); i++)
-				{
-					System.out.println("coucou");
-					controller.getMyClient().getOos().writeObject(new ObjectSend(2, getTerrainAdv().getComponent(i)));
-				}
-				for(int i=0; i<getTerrain().getComponentCount(); i++)
-				{
-					System.out.println("coucou");
-					controller.getMyClient().getOos().writeObject(new ObjectSend(3, getTerrain().getComponent(i)));
-				}
+				System.out.println("INDICE CARTE : "+i);
+				controller.getMyClientServer().getOos().writeObject(new ObjectSend(2, cAttacked, i));
+				System.out.println("coucou");
+				controller.getMyClientServer().getOos().writeObject(new ObjectSend(3, cAttacking));
+				System.out.println("coucou");
+				controller.getMyClient().getOos().writeObject(new ObjectSend(2, cAttacking));
+				System.out.println("coucou");
+				controller.getMyClient().getOos().writeObject(new ObjectSend(3, cAttacked));
 
 			}
-		} catch (IOException e) {
+		} catch (IOException ey) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ey.printStackTrace();
 		}
 	}
 	@Override
@@ -248,7 +241,6 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		}
 		if (((Serviteur)card.getCard()).getNbVie() == 0){
 			card.setVisible(false);
-			card.getParent().remove(card);
 			System.out.println(""+getTerrainAdv().getComponentCount());
 		}
 	}
