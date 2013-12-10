@@ -128,24 +128,6 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 					System.out.println("coucou");
 					controller.getMyClientServer().getOos().writeObject(new ObjectSend(2, getTerrainAdv().getComponent(i)));
 				}
-			}
-			else
-			{
-				for(int i=0; i<getTerrainAdv().getComponentCount(); i++)
-				{
-					System.out.println("coucou");
-					controller.getMyClient().getOos().writeObject(new ObjectSend(2, getTerrainAdv().getComponent(i)));
-				}
-
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			if (controller.getMyClient() == null)
-			{
 				for(int i=0; i<getTerrain().getComponentCount(); i++)
 				{
 					System.out.println("coucou");
@@ -155,6 +137,11 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			}
 			else
 			{
+				for(int i=0; i<getTerrainAdv().getComponentCount(); i++)
+				{
+					System.out.println("coucou");
+					controller.getMyClient().getOos().writeObject(new ObjectSend(2, getTerrainAdv().getComponent(i)));
+				}
 				for(int i=0; i<getTerrain().getComponentCount(); i++)
 				{
 					System.out.println("coucou");
@@ -166,7 +153,6 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
