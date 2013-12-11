@@ -19,7 +19,11 @@ import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
 import be.ephec.eveStone.model.listener.SortHerosListener;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
-
+/**
+ * Cette classe permet la réception des objets que l'adveraire envoie.
+ * @author Andy Vanbutsele et Dasseler Nicolas
+ *
+ */
 public class Reception implements Runnable {
 
 	private ObjectInputStream ois;
@@ -133,10 +137,6 @@ public class Reception implements Runnable {
 							controller.getArea().repaint();
 						}
 					}
-					else if (choix == 4) 
-					{
-
-					}
 					else if (choix == 5) //bouton fin de tour
 					{
 						controller.getArea().getFinTourButton().setEnabled(true);
@@ -154,7 +154,6 @@ public class Reception implements Runnable {
 
 					}
 				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
 					System.err.println("Erreur reception");
 				}
 			}

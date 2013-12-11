@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Dommage;
-import be.ephec.eveStone.model.Hero;
+import be.ephec.eveStone.model.Heros;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
@@ -24,7 +24,7 @@ public class HerosListener implements MouseListener{
 
 	private boolean isTargetable;
 	private JPanel terrainAdv;
-	private Hero heros;
+	private Heros heros;
 	private CardPanel cardAttacking;
 	private SortHeroique sortHeroique;
 	private JLabel labelCoque;
@@ -36,7 +36,7 @@ public class HerosListener implements MouseListener{
 	private static final Cursor targetable = new Cursor(Cursor.CROSSHAIR_CURSOR);
 	private static final Cursor notTargetable = new Cursor(Cursor.DEFAULT_CURSOR);
 
-	public HerosListener(Hero heros, Controller controller){
+	public HerosListener(Heros heros, Controller controller){
 		this.heros=heros;
 		this.cardAttacking=null;
 		this.sortHeroique=null;

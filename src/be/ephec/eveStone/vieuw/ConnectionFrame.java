@@ -49,7 +49,7 @@ public class ConnectionFrame extends JFrame {
 	}
 	
 	private void initGUI(){
-		this.setSize(300, 500);
+		this.setSize(373, 571);
 		this.setLocationRelativeTo(null);
 		{
 			jPanel1 = new JPanel();
@@ -69,7 +69,7 @@ public class ConnectionFrame extends JFrame {
 			GridBagLayout jPanelMenuLayout = new GridBagLayout();
 			getContentPane().add(jPanelMenu, BorderLayout.SOUTH);
 			jPanelMenu.setLayout(jPanelMenuLayout);
-			jPanelMenu.setPreferredSize(new java.awt.Dimension(290, 354));
+			jPanelMenu.setPreferredSize(new java.awt.Dimension(284, 370));
 			jPanelMenu.setBackground(new java.awt.Color(0,0,0));
 			{
 				jButtonCommencer = new JButton();
@@ -124,8 +124,8 @@ public class ConnectionFrame extends JFrame {
 			}
 			jPanelMenuLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1};
 			jPanelMenuLayout.rowHeights = new int[] {7, 7, 7, 7, 7, 7};
-			jPanelMenuLayout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
-			jPanelMenuLayout.columnWidths = new int[] {7, 7, 7, 7, 7};
+			jPanelMenuLayout.columnWeights = new double[] {0.1, 0.1, 0.0, 0.0, 0.1};
+			jPanelMenuLayout.columnWidths = new int[] {7, 7, 25, 110, 7};
 		}
 	}
 	

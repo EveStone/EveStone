@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
-import be.ephec.eveStone.model.Hero;
+import be.ephec.eveStone.model.Heros;
 import be.ephec.eveStone.model.SortHeroique;
 import be.ephec.eveStone.model.repositories.Deck;
 
@@ -193,12 +193,12 @@ public class ChoixHeros extends JFrame{
 		
 		if (choixHero == 0)
 		{
-			controller.setMyHero(new Hero("Interceptor",IMG_INTERCEPTOR, new Deck("interceptor"), new SortHeroique("Tir de Missile", 2, 2, 0, IMG_SORT_INTERCEPTOR, DESCR_SORT_INTEREPTOR)));
+			controller.setMyHero(new Heros("Interceptor",IMG_INTERCEPTOR, new Deck("interceptor"), new SortHeroique("Tir de Missile", 2, 2, 0, IMG_SORT_INTERCEPTOR, DESCR_SORT_INTEREPTOR)));
 			System.out.println(""+ controller.getMyHero().getNom());
 		}
 		else if (choixHero == 1)
 		{
-			controller.setMyHero(new Hero("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique("Renfort !", 2, 0, 2, IMG_SORT_FREGATE, DESCR_SORT_FREGATE)));
+			controller.setMyHero(new Heros("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique("Renfort !", 2, 0, 2, IMG_SORT_FREGATE, DESCR_SORT_FREGATE)));
 			System.out.println(""+ controller.getMyHero().getNom());
 			
 		}

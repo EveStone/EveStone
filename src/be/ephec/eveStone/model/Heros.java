@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import be.ephec.eveStone.model.repositories.Deck;
 
-public class Hero implements Serializable {
+public class Heros implements Serializable {
 	
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class Hero implements Serializable {
 	private SortHeroique sortHero;
 	private int ressource;
 
-	public Hero(String nom,String image, Deck deck, SortHeroique sortHero)
+	public Heros(String nom,String image, Deck deck, SortHeroique sortHero)
 	{
 		this.nom = nom;
 		this.image = image;

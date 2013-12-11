@@ -34,8 +34,8 @@ public class Controller {
 
 
 	// Modèles
-	private Hero myHero;
-	private Hero adverseHero;
+	private Heros myHero;
+	private Heros adverseHero;
 
 	// Views
 	private Area area;
@@ -216,14 +216,14 @@ public class Controller {
 	 * 
 	 * 
 	 */
-	public Hero getMyHero() {
+	public Heros getMyHero() {
 		return myHero;
 	}
-	public void setMyHero(Hero myHero) {
+	public void setMyHero(Heros myHero) {
 		this.myHero = myHero;
 	}
 
-	public Hero getAdverseHero() {
+	public Heros getAdverseHero() {
 		return adverseHero;
 	}
 
@@ -231,7 +231,7 @@ public class Controller {
 		return NUM_PORT;
 	}
 
-	public void setAdverseHero(Hero adverseHero) {
+	public void setAdverseHero(Heros adverseHero) {
 		this.adverseHero = adverseHero;
 	}
 
@@ -376,11 +376,9 @@ public class Controller {
 		try {
 			myClient = new MyClient(this.connexion.getjTextFieldIP().getText(), Integer.parseInt(this.connexion.getTextFieldPort().getText()));
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Erreur lors de la création du client");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Erreur lors de la création du client");
 		}
 		this.connexion.dispose();
 		this.start.getjButtonChoixHeros().setEnabled(true);
@@ -391,8 +389,7 @@ public class Controller {
 		try {
 			server = new MyServer(this);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Erreur lors de la création du serveur");;
 		}
 		JOptionPane.showMessageDialog(null, "Serveur lancé");
 
@@ -402,33 +399,27 @@ public class Controller {
 	}
 	public void connexionStarted()
 	{
-		ObjectSend message = null;
-		if (myClient == null)
-		{
-			try {
+		try {
+			ObjectSend message = null;
+			if (myClient == null)
+			{
+
 				message = (ObjectSend)myClientServer.getOis().readObject();
-				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
+				System.out.println("Le héro de l'adversaire est " + ((Heros)message.getObj()).getNom());
 				Thread tClientServer = new Thread(new Reception(this , myClientServer.getOis()));
 				tClientServer.start();
-			} catch (IOException | ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-		}
-		else 
-		{
-			try {
+			else 
+			{
 				message = (ObjectSend)myClient.getOis().readObject();
-				System.out.println("Le héro de l'adversaire est " + ((Hero)message.getObj()).getNom());
+				System.out.println("Le héro de l'adversaire est " + ((Heros)message.getObj()).getNom());
 				Thread tClient = new Thread(new Reception(this , myClient.getOis()));
 				tClient.start();
-			} catch (IOException | ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-
+			this.adverseHero = (Heros)message.getObj();
+		} catch (IOException | ClassNotFoundException e) {
+			System.err.println("Erreur d'envoi");
 		}
-		this.adverseHero = (Hero)message.getObj();
 	}
 	public void sendDommageHero()
 	{
@@ -446,8 +437,7 @@ public class Controller {
 				myClient.getOos().flush();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Erreur d'envoi");
 		}
 	}
 
@@ -492,30 +482,22 @@ public class Controller {
 				myClient.getOos().flush();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Erreur d'envoi");
 		}
 	}
 	public void sendHero()
 	{
-		if (myClient == null)
-		{
-			try {
+		try {
+			if (myClient == null)
+			{
 				myClientServer.getOos().writeObject(new ObjectSend(0,myHero));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-		}
-		else 
-		{
-			try {
+			else 
+			{
 				myClient.getOos().writeObject(new ObjectSend(0,myHero));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-
+		} catch (IOException e) {
+			System.err.println("Erreur d'envoi");
 		}
 	}
 

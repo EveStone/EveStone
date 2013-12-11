@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
-import be.ephec.eveStone.model.Hero;
+import be.ephec.eveStone.model.Heros;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.vieuw.Area;
@@ -35,7 +35,7 @@ public class SortHerosListener implements MouseListener{
 	private JPanel terrain;
 	private JPanel terrainAdv;
 	private JLabel infoLabel;
-	private Hero heros;
+	private Heros heros;
 	private boolean offensive;
 	private JLabel ressource;
 	private JLabel labelHeros;
@@ -45,7 +45,7 @@ public class SortHerosListener implements MouseListener{
 	private static final Cursor dispo = new Cursor(Cursor.HAND_CURSOR);
 	private static final Cursor nonDispo = new Cursor(Cursor.DEFAULT_CURSOR);
 
-	public SortHerosListener(Hero heros, Controller controller){
+	public SortHerosListener(Heros heros, Controller controller){
 		super();
 		this.enable=true;
 		this.terrain=controller.getArea().getjPanelTerrain();
