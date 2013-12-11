@@ -139,6 +139,7 @@ public class Controller {
 		piocheDepart();
 		initSortHero(area.getjLabelSortHeroique());
 
+		sendHero();
 		connexionStarted();
 
 		this.area.getjLabelHerosAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getImage())));
@@ -534,6 +535,28 @@ public class Controller {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	public void sendHero()
+	{
+		if (myClient == null)
+		{
+			try {
+				myClientServer.getOos().writeObject(new ObjectSend(0,myHero));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else 
+		{
+			try {
+				myClient.getOos().writeObject(new ObjectSend(0,myHero));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 
