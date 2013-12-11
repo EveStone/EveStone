@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Hero;
+import be.ephec.eveStone.model.Invisible;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.listener.CardListenerMain;
 import be.ephec.eveStone.model.listener.CardListenerTerrain;
@@ -70,6 +71,8 @@ public class Reception implements Runnable {
 						int[] nbDegatsTerrain = message.getNbDegatsTerrain();
 						int[] nbVieAdv = message.getNbVieAdv();
 						int[] nbDegatsAdv = message.getNbDegatsAdv();
+						Boolean[] visibleTerrain = message.getVisibleTerrain();
+						Boolean[] visibleTerrainAdv = message.getVisibleTerrainAdv();
 
 						terrain = (Component[]) message.getTerrain();
 						for (int i =0; i<terrain.length; i++)
@@ -84,6 +87,10 @@ public class Reception implements Runnable {
 							if (nbDegatsTerrain != null)
 							{
 								((Serviteur)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setNbDommage(nbDegatsTerrain[i]);
+							}
+							if (visibleTerrain != null && ((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard() instanceof Invisible)
+							{
+								((Invisible)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setInvisible(visibleTerrain[i]);
 							}
 							((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).update();
 						}
@@ -104,21 +111,15 @@ public class Reception implements Runnable {
 							{
 								((Serviteur)((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).getCard()).setNbDommage(nbDegatsAdv[i]);
 							}
+							if (visibleTerrainAdv!= null && ((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).getCard() instanceof Invisible)
+							{
+								((Invisible)((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).getCard()).setInvisible(visibleTerrainAdv[i]);
+							}
 							((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).update();
 						}
 
 						controller.getArea().revalidate();
 						controller.getArea().repaint();
-						/*
-						CardPanel carte = (CardPanel) message.getObj();
-						if (message.getIndex()>=0)
-							controller.getArea().getjPanelTerrain().remove(message.getIndex());
-						if (((Serviteur)(carte.getCard())).getNbVie()>0){
-							controller.getArea().getjPanelTerrain().add(carte);
-						}
-						controller.getArea().revalidate();
-						controller.getArea().repaint();
-						 */
 					}
 					else if (choix == 3) 
 					{
@@ -139,15 +140,6 @@ public class Reception implements Runnable {
 							controller.getArea().revalidate();
 							controller.getArea().repaint();
 						}
-						/*
-						CardPanel carte = (CardPanel) message.getObj();
-						if(message.getIndex()>=0)
-							controller.getArea().getjPanelTerrainAdversaire().remove(message.getIndex());
-						if (((Serviteur)(carte.getCard())).getNbVie()>0){
-							controller.getArea().getjPanelTerrainAdversaire().add(carte);
-						}
-						controller.getArea().revalidate();
-						controller.getArea().repaint();*/
 					}
 					else if (choix == 4) 
 					{
@@ -171,7 +163,7 @@ public class Reception implements Runnable {
 					}
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
-					//e.printStackTrace();
+					System.err.println("Erreur reception");
 				}
 			}
 		}

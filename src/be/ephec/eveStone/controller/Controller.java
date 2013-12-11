@@ -145,7 +145,7 @@ public class Controller {
 		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero, this));
 		this.area.getjLabelSortHeroiqueAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getSortHero().getImage())));
 		this.area.getFinTourButton().addMouseListener(new FinTourListener(this));
-		
+
 		if (myClient == null)
 		{
 			area.getFinTourButton().setEnabled(true);
@@ -182,7 +182,8 @@ public class Controller {
 		for (int i = 0; i<area.getjPanelTerrain().getComponentCount(); i++)
 		{
 			MouseListener ml[] = area.getjPanelTerrain().getComponent(i).getMouseListeners();
-			area.getjPanelTerrain().getComponent(i).removeMouseListener(ml[0]);
+			//area.getjPanelTerrain().getComponent(i).removeMouseListener(ml[0]);
+			((CardListenerTerrain)ml[0]).setCanAttack(false);
 		}
 		for (int i = 0; i<area.getjPanelMain().getComponentCount(); i++)
 		{
@@ -489,35 +490,45 @@ public class Controller {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void sendModif()
 	{
 		int[] tabVieTerrain = new int[area.getjPanelTerrain().getComponentCount()];
 		int[] tabDegatsTerrain = new int[area.getjPanelTerrain().getComponentCount()];
-		
+		Boolean[] tabVisibleTerrain = new Boolean[area.getjPanelTerrain().getComponentCount()];
+
 		for (int i = 0; i<area.getjPanelTerrain().getComponentCount(); i++)
 		{
 			tabVieTerrain[i] = ((Serviteur)((CardPanel)area.getjPanelTerrain().getComponent(i)).getCard()).getNbVie();
 			tabDegatsTerrain[i] = ((Serviteur)((CardPanel)area.getjPanelTerrain().getComponent(i)).getCard()).getNbDommage();
+			if (((CardPanel)area.getjPanelTerrain().getComponent(i)).getCard() instanceof Invisible)
+			{
+				tabVisibleTerrain[i] = ((Invisible)((CardPanel)area.getjPanelTerrain().getComponent(i)).getCard()).isInvisible();
+			}
 		}
 		int[] tabVieTerrainAdv = new int[area.getjPanelTerrainAdversaire().getComponentCount()];
 		int[] tabDegatsTerrainAdv = new int[area.getjPanelTerrainAdversaire().getComponentCount()];
+		Boolean[] tabVisibleTerrainAdv = new Boolean[area.getjPanelTerrainAdversaire().getComponentCount()];
 		for (int i = 0; i<area.getjPanelTerrainAdversaire().getComponentCount(); i++)
 		{
 			tabVieTerrainAdv[i] = ((Serviteur)((CardPanel)area.getjPanelTerrainAdversaire().getComponent(i)).getCard()).getNbVie();
 			tabDegatsTerrainAdv[i] = ((Serviteur)((CardPanel)area.getjPanelTerrainAdversaire().getComponent(i)).getCard()).getNbDommage();
+			if (((CardPanel)area.getjPanelTerrainAdversaire().getComponent(i)).getCard() instanceof Invisible)
+			{
+				tabVisibleTerrainAdv[i] = ((Invisible)((CardPanel)area.getjPanelTerrainAdversaire().getComponent(i)).getCard()).isInvisible();
+			}
 		}
 		try {
 			if (myClient == null)
 			{
 
-				myClientServer.getOos().writeObject(new ObjectSend(2, area.getjPanelTerrainAdversaire().getComponents(),area.getjPanelTerrain().getComponents(), tabVieTerrain, tabDegatsTerrain, tabVieTerrainAdv, tabDegatsTerrainAdv));
+				myClientServer.getOos().writeObject(new ObjectSend(2, area.getjPanelTerrainAdversaire().getComponents(),area.getjPanelTerrain().getComponents(), tabVieTerrain, tabDegatsTerrain, tabVieTerrainAdv, tabDegatsTerrainAdv, tabVisibleTerrain, tabVisibleTerrainAdv));
 				myClientServer.getOos().flush();
 
 			}
 			else
 			{
-				myClient.getOos().writeObject(new ObjectSend(2, area.getjPanelTerrainAdversaire().getComponents(),area.getjPanelTerrain().getComponents(),tabVieTerrain, tabDegatsTerrain, tabVieTerrainAdv, tabDegatsTerrainAdv));
+				myClient.getOos().writeObject(new ObjectSend(2, area.getjPanelTerrainAdversaire().getComponents(),area.getjPanelTerrain().getComponents(),tabVieTerrain, tabDegatsTerrain, tabVieTerrainAdv, tabDegatsTerrainAdv, tabVisibleTerrain, tabVisibleTerrainAdv));
 				myClient.getOos().flush();
 			}
 		} catch (IOException e) {

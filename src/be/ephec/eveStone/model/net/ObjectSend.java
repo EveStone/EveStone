@@ -18,10 +18,6 @@ public class ObjectSend implements Serializable {
 	 */
 	private int action;//Permet de dire quelle action l'adversaire � effectuer et ainsi facilit� les casting
 	private Object obj;
-	private Object cAttack;
-	private Object cAttacked;
-	private int indexCAttack;
-	private int indexCAttacked;
 	private int indice;
 	
 	private Object terrainAdv;
@@ -30,6 +26,8 @@ public class ObjectSend implements Serializable {
 	private int[] nbDegatsTerrain;
 	private int[] nbVieAdv;
 	private int[] nbDegatsAdv;
+	private Boolean[] visibleTerrain;
+	private Boolean[] visibleTerrainAdv;
 	
 	/**
 	 * Constructeur de la classe ObjectSend
@@ -44,7 +42,7 @@ public class ObjectSend implements Serializable {
 	
 	public ObjectSend(int action, Object terrainAdv, Object terrain,
 			int[] nbVieTerrain, int[] nbDegatsTerrain, int[] nbVieAdv,
-			int[] nbDegatsAdv) {
+			int[] nbDegatsAdv, Boolean[] visibleTerrain, Boolean[] visibleTerrainAdv) {
 		super();
 		this.action = action;
 		this.terrainAdv = terrainAdv;
@@ -53,28 +51,8 @@ public class ObjectSend implements Serializable {
 		this.nbDegatsTerrain = nbDegatsTerrain;
 		this.nbVieAdv = nbVieAdv;
 		this.nbDegatsAdv = nbDegatsAdv;
-	}
-
-
-	public ObjectSend(int action, Object obj, int index){
-		this.action=action;
-		this.obj=obj;
-		this.indice=index;
-	}
-	public ObjectSend(int action, Object terrainAdv, Object terrain)
-	{
-		this.action = action;
-		this.terrainAdv = terrainAdv;
-		this.terrain = terrain;
-		
-	}
-	
-	public ObjectSend(int action, Object cAttack, Object cAttacked, int indexCAttack, int indexCAttacked){
-		this.action=action;
-		this.cAttack=cAttack;
-		this.cAttacked=cAttacked;
-		this.indexCAttack=indexCAttack;
-		this.indexCAttacked=indexCAttacked;
+		this.visibleTerrain = visibleTerrain;
+		this.visibleTerrainAdv=visibleTerrainAdv;
 	}
 
 	public int getAction() {
@@ -123,6 +101,16 @@ public class ObjectSend implements Serializable {
 
 	public int[] getNbDegatsAdv() {
 		return nbDegatsAdv;
+	}
+
+
+	public Boolean[] getVisibleTerrain() {
+		return visibleTerrain;
+	}
+
+
+	public Boolean[] getVisibleTerrainAdv() {
+		return visibleTerrainAdv;
 	}
 	
 
