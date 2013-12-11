@@ -56,7 +56,7 @@ public class StartFrame extends JFrame{
 					background.add(jButtonQuitter);
 					jButtonQuitter.setLayout(null);
 					jButtonQuitter.setText("<html><font color=white>Quitter</font></html>");
-					jButtonQuitter.setBounds(700, 587, 124, 22);
+					jButtonQuitter.setBounds(699, 566, 124, 22);
 					jButtonQuitter.setBackground(new java.awt.Color(0,0,0));
 					jButtonQuitter.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
@@ -127,14 +127,7 @@ public class StartFrame extends JFrame{
 	private void jButtonQuitterActionPerformed(ActionEvent evt, final Controller controller) {
 		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
 		//TODO add your code for jButtonQuitter.actionPerformed
-		try {
-			if (controller.getMyClient() != null) controller.getMyClient().getSocket().close();
-			if (controller.getServer() != null)controller.getServer().getS().close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.dispose();
+		System.exit(0);
 	}
 	
 	private void jButtonConfigActionPerformed(ActionEvent evt, final Controller controller) {

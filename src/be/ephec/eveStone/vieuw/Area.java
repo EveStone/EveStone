@@ -73,7 +73,7 @@ public class Area extends JFrame {
 	
 	private void initGUI(final Controller controller){
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		{
 			JLabel background = new JLabel();
 			this.setContentPane(background);
