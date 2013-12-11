@@ -195,10 +195,6 @@ public class Area extends JFrame {
 					jLabelIconeStructAdverse.setBounds(640, 126, 54, 52);
 				}
 				{
-					this.jLabelCoque = jLabelCoque;
-					background.add(jLabelCoque);
-				}
-				{
 					jLabelIconeCoque = new JLabel();
 					background.add(jLabelIconeCoque);
 					BorderLayout jLabelIconeCoqueLayout = new BorderLayout();
@@ -345,6 +341,7 @@ public class Area extends JFrame {
 	public JPanel getjPanelMain() {
 		return jPanelMain;
 	}
+	
 	
 	
 }

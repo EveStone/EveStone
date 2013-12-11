@@ -24,6 +24,13 @@ public class ObjectSend implements Serializable {
 	private int indexCAttacked;
 	private int indice;
 	
+	private Object terrainAdv;
+	private Object terrain;
+	private int[] nbVieTerrain;
+	private int[] nbDegatsTerrain;
+	private int[] nbVieAdv;
+	private int[] nbDegatsAdv;
+	
 	/**
 	 * Constructeur de la classe ObjectSend
 	 * @param action: int ==> Donne l'action que l'adversaire a effectué
@@ -34,10 +41,32 @@ public class ObjectSend implements Serializable {
 		this.obj = obj;
 	}
 	
+	
+	public ObjectSend(int action, Object terrainAdv, Object terrain,
+			int[] nbVieTerrain, int[] nbDegatsTerrain, int[] nbVieAdv,
+			int[] nbDegatsAdv) {
+		super();
+		this.action = action;
+		this.terrainAdv = terrainAdv;
+		this.terrain = terrain;
+		this.nbVieTerrain = nbVieTerrain;
+		this.nbDegatsTerrain = nbDegatsTerrain;
+		this.nbVieAdv = nbVieAdv;
+		this.nbDegatsAdv = nbDegatsAdv;
+	}
+
+
 	public ObjectSend(int action, Object obj, int index){
 		this.action=action;
 		this.obj=obj;
 		this.indice=index;
+	}
+	public ObjectSend(int action, Object terrainAdv, Object terrain)
+	{
+		this.action = action;
+		this.terrainAdv = terrainAdv;
+		this.terrain = terrain;
+		
 	}
 	
 	public ObjectSend(int action, Object cAttack, Object cAttacked, int indexCAttack, int indexCAttacked){
@@ -68,4 +97,34 @@ public class ObjectSend implements Serializable {
 		return indice;
 	}
 
+	public Object getTerrainAdv() {
+		return terrainAdv;
+	}
+
+	public Object getTerrain() {
+		return terrain;
+	}
+
+
+	public int[] getNbVieTerrain() {
+		return nbVieTerrain;
+	}
+
+
+	public int[] getNbDegatsTerrain() {
+		return nbDegatsTerrain;
+	}
+
+
+	public int[] getNbVieAdv() {
+		return nbVieAdv;
+	}
+
+
+	public int[] getNbDegatsAdv() {
+		return nbDegatsAdv;
+	}
+	
+
+	
 }

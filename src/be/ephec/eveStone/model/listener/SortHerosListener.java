@@ -3,13 +3,16 @@ package be.ephec.eveStone.model.listener;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Hero;
 import be.ephec.eveStone.model.Serviteur;
+import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 /**
@@ -37,20 +40,22 @@ public class SortHerosListener implements MouseListener{
 	private JLabel ressource;
 	private JLabel labelHeros;
 	private Area area;
+	private Controller controller;
 	
 	private static final Cursor dispo = new Cursor(Cursor.HAND_CURSOR);
 	private static final Cursor nonDispo = new Cursor(Cursor.DEFAULT_CURSOR);
 
-	public SortHerosListener(Hero heros, Area area){
+	public SortHerosListener(Hero heros, Controller controller){
 		super();
 		this.enable=true;
-		this.terrain=area.getjPanelTerrain();
-		this.terrainAdv=area.getjPanelTerrainAdversaire();
-		this.infoLabel=area.getLabelInfo();
+		this.terrain=controller.getArea().getjPanelTerrain();
+		this.terrainAdv=controller.getArea().getjPanelTerrainAdversaire();
+		this.infoLabel=controller.getArea().getLabelInfo();
 		this.heros=heros;
-		this.ressource=area.getjLabelRessource();
-		this.labelHeros=area.getjLabelHerosAdversaire();
-		this.area = area;
+		this.ressource=controller.getArea().getjLabelRessource();
+		this.labelHeros=controller.getArea().getjLabelHerosAdversaire();
+		this.area = controller.getArea();
+		this.controller = controller;
 		offensive=isOffensive();
 	}
 	/**
@@ -89,6 +94,25 @@ public class SortHerosListener implements MouseListener{
 					minion.addMouseListener(new CardListenerTerrain(minion, area));
 					System.out.println(minion.getCard().getNom());
 					terrain.add(minion);
+					if (controller.getMyClient()== null)
+					{
+						try {
+							controller.getMyClientServer().getOos().writeObject(new ObjectSend(1, minion));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					else 
+					{
+						try {
+							controller.getMyClient().getOos().writeObject(new ObjectSend(1, minion));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
 					terrain.revalidate();
 					terrain.repaint();
 				}

@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Buff;
 import be.ephec.eveStone.model.Carte;
 import be.ephec.eveStone.model.Serviteur;
@@ -15,10 +16,12 @@ public class BuffingListener implements MouseListener{
 
 	private CardPanel cardBuffing;
 	private JPanel terrain;
+	private Controller controller;
 
-	public BuffingListener(CardPanel card, JPanel terrain){
+	public BuffingListener(CardPanel card, Controller controller){
 		this.cardBuffing = card;
-		this.terrain = terrain;
+		this.terrain = controller.getArea().getjPanelTerrain();
+		this.controller = controller;
 	}
 
 	@Override
@@ -70,6 +73,7 @@ public class BuffingListener implements MouseListener{
 		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbVie(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbVie() + buff[0]);
 		((Serviteur)((CardPanel) e.getComponent()).getCard()).setNbDommage(((Serviteur)((CardPanel) e.getComponent()).getCard()).getNbDommage() + buff[1]);
 		((CardPanel) e.getComponent()).update();
+		controller.sendModif();
 	}
 
 	/**

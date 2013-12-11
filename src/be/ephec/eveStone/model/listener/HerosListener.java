@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Dommage;
 import be.ephec.eveStone.model.Hero;
 import be.ephec.eveStone.model.Protection;
@@ -31,17 +32,19 @@ public class HerosListener implements MouseListener{
 	private JLabel labelStructure;
 	private JLabel anim; 
 	private JLabel herosLabel;
+	private Controller controller;
 
 	private static final Cursor targetable = new Cursor(Cursor.CROSSHAIR_CURSOR);
 	private static final Cursor notTargetable = new Cursor(Cursor.DEFAULT_CURSOR);
 
-	public HerosListener(Hero heros, Area area){
+	public HerosListener(Hero heros, Controller controller){
 		this.heros=heros;
 		this.cardAttacking=null;
 		this.sortHeroique=null;
-		this.terrainAdv=area.getjPanelTerrainAdversaire();
-		this.labelCoque=area.getjLabelCoqueAdverse();
-		this.labelStructure=area.getjLabelStructureAdverse();
+		this.terrainAdv=controller.getArea().getjPanelTerrainAdversaire();
+		this.labelCoque=controller.getArea().getjLabelCoqueAdverse();
+		this.labelStructure=controller.getArea().getjLabelStructureAdverse();
+		this.controller = controller;
 		isTargetable=false;
 	}
 
@@ -63,6 +66,7 @@ public class HerosListener implements MouseListener{
 					degats=sortHeroique.getDegats();
 				resetTarget();
 				makeDommage(degats);
+				controller.sendDommageHero();
 				boum(arg0);
 				updateUI();
 				System.out.println("Coque : "+heros.getNbCoque()+" Struct : "+heros.getNbStructure());

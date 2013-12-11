@@ -78,7 +78,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 					degats=((Dommage)cardAttacking.getCard()).getDegats();
 				if (makeDommage(arg0)){
 					dommageClicked((CardPanel)arg0.getComponent(), degats);
-					sendModifCarte(cardAttacking, (CardPanel)arg0.getComponent());
+					controller.sendModif();
 					degats=((Serviteur)((CardPanel)arg0.getComponent()).getCard()).getNbDommage();
 					if(cardAttacking.getCard() instanceof Serviteur){
 						if (cardAttacking.getCard() instanceof Invisible){
@@ -86,7 +86,8 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 							((Invisible)cardAttacking.getCard()).setInvisible(false);
 						}
 						dommageClicked(cardAttacking, degats);
-						sendModifCarteBack((CardPanel)arg0.getComponent(), cardAttacking);
+						controller.sendModif();
+
 						MouseListener ml[]=cardAttacking.getMouseListeners();
 						((CardListenerTerrain)ml[0]).setCanAttack(false);
 						for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
@@ -101,6 +102,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 				degats=sort.getDegats();
 				if(makeDommage(arg0)){
 					dommageClicked(((CardPanel)arg0.getComponent()), degats);
+					controller.sendModif();
 					MouseListener ml[] = labelSort.getMouseListeners();
 					((SortHerosListener)ml[0]).setEnable(false);
 					for(int i=0; i<getTerrainAdv().getComponentCount(); i++){
@@ -117,6 +119,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			arg0.getComponent().setCursor(notTargetable);
 		}
 	}
+	/*
 	public void sendModifCarte(CardPanel cAttacking, CardPanel cAttacked)
 	{
 
@@ -145,7 +148,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			ey.printStackTrace();
 		}
 	}
-	
+
 	public void sendModifCarteBack(CardPanel cAttacking, CardPanel cAttacked){
 		try{
 			if (controller.getMyClient() == null)
@@ -169,7 +172,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-	}
+	}*/
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		super.mouseEntered(arg0);
@@ -220,7 +223,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	public void setCardAttacking(CardPanel cardAttacking) {
 		this.cardAttacking = cardAttacking;
 	}
-	
+
 	public int retrieveIndex(JPanel toFind, CardPanel card){
 		Component[] list = toFind.getComponents();
 		int i=0;
@@ -230,7 +233,7 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * Méthode qui permet de définir si la cible est une cible attaquable
 	 * @param e la source du clic

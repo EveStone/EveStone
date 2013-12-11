@@ -142,7 +142,7 @@ public class Controller {
 		connexionStarted();
 
 		this.area.getjLabelHerosAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getImage())));
-		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero, area));
+		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero, this));
 		this.area.getjLabelSortHeroiqueAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getSortHero().getImage())));
 		this.area.getFinTourButton().addMouseListener(new FinTourListener(this));
 		
@@ -155,7 +155,6 @@ public class Controller {
 			area.getFinTourButton().setEnabled(false);
 			stateOfEnd();
 		}
-
 		/*
 		// Test
 		CardPanel carteEnnemi = new CardPanel();
@@ -203,7 +202,7 @@ public class Controller {
 	 */
 	private void initSortHero(JLabel sortHero){
 		sortHero.setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getSortHero().getImage())));
-		sortHero.addMouseListener(new SortHerosListener(myHero, area));
+		sortHero.addMouseListener(new SortHerosListener(myHero, this));
 	}
 
 	public Area getArea(){
@@ -314,7 +313,7 @@ public class Controller {
 						if (area.getjPanelTerrain().getComponentCount() > 0){
 							JOptionPane.showMessageDialog(null, "Choisissez la carte à buffer");
 							for(int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
-								area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, area.getjPanelTerrain()));
+								area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, this));
 							}
 						}
 					}
@@ -347,7 +346,7 @@ public class Controller {
 					if (area.getjPanelTerrain().getComponentCount() > 0){
 						JOptionPane.showMessageDialog(null, "Choisissez la carte à buffer");
 						for(int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
-							area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, area.getjPanelTerrain()));
+							area.getjPanelTerrain().getComponent(i).addMouseListener(new BuffingListener(label, this));
 						}
 					}
 				}
@@ -470,7 +469,62 @@ public class Controller {
 		}
 		this.adverseHero = (Hero)message.getObj();
 	}
+	public void sendDommageHero()
+	{
+		try {
+			if (myClient == null)
+			{
 
+				myClientServer.getOos().writeObject(new ObjectSend(3, adverseHero));
+				myClientServer.getOos().flush();
+
+			}
+			else
+			{
+				myClient.getOos().writeObject(new ObjectSend(3, adverseHero));
+				myClient.getOos().flush();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendModif()
+	{
+		int[] tabVieTerrain = new int[area.getjPanelTerrain().getComponentCount()];
+		int[] tabDegatsTerrain = new int[area.getjPanelTerrain().getComponentCount()];
+		
+		for (int i = 0; i<area.getjPanelTerrain().getComponentCount(); i++)
+		{
+			tabVieTerrain[i] = ((Serviteur)((CardPanel)area.getjPanelTerrain().getComponent(i)).getCard()).getNbVie();
+			tabDegatsTerrain[i] = ((Serviteur)((CardPanel)area.getjPanelTerrain().getComponent(i)).getCard()).getNbDommage();
+		}
+		int[] tabVieTerrainAdv = new int[area.getjPanelTerrainAdversaire().getComponentCount()];
+		int[] tabDegatsTerrainAdv = new int[area.getjPanelTerrainAdversaire().getComponentCount()];
+		for (int i = 0; i<area.getjPanelTerrainAdversaire().getComponentCount(); i++)
+		{
+			tabVieTerrainAdv[i] = ((Serviteur)((CardPanel)area.getjPanelTerrainAdversaire().getComponent(i)).getCard()).getNbVie();
+			tabDegatsTerrainAdv[i] = ((Serviteur)((CardPanel)area.getjPanelTerrainAdversaire().getComponent(i)).getCard()).getNbDommage();
+		}
+		try {
+			if (myClient == null)
+			{
+
+				myClientServer.getOos().writeObject(new ObjectSend(2, area.getjPanelTerrainAdversaire().getComponents(),area.getjPanelTerrain().getComponents(), tabVieTerrain, tabDegatsTerrain, tabVieTerrainAdv, tabDegatsTerrainAdv));
+				myClientServer.getOos().flush();
+
+			}
+			else
+			{
+				myClient.getOos().writeObject(new ObjectSend(2, area.getjPanelTerrainAdversaire().getComponents(),area.getjPanelTerrain().getComponents(),tabVieTerrain, tabDegatsTerrain, tabVieTerrainAdv, tabDegatsTerrainAdv));
+				myClient.getOos().flush();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public MyClient getMyClient() {
 		return myClient;
