@@ -159,6 +159,7 @@ public class HerosListener implements MouseListener{
 			heros.setNbStructure(heros.getNbStructure()-degats);
 			if (heros.getNbStructure() <=0){
 				JOptionPane.showMessageDialog(null, "Vous avez gagné !");
+				controller.sendDommageHero();
 				System.exit(0);
 			}
 		}	

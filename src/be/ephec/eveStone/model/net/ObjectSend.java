@@ -29,6 +29,9 @@ public class ObjectSend implements Serializable {
 	private Boolean[] visibleTerrain;
 	private Boolean[] visibleTerrainAdv;
 	
+	private int nbCoque;
+	private int nbStruct;
+	
 	/**
 	 * Constructeur de la classe ObjectSend
 	 * @param action: int ==> Donne l'action que l'adversaire a effectué
@@ -40,6 +43,16 @@ public class ObjectSend implements Serializable {
 	}
 	
 	
+	
+	public ObjectSend(int action, int nbCoque, int nbStruct) {
+		super();
+		this.action = action;
+		this.nbCoque = nbCoque;
+		this.nbStruct = nbStruct;
+	}
+
+
+
 	public ObjectSend(int action, Object terrainAdv, Object terrain,
 			int[] nbVieTerrain, int[] nbDegatsTerrain, int[] nbVieAdv,
 			int[] nbDegatsAdv, Boolean[] visibleTerrain, Boolean[] visibleTerrainAdv) {
@@ -112,6 +125,19 @@ public class ObjectSend implements Serializable {
 	public Boolean[] getVisibleTerrainAdv() {
 		return visibleTerrainAdv;
 	}
+
+
+
+	public int getNbCoque() {
+		return nbCoque;
+	}
+
+
+
+	public int getNbStruct() {
+		return nbStruct;
+	}
+	
 	
 
 	

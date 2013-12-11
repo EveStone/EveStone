@@ -476,13 +476,13 @@ public class Controller {
 			if (myClient == null)
 			{
 
-				myClientServer.getOos().writeObject(new ObjectSend(3, adverseHero));
+				myClientServer.getOos().writeObject(new ObjectSend(3, adverseHero.getNbCoque(), adverseHero.getNbStructure()));
 				myClientServer.getOos().flush();
 
 			}
 			else
 			{
-				myClient.getOos().writeObject(new ObjectSend(3, adverseHero));
+				myClient.getOos().writeObject(new ObjectSend(3, adverseHero.getNbCoque(), adverseHero.getNbStructure()));
 				myClient.getOos().flush();
 			}
 		} catch (IOException e) {

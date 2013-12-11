@@ -123,8 +123,8 @@ public class Reception implements Runnable {
 					}
 					else if (choix == 3) 
 					{
-						int nbCoque = ((Hero)message.getObj()).getNbCoque();
-						int nbStructure = ((Hero)message.getObj()).getNbStructure();
+						int nbCoque = message.getNbCoque();
+						int nbStructure = message.getNbStruct();
 						
 						if (nbStructure <=0)
 						{
