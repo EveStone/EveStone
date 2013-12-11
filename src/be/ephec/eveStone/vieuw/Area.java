@@ -2,9 +2,9 @@ package be.ephec.eveStone.vieuw;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import be.ephec.eveStone.controller.Controller;
+import be.ephec.eveStone.sound.SonPlayer;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 
@@ -62,6 +64,8 @@ public class Area extends JFrame {
 	private JLabel jLabelInfosCarte;
 	private JPanel jPanelTerrain;
 	private JButton jButtonFinTour;
+	
+	private SonPlayer background;
 
 	public Area(final Controller controller){
 		super("EVE STONE");
@@ -342,6 +346,9 @@ public class Area extends JFrame {
 		return jPanelMain;
 	}
 	
-	
+	public void playSound(){
+		background = new SonPlayer(getClass().getClassLoader().getResource("./sound/soundEveStone.mp3").getPath());
+		background.start();
+	}
 	
 }

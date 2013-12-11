@@ -3,6 +3,7 @@ package be.ephec.eveStone.vieuw.container;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
+import java.io.Serializable;
 
 import be.ephec.eveStone.model.*;
 
@@ -11,12 +12,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class CardPanel extends JLabel {
+public class CardPanel extends JLabel implements Serializable{
 
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1931817779287136633L;
+	private static final long serialVersionUID = 8382233582936491148L;
 	private Carte card;
 	JButton jouer;
 	JLabel ressource;

@@ -156,24 +156,7 @@ public class Controller {
 			area.getFinTourButton().setEnabled(false);
 			stateOfEnd();
 		}
-		/*
-		// Test
-		CardPanel carteEnnemi = new CardPanel();
-		carteEnnemi.setCard(new Serviteur("Hornet", 2, "img/FregateCard/hornet.png", "Drone d'attaque léger", 2, 2));
-		carteEnnemi.makeCard();
-		carteEnnemi.showInfo(false);
-		carteEnnemi.setName(carteEnnemi.getName());
-		carteEnnemi.addMouseListener(new CardListenerTerrainAdv(carteEnnemi, area));
-		area.getjPanelTerrainAdversaire().add(carteEnnemi);
-		/*
-		CardPanel carteEnnemi2 =  new CardPanel();
-		carteEnnemi2.setCard(new Protection("Wasp EC-900",2, "img/FregateCard/waspEC900.png", "Protection : L'ennemi ne peut attaquer aucun autre serviteur ou votre héros tant que cette carte est en jeu", 2, 2, true));
-		carteEnnemi2.makeCard();
-		carteEnnemi2.showInfo(false);
-		carteEnnemi2.setName("Wasp EC-900");
-		carteEnnemi2.addMouseListener(new CardListenerTerrainAdv(carteEnnemi2, area));
-		area.getjPanelTerrainAdversaire().add(carteEnnemi2);
-		 */
+		area.playSound();
 	}
 
 	public void stateOfEnd()
