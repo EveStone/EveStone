@@ -18,7 +18,6 @@ import be.ephec.eveStone.model.Hero;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
-import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
 public class HerosListener implements MouseListener{

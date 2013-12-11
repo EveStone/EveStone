@@ -1,11 +1,9 @@
 package be.ephec.eveStone.model.listener;
 
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,9 +15,6 @@ import be.ephec.eveStone.model.Invisible;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
-import be.ephec.eveStone.model.net.ObjectSend;
-import be.ephec.eveStone.model.net.client.MyClient;
-import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 /**
  * Listener sur les cartes du terrain adverse.

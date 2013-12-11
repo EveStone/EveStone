@@ -8,8 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,7 +18,6 @@ import javax.swing.JPanel;
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Hero;
 import be.ephec.eveStone.model.SortHeroique;
-import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.model.repositories.Deck;
 
 /**

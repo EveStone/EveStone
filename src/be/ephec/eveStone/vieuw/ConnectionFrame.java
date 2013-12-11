@@ -3,8 +3,6 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,7 +26,13 @@ import be.ephec.eveStone.controller.Controller;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class ConnectionFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2984643889204700111L;
 	private JTextField jTextFieldIP;
+	private JTextField jTextFieldPort;
+	private JLabel jLabelPort;
 	private JButton jButtonMakeServer;
 	private JLabel jLabelIPEx;
 	private JLabel jLabel2;
@@ -69,14 +73,14 @@ public class ConnectionFrame extends JFrame {
 			jPanelMenu.setBackground(new java.awt.Color(0,0,0));
 			{
 				jButtonCommencer = new JButton();
-				jPanelMenu.add(jButtonCommencer, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				jPanelMenu.add(jButtonCommencer, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 				jButtonCommencer.setLayout(null);
 				jButtonCommencer.setText("<html><font color=white>Commencer</font></html>");
 				jButtonCommencer.setBackground(new java.awt.Color(0,0,0));
 			}
 			{
 				jButtonAnnuler = new JButton();
-				jPanelMenu.add(jButtonAnnuler, new GridBagConstraints(3, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				jPanelMenu.add(jButtonAnnuler, new GridBagConstraints(3, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 				jButtonAnnuler.setLayout(null);
 				jButtonAnnuler.setText("<html><font color=white>Annuler</font></html>");
 				jButtonAnnuler.setBackground(new java.awt.Color(0,0,0));
@@ -105,12 +109,21 @@ public class ConnectionFrame extends JFrame {
 			}
 			{
 				jButtonMakeServer = new JButton();
-				jPanelMenu.add(jButtonMakeServer, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				jPanelMenu.add(jButtonMakeServer, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 				jButtonMakeServer.setText("<html><font color=white>Démarrer le serveur</font></html>");
 				jButtonMakeServer.setBackground(new java.awt.Color(0,0,0));
 			}
-			jPanelMenuLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
-			jPanelMenuLayout.rowHeights = new int[] {7, 7, 7, 7, 7};
+			{
+				jLabelPort = new JLabel();
+				jPanelMenu.add(jLabelPort, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				jLabelPort.setText("<html><font color=white>Port :</font></html>");
+			}
+			{
+				jTextFieldPort = new JTextField();
+				jPanelMenu.add(jTextFieldPort, new GridBagConstraints(3, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+			}
+			jPanelMenuLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1};
+			jPanelMenuLayout.rowHeights = new int[] {7, 7, 7, 7, 7, 7};
 			jPanelMenuLayout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
 			jPanelMenuLayout.columnWidths = new int[] {7, 7, 7, 7, 7};
 		}
@@ -134,6 +147,10 @@ public class ConnectionFrame extends JFrame {
 	}
 	public JButton getjButtonMakeServer() {
 		return jButtonMakeServer;
+	}
+	
+	public JTextField getTextFieldPort(){
+		return jTextFieldPort;
 	}
 	
 }

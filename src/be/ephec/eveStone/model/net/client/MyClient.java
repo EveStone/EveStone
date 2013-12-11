@@ -12,8 +12,8 @@ public class MyClient extends Socket{
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
 
-	public MyClient(String ip) throws UnknownHostException, IOException {
-		super(ip,2013);
+	public MyClient(String ip, int numPort) throws UnknownHostException, IOException {
+		super(ip, numPort);
 		oos = new ObjectOutputStream(this.getOutputStream());
 		ois = new ObjectInputStream(this.getInputStream());
 		JOptionPane.showMessageDialog(null, "Connexion établie avec le serveur"); // Si le message s'affiche c'est que je suis connect�

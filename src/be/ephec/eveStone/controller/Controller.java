@@ -5,9 +5,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
@@ -362,25 +359,6 @@ public class Controller {
 			JOptionPane.showMessageDialog(null, "Ressources Inssufisantes !");
 	}
 
-	private void setCanAttack(){
-		MouseListener ml[];
-		for (int i=0; i<area.getjPanelTerrain().getComponentCount(); i++){
-			System.out.println("terrain : "+i);
-			ml = area.getjPanelTerrain().getComponent(i).getMouseListeners();
-			((CardListenerTerrain)ml[0]).setCanAttack(true);
-		}
-	}
-
-	private void setTargetableFalse(){
-		MouseListener ml[];
-		for(int i=0; i<area.getjPanelTerrainAdversaire().getComponentCount(); i++){
-			ml = area.getjPanelTerrainAdversaire().getComponent(i).getMouseListeners();
-			((CardListenerTerrainAdv)ml[0]).setTargetable(false);
-		}
-		ml = area.getjLabelHerosAdversaire().getMouseListeners();
-		((HerosListener)ml[0]).setTargetable(false);
-	}
-
 	protected void jButtonAnnulerClicked(MouseEvent evt)
 	{
 		this.connexion.dispose();
@@ -396,7 +374,7 @@ public class Controller {
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
 		try {
-			myClient = new MyClient(this.connexion.getjTextFieldIP().getText());
+			myClient = new MyClient(this.connexion.getjTextFieldIP().getText(), Integer.parseInt(this.connexion.getTextFieldPort().getText()));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -412,13 +390,11 @@ public class Controller {
 	{
 		try {
 			server = new MyServer(this);
-		} catch (IOException e) {
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		JOptionPane.showMessageDialog(null, "Serveur lancé");
-
-
 
 		this.connexion.dispose();
 		this.start.getjButtonChoixHeros().setEnabled(true);

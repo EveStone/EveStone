@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,7 +14,6 @@ import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.sound.SonPlayer;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
