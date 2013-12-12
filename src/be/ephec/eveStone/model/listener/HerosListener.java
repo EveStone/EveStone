@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Dommage;
 import be.ephec.eveStone.model.Heros;
+import be.ephec.eveStone.model.Invisible;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
@@ -58,7 +59,12 @@ public class HerosListener implements MouseListener{
 						degats=((Serviteur)cardAttacking.getCard()).getNbDommage();
 					}
 					else
+					{
 						degats=((Dommage)cardAttacking.getCard()).getDegats();
+					}
+					if  (cardAttacking.getCard() instanceof Invisible){
+						((Invisible)cardAttacking.getCard()).setInvisible(false);
+					}
 					resetTarget();
 				}
 				else
