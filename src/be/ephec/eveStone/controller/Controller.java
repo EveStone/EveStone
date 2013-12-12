@@ -301,6 +301,8 @@ public class Controller {
 						}
 					}
 					area.getjPanelTerrain().add(label);
+					MouseListener[] ml = label.getMouseListeners();
+					((CardListenerTerrain)ml[0]).setCanAttack(false);
 					if (myClient == null)
 					{
 						try {
@@ -320,7 +322,7 @@ public class Controller {
 						}
 
 					}
-					MouseListener ml[] = label.getMouseListeners();
+					ml = label.getMouseListeners();
 					label.removeMouseListener(ml[ml.length-1]);
 					label.addMouseListener(new CardListenerTerrain(label, area));
 				}
