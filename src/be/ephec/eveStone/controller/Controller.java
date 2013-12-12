@@ -138,6 +138,7 @@ public class Controller {
 
 		sendHero();
 		connexionStarted();
+		
 
 		this.area.getjLabelHerosAdversaire().setIcon(new ImageIcon(getClass().getClassLoader().getResource(adverseHero.getImage())));
 		area.getjLabelHerosAdversaire().addMouseListener(new HerosListener(adverseHero, this));
@@ -242,6 +243,8 @@ public class Controller {
 	 */
 	private void piocheDepart() {
 		for(int i = 0; i<NB_CARTE_DEPART; i++){
+			JLabel label = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/CarteDosV3.png")));
+			area.getjPanelMainAdversaire().add(label);
 			pioche();
 		}
 	}
@@ -251,8 +254,6 @@ public class Controller {
 	public void pioche(){
 		if(area.getPanelMain().getComponentCount()<NB_MAX_CARTE_MAIN){
 			final CardPanel card = new CardPanel();
-			JLabel label = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/CarteDosV3.png")));
-			area.getjPanelMainAdversaire().add(label);
 			card.setLayout(null);
 			card.setCard(myHero.getDeck().getTabCartes().poll());
 			card.setName(card.getCard().getNom());

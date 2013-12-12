@@ -32,6 +32,8 @@ public class ObjectSend implements Serializable {
 	private int nbCoque;
 	private int nbStruct;
 	
+	private int nbCarteMain;
+	
 	/**
 	 * Constructeur de la classe ObjectSend
 	 * @param action: int ==> Donne l'action que l'adversaire a effectué
@@ -66,6 +68,12 @@ public class ObjectSend implements Serializable {
 		this.nbDegatsAdv = nbDegatsAdv;
 		this.visibleTerrain = visibleTerrain;
 		this.visibleTerrainAdv=visibleTerrainAdv;
+	}
+	public ObjectSend(int action, Object obj, int nbCarteMain)
+	{
+		this.action = action;
+		this.obj = obj;
+		this.nbCarteMain = nbCarteMain;
 	}
 
 	public int getAction() {
@@ -136,6 +144,12 @@ public class ObjectSend implements Serializable {
 
 	public int getNbStruct() {
 		return nbStruct;
+	}
+
+
+
+	public int getNbCarteMain() {
+		return nbCarteMain;
 	}
 	
 	

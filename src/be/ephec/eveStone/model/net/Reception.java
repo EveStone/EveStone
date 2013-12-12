@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import be.ephec.eveStone.controller.Controller;
@@ -53,7 +54,6 @@ public class Reception implements Runnable {
 						carte.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource((carte.getCard().getImage()))).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
 						carte.addMouseListener(new CardListenerTerrainAdv(carte, controller));
 						controller.getArea().getjPanelTerrainAdversaire().add(carte);
-						controller.getArea().getjPanelMainAdversaire().remove(controller.getArea().getComponent(controller.getArea().getComponentCount()-1));
 						controller.getArea().revalidate();
 						controller.getArea().repaint();
 					}
@@ -139,6 +139,13 @@ public class Reception implements Runnable {
 					}
 					else if (choix == 5) //bouton fin de tour
 					{
+						int nbCarteMainAdv = message.getNbCarteMain();
+						controller.getArea().getjPanelMainAdversaire().removeAll();
+						for (int i = 0; i<nbCarteMainAdv;i++)
+						{
+							JLabel label = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/CarteDosV3.png")));
+							controller.getArea().getjPanelMainAdversaire().add(label);
+						}
 						controller.getArea().getFinTourButton().setEnabled(true);
 						MouseListener ml[] = controller.getArea().getjLabelSortHeroique().getMouseListeners();
 						((SortHerosListener)ml[0]).setEnable(true);

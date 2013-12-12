@@ -75,7 +75,7 @@ public class FinTourListener implements MouseListener{
 		try {
 			if (controller.getMyClient() == null)
 			{
-				controller.getMyClientServer().getOos().writeObject(new ObjectSend(5, "Fin de tour"));
+				controller.getMyClientServer().getOos().writeObject(new ObjectSend(5, "Fin de tour",controller.getArea().getjPanelMain().getComponentCount()));
 			}
 			else
 			{
