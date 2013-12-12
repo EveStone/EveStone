@@ -426,17 +426,26 @@ public class Controller {
 	}
 	public void sendDommageHero()
 	{
+		Boolean[] tabVisibleTerrain = new Boolean[area.getjPanelTerrain().getComponentCount()];
+
+		for (int i = 0; i<area.getjPanelTerrain().getComponentCount(); i++)
+		{
+			if (((CardPanel)area.getjPanelTerrain().getComponent(i)).getCard() instanceof Invisible)
+			{
+				tabVisibleTerrain[i] = ((Invisible)((CardPanel)area.getjPanelTerrain().getComponent(i)).getCard()).isInvisible();
+			}
+		}
 		try {
 			if (myClient == null)
 			{
 
-				myClientServer.getOos().writeObject(new ObjectSend(3, adverseHero.getNbCoque(), adverseHero.getNbStructure()));
+				myClientServer.getOos().writeObject(new ObjectSend(3, adverseHero.getNbCoque(), adverseHero.getNbStructure(),tabVisibleTerrain));
 				myClientServer.getOos().flush();
 
 			}
 			else
 			{
-				myClient.getOos().writeObject(new ObjectSend(3, adverseHero.getNbCoque(), adverseHero.getNbStructure()));
+				myClient.getOos().writeObject(new ObjectSend(3, adverseHero.getNbCoque(), adverseHero.getNbStructure(),tabVisibleTerrain));
 				myClient.getOos().flush();
 			}
 		} catch (IOException e) {

@@ -122,6 +122,7 @@ public class Reception implements Runnable {
 					{
 						int nbCoque = message.getNbCoque();
 						int nbStructure = message.getNbStruct();
+						boolean[] visibleTerrainAdv = (boolean[]) message.getTerrainAdv();
 						
 						if (nbStructure <=0)
 						{
@@ -130,6 +131,10 @@ public class Reception implements Runnable {
 						}
 						else
 						{
+							for (int i = 0; i<terrainAdv.length; i++)
+							{
+								((Invisible)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setInvisible(visibleTerrainAdv[i]);
+							}
 							controller.getMyHero().setNbCoque(nbCoque);
 							controller.getMyHero().setNbStructure(nbStructure);
 							controller.getArea().getjLabelCoque().setText("<html><font color=black>" +controller.getMyHero().getNbCoque() +"</font></html>");

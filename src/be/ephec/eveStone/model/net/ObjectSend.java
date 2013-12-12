@@ -46,11 +46,12 @@ public class ObjectSend implements Serializable {
 	
 	
 	
-	public ObjectSend(int action, int nbCoque, int nbStruct) {
+	public ObjectSend(int action, int nbCoque, int nbStruct, Boolean[] visibleTerrainAdv) {
 		super();
 		this.action = action;
 		this.nbCoque = nbCoque;
 		this.nbStruct = nbStruct;
+		this.visibleTerrainAdv = visibleTerrainAdv;
 	}
 
 
