@@ -75,7 +75,6 @@ public class Reception implements Runnable {
 						{
 							controller.getArea().getjPanelTerrainAdversaire().add((CardPanel) terrain[i]);
 							controller.getArea().getjPanelTerrainAdversaire().getComponent(i).addMouseListener(new CardListenerTerrainAdv((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i),controller));
-
 							if (nbVieTerrain != null)
 							{
 								((Serviteur)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setNbVie(nbVieTerrain[i]);
@@ -84,7 +83,7 @@ public class Reception implements Runnable {
 							{
 								((Serviteur)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setNbDommage(nbDegatsTerrain[i]);
 							}
-							if (visibleTerrain != null && ((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard() instanceof Invisible)
+							if ((visibleTerrain != null && ((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard() instanceof Invisible) ||controller.getArea().getFinTourButton().isEnabled())
 							{
 								((Invisible)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setInvisible(visibleTerrain[i]);
 							}
