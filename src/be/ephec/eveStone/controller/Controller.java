@@ -323,8 +323,6 @@ public class Controller {
 					MouseListener[] ml = label.getMouseListeners();
 					label.removeMouseListener(ml[ml.length-1]);
 					label.addMouseListener(new CardListenerTerrain(label, area));
-					ml = label.getMouseListeners();
-					((CardListenerTerrain)ml[0]).setCanAttack(false);
 				}
 				else if (label.getCard() instanceof Buff)
 				{
@@ -467,6 +465,8 @@ public class Controller {
 			{
 				tabVisibleTerrain[i] = ((Invisible)((CardPanel)area.getjPanelTerrain().getComponent(i)).getCard()).isInvisible();
 			}
+			else
+				tabVisibleTerrain[i] = false;
 		}
 		int[] tabVieTerrainAdv = new int[area.getjPanelTerrainAdversaire().getComponentCount()];
 		int[] tabDegatsTerrainAdv = new int[area.getjPanelTerrainAdversaire().getComponentCount()];
@@ -479,6 +479,8 @@ public class Controller {
 			{
 				tabVisibleTerrainAdv[i] = ((Invisible)((CardPanel)area.getjPanelTerrainAdversaire().getComponent(i)).getCard()).isInvisible();
 			}
+			else
+				tabVisibleTerrainAdv[i] = false;
 		}
 		try {
 			if (myClient == null)

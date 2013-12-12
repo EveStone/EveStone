@@ -101,7 +101,7 @@ public class FinTourListener implements MouseListener{
 		for (int i=0; i<controller.getArea().getjPanelTerrain().getComponentCount(); i++){
 			System.out.println("terrain : "+i);
 			ml = controller.getArea().getjPanelTerrain().getComponent(i).getMouseListeners();
-			((CardListenerTerrain)ml[0]).setCanAttack(true);
+			((CardListenerTerrain)ml[0]).setCanAttack(false);
 		}
 	}
 

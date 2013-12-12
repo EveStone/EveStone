@@ -123,7 +123,7 @@ public class Reception implements Runnable {
 						int nbCoque = message.getNbCoque();
 						int nbStructure = message.getNbStruct();
 						boolean[] visibleTerrainAdv = (boolean[]) message.getTerrainAdv();
-						
+
 						if (nbStructure <=0)
 						{
 							JOptionPane.showMessageDialog(null, "Vous avez perdu");
@@ -131,26 +131,27 @@ public class Reception implements Runnable {
 						}
 						else
 						{
-							if (terrainAdv.clone() != null){
-							for (int i = 0; i<terrainAdv.length; i++)
-							{
-								if (visibleTerrainAdv!= null && ((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard() instanceof Invisible)
+							if (terrainAdv != null){
+								System.out.println("Element : "+terrainAdv.length);
+								for (int i = 0; i<terrainAdv.length; i++)
 								{
-									((Invisible)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setInvisible(visibleTerrainAdv[i]);
+									if (visibleTerrainAdv!= null && ((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard() instanceof Invisible)
+									{
+										((Invisible)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setInvisible(visibleTerrainAdv[i]);
+									}
 								}
-							}
-							controller.getMyHero().setNbCoque(nbCoque);
-							controller.getMyHero().setNbStructure(nbStructure);
-							controller.getArea().getjLabelCoque().setText("<html><font color=black>" +controller.getMyHero().getNbCoque() +"</font></html>");
-							controller.getArea().getjLabelStructure().setText("<html><font color=white>" +controller.getMyHero().getNbStructure() +"</font></html>");
-							controller.getArea().revalidate();
-							controller.getArea().repaint();
+								controller.getMyHero().setNbCoque(nbCoque);
+								controller.getMyHero().setNbStructure(nbStructure);
+								controller.getArea().getjLabelCoque().setText("<html><font color=black>" +controller.getMyHero().getNbCoque() +"</font></html>");
+								controller.getArea().getjLabelStructure().setText("<html><font color=white>" +controller.getMyHero().getNbStructure() +"</font></html>");
+								controller.getArea().revalidate();
+								controller.getArea().repaint();
 							}
 						}
 					}
 					else if (choix == 4)
 					{
-						
+
 					}
 					else if (choix == 5) //bouton fin de tour
 					{
@@ -167,6 +168,8 @@ public class Reception implements Runnable {
 						for (int i = 0; i<controller.getArea().getjPanelTerrain().getComponentCount(); i++)
 						{
 							controller.getArea().getjPanelTerrain().getComponent(i).addMouseListener(new CardListenerTerrain((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i),controller.getArea()));
+							ml = controller.getArea().getjPanelTerrain().getComponent(i).getMouseListeners();
+							((CardListenerTerrain)ml[0]).setCanAttack(true);
 						}
 						for (int i = 0; i<controller.getArea().getjPanelMain().getComponentCount(); i++)
 						{
@@ -177,6 +180,8 @@ public class Reception implements Runnable {
 					}
 				} catch (ClassNotFoundException | IOException e) {
 					System.err.println("Erreur reception");
+					JOptionPane.showMessageDialog(null, "Connexion avec le serveur perdue");
+					System.exit(0);
 				}
 			}
 		}

@@ -35,7 +35,7 @@ public class CardListenerTerrain extends CardListenerMain{
 		this.terrain=area.getjPanelTerrain();
 		this.terrainAdv=area.getjPanelTerrainAdversaire();
 		this.herosAdvLabel=area.getjLabelHerosAdversaire();
-		canAttack=true;
+		canAttack=false;
 	}
 	/**
 	 * Lorsque l'on clique sur un serviteur du terrain, on active la fonction targetable
