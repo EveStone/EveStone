@@ -55,7 +55,7 @@ public class ChoixHeros extends JFrame{
 	private final String IMG_SORT_FREGATE = "img/sortFregate.png";
 	private final String IMG_SORT_INTERCEPTOR = "img/sortInterceptor.png";
 	
-	private final String DESCR_SORT_FREGATE = "Invoque 1 serviteur sur le terrain. Ce serviteur possède 2 d'attaque et 2 points de vie.";
+	private final String DESCR_SORT_FREGATE = "Invoque 1 serviteur sur le terrain. Ce serviteur possède 1 d'attaque et 1 points de vie.";
 	private final String DESCR_SORT_INTEREPTOR = "Tir un missile qui inflige 2 points de degats à un serviteur ou héros ennemi";
 
 	public ChoixHeros(final Controller controller, final JButton commencer){
@@ -164,7 +164,7 @@ public class ChoixHeros extends JFrame{
 		jLabelDescription.setText("<html><font color=white>Nom : Interceptor<br/><br/>"
 								   + "Spécéficité : Petit et rapide, l'interceptor peut infliger des dégats important. Pour cela il utilise principalement"
 								   + " des drones d'attaque et des drone protecteur pour esquiver les dégats.<br/><br/>"
-								   + "Sort Héros : Bombe Kinétique (Inflige deux de dégats à un serviteur ou hero)</font></html>");
+								   + "Sort Héros : Tir de missile ! Inflige 2 points de dégats.</font></html>");
 		choixHero = 0;
 		jLabelcheckInterceptor.setVisible(true);
 		jLabelCheckFregate.setVisible(false);
@@ -175,8 +175,8 @@ public class ChoixHeros extends JFrame{
 		//TODO add your code for jLabel2.mouseClicked
 		jLabelDescription.setText("<html><font color=white>Nom : Frégate<br/><br/>"
 				   + "Spécéficité : La frégate est un vaisseau robuste principalement conçu pour encaisser des dégats."
-				   + " Elle utilise des drônes puissants et qui nombreux qui noient l'ennemi sous un pluie de coup.<br/><br/>"
-				   + "Sort Héros : Defense !(Donne + 2 à la coque)</font></html>");
+				   + " Elle utilise de nombreux drones qui noient l'ennemi sous un pluie de coup.<br/><br/>"
+				   + "Sort Héros : Renfort ! Invoque 1 serviteur sur le terrain.</font></html>");
 		choixHero = 1;
 		jLabelCheckFregate.setVisible(true);
 		jLabelcheckInterceptor.setVisible(false);
@@ -198,7 +198,7 @@ public class ChoixHeros extends JFrame{
 		}
 		else if (choixHero == 1)
 		{
-			controller.setMyHero(new Heros("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique("Renfort !", 2, 0, 2, IMG_SORT_FREGATE, DESCR_SORT_FREGATE)));
+			controller.setMyHero(new Heros("Fregate",IMG_FREGATE, new Deck("fregate"), new SortHeroique("Renfort !", 2, 0, 1, IMG_SORT_FREGATE, DESCR_SORT_FREGATE)));
 			System.out.println(""+ controller.getMyHero().getNom());
 			
 		}

@@ -51,25 +51,13 @@ public class ConnectionFrame extends JFrame {
 	private void initGUI(){
 		this.setSize(373, 571);
 		this.setLocationRelativeTo(null);
-		{
-			jPanel1 = new JPanel();
-			getContentPane().add(jPanel1, BorderLayout.NORTH);
-			jPanel1.setPreferredSize(new java.awt.Dimension(290, 166));
-			jPanel1.setBackground(new java.awt.Color(0,0,0));
-			{
-				jLabel1 = new JLabel();
-				jPanel1.add(jLabel1);
-				jLabel1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/logoConnexion.png")));
-				jLabel1.setLayout(null);
-				jLabel1.setBounds(47, 29, 200, 150);
-			}
-		}
+		getContentPane().setBackground(new java.awt.Color(0,0,0));
 		{
 			jPanelMenu = new JPanel();
 			GridBagLayout jPanelMenuLayout = new GridBagLayout();
 			getContentPane().add(jPanelMenu, BorderLayout.SOUTH);
 			jPanelMenu.setLayout(jPanelMenuLayout);
-			jPanelMenu.setPreferredSize(new java.awt.Dimension(284, 370));
+			jPanelMenu.setPreferredSize(new java.awt.Dimension(363, 378));
 			jPanelMenu.setBackground(new java.awt.Color(0,0,0));
 			{
 				jButtonCommencer = new JButton();
@@ -126,6 +114,19 @@ public class ConnectionFrame extends JFrame {
 			jPanelMenuLayout.rowHeights = new int[] {7, 7, 7, 7, 7, 7};
 			jPanelMenuLayout.columnWeights = new double[] {0.1, 0.1, 0.0, 0.0, 0.1};
 			jPanelMenuLayout.columnWidths = new int[] {7, 7, 25, 110, 7};
+		}
+		{
+			jPanel1 = new JPanel();
+			getContentPane().add(jPanel1, BorderLayout.NORTH);
+			jPanel1.setPreferredSize(new java.awt.Dimension(290, 166));
+			jPanel1.setBackground(new java.awt.Color(0,0,0));
+			{
+				jLabel1 = new JLabel();
+				jPanel1.add(jLabel1);
+				jLabel1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("img/logoConnexion.png")));
+				jLabel1.setLayout(null);
+				jLabel1.setBounds(47, 29, 200, 150);
+			}
 		}
 	}
 	

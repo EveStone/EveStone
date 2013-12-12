@@ -8,7 +8,7 @@ import be.ephec.eveStone.controller.Controller;
 
 public class MyServer {
 
-	private static int numPort=0;
+	private static int numPort=2013;
 	private Thread t;
 	private ServerSocket s;
 

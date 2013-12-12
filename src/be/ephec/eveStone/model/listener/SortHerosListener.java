@@ -88,7 +88,7 @@ public class SortHerosListener implements MouseListener{
 				}
 				else{
 					CardPanel minion = new CardPanel();
-					minion.setCard(new Serviteur("Hornet", 2, "img/FregateCard/hornet.png", "Drone d'attaque léger", 2, 2));
+					minion.setCard(new Serviteur("Hornet", 0, "img/FregateCard/hornet.png", "Drone de renfort", 1, 1));
 					minion.makeCard();
 					minion.showInfo(false);
 					minion.addMouseListener(new CardListenerTerrain(minion, area));
