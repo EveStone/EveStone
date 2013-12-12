@@ -131,6 +131,7 @@ public class Reception implements Runnable {
 						}
 						else
 						{
+							if (terrainAdv.clone() != null){
 							for (int i = 0; i<terrainAdv.length; i++)
 							{
 								if (visibleTerrainAdv!= null && ((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard() instanceof Invisible)
@@ -144,6 +145,7 @@ public class Reception implements Runnable {
 							controller.getArea().getjLabelStructure().setText("<html><font color=white>" +controller.getMyHero().getNbStructure() +"</font></html>");
 							controller.getArea().revalidate();
 							controller.getArea().repaint();
+							}
 						}
 					}
 					else if (choix == 4)
