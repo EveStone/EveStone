@@ -95,9 +95,10 @@ public class Reception implements Runnable {
 						for (int i =0; i<terrainAdv.length; i++)
 						{
 							controller.getArea().getjPanelTerrain().add((CardPanel) terrainAdv[i]);
-							if(controller.getArea().getFinTourButton().isEnabled())
+							if(controller.getArea().getFinTourButton().isEnabled() || (visibleTerrainAdv!= null && ((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).getCard() instanceof Invisible))
 							{
 								controller.getArea().getjPanelTerrain().getComponent(i).addMouseListener(new CardListenerTerrain((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i),controller.getArea()));
+								((Invisible)((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).getCard()).setInvisible(visibleTerrainAdv[i]);
 							}
 							if(nbVieAdv !=null)
 							{
@@ -136,6 +137,10 @@ public class Reception implements Runnable {
 							controller.getArea().revalidate();
 							controller.getArea().repaint();
 						}
+					}
+					else if (choix == 4)
+					{
+						
 					}
 					else if (choix == 5) //bouton fin de tour
 					{
