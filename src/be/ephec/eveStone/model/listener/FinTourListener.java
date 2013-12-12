@@ -79,7 +79,7 @@ public class FinTourListener implements MouseListener{
 			}
 			else
 			{
-				controller.getMyClient().getOos().writeObject(new ObjectSend(5, "Fin de tour"));
+				controller.getMyClient().getOos().writeObject(new ObjectSend(5, "Fin de tour",controller.getArea().getjPanelMain().getComponentCount()));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
