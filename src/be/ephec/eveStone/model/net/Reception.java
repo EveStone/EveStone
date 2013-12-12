@@ -133,7 +133,10 @@ public class Reception implements Runnable {
 						{
 							for (int i = 0; i<terrainAdv.length; i++)
 							{
-								((Invisible)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setInvisible(visibleTerrainAdv[i]);
+								if (visibleTerrainAdv!= null && ((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard() instanceof Invisible)
+								{
+									((Invisible)((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard()).setInvisible(visibleTerrainAdv[i]);
+								}
 							}
 							controller.getMyHero().setNbCoque(nbCoque);
 							controller.getMyHero().setNbStructure(nbStructure);
