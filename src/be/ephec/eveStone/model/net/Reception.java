@@ -59,7 +59,6 @@ public class Reception implements Runnable {
 					}
 					else if (choix == 2) //pour les changements de degats de carte attaqué
 					{
-						System.out.println("Je change mon terrain");
 						controller.getArea().getjPanelTerrainAdversaire().removeAll();
 						controller.getArea().getjPanelTerrain().removeAll();
 
@@ -132,7 +131,6 @@ public class Reception implements Runnable {
 						else
 						{
 							if (terrainAdv != null){
-								System.out.println("Element : "+terrainAdv.length);
 								for (int i = 0; i<terrainAdv.length; i++)
 								{
 									if (visibleTerrainAdv!= null && ((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i)).getCard() instanceof Invisible)
@@ -151,10 +149,14 @@ public class Reception implements Runnable {
 					}
 					else if (choix == 4)
 					{
-
+						int nbRessource = (int)message.getObj();
+						controller.getAdverseHero().setRessource(nbRessource);
+						controller.getArea().getjLabelRessourceAdversaire().setText("<html><font color=white>"+controller.getAdverseHero().getRessource()+"</font></html>");
 					}
 					else if (choix == 5) //bouton fin de tour
 					{
+						JOptionPane.showMessageDialog(null, "Votre tour");
+						controller.getArea().getjLabelRessourceAdversaire().setText("<html><font color=white>"+controller.getAdverseHero().getRessource()+"</font></html>");
 						int nbCarteMainAdv = message.getNbCarteMain();
 						controller.getArea().getjPanelMainAdversaire().removeAll();
 						for (int i = 0; i<nbCarteMainAdv;i++)

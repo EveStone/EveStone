@@ -80,25 +80,10 @@ public class CardListenerMain implements MouseListener{
 	 */
 	protected void cardMouseOn(final CardPanel card) {
 		card.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		final Timer animation = new Timer();
 		infoLabel.setText("<html><font color=white>Carte : "+card.getCard().getNom()+"<br/><br/>"
 				+"Type : "+card.getCard().toString()+"<br/><br/>"
-				+"Description : "+card.getCard().getDescription()+"</font></html>");
-		animation.schedule(new TimerTask() {
-			int width = 85;
-			double height = 132;
-			@Override
-			public void run() {
-				for(int i=0; i<23; i++) {
-					card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(width, (int)height, Image.SCALE_DEFAULT)));
-					width=width+1;
-					height=(height+(1*1.5));
-					card.revalidate();
-					card.repaint();
-				}
-				animation.cancel();
-			}
-		},5);
+				+"Description :<br/>"+card.getCard().getDescription()+"</font></html>");
+		card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(108, 157, Image.SCALE_DEFAULT)));
 		card.showInfo(true);
 	}
 	/**

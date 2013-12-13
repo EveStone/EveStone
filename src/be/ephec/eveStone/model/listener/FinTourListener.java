@@ -62,6 +62,15 @@ public class FinTourListener implements MouseListener{
 		controller.getArea().getjLabelRessource().setText("<html><font color=white>"+controller.getMyHero().getRessource()+"</font></html>");
 		setCanAttack();
 		
+		try{
+			if(controller.getMyClient() == null)
+				controller.getMyClientServer().getOos().writeObject(new ObjectSend(4, controller.getMyHero().getRessource()));
+			else
+				controller.getMyClient().getOos().writeObject(new ObjectSend(4, controller.getMyHero().getRessource()));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 		controller.stateOfEnd();
 		
 		controller.getArea().revalidate();
@@ -99,7 +108,6 @@ public class FinTourListener implements MouseListener{
 	private void setCanAttack(){
 		MouseListener ml[];
 		for (int i=0; i<controller.getArea().getjPanelTerrain().getComponentCount(); i++){
-			System.out.println("terrain : "+i);
 			ml = controller.getArea().getjPanelTerrain().getComponent(i).getMouseListeners();
 			((CardListenerTerrain)ml[0]).setCanAttack(false);
 		}

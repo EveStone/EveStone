@@ -257,7 +257,6 @@ public class Controller {
 			card.setLayout(null);
 			card.setCard(myHero.getDeck().getTabCartes().poll());
 			card.setName(card.getCard().getNom());
-			System.out.println(card.getName());
 			card.makeCard();
 			area.getPanelMain().add(card);
 			card.showInfo(false);
@@ -351,9 +350,19 @@ public class Controller {
 				area.getPanelMain().remove(label);
 				label.showInfo(false);
 				label.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(label.getCard().getImage())).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
-
+				
 				area.revalidate();
 				area.repaint();
+				try {
+					if(myClient == null)
+						myClientServer.getOos().writeObject(new ObjectSend(4, this.getMyHero().getRessource()));
+					else
+						myClient.getOos().writeObject(new ObjectSend(4, this.getMyHero().getRessource()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		}
 		else

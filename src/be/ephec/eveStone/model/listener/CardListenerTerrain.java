@@ -45,7 +45,6 @@ public class CardListenerTerrain extends CardListenerMain{
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("Can Attack ? : "+canAttack);
 		if (canAttack){
 			MouseListener ml[];
 			for(int i=0; i<terrainAdv.getComponentCount(); i++){

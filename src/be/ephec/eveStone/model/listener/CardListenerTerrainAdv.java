@@ -274,7 +274,6 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		if (((Serviteur)card.getCard()).getNbVie() == 0){
 			card.setVisible(false);
 			card.getParent().remove(card);
-			System.out.println(""+getTerrainAdv().getComponentCount());
 		}
 	}
 

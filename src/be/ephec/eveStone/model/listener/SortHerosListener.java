@@ -115,6 +115,14 @@ public class SortHerosListener implements MouseListener{
 					}
 					terrain.revalidate();
 					terrain.repaint();
+					try{
+						if(controller.getMyClient() == null)
+							controller.getMyClientServer().getOos().writeObject(new ObjectSend(4, controller.getMyHero().getRessource()));
+						else
+							controller.getMyClient().getOos().writeObject(new ObjectSend(4, controller.getMyHero().getRessource()));
+					}catch(IOException e){
+						e.printStackTrace();
+					}
 				}
 				this.setEnable(false);
 				heros.setRessource(heros.getRessource()-heros.getSortHero().getRessource());

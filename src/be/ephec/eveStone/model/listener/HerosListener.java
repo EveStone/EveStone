@@ -50,7 +50,6 @@ public class HerosListener implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("Target = "+isTargetable);
 		if (isTargetable){
 			if(!checkProtection()){
 				int degats=0;
@@ -74,7 +73,6 @@ public class HerosListener implements MouseListener{
 				controller.sendDommageHero();
 				boum(arg0);
 				updateUI();
-				System.out.println("Coque : "+heros.getNbCoque()+" Struct : "+heros.getNbStructure());
 				arg0.getComponent().setCursor(notTargetable);
 			}
 			else{
@@ -173,7 +171,6 @@ public class HerosListener implements MouseListener{
 	private void boum(MouseEvent e){
 		herosLabel = ((JLabel)e.getComponent());
 		herosLabel.setLayout(new BorderLayout());
-		System.out.println("boum");
 		anim = new JLabel();
 		anim.setIcon(new ImageIcon(getClass().getClassLoader().getResource("animation/explosion.gif")));
 		((JLabel)e.getComponent()).add(anim, BorderLayout.CENTER);
