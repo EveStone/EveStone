@@ -21,22 +21,62 @@ import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving heros events.
+ * The class that is interested in processing a heros
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addHerosListener<code> method. When
+ * the heros event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see HerosEvent
+ */
 public class HerosListener implements MouseListener{
 
+	/** The is targetable. */
 	private boolean isTargetable;
+	
+	/** The terrain adv. */
 	private JPanel terrainAdv;
+	
+	/** The heros. */
 	private Heros heros;
+	
+	/** The card attacking. */
 	private CardPanel cardAttacking;
+	
+	/** The sort heroique. */
 	private SortHeroique sortHeroique;
+	
+	/** The label coque. */
 	private JLabel labelCoque;
+	
+	/** The label structure. */
 	private JLabel labelStructure;
+	
+	/** The anim. */
 	private JLabel anim; 
+	
+	/** The heros label. */
 	private JLabel herosLabel;
+	
+	/** The controller. */
 	private Controller controller;
 
+	/** The Constant targetable. */
 	private static final Cursor targetable = new Cursor(Cursor.CROSSHAIR_CURSOR);
+	
+	/** The Constant notTargetable. */
 	private static final Cursor notTargetable = new Cursor(Cursor.DEFAULT_CURSOR);
 
+	/**
+	 * Instantiates a new heros listener.
+	 *
+	 * @param heros the heros
+	 * @param controller the controller
+	 */
 	public HerosListener(Heros heros, Controller controller){
 		this.heros=heros;
 		this.cardAttacking=null;
@@ -48,6 +88,9 @@ public class HerosListener implements MouseListener{
 		isTargetable=false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (isTargetable){
@@ -82,6 +125,9 @@ public class HerosListener implements MouseListener{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		if(isTargetable)
@@ -90,34 +136,61 @@ public class HerosListener implements MouseListener{
 			arg0.getComponent().setCursor(notTargetable);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 
 	}
 
+	/**
+	 * Sets the targetable.
+	 *
+	 * @param check the new targetable
+	 */
 	public void setTargetable(boolean check){
 		this.isTargetable=check;
 	}
 
+	/**
+	 * Sets the card attacking.
+	 *
+	 * @param card the new card attacking
+	 */
 	public void setCardAttacking(CardPanel card){
 		this.cardAttacking=card;
 	}
 
+	/**
+	 * Sets the sort attacking.
+	 *
+	 * @param sort the new sort attacking
+	 */
 	public void setSortAttacking(SortHeroique sort){
 		this.sortHeroique=sort;
 	}
 
+	/**
+	 * Reset target.
+	 */
 	private void resetTarget(){
 		MouseListener ml[];
 		if((cardAttacking!=null) && (!(cardAttacking.getCard() instanceof Dommage))){
@@ -133,6 +206,11 @@ public class HerosListener implements MouseListener{
 		this.setCardAttacking(null);
 	}
 
+	/**
+	 * Check protection.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean checkProtection(){
 		boolean check=false;
 		for(int i=0; i<terrainAdv.getComponentCount(); i++){
@@ -143,6 +221,9 @@ public class HerosListener implements MouseListener{
 		return check;
 	}
 
+	/**
+	 * Update ui.
+	 */
 	private void updateUI(){
 		labelCoque.setText(""+heros.getNbCoque());
 		labelStructure.setText("<html><font color=white>"+heros.getNbStructure()+"</font></html>");
@@ -152,6 +233,11 @@ public class HerosListener implements MouseListener{
 		labelStructure.repaint();
 	}
 
+	/**
+	 * Make dommage.
+	 *
+	 * @param degats the degats
+	 */
 	private void makeDommage(int degats){
 		if(heros.getNbCoque()-degats>=0)
 			heros.setNbCoque(heros.getNbCoque()-degats);
@@ -168,6 +254,11 @@ public class HerosListener implements MouseListener{
 		}	
 	}
 
+	/**
+	 * Boum.
+	 *
+	 * @param e the e
+	 */
 	private void boum(MouseEvent e){
 		herosLabel = ((JLabel)e.getComponent());
 		herosLabel.setLayout(new BorderLayout());

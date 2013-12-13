@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import be.ephec.eveStone.controller.Controller;
 
+// TODO: Auto-generated Javadoc
 /**
 * This code was edited or generated using CloudGarden's Jigloo
 * SWT/Swing GUI Builder, which is free for non-commercial
@@ -26,28 +27,59 @@ import be.ephec.eveStone.controller.Controller;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class ConnectionFrame extends JFrame {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2984643889204700111L;
+	
+	/** The j text field ip. */
 	private JTextField jTextFieldIP;
+	
+	/** The j text field port. */
 	private JTextField jTextFieldPort;
+	
+	/** The j label port. */
 	private JLabel jLabelPort;
+	
+	/** The j button make server. */
 	private JButton jButtonMakeServer;
+	
+	/** The j label ip ex. */
 	private JLabel jLabelIPEx;
+	
+	/** The j label2. */
 	private JLabel jLabel2;
+	
+	/** The j button annuler. */
 	private JButton jButtonAnnuler;
+	
+	/** The j button commencer. */
 	private JButton jButtonCommencer;
+	
+	/** The j label1. */
 	private JLabel jLabel1;
+	
+	/** The j panel menu. */
 	private JPanel jPanelMenu;
+	
+	/** The j panel1. */
 	private JPanel jPanel1;
+	
+	/** The j label exemple. */
 	private JLabel jLabelExemple;
 
+	/**
+	 * Instantiates a new connection frame.
+	 *
+	 * @param controller the controller
+	 */
 	public ConnectionFrame(final Controller controller){
 		super("Connexion");
 		initGUI();
 	}
 	
+	/**
+	 * Inits the gui.
+	 */
 	private void initGUI(){
 		this.setSize(373, 571);
 		this.setLocationRelativeTo(null);
@@ -130,26 +162,55 @@ public class ConnectionFrame extends JFrame {
 		}
 	}
 	
+	/**
+	 * Display.
+	 */
 	public void display(){
 		this.setVisible(true);
 	}
 	
 	
+	/**
+	 * Gets the j button annuler.
+	 *
+	 * @return the j button annuler
+	 */
 	public JButton getjButtonAnnuler() {
 		return jButtonAnnuler;
 	}
 
+	/**
+	 * Gets the j button commencer.
+	 *
+	 * @return the j button commencer
+	 */
 	public JButton getjButtonCommencer() {
 		return jButtonCommencer;
 	}
 
+	/**
+	 * Gets the j text field ip.
+	 *
+	 * @return the j text field ip
+	 */
 	public JTextField getjTextFieldIP() {
 		return jTextFieldIP;
 	}
+	
+	/**
+	 * Gets the j button make server.
+	 *
+	 * @return the j button make server
+	 */
 	public JButton getjButtonMakeServer() {
 		return jButtonMakeServer;
 	}
 	
+	/**
+	 * Gets the text field port.
+	 *
+	 * @return the text field port
+	 */
 	public JTextField getTextFieldPort(){
 		return jTextFieldPort;
 	}

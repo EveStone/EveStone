@@ -15,6 +15,7 @@ import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
+// TODO: Auto-generated Javadoc
 /**
  * Classe qui s'occupe de gérer les sort héroiques du  héros
  * 
@@ -31,20 +32,48 @@ import be.ephec.eveStone.vieuw.container.CardPanel;
  */
 public class SortHerosListener implements MouseListener{
 
+	/** The enable. */
 	private boolean enable;
+	
+	/** The terrain. */
 	private JPanel terrain;
+	
+	/** The terrain adv. */
 	private JPanel terrainAdv;
+	
+	/** The info label. */
 	private JLabel infoLabel;
+	
+	/** The heros. */
 	private Heros heros;
+	
+	/** The offensive. */
 	private boolean offensive;
+	
+	/** The ressource. */
 	private JLabel ressource;
+	
+	/** The label heros. */
 	private JLabel labelHeros;
+	
+	/** The area. */
 	private Area area;
+	
+	/** The controller. */
 	private Controller controller;
 	
+	/** The Constant dispo. */
 	private static final Cursor dispo = new Cursor(Cursor.HAND_CURSOR);
+	
+	/** The Constant nonDispo. */
 	private static final Cursor nonDispo = new Cursor(Cursor.DEFAULT_CURSOR);
 
+	/**
+	 * Instantiates a new sort heros listener.
+	 *
+	 * @param heros the heros
+	 * @param controller the controller
+	 */
 	public SortHerosListener(Heros heros, Controller controller){
 		super();
 		this.enable=true;
@@ -58,17 +87,20 @@ public class SortHerosListener implements MouseListener{
 		this.controller = controller;
 		offensive=isOffensive();
 	}
+	
 	/**
 	 * On vérifie si le sort héroique est disponible.
 	 * On vérifie ensuite si les ressource sont suffisante pour lancer le sort
 	 * On Vérifie si le sort est de nature offensive
-	 * 		si oui, on ajoute une target sur les carte adverse avec le sort (on retire la carte qui pourrait avoir été enreigstrée
-	 * 		comme attaquante)
-	 * 		
-	 * 		si non, on ajoute un serviteur au panel terrain
+	 * si oui, on ajoute une target sur les carte adverse avec le sort (on retire la carte qui pourrait avoir été enreigstrée
+	 * comme attaquante)
+	 * 
+	 * si non, on ajoute un serviteur au panel terrain
 	 * 
 	 * (A MODIFIER PROCHAINEMENT) : la nature du sort sera définir suivant un champs, afin de pouvoir appliquer d'autre
 	 * effets supplémentaire (buff, degats sur plusieurs adversaires, débuff enemmis, neutralisation, ect...)
+	 *
+	 * @param arg0 the arg0
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
@@ -135,6 +167,9 @@ public class SortHerosListener implements MouseListener{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		infoLabel.setText("<html><font color=white>Carte : "+heros.getSortHero().getNom()+"<br/><br/>"
@@ -146,6 +181,9 @@ public class SortHerosListener implements MouseListener{
 			arg0.getComponent().setCursor(nonDispo);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		infoLabel.setText("<html><font color=white>Carte : <br/><br/>"
@@ -153,20 +191,36 @@ public class SortHerosListener implements MouseListener{
 				+"Description : </font></html>");
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 
 	}
 
+	/**
+	 * Sets the enable.
+	 *
+	 * @param check the new enable
+	 */
 	public void setEnable(boolean check){
 		this.enable=check;
 	}
 
+	/**
+	 * Checks if is offensive.
+	 *
+	 * @return true, if is offensive
+	 */
 	private boolean isOffensive(){
 		if(heros.getSortHero().getDegats()==0)
 			return false;

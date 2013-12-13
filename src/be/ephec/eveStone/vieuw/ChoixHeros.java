@@ -20,6 +20,7 @@ import be.ephec.eveStone.model.Heros;
 import be.ephec.eveStone.model.SortHeroique;
 import be.ephec.eveStone.model.repositories.Deck;
 
+// TODO: Auto-generated Javadoc
 /**
 * This code was edited or generated using CloudGarden's Jigloo
 * SWT/Swing GUI Builder, which is free for non-commercial
@@ -33,36 +34,78 @@ import be.ephec.eveStone.model.repositories.Deck;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class ChoixHeros extends JFrame{
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3248722263899412425L;
+	
+	/** The j panel1. */
 	private JPanel jPanel1;
+	
+	/** The j button save. */
 	private JButton jButtonSave;
+	
+	/** The j label description. */
 	private JLabel jLabelDescription;
+	
+	/** The j label title. */
 	private JLabel jLabelTitle;
+	
+	/** The j button quitter. */
 	private JButton jButtonQuitter;
+	
+	/** The j label2. */
 	private JLabel jLabel2;
+	
+	/** The j label1. */
 	private JLabel jLabel1;
+	
+	/** The j panel description. */
 	private JPanel jPanelDescription;
+	
+	/** The choix hero. */
 	private int choixHero = -1; // 0 alors interceptor, 1 alors fregate
+	
+	/** The j label check fregate. */
 	private JLabel jLabelCheckFregate;
+	
+	/** The j labelcheck interceptor. */
 	private JLabel jLabelcheckInterceptor;
 
+	/** The img fregate. */
 	private final String IMG_FREGATE = "img/Fregate.png";
+	
+	/** The img interceptor. */
 	private final String IMG_INTERCEPTOR = "img/Interceptor.png";
 	
+	/** The img sort fregate. */
 	private final String IMG_SORT_FREGATE = "img/sortFregate.png";
+	
+	/** The img sort interceptor. */
 	private final String IMG_SORT_INTERCEPTOR = "img/sortInterceptor.png";
 	
+	/** The descr sort fregate. */
 	private final String DESCR_SORT_FREGATE = "Invoque 1 serviteur sur le terrain. Ce serviteur possède 1 d'attaque et 1 points de vie.";
+	
+	/** The descr sort intereptor. */
 	private final String DESCR_SORT_INTEREPTOR = "Tir un missile qui inflige 2 points de degats à un serviteur ou héros ennemi";
 
+	/**
+	 * Instantiates a new choix heros.
+	 *
+	 * @param controller the controller
+	 * @param commencer the commencer
+	 */
 	public ChoixHeros(final Controller controller, final JButton commencer){
 		super("Choix du Héros");
 		initGUI(controller, commencer);
 	}
 	
+	/**
+	 * Inits the gui.
+	 *
+	 * @param controller the controller
+	 * @param commencer the commencer
+	 */
 	private void initGUI(final Controller controller, final JButton commencer){
 		this.setSize(484, 582);
 		this.setVisible(true);
@@ -158,6 +201,11 @@ public class ChoixHeros extends JFrame{
 		}
 	}
 	
+	/**
+	 * J label1 mouse clicked.
+	 *
+	 * @param evt the evt
+	 */
 	private void jLabel1MouseClicked(MouseEvent evt) {
 		//System.out.println("jLabel1.mouseClicked, event="+evt);
 		//TODO add your code for jLabel1.mouseClicked
@@ -170,6 +218,11 @@ public class ChoixHeros extends JFrame{
 		jLabelCheckFregate.setVisible(false);
 	}
 	
+	/**
+	 * J label2 mouse clicked.
+	 *
+	 * @param evt the evt
+	 */
 	private void jLabel2MouseClicked(MouseEvent evt) {
 		//System.out.println("jLabel2.mouseClicked, event="+evt);
 		//TODO add your code for jLabel2.mouseClicked
@@ -182,11 +235,24 @@ public class ChoixHeros extends JFrame{
 		jLabelcheckInterceptor.setVisible(false);
 	}
 	
+	/**
+	 * J button quitter action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void jButtonQuitterActionPerformed(ActionEvent evt) {
 		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
 		//TODO add your code for jButtonQuitter.actionPerformed
 		this.dispose();
 	}
+	
+	/**
+	 * J button sauver action performed.
+	 *
+	 * @param evt the evt
+	 * @param controller the controller
+	 * @param commencer the commencer
+	 */
 	private void jButtonSauverActionPerformed(ActionEvent evt, final Controller controller, JButton commencer) {
 		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
 		//TODO add your code for jButtonQuitter.actionPerformed

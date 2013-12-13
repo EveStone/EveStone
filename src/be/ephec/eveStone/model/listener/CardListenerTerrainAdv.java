@@ -16,6 +16,7 @@ import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
 import be.ephec.eveStone.vieuw.container.CardPanel;
+// TODO: Auto-generated Javadoc
 /**
  * Listener sur les cartes du terrain adverse.
  * 
@@ -27,22 +28,35 @@ import be.ephec.eveStone.vieuw.container.CardPanel;
  */
 public class CardListenerTerrainAdv extends CardListenerTerrain{
 
+	/** The is targetable. */
 	private boolean isTargetable;
+	
+	/** The card attacking. */
 	private CardPanel cardAttacking;
+	
+	/** The sort. */
 	private SortHeroique sort;
+	
+	/** The label sort. */
 	private JLabel labelSort;
+	
+	/** The heros. */
 	private JLabel heros;
+	
+	/** The controller. */
 	private Controller controller;
 
+	/** The Constant targetable. */
 	private static final Cursor targetable = new Cursor(Cursor.CROSSHAIR_CURSOR);
+	
+	/** The Constant notTargetable. */
 	private static final Cursor notTargetable = new Cursor(Cursor.DEFAULT_CURSOR);
 
 	/**
-	 * Constructeur
+	 * Constructeur.
+	 *
 	 * @param card le panel de la carte ciblée
-	 * @param infoLabel le label d'information complémentaire
-	 * @param terrain le terrain du joueur
-	 * @param terrainAdv le terrain de son adversaire
+	 * @param controller the controller
 	 */
 	public CardListenerTerrainAdv(CardPanel card, Controller controller) {
 		super(card, controller.getArea());
@@ -50,17 +64,20 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		this.heros=controller.getArea().getjLabelHerosAdversaire();
 		isTargetable=false;
 	}
+	
 	/**
 	 * On verifie si la cible est targetable. On definit ensuite la nature des degats :
-	 * 	-Si la source de dégat est un serviteur adverse, le sort enregistré est forcement null (voir CardListenerTerrain)
-	 * 	 On vérifie donc si on peut l'attaquer (makeDegat).
-	 * 		Si toute les conditions sont favorables, les serviteurs vont s'infliger des dégats mutuels
-	 * 		On supprime donc les flags de target et on réinitialise la carte attaquante à null
-	 * 		Si la cible qui attaquait était invisible, elle ne l'est plus et peut maintenant subir des dégats
-	 * 	
-	 * 	-Si la source de dégats est un sort,
-	 * 	 On vérifie que les condition sont favorable (même règle que pour les carte en jeu)
-	 * 	 On retire le montant de points de vie du sort a la cible.
+	 * -Si la source de dégat est un serviteur adverse, le sort enregistré est forcement null (voir CardListenerTerrain)
+	 * On vérifie donc si on peut l'attaquer (makeDegat).
+	 * Si toute les conditions sont favorables, les serviteurs vont s'infliger des dégats mutuels
+	 * On supprime donc les flags de target et on réinitialise la carte attaquante à null
+	 * Si la cible qui attaquait était invisible, elle ne l'est plus et peut maintenant subir des dégats
+	 * 
+	 * -Si la source de dégats est un sort,
+	 * On vérifie que les condition sont favorable (même règle que pour les carte en jeu)
+	 * On retire le montant de points de vie du sort a la cible.
+	 *
+	 * @param arg0 the arg0
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
@@ -168,6 +185,9 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			e.printStackTrace();
 		}
 	}*/
+	/* (non-Javadoc)
+	 * @see be.ephec.eveStone.model.listener.CardListenerTerrain#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		super.mouseEntered(arg0);
@@ -177,24 +197,35 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			getCard().setCursor(notTargetable);
 	}
 
+	/* (non-Javadoc)
+	 * @see be.ephec.eveStone.model.listener.CardListenerTerrain#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		super.mouseExited(arg0);
 	}
 
+	/* (non-Javadoc)
+	 * @see be.ephec.eveStone.model.listener.CardListenerTerrain#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see be.ephec.eveStone.model.listener.CardListenerTerrain#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
+	
 	/**
-	 * Méthode qui permet de définir si une carte de protection se trouve sur le terrain panel
+	 * Méthode qui permet de définir si une carte de protection se trouve sur le terrain panel.
+	 *
 	 * @param panel le terrain à vérifier
 	 * @return false si aucune carte Protection n'est en jeu sur le terrain panel, true sinon
 	 */
@@ -211,14 +242,31 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		return check;
 	}
 
+	/**
+	 * Gets the card attacking.
+	 *
+	 * @return the card attacking
+	 */
 	public CardPanel getCardAttacking() {
 		return cardAttacking;
 	}
 
+	/**
+	 * Sets the card attacking.
+	 *
+	 * @param cardAttacking the new card attacking
+	 */
 	public void setCardAttacking(CardPanel cardAttacking) {
 		this.cardAttacking = cardAttacking;
 	}
 
+	/**
+	 * Retrieve index.
+	 *
+	 * @param toFind the to find
+	 * @param card the card
+	 * @return the int
+	 */
 	public int retrieveIndex(JPanel toFind, CardPanel card){
 		Component[] list = toFind.getComponents();
 		int i=0;
@@ -230,7 +278,8 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 	}
 
 	/**
-	 * Méthode qui permet de définir si la cible est une cible attaquable
+	 * Méthode qui permet de définir si la cible est une cible attaquable.
+	 *
 	 * @param e la source du clic
 	 * @return true si la cible est attaquable, false sinon
 	 */
@@ -257,8 +306,10 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			}
 		}
 	}
+	
 	/**
-	 * Méthode qui permet de retire une nombre de point de dégat dommage à une carte
+	 * Méthode qui permet de retire une nombre de point de dégat dommage à une carte.
+	 *
 	 * @param card Le Label contenant la carte
 	 * @param dommage Le nombre de point de dégats a retirr à la carte
 	 */
@@ -277,10 +328,21 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 		}
 	}
 
+	/**
+	 * Sets the targetable.
+	 *
+	 * @param check the new targetable
+	 */
 	public void setTargetable(boolean check){
 		this.isTargetable=check;
 	}
 
+	/**
+	 * Sets the sort hero.
+	 *
+	 * @param sort the sort
+	 * @param labelSort the label sort
+	 */
 	public void setSortHero(SortHeroique sort, JLabel labelSort){
 		this.sort=sort;
 		this.labelSort=labelSort;

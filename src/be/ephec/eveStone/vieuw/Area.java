@@ -15,6 +15,7 @@ import be.ephec.eveStone.sound.SonPlayer;
 
 import java.awt.BorderLayout;
 
+// TODO: Auto-generated Javadoc
 /**
 * This code was edited or generated using CloudGarden's Jigloo
 * SWT/Swing GUI Builder, which is free for non-commercial
@@ -35,36 +36,86 @@ import java.awt.BorderLayout;
  */
 public class Area extends JFrame {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8140867745881460741L;
+	
+	/** The Constant PATH_BG. */
 	private static final String PATH_BG = "img/Background.png";
+	
+	/** The j panel terrain adversaire. */
 	private JPanel jPanelTerrainAdversaire;
+	
+	/** The j panel main adversaire. */
 	private JPanel jPanelMainAdversaire;
+	
+	/** The j label ressource adversaire. */
 	private JLabel jLabelRessourceAdversaire;
+	
+	/** The j label sort heroique adversaire. */
 	private JLabel jLabelSortHeroiqueAdversaire;
+	
+	/** The j label heros adversaire. */
 	private JLabel jLabelHerosAdversaire;
+	
+	/** The j label sort heroique. */
 	private JLabel jLabelSortHeroique;
+	
+	/** The j label ressource. */
 	private JLabel jLabelRessource;
+	
+	/** The j label heros. */
 	private JLabel jLabelHeros;
+	
+	/** The j panel main. */
 	private JPanel jPanelMain;
+	
+	/** The j label icone coque. */
 	private JLabel jLabelIconeCoque;
+	
+	/** The j label icone coque adverse. */
 	private JLabel jLabelIconeCoqueAdverse;
+	
+	/** The j label1. */
 	private JLabel jLabel1;
+	
+	/** The j label ress sort. */
 	private JLabel jLabelRessSort;
+	
+	/** The j label icone struct. */
 	private JLabel jLabelIconeStruct;
+	
+	/** The j label structure adverse. */
 	private JLabel jLabelStructureAdverse;
+	
+	/** The j label icone struct adverse. */
 	private JLabel jLabelIconeStructAdverse;
+	
+	/** The j label coque adverse. */
 	private JLabel jLabelCoqueAdverse;
+	
+	/** The j label structure. */
 	private JLabel jLabelStructure;
+	
+	/** The j label coque. */
 	private JLabel jLabelCoque;
+	
+	/** The j label infos carte. */
 	private JLabel jLabelInfosCarte;
+	
+	/** The j panel terrain. */
 	private JPanel jPanelTerrain;
+	
+	/** The j button fin tour. */
 	private JButton jButtonFinTour;
 	
+	/** The background. */
 	private SonPlayer background;
 
+	/**
+	 * Instantiates a new area.
+	 *
+	 * @param controller the controller
+	 */
 	public Area(final Controller controller){
 		super("EVE STONE");
 		this.setSize(1240, 859);
@@ -73,6 +124,11 @@ public class Area extends JFrame {
 		this.initGUI(controller);
 	}
 	
+	/**
+	 * Inits the gui.
+	 *
+	 * @param controller the controller
+	 */
 	private void initGUI(final Controller controller){
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -239,111 +295,238 @@ public class Area extends JFrame {
 		}
 	}
 	
+	/**
+	 * Display.
+	 */
 	public void display(){
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Gets the panel main.
+	 *
+	 * @return the panel main
+	 */
 	public JPanel getPanelMain(){
 		return this.jPanelMain;
 	}
 	
+	/**
+	 * Gets the j panel terrain.
+	 *
+	 * @return the j panel terrain
+	 */
 	public JPanel getjPanelTerrain() {
 		return jPanelTerrain;
 	}
 
+	/**
+	 * Gets the j panel terrain adversaire.
+	 *
+	 * @return the j panel terrain adversaire
+	 */
 	public JPanel getjPanelTerrainAdversaire() {
 		return jPanelTerrainAdversaire;
 	}
 
+	/**
+	 * Gets the j panel main adversaire.
+	 *
+	 * @return the j panel main adversaire
+	 */
 	public JPanel getjPanelMainAdversaire() {
 		return jPanelMainAdversaire;
 	}
 
+	/**
+	 * Gets the j label heros adversaire.
+	 *
+	 * @return the j label heros adversaire
+	 */
 	public JLabel getjLabelHerosAdversaire() {
 		return jLabelHerosAdversaire;
 	}
 
+	/**
+	 * Gets the j label heros.
+	 *
+	 * @return the j label heros
+	 */
 	public JLabel getjLabelHeros(){
 		return this.jLabelHeros;
 	}
+	
+	/**
+	 * Gets the j label sort heroique.
+	 *
+	 * @return the j label sort heroique
+	 */
 	public JLabel getjLabelSortHeroique() {
 		return this.jLabelSortHeroique;
 	}
 	
 	
+	/**
+	 * Gets the j label ressource adversaire.
+	 *
+	 * @return the j label ressource adversaire
+	 */
 	public JLabel getjLabelRessourceAdversaire() {
 		return jLabelRessourceAdversaire;
 	}
 
+	/**
+	 * Gets the j label sort heroique adversaire.
+	 *
+	 * @return the j label sort heroique adversaire
+	 */
 	public JLabel getjLabelSortHeroiqueAdversaire() {
 		return jLabelSortHeroiqueAdversaire;
 	}
 
+	/**
+	 * Gets the j label ressource.
+	 *
+	 * @return the j label ressource
+	 */
 	public JLabel getjLabelRessource(){
 		return this.jLabelRessource;
 	}
 	
+	/**
+	 * Gets the fin tour button.
+	 *
+	 * @return the fin tour button
+	 */
 	public JButton getFinTourButton(){
 		return jButtonFinTour;
 	}	
 	
+	/**
+	 * Gets the label info.
+	 *
+	 * @return the label info
+	 */
 	public JLabel getLabelInfo(){
 		return this.jLabelInfosCarte;
 	}
 
+	/**
+	 * Gets the j label structure adverse.
+	 *
+	 * @return the j label structure adverse
+	 */
 	public JLabel getjLabelStructureAdverse() {
 		return jLabelStructureAdverse;
 	}
 
+	/**
+	 * Sets the j label structure adverse.
+	 *
+	 * @param jLabelStructureAdverse the new j label structure adverse
+	 */
 	public void setjLabelStructureAdverse(JLabel jLabelStructureAdverse) {
 		this.jLabelStructureAdverse = jLabelStructureAdverse;
 	}
 
+	/**
+	 * Gets the j label coque adverse.
+	 *
+	 * @return the j label coque adverse
+	 */
 	public JLabel getjLabelCoqueAdverse() {
 		return jLabelCoqueAdverse;
 	}
 
+	/**
+	 * Sets the j label coque adverse.
+	 *
+	 * @param jLabelCoqueAdverse the new j label coque adverse
+	 */
 	public void setjLabelCoqueAdverse(JLabel jLabelCoqueAdverse) {
 		this.jLabelCoqueAdverse = jLabelCoqueAdverse;
 	}
 
+	/**
+	 * Gets the j label structure.
+	 *
+	 * @return the j label structure
+	 */
 	public JLabel getjLabelStructure() {
 		return jLabelStructure;
 	}
 
+	/**
+	 * Sets the j label structure.
+	 *
+	 * @param jLabelStructure the new j label structure
+	 */
 	public void setjLabelStructure(JLabel jLabelStructure) {
 		this.jLabelStructure = jLabelStructure;
 	}
 
+	/**
+	 * Gets the j label coque.
+	 *
+	 * @return the j label coque
+	 */
 	public JLabel getjLabelCoque() {
 		return jLabelCoque;
 	}
 
+	/**
+	 * Sets the j label coque.
+	 *
+	 * @param jLabelCoque the new j label coque
+	 */
 	public void setjLabelCoque(JLabel jLabelCoque) {
 	}
 
+	/**
+	 * Sets the j panel terrain adversaire.
+	 *
+	 * @param jPanelTerrainAdversaire the new j panel terrain adversaire
+	 */
 	public void setjPanelTerrainAdversaire(JPanel jPanelTerrainAdversaire) {
 		this.jPanelTerrainAdversaire = jPanelTerrainAdversaire;
 		this.jPanelTerrainAdversaire.revalidate();
 		this.jPanelTerrainAdversaire.repaint();
 	}
 
+	/**
+	 * Sets the j label ressource adversaire.
+	 *
+	 * @param jLabelRessourceAdversaire the new j label ressource adversaire
+	 */
 	public void setjLabelRessourceAdversaire(JLabel jLabelRessourceAdversaire) {
 		this.jLabelRessourceAdversaire = jLabelRessourceAdversaire;
 		this.revalidate();
 		this.repaint();
 	}
 
+	/**
+	 * Sets the j panel terrain.
+	 *
+	 * @param jPanelTerrain the new j panel terrain
+	 */
 	public void setjPanelTerrain(JPanel jPanelTerrain) {
 		this.jPanelTerrain = jPanelTerrain;
 		this.revalidate();
 		this.repaint();
 	}
 
+	/**
+	 * Gets the j panel main.
+	 *
+	 * @return the j panel main
+	 */
 	public JPanel getjPanelMain() {
 		return jPanelMain;
 	}
 	
+	/**
+	 * Play sound.
+	 */
 	public void playSound(){
 		background = new SonPlayer(getClass().getClassLoader().getResource("./sound/soundEveStone.mp3").getPath());
 		background.start();

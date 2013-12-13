@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 import be.ephec.eveStone.controller.Controller;
 
+// TODO: Auto-generated Javadoc
 /**
 * This code was edited or generated using CloudGarden's Jigloo
 * SWT/Swing GUI Builder, which is free for non-commercial
@@ -22,23 +23,43 @@ import be.ephec.eveStone.controller.Controller;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class StartFrame extends JFrame{
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4679000391438807432L;
+	
+	/** The j button quitter. */
 	private JButton jButtonQuitter;
+	
+	/** The j button commencer. */
 	private JButton jButtonCommencer;
+	
+	/** The j button config. */
 	private JButton jButtonConfig;
+	
+	/** The j button regles. */
 	private JButton jButtonRegles;
+	
+	/** The j button choix heros. */
 	private JButton jButtonChoixHeros;
 	
+	/** The Constant PATH_START. */
 	private static final String PATH_START = "img/StartFrame.png";
 	
+	/**
+	 * Instantiates a new start frame.
+	 *
+	 * @param controller the controller
+	 */
 	public StartFrame(final Controller controller) {
 		super();
 		initGUI(controller);
 	}
 	
+	/**
+	 * Inits the gui.
+	 *
+	 * @param controller the controller
+	 */
 	private void initGUI(final Controller controller) {
 		try {
 			pack();
@@ -121,12 +142,24 @@ public class StartFrame extends JFrame{
 		}
 	}
 	
+	/**
+	 * J button quitter action performed.
+	 *
+	 * @param evt the evt
+	 * @param controller the controller
+	 */
 	private void jButtonQuitterActionPerformed(ActionEvent evt, final Controller controller) {
 		//System.out.println("jButtonQuitter.actionPerformed, event="+evt);
 		//TODO add your code for jButtonQuitter.actionPerformed
 		System.exit(0);
 	}
 	
+	/**
+	 * J button config action performed.
+	 *
+	 * @param evt the evt
+	 * @param controller the controller
+	 */
 	private void jButtonConfigActionPerformed(ActionEvent evt, final Controller controller) {
 		//System.out.println("jButtonConfig.actionPerformed, event="+evt);
 		//TODO add your code for jButtonConfig.actionPerformed
@@ -134,6 +167,12 @@ public class StartFrame extends JFrame{
 		controller.displayConnectionFrame();
 	}
 	
+	/**
+	 * J button commencer action performed.
+	 *
+	 * @param evt the evt
+	 * @param controller the controller
+	 */
 	private void jButtonCommencerActionPerformed(ActionEvent evt, final Controller controller) {
 		//System.out.println("jButtonCommencer.actionPerformed, event="+evt);
 		//TODO add your code for jButtonCommencer.actionPerformed
@@ -142,30 +181,63 @@ public class StartFrame extends JFrame{
 		this.dispose();
 	}
 	
+	/**
+	 * J button choix heros action performed.
+	 *
+	 * @param evt the evt
+	 * @param controller the controller
+	 * @param commencer the commencer
+	 */
 	private void jButtonChoixHerosActionPerformed(ActionEvent evt, final Controller controller, JButton commencer) {
 		//System.out.println("jButtonChoixHeros.actionPerformed, event="+evt);
 		//TODO add your code for jButtonChoixHeros.actionPerformed
 		new ChoixHeros(controller, commencer);
 	}
 	
+	/**
+	 * J button regles action performed.
+	 *
+	 * @param evt the evt
+	 * @param controller the controller
+	 */
 	private void jButtonReglesActionPerformed(ActionEvent evt,final Controller controller) {
 		controller.makeRulesFrame();
 		controller.displayRulesFrame();
 		//TODO add your code for jButtonRegles.actionPerformed
 	}
 
+	/**
+	 * Gets the j button config.
+	 *
+	 * @return the j button config
+	 */
 	public JButton getjButtonConfig() {
 		return jButtonConfig;
 	}
 
+	/**
+	 * Sets the j button config.
+	 *
+	 * @param jButtonConfig the new j button config
+	 */
 	public void setjButtonConfig(JButton jButtonConfig) {
 		this.jButtonConfig = jButtonConfig;
 	}
 
+	/**
+	 * Gets the j button choix heros.
+	 *
+	 * @return the j button choix heros
+	 */
 	public JButton getjButtonChoixHeros() {
 		return jButtonChoixHeros;
 	}
 
+	/**
+	 * Sets the j button choix heros.
+	 *
+	 * @param jButtonChoixHeros the new j button choix heros
+	 */
 	public void setjButtonChoixHeros(JButton jButtonChoixHeros) {
 		this.jButtonChoixHeros = jButtonChoixHeros;
 	}

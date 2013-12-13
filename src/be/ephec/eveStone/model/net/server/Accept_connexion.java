@@ -6,17 +6,33 @@ import java.net.*;
 import be.ephec.eveStone.controller.Controller;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Accept_connexion.
+ */
 public class Accept_connexion implements Runnable{
 
+	/** The socketserver. */
 	private ServerSocket socketserver = null;
+	
+	/** The controller. */
 	private Controller controller;
 
+	/**
+	 * Instantiates a new accept_connexion.
+	 *
+	 * @param ss the ss
+	 * @param controller the controller
+	 */
 	public Accept_connexion(ServerSocket ss, Controller controller){
 	 socketserver = ss;
 	 this.controller = controller;
 	 
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {
 		
 		try {

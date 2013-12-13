@@ -7,14 +7,35 @@ import java.io.IOException;
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.net.ObjectSend;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving finTour events.
+ * The class that is interested in processing a finTour
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addFinTourListener<code> method. When
+ * the finTour event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see FinTourEvent
+ */
 public class FinTourListener implements MouseListener{
 
+	/** The controller. */
 	private Controller controller;
 
+	/**
+	 * Instantiates a new fin tour listener.
+	 *
+	 * @param controller the controller
+	 */
 	public FinTourListener(Controller controller){
 		this.controller=controller;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -24,30 +45,47 @@ public class FinTourListener implements MouseListener{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * J button fin tour clicked.
+	 *
+	 * @param evt the evt
+	 */
 	protected void jButtonFinTourClicked(MouseEvent evt) {
 		Controller.nbTour++;
 		if (Controller.nbTour < Controller.NB_MAX_RESSOURCE)
@@ -79,6 +117,10 @@ public class FinTourListener implements MouseListener{
 		
 		sendBoutonFin();
 	}
+	
+	/**
+	 * Send bouton fin.
+	 */
 	public void sendBoutonFin()
 	{
 		try {
@@ -95,6 +137,10 @@ public class FinTourListener implements MouseListener{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Sets the targetable false.
+	 */
 	private void setTargetableFalse(){
 		MouseListener ml[];
 		for(int i=0; i<controller.getArea().getjPanelTerrainAdversaire().getComponentCount(); i++){
@@ -105,6 +151,9 @@ public class FinTourListener implements MouseListener{
 		((HerosListener)ml[0]).setTargetable(false);
 	}
 
+	/**
+	 * Sets the can attack.
+	 */
 	private void setCanAttack(){
 		MouseListener ml[];
 		for (int i=0; i<controller.getArea().getjPanelTerrain().getComponentCount(); i++){

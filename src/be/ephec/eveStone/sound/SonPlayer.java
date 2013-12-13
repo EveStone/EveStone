@@ -11,11 +11,25 @@ import javazoom.jl.player.AudioDevice;
 import javazoom.jl.player.FactoryRegistry;
 import javazoom.jl.player.Player;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SonPlayer.
+ */
 public class SonPlayer extends Thread implements Runnable
 {
+	
+	/** The filename. */
 	private String fFilename = null;
+	
+	/** The remote. */
 	private boolean remote = false;
 
+	/**
+	 * Creates the instance.
+	 *
+	 * @param args the args
+	 * @return the son player
+	 */
 	static public SonPlayer createInstance(String[] args)
 	{
 		SonPlayer player = new SonPlayer();
@@ -24,15 +38,29 @@ public class SonPlayer extends Thread implements Runnable
 		return player;
 	}
 
+	/**
+	 * Instantiates a new son player.
+	 */
 	public SonPlayer() {
 
 	}
 
+	/**
+	 * Instantiates a new son player.
+	 *
+	 * @param filename the filename
+	 */
 	public SonPlayer(String filename)
 	{
 		this.fFilename=filename;
 	}
 
+	/**
+	 * Parses the args.
+	 *
+	 * @param args the args
+	 * @return true, if successful
+	 */
 	protected boolean parseArgs(String[] args)
 	{
 		boolean parsed = false;
@@ -62,6 +90,9 @@ public class SonPlayer extends Thread implements Runnable
 		return parsed;
 	}
 
+	/**
+	 * Show usage.
+	 */
 	public void showUsage()
 	{
 		System.out.println("Usage: jlp [-url] <filename>");
@@ -69,6 +100,10 @@ public class SonPlayer extends Thread implements Runnable
 		System.out.println(" e.g. : java javazoom.jl.player.jlp localfile.mp3");
 
 	}
+	
+	/**
+	 * Stopper.
+	 */
 	public void stopper()
 	{
 		try
@@ -93,6 +128,11 @@ public class SonPlayer extends Thread implements Runnable
 
 	}
 
+	/**
+	 * Jouer.
+	 *
+	 * @throws JavaLayerException the java layer exception
+	 */
 	public void jouer()
 			throws JavaLayerException
 			{
@@ -117,6 +157,9 @@ public class SonPlayer extends Thread implements Runnable
 
 	/**
 	 * Jouer fichier de l' URL (Streaming).
+	 *
+	 * @return the uRL input stream
+	 * @throws Exception the exception
 	 */
 	protected InputStream getURLInputStream() throws Exception
 	{
@@ -129,6 +172,9 @@ public class SonPlayer extends Thread implements Runnable
 
 	/**
 	 * Jouer un fichier de FileInputStream.
+	 *
+	 * @return the input stream
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	protected InputStream getInputStream() throws IOException
 	{
@@ -137,11 +183,20 @@ public class SonPlayer extends Thread implements Runnable
 		return bin;
 	}
 
+	/**
+	 * Gets the audio device.
+	 *
+	 * @return the audio device
+	 * @throws JavaLayerException the java layer exception
+	 */
 	protected AudioDevice getAudioDevice() throws JavaLayerException
 	{
 		return FactoryRegistry.systemRegistry().createAudioDevice();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	public void run() {
 		{
 			try {

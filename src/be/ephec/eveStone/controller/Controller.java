@@ -30,34 +30,65 @@ import be.ephec.eveStone.vieuw.RulesFrame;
 import be.ephec.eveStone.vieuw.StartFrame;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Controller.
+ */
 public class Controller {
 
 
 	// Modèles
+	/** The my hero. */
 	private Heros myHero;
+	
+	/** The adverse hero. */
 	private Heros adverseHero;
 
 	// Views
+	/** The area. */
 	private Area area;
+	
+	/** The start. */
 	private StartFrame start;
+	
+	/** The connexion. */
 	private ConnectionFrame connexion;
+	
+	/** The rules. */
 	private RulesFrame rules;
 
+	/** The Constant NB_MAX_RESSOURCE. */
 	public final static int NB_MAX_RESSOURCE = 10;
+	
+	/** The Constant NB_MAX_CARTE_TERRAIN. */
 	public final static int NB_MAX_CARTE_TERRAIN = 7;
+	
+	/** The Constant NB_MAX_CARTE_MAIN. */
 	public final static int NB_MAX_CARTE_MAIN = 7;
+	
+	/** The Constant NB_CARTE_DEPART. */
 	public final static int NB_CARTE_DEPART = 4;
 
 	//Port serveur
+	/** The num port. */
 	private final int NUM_PORT = 2013;
 
 	//client NET
+	/** The my client. */
 	private MyClient myClient = null;
+	
+	/** The my client server. */
 	private ClientServer myClientServer = null;
+	
+	/** The server. */
 	private MyServer server;
 
+	/** The nb tour. */
 	public static int nbTour;
 
+	/**
+	 * Instantiates a new controller.
+	 */
 	public Controller(){
 
 	}
@@ -67,20 +98,22 @@ public class Controller {
 
 	/**
 	 * Construit la nouvelles Fenetre Start qui permet de séléctionner son héros, de se connecter
-	 * à un serveur et de commencer une partie
+	 * à un serveur et de commencer une partie.
 	 */
 	public void makeStartFrame(){
 		this.start = new StartFrame(this);
 		this.start.getjButtonChoixHeros().setEnabled(false);
 	}
+	
 	/**
-	 * Affiche la startFrame
+	 * Affiche la startFrame.
 	 */
 	public void displayStartFrame(){
 		start.setVisible(true);
 	}
+	
 	/**
-	 * Construit la fenêtre de connection
+	 * Construit la fenêtre de connection.
 	 */
 	public void makeConnectionFrame(){
 		this.connexion = new ConnectionFrame(this);
@@ -100,14 +133,16 @@ public class Controller {
 			}
 		});
 	}
+	
 	/**
-	 * Affiche la fenêtre de connection
+	 * Affiche la fenêtre de connection.
 	 */
 	public void displayConnectionFrame(){
 		connexion.display();
 	}
+	
 	/**
-	 * Construit la fenêtre de regles
+	 * Construit la fenêtre de regles.
 	 */
 	public void makeRulesFrame()
 	{
@@ -118,8 +153,9 @@ public class Controller {
 			}
 		});
 	}
+	
 	/**
-	 * Affiche la fenêtre de regles
+	 * Affiche la fenêtre de regles.
 	 */
 	public void displayRulesFrame()
 	{
@@ -157,6 +193,9 @@ public class Controller {
 		area.playSound();
 	}
 
+	/**
+	 * State of end.
+	 */
 	public void stateOfEnd()
 	{
 		MouseListener mlSh[] = area.getjLabelSortHeroique().getMouseListeners();
@@ -173,27 +212,37 @@ public class Controller {
 			area.getjPanelMain().getComponent(i).removeMouseListener(ml[0]);
 		}
 	}
+	
 	/**
-	 * Affiche la Zone de jeu
+	 * Affiche la Zone de jeu.
 	 */
 	public void displayArea(){
 		area.display();
 	}
 
 	/**
-	 * Initialise l'affichage du sort héroique
+	 * Initialise l'affichage du sort héroique.
+	 *
+	 * @param sortHero the sort hero
 	 */
 	private void initSortHero(JLabel sortHero){
 		sortHero.setIcon(new ImageIcon(getClass().getClassLoader().getResource(myHero.getSortHero().getImage())));
 		sortHero.addMouseListener(new SortHerosListener(myHero, this));
 	}
 
+	/**
+	 * Gets the area.
+	 *
+	 * @return the area
+	 */
 	public Area getArea(){
 		return this.area;
 	}
+	
 	/**
-	 * Cette m�thode permet de retourner l'attaque d'un serviteur et d'un sort
-	 * @param une carte (NE PEUT PAS ETRE NULL)
+	 * Cette m�thode permet de retourner l'attaque d'un serviteur et d'un sort.
+	 *
+	 * @param c the c
 	 * @return 0 si ce n'est pas un serviteur ou un sort de dommage, retourne l'attaque du serviteur ou le nombre de dommage du sort
 	 */
 	public int getDommage(Carte c)
@@ -217,29 +266,55 @@ public class Controller {
 	 * 
 	 * 
 	 */
+	/**
+	 * Gets the my hero.
+	 *
+	 * @return the my hero
+	 */
 	public Heros getMyHero() {
 		return myHero;
 	}
+	
+	/**
+	 * Sets the my hero.
+	 *
+	 * @param myHero the new my hero
+	 */
 	public void setMyHero(Heros myHero) {
 		this.myHero = myHero;
 	}
 
+	/**
+	 * Gets the adverse hero.
+	 *
+	 * @return the adverse hero
+	 */
 	public Heros getAdverseHero() {
 		return adverseHero;
 	}
 
+	/**
+	 * Gets the num port.
+	 *
+	 * @return the num port
+	 */
 	public int getNUM_PORT() {
 		return NUM_PORT;
 	}
 
+	/**
+	 * Sets the adverse hero.
+	 *
+	 * @param adverseHero the new adverse hero
+	 */
 	public void setAdverseHero(Heros adverseHero) {
 		this.adverseHero = adverseHero;
 	}
 
 	// Actions
 	/**
-	 * Pioche NB_CARTE_DEPART au début du jeu
-	 * @param evt
+	 * Pioche NB_CARTE_DEPART au début du jeu.
+	 *
 	 */
 	private void piocheDepart() {
 		for(int i = 0; i<NB_CARTE_DEPART; i++){
@@ -248,8 +323,9 @@ public class Controller {
 			pioche();
 		}
 	}
+	
 	/**
-	 * ajoute une carte a la main, si NB_MAX_CARTE_MAIN non atteint, sinon retire 1 pv au héros
+	 * ajoute une carte a la main, si NB_MAX_CARTE_MAIN non atteint, sinon retire 1 pv au héros.
 	 */
 	public void pioche(){
 		if(area.getPanelMain().getComponentCount()<NB_MAX_CARTE_MAIN){
@@ -278,9 +354,10 @@ public class Controller {
 
 	/**
 	 * Permet d'engager une carte
-	 * 		- Les serviteurs s'ajoutent sur le terrain
-	 * @param evt
-	 * @param label
+	 * - Les serviteurs s'ajoutent sur le terrain.
+	 *
+	 * @param evt the evt
+	 * @param label the label
 	 */
 	protected void jButtonJouerClicked(MouseEvent evt, CardPanel label) {
 		if(myHero.getRessource() >= label.getCard().getRessource()){
@@ -369,11 +446,21 @@ public class Controller {
 			JOptionPane.showMessageDialog(null, "Ressources Inssufisantes !");
 	}
 
+	/**
+	 * J button annuler clicked.
+	 *
+	 * @param evt the evt
+	 */
 	protected void jButtonAnnulerClicked(MouseEvent evt)
 	{
 		this.connexion.dispose();
 	}
 
+	/**
+	 * J button close clicked.
+	 *
+	 * @param evt the evt
+	 */
 	protected void jButtonCloseClicked(MouseEvent evt)
 	{
 		this.rules.dispose();
@@ -381,6 +468,11 @@ public class Controller {
 
 
 	//Partie NET
+	/**
+	 * J button commencer clicked.
+	 *
+	 * @param evt the evt
+	 */
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
 		try {
@@ -394,6 +486,12 @@ public class Controller {
 		this.start.getjButtonChoixHeros().setEnabled(true);
 		this.start.getjButtonConfig().setEnabled(false);
 	}
+	
+	/**
+	 * J button make server clicked.
+	 *
+	 * @param evt the evt
+	 */
 	protected void jButtonMakeServerClicked(MouseEvent evt)
 	{
 		try {
@@ -407,6 +505,10 @@ public class Controller {
 		this.start.getjButtonChoixHeros().setEnabled(true);
 		this.start.getjButtonConfig().setEnabled(false);
 	}
+	
+	/**
+	 * Connexion started.
+	 */
 	public void connexionStarted()
 	{
 		try {
@@ -431,6 +533,10 @@ public class Controller {
 			System.err.println("Erreur d'envoi");
 		}
 	}
+	
+	/**
+	 * Send dommage hero.
+	 */
 	public void sendDommageHero()
 	{
 		Boolean[] tabVisibleTerrain = new Boolean[area.getjPanelTerrain().getComponentCount()];
@@ -460,6 +566,9 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Send modif.
+	 */
 	public void sendModif()
 	{
 		int[] tabVieTerrain = new int[area.getjPanelTerrain().getComponentCount()];
@@ -508,6 +617,10 @@ public class Controller {
 			System.err.println("Erreur d'envoi");
 		}
 	}
+	
+	/**
+	 * Send hero.
+	 */
 	public void sendHero()
 	{
 		try {
@@ -524,22 +637,47 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Gets the my client.
+	 *
+	 * @return the my client
+	 */
 	public MyClient getMyClient() {
 		return myClient;
 	}
 
+	/**
+	 * Gets the my client server.
+	 *
+	 * @return the my client server
+	 */
 	public ClientServer getMyClientServer() {
 		return myClientServer;
 	}
 
+	/**
+	 * Sets the my client.
+	 *
+	 * @param myClient the new my client
+	 */
 	public void setMyClient(MyClient myClient) {
 		this.myClient = myClient;
 	}
 
+	/**
+	 * Sets the my client server.
+	 *
+	 * @param myClientServer the new my client server
+	 */
 	public void setMyClientServer(ClientServer myClientServer) {
 		this.myClientServer = myClientServer;
 	}
 
+	/**
+	 * Gets the server.
+	 *
+	 * @return the server
+	 */
 	public MyServer getServer()
 	{
 		return server;

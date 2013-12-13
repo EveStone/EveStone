@@ -12,18 +12,44 @@ import be.ephec.eveStone.model.Carte;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving buffing events.
+ * The class that is interested in processing a buffing
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addBuffingListener<code> method. When
+ * the buffing event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see BuffingEvent
+ */
 public class BuffingListener implements MouseListener{
 
+	/** The card buffing. */
 	private CardPanel cardBuffing;
+	
+	/** The terrain. */
 	private JPanel terrain;
+	
+	/** The controller. */
 	private Controller controller;
 
+	/**
+	 * Instantiates a new buffing listener.
+	 *
+	 * @param card the card
+	 * @param controller the controller
+	 */
 	public BuffingListener(CardPanel card, Controller controller){
 		this.cardBuffing = card;
 		this.terrain = controller.getArea().getjPanelTerrain();
 		this.controller = controller;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		buffClicked(arg0, getBuff(cardBuffing.getCard()));
@@ -36,24 +62,36 @@ public class BuffingListener implements MouseListener{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		arg0.getComponent().setCursor(new Cursor(Cursor.MOVE_CURSOR));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -61,10 +99,10 @@ public class BuffingListener implements MouseListener{
 	}
 
 	/**
-	 * Cette methode recoit un event et buff la carte en fonction du tableau buff
-	 * @param e: event non null
-	 * @param buff[0] ==> pv
-	 *        buff[1] ==> degats 
+	 * Cette methode recoit un event et buff la carte en fonction du tableau buff.
+	 *
+	 * @param e the e
+	 * @param buff the buff
 	 */
 	protected void buffClicked(MouseEvent e,  int buff[])
 	{
@@ -77,10 +115,11 @@ public class BuffingListener implements MouseListener{
 	}
 
 	/**
-	 * Retourne un tableau de int pour le buff de la carte
-	 * @param une carte ne peut pas être null
+	 * Retourne un tableau de int pour le buff de la carte.
+	 *
+	 * @param c the c
 	 * @return buff[0] ==> pv
-	 *         buff[1] ==> degats
+	 * buff[1] ==> degats
 	 */
 	private int[] getBuff(Carte c)
 	{

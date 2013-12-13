@@ -12,29 +12,53 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CardPanel.
+ */
 public class CardPanel extends JLabel implements Serializable{
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8382233582936491148L;
+	
+	/** The card. */
 	private Carte card;
+	
+	/** The jouer. */
 	JButton jouer;
+	
+	/** The ressource. */
 	JLabel ressource;
+	
+	/** The attaque. */
 	JLabel attaque;
+	
+	/** The vie. */
 	JLabel vie;
 	
+	/** The Constant FONT_SIZE. */
 	private static final int FONT_SIZE = 25;
 
+	/**
+	 * Instantiates a new card panel.
+	 */
 	public CardPanel(){
 
 	}
 
+	/**
+	 * Instantiates a new card panel.
+	 *
+	 * @param image the image
+	 */
 	public CardPanel(Icon image) {
 		super(image);
 	}
 
+	/**
+	 * Make card.
+	 */
 	public void makeCard(){
 
 		this.setIcon(new ImageIcon((new ImageIcon(getClass().getClassLoader().getResource(card.getImage()))).getImage().getScaledInstance(85, 132, Image.SCALE_AREA_AVERAGING)));
@@ -75,6 +99,11 @@ public class CardPanel extends JLabel implements Serializable{
 
 	}
 
+	/**
+	 * Show info.
+	 *
+	 * @param show the show
+	 */
 	public void showInfo(boolean show){
 
 		this.ressource.setVisible(show);
@@ -86,17 +115,36 @@ public class CardPanel extends JLabel implements Serializable{
 		this.repaint();
 	}
 
+	/**
+	 * Sets the card.
+	 *
+	 * @param card the new card
+	 */
 	public void setCard(Carte card){
 		this.card = card;
 	}
 
+	/**
+	 * Gets the card.
+	 *
+	 * @return the card
+	 */
 	public Carte getCard(){
 		return this.card;
 	}
 
+	/**
+	 * Gets the button.
+	 *
+	 * @return the button
+	 */
 	public JButton getButton(){
 		return this.jouer;
 	}
+	
+	/**
+	 * Update.
+	 */
 	public void update()
 	{
 		attaque.setText("<html><font color=\"#FBF2B7\">"+((Serviteur) card).getNbDommage()+"</font></html>");
@@ -106,21 +154,35 @@ public class CardPanel extends JLabel implements Serializable{
 
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getBaselineResizeBehavior()
+	 */
 	@Override
 	public Component.BaselineResizeBehavior getBaselineResizeBehavior() {
 	    return Component.BaselineResizeBehavior.CONSTANT_ASCENT;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getBaseline(int, int)
+	 */
 	@Override
 	public int getBaseline(int width, int height) {
 	    return 0;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.Container#add(java.awt.Component)
+	 */
 	public Component add(Component comp){
 		super.add(comp);
 		return comp;
 	}
 
+	/**
+	 * Gets the jouer.
+	 *
+	 * @return the jouer
+	 */
 	public JButton getJouer() {
 		return jouer;
 	}

@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import be.ephec.eveStone.vieuw.container.CardPanel;
+// TODO: Auto-generated Javadoc
 /**
  * Listener pour les carte de la main.
  * 
@@ -22,44 +23,70 @@ import be.ephec.eveStone.vieuw.container.CardPanel;
  */
 public class CardListenerMain implements MouseListener{
 
+	/** The card. */
 	private CardPanel card;
+	
+	/** The info label. */
 	private JLabel infoLabel;
 
+	/**
+	 * Instantiates a new card listener main.
+	 *
+	 * @param card the card
+	 * @param infoLabel the info label
+	 */
 	public CardListenerMain(CardPanel card, JLabel infoLabel){
 		super();
 		this.card=card;
 		this.infoLabel = infoLabel;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		cardClicked(arg0, card);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		cardMouseOn(card);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		cardMouseOff(arg0, card);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
+	
 	/**
-	 * Permet d'afficher ou non le bouton jouer de la carte lorsque l'on clique dessus
-	 * @param ev
+	 * Permet d'afficher ou non le bouton jouer de la carte lorsque l'on clique dessus.
+	 *
+	 * @param ev the ev
 	 * @param label le Label contenant la carte
 	 */
 	protected void cardClicked(MouseEvent ev, final CardPanel label) {
@@ -68,14 +95,15 @@ public class CardListenerMain implements MouseListener{
 		else
 			label.getButton().setVisible(true);
 	}
+	
 	/**
 	 * Méthode d'animation et d'affichage d'information
 	 * 
 	 * Lors du survole d'une carte, la carte va zoomer et afficher ses informations
 	 * distinctes (ressource necessaire a la mise en jeu, points d'attaque, pv)
 	 * Elle va aussi mettre à jour un cadran sur le coté qui permet d'avoir une aide
-	 * approffondie sur la carte (nom, type, description)
-	 * 
+	 * approffondie sur la carte (nom, type, description).
+	 *
 	 * @param card le Panel de la carte active
 	 */
 	protected void cardMouseOn(final CardPanel card) {
@@ -86,12 +114,13 @@ public class CardListenerMain implements MouseListener{
 		card.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(card.getCard().getImage())).getImage().getScaledInstance(108, 157, Image.SCALE_DEFAULT)));
 		card.showInfo(true);
 	}
+	
 	/**
 	 * Permet de dézoomer une carte et de supprimer l'affichage de toute les informations
 	 * lui étant liées.
-	 * 
-	 * @param evt
-	 * @param card
+	 *
+	 * @param evt the evt
+	 * @param card the card
 	 */
 	protected void cardMouseOff(MouseEvent evt, final CardPanel card) {
 		if (! (card.contains(evt.getPoint()))){

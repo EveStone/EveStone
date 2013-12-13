@@ -13,6 +13,7 @@ import javax.swing.WindowConstants;
 import be.ephec.eveStone.controller.Controller;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * This code was edited or generated using CloudGarden's Jigloo
  * SWT/Swing GUI Builder, which is free for non-commercial
@@ -26,18 +27,29 @@ import be.ephec.eveStone.controller.Controller;
  * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class RulesFrame extends javax.swing.JFrame {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7559119970281626969L;
+	
+	/** The j button close. */
 	private JButton jButtonClose;
+	
+	/** The j label regles. */
 	private JLabel jLabelRegles;
+	
+	/** The j panel regles. */
 	private JPanel jPanelRegles;
+	
+	/** The j label1. */
 	private JLabel jLabel1;
+	
+	/** The j panel titre. */
 	private JPanel jPanelTitre;
 
 	/**
-	 * Auto-generated main method to display this JFrame
+	 * Auto-generated main method to display this JFrame.
+	 *
+	 * @param controller the controller
 	 */
 
 	public RulesFrame(final Controller controller) {
@@ -45,6 +57,9 @@ public class RulesFrame extends javax.swing.JFrame {
 		initGUI();
 	}
 
+	/**
+	 * Inits the gui.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -115,10 +130,19 @@ public class RulesFrame extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Display.
+	 */
 	public void display(){
 		this.setVisible(true);
 	}
 
+	/**
+	 * Gets the j button close.
+	 *
+	 * @return the j button close
+	 */
 	public JButton getjButtonClose() {
 		return jButtonClose;
 	}
