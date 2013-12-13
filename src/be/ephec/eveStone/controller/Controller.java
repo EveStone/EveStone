@@ -45,7 +45,7 @@ public class Controller {
 	private Heros adverseHero;
 
 	// Views
-	/** The area. */
+	/** The area */
 	private Area area;
 	
 	/** The start. */
