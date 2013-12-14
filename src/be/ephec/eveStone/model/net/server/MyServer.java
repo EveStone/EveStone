@@ -3,6 +3,8 @@ package be.ephec.eveStone.model.net.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 
+import javax.swing.JOptionPane;
+
 import be.ephec.eveStone.controller.Controller;
 
 
@@ -34,7 +36,7 @@ public class MyServer {
 			// TODO Auto-generated catch block
 			numPort++;
 		}
-		System.out.println("Le serveur est à l'écoute du port "+s.getLocalPort());
+		JOptionPane.showMessageDialog(null, "Le serveur est à l'écoute du port "+s.getLocalPort());
 		
 		t = new Thread(new Accept_connexion(s, controller));
 		t.setDaemon(true);

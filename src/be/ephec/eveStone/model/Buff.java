@@ -2,19 +2,18 @@ package be.ephec.eveStone.model;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Buff.
+ * la Classe Buff.
  */
 public class Buff extends Sort implements Serializable{
 	
-	/** The Constant serialVersionUID. */
+	/** la Constante serialVersionUID. */
 	private static final long serialVersionUID = -1766582470131004337L;
 	
-	/** The buff pv. */
+	/** le buff pv. */
 	private int buffPv;
 	
-	/** The buff degats. */
+	/** le beug degats. */
 	private int buffDegats;
 	
 	
@@ -22,12 +21,12 @@ public class Buff extends Sort implements Serializable{
 	/**
 	 * Constructeur avec les buff de vie et de d�gats.
 	 *
-	 * @param nom the nom
-	 * @param ressource the ressource
-	 * @param image the image
-	 * @param description the description
-	 * @param buffPv the buff pv
-	 * @param buffDegats the buff degats
+	 * @param nom : String 
+	 * @param ressource : int
+	 * @param image : String
+	 * @param description : String
+	 * @param buffPv : int
+	 * @param buffDegats : int
 	 */
 	public Buff(String nom,int ressource, String image, String description, int buffPv, int buffDegats)
 	{
@@ -39,25 +38,25 @@ public class Buff extends Sort implements Serializable{
 	
 
 	/**
-	 * Gets the buff pv.
+	 *Retourne le buiff pv
 	 *
-	 * @return the buff pv
+	 * @return buff pv : int
 	 */
 	public int getBuffPv() {
 		return buffPv;
 	}
 
 	/**
-	 * Sets the buff pv.
+	 * Sets le buff pv
 	 *
-	 * @param buffPv the new buff pv
+	 * @param buffPv : int
 	 */
 	public void setBuffPv(int buffPv) {
 		this.buffPv = buffPv;
 	}
 
 	/**
-	 * Gets the buff degats.
+	 * Retourne le buff degats.
 	 *
 	 * @return the buff degats
 	 */
@@ -66,7 +65,7 @@ public class Buff extends Sort implements Serializable{
 	}
 
 	/**
-	 * Sets the buff degats.
+	 * Sets le buff degats.
 	 *
 	 * @param buffDegats the new buff degats
 	 */

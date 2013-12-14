@@ -2,35 +2,34 @@ package be.ephec.eveStone.model;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Carte.
+ * La Classe Carte.
  */
 public class Carte implements Serializable {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2278480827902288826L;
 	
-	/** The ressource. */
+	/** les ressources. */
 	private int ressource;
 	
-	/** The image. */
+	/** l'image. */
 	private String image; //chemin d'acc�s de l'image de la carte
 	
-	/** The nom. */
+	/** le nom. */
 	private String nom;
 	
-	/** The description. */
+	/** la description. */
 	private String description;
 	
 	
 	/**
-	 * Instantiates a new carte.
+	 * Constructeur de la classe carte.
 	 *
-	 * @param nom the nom
-	 * @param ressource the ressource
-	 * @param image the image
-	 * @param description the description
+	 * @param nom : String
+	 * @param ressource : int
+	 * @param image : String
+	 * @param description : String
 	 */
 	public Carte( String nom,int ressource, String image, String description)
 	{
@@ -41,63 +40,63 @@ public class Carte implements Serializable {
 	}
 	
 	/**
-	 * Gets the ressource.
+	 * rtourne les ressources.
 	 *
-	 * @return the ressource
+	 * @return ressource
 	 */
 	public int getRessource() {
 		return ressource;
 	}
 
 	/**
-	 * Sets the ressource.
+	 * Sets les ressources.
 	 *
-	 * @param ressource the new ressource
+	 * @param ressource les nouvelles ressource
 	 */
 	public void setRessource(int ressource) {
 		this.ressource = ressource;
 	}
 	
 	/**
-	 * Gets the image.
+	 * Retourne l'image.
 	 *
-	 * @return the image
+	 * @return l'image
 	 */
 	public String getImage() {
 		return image;
 	}
 	
 	/**
-	 * Sets the image.
+	 * Sets l'image.
 	 *
-	 * @param image the new image
+	 * @param image la nouvelle image
 	 */
 	public void setImage(String image) {
 		this.image = image;
 	}
 	
 	/**
-	 * Gets the nom.
+	 * Retourne le nom.
 	 *
-	 * @return the nom
+	 * @return le nom
 	 */
 	public String getNom() {
 		return nom;
 	}
 	
 	/**
-	 * Sets the nom.
+	 * Sets le nom.
 	 *
-	 * @param nom the new nom
+	 * @param nom le nouveau nom
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
 	/**
-	 * Gets the description.
+	 * retourne la description.
 	 *
-	 * @return the description
+	 * @return la description
 	 */
 	public String getDescription(){
 		return description;

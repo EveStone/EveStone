@@ -6,17 +6,17 @@ import be.ephec.eveStone.controller.Controller;
 
 
 /**
- * The Class EveStone.
+ * La Classe EveStone.
  */
 public class EveStone{
 
-	/** The controller. */
+	/** le controller. */
 	private static Controller CONTROLLER;
 
 	/**
-	 * The main method.
+	 * La méthode main du programme.
 	 *
-	 * @param args the arguments
+	 * @param args non utilisé
 	 */
 	public static void main(String[] args)
 	{
@@ -33,9 +33,9 @@ public class EveStone{
 	}
 	
 	/**
-	 * Gets the controller.
+	 * Retourne le controller.
 	 *
-	 * @return the controller
+	 * @return controller
 	 */
 	public static Controller getController(){
 		return CONTROLLER;
