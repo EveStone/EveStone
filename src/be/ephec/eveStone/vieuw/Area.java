@@ -10,10 +10,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import be.ephec.eveStone.controller.Controller;
-import be.ephec.eveStone.sound.SonPlayer;
 
 import java.awt.BorderLayout;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -107,9 +110,6 @@ public class Area extends JFrame {
 	
 	/** The j button fin tour. */
 	private JButton jButtonFinTour;
-	
-	/** The background. */
-	private SonPlayer background;
 
 	/**
 	 * Instantiates a new area.
@@ -526,10 +526,26 @@ public class Area extends JFrame {
 	
 	/**
 	 * Play sound.
+	 * @throws URISyntaxException 
+	 * @throws IOException 
+	 * @throws JavaLayerException 
 	 */
 	public void playSound(){
-		background = new SonPlayer(getClass().getClassLoader().getResource("./sound/soundEveStone.mp3").getPath());
-		background.start();
+
+		Thread sound = new Thread(new Runnable(){
+			public void run(){
+				try{
+					InputStream path = ClassLoader.getSystemResourceAsStream("sound/soundEveStone.mp3");
+					BufferedInputStream bis = new BufferedInputStream(path);
+					Player player;
+					player = new Player(bis);
+					player.play();
+				}catch(JavaLayerException e){
+					e.printStackTrace();
+				}
+			}
+		});
+		sound.start();
 	}
 	
 }
