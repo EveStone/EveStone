@@ -7,6 +7,8 @@ import be.ephec.eveStone.controller.Controller;
 
 /**
  * La Classe EveStone.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class EveStone{
 

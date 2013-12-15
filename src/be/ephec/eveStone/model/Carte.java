@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * La Classe Carte.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class Carte implements Serializable {
 	

@@ -30,64 +30,63 @@ import be.ephec.eveStone.vieuw.RulesFrame;
 import be.ephec.eveStone.vieuw.StartFrame;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Controller.
+ * La classe controller
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class Controller {
 
 
 	// Modèles
-	/** The my hero. */
+	/** mon héro*/
 	private Heros myHero;
 	
-	/** The adverse hero. */
+	/** le hero adverse */
 	private Heros adverseHero;
 
 	// Views
-	/** The area */
+	/** l'area */
 	private Area area;
 	
-	/** The start. */
+	/** la fenetre de démarrage */
 	private StartFrame start;
 	
-	/** The connexion. */
+	/** la fenetre de connexion */
 	private ConnectionFrame connexion;
 	
-	/** The rules. */
+	/** La fenetre de règles */
 	private RulesFrame rules;
 
-	/** The Constant NB_MAX_RESSOURCE. */
+	/** La constante NB_MAX_RESSOURCE. */
 	public final static int NB_MAX_RESSOURCE = 10;
 	
-	/** The Constant NB_MAX_CARTE_TERRAIN. */
+	/** La constante NB_MAX_CARTE_TERRAIN. */
 	public final static int NB_MAX_CARTE_TERRAIN = 7;
 	
-	/** The Constant NB_MAX_CARTE_MAIN. */
+	/** La constante NB_MAX_CARTE_MAIN. */
 	public final static int NB_MAX_CARTE_MAIN = 7;
 	
-	/** The Constant NB_CARTE_DEPART. */
+	/** La constante NB_CARTE_DEPART. */
 	public final static int NB_CARTE_DEPART = 4;
 
-	//Port serveur
-	/** The num port. */
-	private final int NUM_PORT = 2013;
+
 
 	//client NET
-	/** The my client. */
+	/** mon client. */
 	private MyClient myClient = null;
 	
-	/** The my client server. */
+	/** mon client server. */
 	private ClientServer myClientServer = null;
 	
-	/** The server. */
+	/** le server. */
 	private MyServer server;
 
-	/** The nb tour. */
+	/** le nombre de tour. */
 	public static int nbTour;
 
 	/**
-	 * Instantiates a new controller.
+	 * Constructeur du controller.
 	 */
 	public Controller(){
 
@@ -194,7 +193,7 @@ public class Controller {
 	}
 
 	/**
-	 * State of end.
+	 * Etat de fin de tour
 	 */
 	public void stateOfEnd()
 	{
@@ -231,9 +230,9 @@ public class Controller {
 	}
 
 	/**
-	 * Gets the area.
+	 * Retourne l'area.
 	 *
-	 * @return the area
+	 * @return area: Area
 	 */
 	public Area getArea(){
 		return this.area;
@@ -267,45 +266,36 @@ public class Controller {
 	 * 
 	 */
 	/**
-	 * Gets the my hero.
+	 * Retourne on héro
 	 *
-	 * @return the my hero
+	 * @return hero: Heros
 	 */
 	public Heros getMyHero() {
 		return myHero;
 	}
 	
 	/**
-	 * Sets the my hero.
+	 * Sets mon héro
 	 *
-	 * @param myHero the new my hero
+	 * @param myHero : Hero
 	 */
 	public void setMyHero(Heros myHero) {
 		this.myHero = myHero;
 	}
 
 	/**
-	 * Gets the adverse hero.
+	 * Retourne le héros adverse
 	 *
-	 * @return the adverse hero
+	 * @return adverseHero: Heros
 	 */
 	public Heros getAdverseHero() {
 		return adverseHero;
 	}
 
 	/**
-	 * Gets the num port.
+	 * Sets le Héro adverse
 	 *
-	 * @return the num port
-	 */
-	public int getNUM_PORT() {
-		return NUM_PORT;
-	}
-
-	/**
-	 * Sets the adverse hero.
-	 *
-	 * @param adverseHero the new adverse hero
+	 * @param adverseHero : Heros
 	 */
 	public void setAdverseHero(Heros adverseHero) {
 		this.adverseHero = adverseHero;
@@ -449,7 +439,7 @@ public class Controller {
 	/**
 	 * J button annuler clicked.
 	 *
-	 * @param evt the evt
+	 * @param evt : MouseEvent
 	 */
 	protected void jButtonAnnulerClicked(MouseEvent evt)
 	{
@@ -459,7 +449,7 @@ public class Controller {
 	/**
 	 * J button close clicked.
 	 *
-	 * @param evt the evt
+	 * @param evt : MouseEvent
 	 */
 	protected void jButtonCloseClicked(MouseEvent evt)
 	{
@@ -469,9 +459,9 @@ public class Controller {
 
 	//Partie NET
 	/**
-	 * J button commencer clicked.
+	 * Démarrer la partie, envoie des héros.
 	 *
-	 * @param evt the evt
+	 * @param evt : MouseEvent
 	 */
 	protected void jButtonCommencerClicked(MouseEvent evt)
 	{
@@ -488,9 +478,9 @@ public class Controller {
 	}
 	
 	/**
-	 * J button make server clicked.
+	 * Création du serveur.
 	 *
-	 * @param evt the evt
+	 * @param evt : MouseEvent
 	 */
 	protected void jButtonMakeServerClicked(MouseEvent evt)
 	{
@@ -507,7 +497,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Connexion started.
+	 * Connexion demarrer.
 	 */
 	public void connexionStarted()
 	{
@@ -535,7 +525,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Send dommage hero.
+	 * Envoie dommage hero.
 	 */
 	public void sendDommageHero()
 	{
@@ -567,7 +557,7 @@ public class Controller {
 	}
 
 	/**
-	 * Send modif.
+	 * Envoie modif.
 	 */
 	public void sendModif()
 	{
@@ -619,7 +609,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Send hero.
+	 * Envoie hero.
 	 */
 	public void sendHero()
 	{
@@ -638,45 +628,45 @@ public class Controller {
 	}
 
 	/**
-	 * Gets the my client.
+	 * Retourne mon client
 	 *
-	 * @return the my client
+	 * @return myClient : MyClient
 	 */
 	public MyClient getMyClient() {
 		return myClient;
 	}
 
 	/**
-	 * Gets the my client server.
+	 * Retourne le client server
 	 *
-	 * @return the my client server
+	 * @return myClientServer : ClientServer
 	 */
 	public ClientServer getMyClientServer() {
 		return myClientServer;
 	}
 
 	/**
-	 * Sets the my client.
+	 * Set mon client
 	 *
-	 * @param myClient the new my client
+	 * @param myClient : MyClient
 	 */
 	public void setMyClient(MyClient myClient) {
 		this.myClient = myClient;
 	}
 
 	/**
-	 * Sets the my client server.
+	 * Set mon client serveur
 	 *
-	 * @param myClientServer the new my client server
+	 * @param myClientServer : ClientServer
 	 */
 	public void setMyClientServer(ClientServer myClientServer) {
 		this.myClientServer = myClientServer;
 	}
 
 	/**
-	 * Gets the server.
+	 * Retourne le serveur
 	 *
-	 * @return the server
+	 * @return myServer : MyServer
 	 */
 	public MyServer getServer()
 	{

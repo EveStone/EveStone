@@ -2,10 +2,10 @@ package be.ephec.eveStone.model;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * M�me principe que la classe serviteur a part le rajout du boolean proctection pour dire si la carte est protection ou non.
- * @author nicolas
+ * @author Dasseler Nicolas & Vanbutsele Andy
  *
  */
 public class Protection extends Serviteur implements Serializable {

@@ -5,9 +5,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ClientServer.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class ClientServer {
 

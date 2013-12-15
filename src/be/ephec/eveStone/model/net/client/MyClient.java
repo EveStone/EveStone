@@ -6,9 +6,11 @@ import java.net.*;
 import javax.swing.JOptionPane;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class MyClient.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class MyClient extends Socket{
 

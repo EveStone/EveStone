@@ -21,6 +21,8 @@ import be.ephec.eveStone.controller.Controller;
 * A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+* 
+* @author Dasseler Nicolas & Vanbutsele Andy
 */
 public class StartFrame extends JFrame{
 	

@@ -16,7 +16,7 @@ import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
 import be.ephec.eveStone.vieuw.container.CardPanel;
-// TODO: Auto-generated Javadoc
+
 /**
  * Listener sur les cartes du terrain adverse.
  * 

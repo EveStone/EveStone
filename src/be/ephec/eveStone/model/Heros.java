@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import be.ephec.eveStone.model.repositories.Deck;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Heros.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class Heros implements Serializable {
 	

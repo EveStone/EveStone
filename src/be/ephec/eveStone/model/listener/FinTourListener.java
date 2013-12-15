@@ -7,7 +7,7 @@ import java.io.IOException;
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.net.ObjectSend;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The listener interface for receiving finTour events.
  * The class that is interested in processing a finTour
@@ -18,6 +18,8 @@ import be.ephec.eveStone.model.net.ObjectSend;
  * method is invoked.
  *
  * @see FinTourEvent
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class FinTourListener implements MouseListener{
 

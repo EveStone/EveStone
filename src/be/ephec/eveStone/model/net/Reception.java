@@ -20,7 +20,6 @@ import be.ephec.eveStone.model.listener.CardListenerTerrainAdv;
 import be.ephec.eveStone.model.listener.SortHerosListener;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
-// TODO: Auto-generated Javadoc
 /**
  * Cette classe permet la réception des objets que l'adveraire envoie.
  * @author Andy Vanbutsele et Dasseler Nicolas

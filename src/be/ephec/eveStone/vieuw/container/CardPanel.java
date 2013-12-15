@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 /**
  * La classe CardPanel qui permet de contenir tout les informations d'une carte essentielle à son affichage.
  * Cette classe étend JLabel.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class CardPanel extends JLabel implements Serializable{
 

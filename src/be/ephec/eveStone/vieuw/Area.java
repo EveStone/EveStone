@@ -18,7 +18,7 @@ import java.awt.BorderLayout;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 
-// TODO: Auto-generated Javadoc
+
 /**
 * This code was edited or generated using CloudGarden's Jigloo
 * SWT/Swing GUI Builder, which is free for non-commercial
@@ -33,7 +33,7 @@ import java.io.InputStream;
 */
 /**
  * 
- * @author Vanbutsele Andy
+ * @author Dasseler Nicolas & Vanbutsele Andy
  *
  * Classe représentant la fenêtre de jeu.
  */

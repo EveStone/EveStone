@@ -2,9 +2,11 @@ package be.ephec.eveStone.model;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Serviteur.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class Serviteur extends Carte implements Serializable {
 	

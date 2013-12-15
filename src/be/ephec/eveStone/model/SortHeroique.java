@@ -2,9 +2,11 @@ package be.ephec.eveStone.model;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SortHeroique.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class SortHeroique implements Serializable {
 	

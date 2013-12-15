@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import be.ephec.eveStone.vieuw.container.CardPanel;
-// TODO: Auto-generated Javadoc
+
 /**
  * Listener pour les carte de la main.
  * 

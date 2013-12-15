@@ -32,6 +32,8 @@ import be.ephec.eveStone.model.repositories.Deck;
 * A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+* 
+* @author Dasseler Nicolas & Vanbutsele Andy
 */
 public class ChoixHeros extends JFrame{
 	

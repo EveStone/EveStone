@@ -15,7 +15,7 @@ import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.net.ObjectSend;
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
-// TODO: Auto-generated Javadoc
+
 /**
  * Classe qui s'occupe de gérer les sort héroiques du  héros
  * 

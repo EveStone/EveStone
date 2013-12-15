@@ -6,9 +6,11 @@ import java.net.*;
 import be.ephec.eveStone.controller.Controller;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Accept_connexion.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class Accept_connexion implements Runnable{
 

@@ -7,9 +7,10 @@ import org.junit.Test;
 import be.ephec.eveStone.controller.Controller;
 import be.ephec.eveStone.model.Serviteur;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Tests.
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class Tests {
 

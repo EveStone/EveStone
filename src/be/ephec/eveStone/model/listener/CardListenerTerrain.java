@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import be.ephec.eveStone.vieuw.Area;
 import be.ephec.eveStone.vieuw.container.CardPanel;
-// TODO: Auto-generated Javadoc
+
 /**
  * Listener sur le terrain de jeu
  * 

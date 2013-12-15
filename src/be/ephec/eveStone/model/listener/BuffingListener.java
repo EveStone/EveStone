@@ -22,6 +22,7 @@ import be.ephec.eveStone.vieuw.container.CardPanel;
  * method is invoked.
  *
  * @see BuffingEvent
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class BuffingListener implements MouseListener{
 

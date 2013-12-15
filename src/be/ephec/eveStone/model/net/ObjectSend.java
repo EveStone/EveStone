@@ -2,10 +2,12 @@ package be.ephec.eveStone.model.net;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Cette classe permet de cr�er les objet qui seront envoyé.
  * @author nicolas, andy
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  *
  */
 public class ObjectSend implements Serializable {

@@ -2,9 +2,11 @@ package be.ephec.eveStone.model;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Sort.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class Sort extends Carte implements Serializable{
 	

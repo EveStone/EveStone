@@ -21,7 +21,7 @@ import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.model.SortHeroique;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The listener interface for receiving heros events.
  * The class that is interested in processing a heros
@@ -32,6 +32,8 @@ import be.ephec.eveStone.vieuw.container.CardPanel;
  * method is invoked.
  *
  * @see HerosEvent
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class HerosListener implements MouseListener{
 

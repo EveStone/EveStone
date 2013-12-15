@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * la Classe Buff.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class Buff extends Sort implements Serializable{
 	

@@ -9,9 +9,10 @@ import be.ephec.eveStone.model.*;
 
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Deck.
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class Deck implements Serializable{
 	

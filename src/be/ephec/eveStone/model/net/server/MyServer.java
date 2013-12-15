@@ -8,9 +8,11 @@ import javax.swing.JOptionPane;
 import be.ephec.eveStone.controller.Controller;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class MyServer.
+ * 
+ * @author Dasseler Nicolas & Vanbutsele Andy
  */
 public class MyServer {
 
