@@ -2,6 +2,8 @@ package be.ephec.eveStone.tests;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -14,6 +16,8 @@ import be.ephec.eveStone.model.Dommage;
 import be.ephec.eveStone.model.Invisible;
 import be.ephec.eveStone.model.Protection;
 import be.ephec.eveStone.model.Serviteur;
+import be.ephec.eveStone.model.net.client.MyClient;
+import be.ephec.eveStone.model.net.server.MyServer;
 import be.ephec.eveStone.model.repositories.Deck;
 
 
@@ -49,6 +53,19 @@ public class Tests {
 		assert(tabCarte.contains(new Serviteur("Light Maintenance",1, "img/CommonCard/lightMaintenance.png", "Augmente les points de vie d'un serviteur engagé sur le terrain de 1", 1, 1, 1, 0))==true);
 	}
 	
-	
+	@Test
+	public void testSocket()
+	{
+		//permet de tester la liaison serveur <=> client
+		try {
+			MyServer serv = new MyServer(controller);
+			MyClient cl = new MyClient("127.0.0.1", serv.getNumPort());
+			cl.getOos().writeObject("Test");
+			assertTrue(("Test").equals((String)controller.getMyClientServer().getOis().readObject()));
+		} catch (InterruptedException | IOException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
