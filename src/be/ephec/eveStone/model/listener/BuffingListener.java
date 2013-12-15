@@ -12,7 +12,6 @@ import be.ephec.eveStone.model.Carte;
 import be.ephec.eveStone.model.Serviteur;
 import be.ephec.eveStone.vieuw.container.CardPanel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The listener interface for receiving buffing events.
  * The class that is interested in processing a buffing

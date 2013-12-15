@@ -12,52 +12,52 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class CardPanel.
+ * La classe CardPanel qui permet de contenir tout les informations d'une carte essentielle à son affichage.
+ * Cette classe étend JLabel.
  */
 public class CardPanel extends JLabel implements Serializable{
 
 	
-	/** The Constant serialVersionUID. */
+	/** La Constante serialVersionUID. */
 	private static final long serialVersionUID = 8382233582936491148L;
 	
-	/** The card. */
+	/** La carte. */
 	private Carte card;
 	
-	/** The jouer. */
+	/** le bouton jouer. */
 	JButton jouer;
 	
-	/** The ressource. */
+	/** les ressources. */
 	JLabel ressource;
 	
-	/** The attaque. */
+	/** l'attaque. */
 	JLabel attaque;
 	
-	/** The vie. */
+	/** la vie. */
 	JLabel vie;
 	
-	/** The Constant FONT_SIZE. */
+	/** la constante FONT_SIZE. */
 	private static final int FONT_SIZE = 25;
 
 	/**
-	 * Instantiates a new card panel.
+	 * Constructeur d'un nouveau carte panel
 	 */
 	public CardPanel(){
 
 	}
 
 	/**
-	 * Instantiates a new card panel.
+	 * Constructeur d'un nouveau carte panel
 	 *
-	 * @param image the image
+	 * @param image: Icon (image de la carte)
 	 */
 	public CardPanel(Icon image) {
 		super(image);
 	}
 
 	/**
-	 * Make card.
+	 * Créer une nouvelle carte
 	 */
 	public void makeCard(){
 
@@ -100,9 +100,11 @@ public class CardPanel extends JLabel implements Serializable{
 	}
 
 	/**
-	 * Show info.
+	 * Montre les info
 	 *
-	 * @param show the show
+	 * @param show: Boolean
+	 * true ==> affiche
+	 * false ==> n'affiche pas.
 	 */
 	public void showInfo(boolean show){
 
@@ -116,34 +118,34 @@ public class CardPanel extends JLabel implements Serializable{
 	}
 
 	/**
-	 * Sets the card.
+	 * Sets la carte.
 	 *
-	 * @param card the new card
+	 * @param carte : Carte 
 	 */
 	public void setCard(Carte card){
 		this.card = card;
 	}
 
 	/**
-	 * Gets the card.
+	 * Retourne la carte
 	 *
-	 * @return the card
+	 * @return la carte
 	 */
 	public Carte getCard(){
 		return this.card;
 	}
 
 	/**
-	 * Gets the button.
+	 * Retourne le bouton Jouer
 	 *
-	 * @return the button
+	 * @return jouer : JButton
 	 */
 	public JButton getButton(){
 		return this.jouer;
 	}
 	
 	/**
-	 * Update.
+	 * Met à jour le carte Panel
 	 */
 	public void update()
 	{
@@ -178,14 +180,6 @@ public class CardPanel extends JLabel implements Serializable{
 		return comp;
 	}
 
-	/**
-	 * Gets the jouer.
-	 *
-	 * @return the jouer
-	 */
-	public JButton getJouer() {
-		return jouer;
-	}
 	
 	
 }
