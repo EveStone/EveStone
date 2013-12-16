@@ -18,10 +18,10 @@ public class MyServer {
 
 	/** The num port. */
 	private static int numPort=2013;
-	
+
 	/** The t. */
 	private Thread t;
-	
+
 	/** The s. */
 	private ServerSocket s;
 
@@ -32,14 +32,15 @@ public class MyServer {
 	 * @throws InterruptedException the interrupted exception
 	 */
 	public MyServer(Controller controller) throws InterruptedException {
-		try {
-			this.s = new ServerSocket(numPort);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			numPort++;
+		while (this.s == null)
+		{
+			try {
+				this.s = new ServerSocket(numPort);
+			} catch (IOException  e) {
+				numPort++;
+			}
 		}
 		JOptionPane.showMessageDialog(null, "Le serveur est à l'écoute du port "+s.getLocalPort());
-		
 		t = new Thread(new Accept_connexion(s, controller));
 		t.setDaemon(true);
 		t.start();
@@ -53,7 +54,7 @@ public class MyServer {
 	public ServerSocket getS() {
 		return s;
 	}
-	
+
 	/**
 	 * Gets the num port.
 	 *
