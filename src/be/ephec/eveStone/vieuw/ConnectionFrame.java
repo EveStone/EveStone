@@ -76,6 +76,7 @@ public class ConnectionFrame extends JFrame {
 	 */
 	public ConnectionFrame(final Controller controller){
 		super("Connexion");
+		this.setResizable(false);
 		initGUI();
 	}
 	

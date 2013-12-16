@@ -56,6 +56,7 @@ public class RulesFrame extends javax.swing.JFrame {
 
 	public RulesFrame(final Controller controller) {
 		super("Règles");
+		this.setResizable(false);
 		initGUI();
 	}
 

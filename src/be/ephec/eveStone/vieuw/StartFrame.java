@@ -54,6 +54,7 @@ public class StartFrame extends JFrame{
 	 */
 	public StartFrame(final Controller controller) {
 		super();
+		this.setResizable(false);
 		initGUI(controller);
 	}
 	

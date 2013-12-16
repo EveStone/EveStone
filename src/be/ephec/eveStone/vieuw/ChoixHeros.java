@@ -99,6 +99,7 @@ public class ChoixHeros extends JFrame{
 	 */
 	public ChoixHeros(final Controller controller, final JButton commencer){
 		super("Choix du Héros");
+		this.setResizable(false);
 		initGUI(controller, commencer);
 	}
 	
