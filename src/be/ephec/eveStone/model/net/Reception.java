@@ -116,7 +116,6 @@ public class Reception implements Runnable {
 							controller.getArea().getjPanelTerrain().add((CardPanel) terrainAdv[i]);
 							if(controller.getArea().getFinTourButton().isEnabled() || (visibleTerrainAdv!= null && ((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).getCard() instanceof Invisible))
 							{
-								controller.getArea().getjPanelTerrain().getComponent(i).addMouseListener(new CardListenerTerrain((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i),controller.getArea()));
 								((Invisible)((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).getCard()).setInvisible(visibleTerrainAdv[i]);
 							}
 							if(nbVieAdv !=null)
@@ -131,6 +130,8 @@ public class Reception implements Runnable {
 							{
 								((Invisible)((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).getCard()).setInvisible(visibleTerrainAdv[i]);
 							}
+
+							controller.getArea().getjPanelTerrain().getComponent(i).addMouseListener(new CardListenerTerrain((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i),controller.getArea()));
 							((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).update();
 						}
 
@@ -189,7 +190,6 @@ public class Reception implements Runnable {
 						((SortHerosListener)ml[0]).setEnable(true);
 						for (int i = 0; i<controller.getArea().getjPanelTerrain().getComponentCount(); i++)
 						{
-							controller.getArea().getjPanelTerrain().getComponent(i).addMouseListener(new CardListenerTerrain((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i),controller.getArea()));
 							ml = controller.getArea().getjPanelTerrain().getComponent(i).getMouseListeners();
 							((CardListenerTerrain)ml[0]).setCanAttack(true);
 						}

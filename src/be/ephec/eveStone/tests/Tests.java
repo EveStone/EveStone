@@ -3,14 +3,11 @@ package be.ephec.eveStone.tests;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.junit.Test;
 
 import be.ephec.eveStone.controller.Controller;
-import be.ephec.eveStone.model.Buff;
 import be.ephec.eveStone.model.Carte;
 import be.ephec.eveStone.model.Dommage;
 import be.ephec.eveStone.model.Invisible;
@@ -29,6 +26,7 @@ public class Tests {
 
 	/** The controller. */
 	Controller controller = new Controller();
+	private MyClient myClient;
 	
 	/**
 	 * Test get dommage.
@@ -59,8 +57,8 @@ public class Tests {
 		//permet de tester la liaison serveur <=> client
 		try {
 			MyServer serv = new MyServer(controller);
-			MyClient cl = new MyClient("127.0.0.1", serv.getNumPort());
-			cl.getOos().writeObject("Test");
+			myClient = new MyClient("127.0.0.1", serv.getNumPort());
+			myClient.getOos().writeObject("Test");
 			assertTrue(("Test").equals((String)controller.getMyClientServer().getOis().readObject()));
 		} catch (InterruptedException | IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
