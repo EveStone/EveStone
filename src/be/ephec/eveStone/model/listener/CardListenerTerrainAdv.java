@@ -131,60 +131,6 @@ public class CardListenerTerrainAdv extends CardListenerTerrain{
 			arg0.getComponent().setCursor(notTargetable);
 		}
 	}
-	/*
-	public void sendModifCarte(CardPanel cAttacking, CardPanel cAttacked)
-	{
-
-
-		try {
-			if (controller.getMyClient() == null)
-			{
-				// Coté Serveur
-				int i = retrieveIndex(getTerrainAdv(), cAttacked);
-				System.out.println("INDICE CARTE : "+i);
-				//Envoi carte attaquante
-				controller.getMyClientServer().getOos().writeObject(new ObjectSend(2, cAttacked, i));
-				i=retrieveIndex(getTerrain(), cAttacking);
-				controller.getMyClientServer().getOos().writeObject(new ObjectSend(3, cAttacking, i));
-			}
-			else
-			{
-				// Coté client
-				int i = retrieveIndex(getTerrainAdv(), cAttacked);
-				controller.getMyClient().getOos().writeObject(new ObjectSend(2, cAttacked, i));
-				i = retrieveIndex(getTerrain(), cAttacking);
-				controller.getMyClient().getOos().writeObject(new ObjectSend(3, cAttacking, i));
-			}
-		} catch (IOException ey) {
-			// TODO Auto-generated catch block
-			ey.printStackTrace();
-		}
-	}
-
-	public void sendModifCarteBack(CardPanel cAttacking, CardPanel cAttacked){
-		try{
-			if (controller.getMyClient() == null)
-			{
-				// Coté Serveur
-				int i = retrieveIndex(getTerrainAdv(), cAttacking);
-				System.out.println("INDICE CARTE : "+i);
-				//Envoi carte attaquante
-				controller.getMyClientServer().getOos().writeObject(new ObjectSend(2, cAttacking, i));
-				i=retrieveIndex(getTerrain(), cAttacked);
-				controller.getMyClientServer().getOos().writeObject(new ObjectSend(3, cAttacked, i));
-			}
-			else
-			{
-				// Coté client
-				int i = retrieveIndex(getTerrainAdv(), cAttacking);
-				controller.getMyClient().getOos().writeObject(new ObjectSend(2, cAttacking, i));
-				i = retrieveIndex(getTerrain(), cAttacked);
-				controller.getMyClient().getOos().writeObject(new ObjectSend(3, cAttacked, i));
-			}
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-	}*/
 	/* (non-Javadoc)
 	 * @see be.ephec.eveStone.model.listener.CardListenerTerrain#mouseEntered(java.awt.event.MouseEvent)
 	 */

@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import be.ephec.eveStone.vieuw.Area;
@@ -80,8 +79,6 @@ public class CardListenerTerrain extends CardListenerMain{
 			((HerosListener)ml[0]).setSortAttacking(null);
 			((HerosListener)ml[0]).setTargetable(true);
 		}
-		else
-			JOptionPane.showMessageDialog(null, "Laissez ce serviteur se reposer !");
 	}
 
 	/* (non-Javadoc)
