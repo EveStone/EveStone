@@ -93,7 +93,6 @@ public class Reception implements Runnable {
 						for (int i =0; i<terrain.length; i++)
 						{
 							controller.getArea().getjPanelTerrainAdversaire().add((CardPanel) terrain[i]);
-							controller.getArea().getjPanelTerrainAdversaire().getComponent(i).addMouseListener(new CardListenerTerrainAdv((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i),controller));
 
 							if (nbVieTerrain != null)
 							{
