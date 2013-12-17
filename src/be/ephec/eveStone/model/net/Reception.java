@@ -92,6 +92,10 @@ public class Reception implements Runnable {
 						terrain = (Component[]) message.getTerrain();
 						for (int i =0; i<terrain.length; i++)
 						{
+							MouseListener ml[] = terrain[i].getMouseListeners();
+							for(int j=0; j<ml.length; j++){
+								terrain[i].removeMouseListener(ml[j]);
+							}
 							controller.getArea().getjPanelTerrainAdversaire().add((CardPanel) terrain[i]);
 							controller.getArea().getjPanelTerrainAdversaire().getComponent(i).addMouseListener(new CardListenerTerrainAdv((CardPanel)controller.getArea().getjPanelTerrainAdversaire().getComponent(i),controller));
 
@@ -113,6 +117,10 @@ public class Reception implements Runnable {
 						terrainAdv = (Component[]) message.getTerrainAdv();
 						for (int i =0; i<terrainAdv.length; i++)
 						{
+							MouseListener ml[] = terrainAdv[i].getMouseListeners();
+							for(int j=0; j<ml.length; j++){
+								terrainAdv[i].removeMouseListener(ml[j]);
+							}
 							controller.getArea().getjPanelTerrain().add((CardPanel) terrainAdv[i]);
 							if(controller.getArea().getFinTourButton().isEnabled() || (visibleTerrainAdv!= null && ((CardPanel)controller.getArea().getjPanelTerrain().getComponent(i)).getCard() instanceof Invisible))
 							{
